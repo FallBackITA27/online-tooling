@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 5 Extractor for MKWii</title>
+</head>
+<body>
+    <style>
+        .cont1 {
+            height: 90%;
+            width: 90%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            display: grid;
+            grid-column-gap: 3%;
+            grid-auto-flow: row;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+            align-items: center;
+            justify-items: center;
+        }
+        .image {
+            width: 100px;
+            height: 100px;
+        }
+        .dlimage {
+            width: 20px;
+            height: 20px;
+        }
+        input {
+            z-index: 1000;
+        }
+        .selections {
+            height:10%;
+            width: 100%;
+            position: absolute;
+            top:0;
+            left:0;
+            display: grid;
+            grid-auto-flow: column;
+            grid-template-columns: 1fr 1fr 1fr;
+            justify-items: center;
+            align-content: space-between;
+        }
+        .vert {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+        #fmdata {
+            grid-column: 2 / span 2;
+        }
+    </style>
+    <div class="selections">
+        <div><label for="savefile">Savefile to upload:</label><input type="file" name="savefile" id="savefile" accept=".dat"></div>
+        <div><label for="trackSelect">Track to check:</label><select name="trackSelect" id="trackSelect">
+            <option value="LC">LC</option>
+            <option value="MMM">MMM</option>
+            <option value="MG">MG</option>
+            <option value="TF">TF</option>
+            <option value="MC">MC</option>
+            <option value="CM">CM</option>
+            <option value="DKSC">DKSC</option>
+            <option value="WGM">WGM</option>
+            <option value="DC">DC</option>
+            <option value="KC">KC</option>
+            <option value="MT">MT</option>
+            <option value="GV">GV</option>
+            <option value="DDR">DDR</option>
+            <option value="MH">MH</option>
+            <option value="BC">BC</option>
+            <option value="RR">RR</option>
+            <option value="rPB">rPB</option>
+            <option value="rYF">rYF</option>
+            <option value="rGV2">rGV2</option>
+            <option value="rMR">rMR</option>
+            <option value="rSL">rSL</option>
+            <option value="rSGB">rSGB</option>
+            <option value="rDS">rDS</option>
+            <option value="rWS">rWS</option>
+            <option value="rDH">rDH</option>
+            <option value="rBC3">rBC3</option>
+            <option value="rDKJP">rDKJP</option>
+            <option value="rMC">rMC</option>
+            <option value="rMC3">rMC3</option>
+            <option value="rPG">rPG</option>
+            <option value="rDKM">rDKM</option>
+            <option value="rBC">rBC</option>
+        </select></div>
+        <div><label for="license">License to check:</label><select name="license" id="license">
+            <option value="1">License 1</option>
+            <option value="2">License 2</option>
+            <option value="3">License 3</option>
+            <option value="4">License 4</option>
+        </select></div>
+    </div>
+    <div class="cont1">
+        <p>1st</p><p id="namep1"></p><div class="vert" id="vertp1"></div><p id="timep1"></p><p id="charp1"></p><p id="vehp1"></p><p id="conp1"></p>
+        <p>2nd</p><p id="namep2"></p><div class="vert" id="vertp2"></div><p id="timep2"></p><p id="charp2"></p><p id="vehp2"></p><p id="conp2"></p>
+        <p>3rd</p><p id="namep3"></p><div class="vert" id="vertp3"></div><p id="timep3"></p><p id="charp3"></p><p id="vehp3"></p><p id="conp3"></p>
+        <p>4th</p><p id="namep4"></p><div class="vert" id="vertp4"></div><p id="timep4"></p><p id="charp4"></p><p id="vehp4"></p><p id="conp4"></p>
+        <p>5th</p><p id="namep5"></p><div class="vert" id="vertp5"></div><p id="timep5"></p><p id="charp5"></p><p id="vehp5"></p><p id="conp5"></p>
+        <p>Flap</p><p id="fmdata">Mii Data for Flaps doesn't exist.</p><p id="timep6"></p><p id="charp6"></p><p id="vehp6"></p><p id="conp6"></p>
+    </div>
+    <div class="cont2">
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+    </div>
+</body>
+</html>
+<script src="script.js"></script>
