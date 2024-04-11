@@ -45,23 +45,14 @@ document.getElementById("readInput").addEventListener("click", async function() 
     for (let line of parserData) {
         let keywords = line.toLowerCase().split(" ").filter(r=>r !== "");
         console.log(keywords);
-        if (keywords[0].startsWith("name")) {
+        if (keywords[0].startsWith("date")) {
             skipToNextSubmission = false
             data.submissions.push(currentSubmission);
-            currentSubmission = {
-                name: keywords.slice(1,keywords.length).join(" "),
-                date: "",
-                flapCatch: false,
-                noscCatch: false,
-            };
-            console.log(currentSubmission);
-        } else if (keywords[0].startsWith("date")) {
             let year;
             let month;
             let date;
             if (keywords.length > 4) {
                 skipToNextSubmission = true;
-                currentSubmission.skip = true;
                 currentSubmission.err = true;
                 currentSubmission.errString = "Cannot parse date";
             };
@@ -81,7 +72,14 @@ document.getElementById("readInput").addEventListener("click", async function() 
                 let kwfiltered = kw.replace(/nth/g, "").replace(/rd/g, "").replace(/nd/g, "").replace(/st/g, "");
                 date = kwfiltered.padStart(2,"0")
             };
-            currentSubmission.date = `${year}-${month}-${date}`;
+            currentSubmission = {
+                name: "",
+                date: `${year}-${month}-${date}`,
+                flapCatch: false,
+                noscCatch: false,
+            };
+        } else if (keywords[0].startsWith("name")) {
+            currentSubmission.name = keywords.slice(1,keywords.length).join(" ");
         }
 
         if (skipToNextSubmission) continue;
