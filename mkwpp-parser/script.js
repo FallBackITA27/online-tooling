@@ -66,6 +66,7 @@ function resetOutput() {
 }
 
 async function parseData() {
+    console.log("Started");
     let parserData = document.getElementById("inputTextArea").value.split("\n").filter(r=>r !== "");
     let currentSubmission = {skip:true};
     let skipToNextSubmission = false;
@@ -172,6 +173,7 @@ async function parseData() {
         data.submissions.times.push(handleTime(data,track,nosc,flap));
     }
     data.submissions.push(currentSubmission);
+    console.log("Finished");
 }
 
 document.addEventListener("DOMContentLoaded", async function() {
