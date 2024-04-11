@@ -65,7 +65,7 @@ function resetOutput() {
     document.getElementById("output").innerHTML = "";
 }
 
-async function parseData() {
+document.getElementById("readInput").addEventListener("click", async function() {
     console.log("Started");
     let parserData = document.getElementById("inputTextArea").value.split("\n").filter(r=>r !== "");
     let currentSubmission = {skip:true};
@@ -174,10 +174,9 @@ async function parseData() {
     }
     data.submissions.push(currentSubmission);
     console.log("Finished");
-}
+});
 
 document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById("readInput").addEventListener("click", parseData);
 
     // fetch("https://www.mariokart64.com/mkw/profile.php").then(r=>r.text()).then(r=>{
     //     let profileDocument = new DOMParser().parseFromString(r);
