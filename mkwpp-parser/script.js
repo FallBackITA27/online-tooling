@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 });
 
 document.getElementById("readInput").addEventListener("click", async function() {
-    let parserData = document.getElementById("inputTextArea").value.split("\n").filter(r=>r === "");
+    let parserData = document.getElementById("inputTextArea").value.split("\n").filter(r=>r !== "");
     console.log(parserData);
 });
 
