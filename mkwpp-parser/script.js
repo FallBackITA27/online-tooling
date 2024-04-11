@@ -51,7 +51,42 @@ let constants = {
         "rpb": 29,
         "rdkm": 30,
         "rbc": 31,
-    }
+    },
+
+    track_names: [
+        "Luigi Circuit",
+        "Moo Moo meadows",
+        "Mushroom Gorge",
+        "Toad's Factory",
+        "Mario Circuit",
+        "Coconut Mall",
+        "DK's Snowboard Cross",
+        "Wario's Gold Mine",
+        "Daisy Circuit",
+        "Koopa Cape",
+        "Maple Treeway",
+        "Grumble Volcano",
+        "Dry Dry Ruins",
+        "Moonview Highway",
+        "Bowser's Castle",
+        "Rainbow Road",
+        "GCN Peach Beach",
+        "DS Yoshi Falls",
+        "SNES Ghost Valley 2",
+        "N64 Mario Raceway",
+        "N64 Sherbet Land",
+        "GBA Shy Guy Beach",
+        "DS Delfino Square",
+        "GCN Waluigi Stadium",
+        "DS Desert Hills",
+        "GBA Bowser Castle 3",
+        "N64 DK's Jungle Parkway",
+        "GCN Mario Circuit",
+        "SNES Mario Circuit 3",
+        "DS Peach Gardens",
+        "GCN DK Mountain",
+        "N64 Bowser's Castle",
+    ]
 }
 
 function writeToOutput(d) {
@@ -185,7 +220,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
         writeToOutput("Date: "+submission.date);
         writeToOutput("Times submitted: "+submission.times.length);
         for (let time of submission.times) {
-            console.log(time);
+            writeToOutput(`${track_names[time[track]]}:${time.flap ? " flap" : ""}${time.nosc ? " nosc" : ""} ${formatMsToTime(time.time)} ${time.comment}`);
         }
     }
 });
@@ -199,9 +234,16 @@ document.addEventListener("DOMContentLoaded", function() {
     // });
 });
 
+function formatMsToTime(i32) {
+    let mins = Math.trunc(i32 / 60000);
+    i32 %= 60000;
+    let sec = Math.trunc(i32 / 1000);
+    i32 %= 1000;
+    let ret = `${mins.toString().padStart(2, "0")}:${sec.toString().padStart(2, "0")}.${Math.trunc(i32).toString().padStart(3, "0")}`;
+    return ret;
+}
+
 function handleTime(data, track, nosc, flap) {
-    let calculated = track * 2;
-    if (flap) calculated++;
     let time = 0;
     let comment = "";
     for (let token of data) {
@@ -228,7 +270,8 @@ function handleTime(data, track, nosc, flap) {
         time = total;
     }
     return {
-        track: calculated,
+        track: track,
+        flap: flap,
         time: time,
         comment: comment,
         nosc: nosc
