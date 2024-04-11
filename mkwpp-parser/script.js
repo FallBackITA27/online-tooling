@@ -28,7 +28,6 @@ document.getElementById("readInput").addEventListener("click", async function() 
         let keywords = line.toLowerCase().split(" ").filter(r=>r !== "");
         console.log(keywords);
         if (keywords[0].contains("name")) {
-            if (!currentSubmission.skip) data.submissions.push(currentSubmission);
             currentSubmission = {
                 name: keywords.slice(1,keywords.length).join(" "),
                 date: "",
@@ -38,6 +37,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
             console.log(currentSubmission);
         }
     }
+    data.submissions.push(currentSubmission);
 });
 
 /* example data
