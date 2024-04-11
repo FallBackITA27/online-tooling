@@ -17,6 +17,10 @@ a {
     color: aquamarine;
 }
 
+code {
+    background-color: black;
+}
+
 .Tool {
     display: flex;
     flex-direction: column;
