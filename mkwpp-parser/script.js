@@ -218,6 +218,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
         }
         writeToOutput("Name: "+submission.name);
         writeToOutput("Date: "+submission.date);
+        submission.times.sort((a,b)=>(a.track + a.flap)-(b.track + b.flap))
         writeToOutput("Times submitted: "+submission.times.length);
         for (let time of submission.times) {
             writeToOutput(`${constants.track_names[time.track]}:${time.flap ? " flap" : ""}${time.nosc ? " nosc" : ""} ${formatMsToTime(time.time)} ${time.comment}`);
