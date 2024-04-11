@@ -1,8 +1,8 @@
-let data = {
+var data = {
     submissions: [],
 };
 
-let constants = {
+var constants = {
     months: {
         "ja": "01",
         "f": "02",
