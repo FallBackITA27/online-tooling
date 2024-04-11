@@ -74,7 +74,6 @@ document.addEventListener("DOMContentLoaded", async function() {
 });
 
 document.getElementById("readInput").addEventListener("click", async function() {
-    data.submissions = [];
     let parserData = document.getElementById("inputTextArea").value.split("\n").filter(r=>r !== "");
     let currentSubmission = {skip:true};
     let skipToNextSubmission = false;
