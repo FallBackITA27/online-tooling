@@ -54,6 +54,41 @@ let constants = {
         "rbc": 31,
     },
 
+    track_category: {
+        0: true,
+        1: true,
+        2: false,
+        3: false,
+        4: false,
+        5: false,
+        6: true,
+        7: false,
+        8: true,
+        9: false,
+        10: false,
+        11: false,
+        12: true,
+        13: true,
+        14: false,
+        15: false,
+        16: false,
+        17: true,
+        18: false,
+        19: true,
+        20: false,
+        21: false,
+        22: true,
+        23: false,
+        24: false,
+        25: false,
+        26: false,
+        27: false,
+        28: true,
+        29: false,
+        30: false,
+        31: false,
+    },
+
     track_names: [
         "Luigi Circuit",
         "Moo Moo Meadows",
@@ -98,7 +133,7 @@ async function loadStuff() {
             console.log(row);
             let starterData = row.children[0].children[0];
             if (row.children[0].innerHTML === "Name") continue;
-            data.players[starterData.innerHTML.toLowerCase()] = parseInt(starterData.href.split("=")[1]);
+            data.players[starterData.innerHTML.toLowerCase()] = starterData.innerHTML;
         }
         document.getElementById("readInput").disabled = "";
     });
@@ -225,6 +260,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
     data.submissions.push(currentSubmission);
     console.log("Finished");
     resetOutput();
+    let out = [];
     for (let submission of data.submissions) {
         if (submission.err || submission.skip) {
             if (submission.err) {
@@ -238,8 +274,13 @@ document.getElementById("readInput").addEventListener("click", async function() 
         writeToOutput("Times submitted: "+submission.times.length);
         for (let time of submission.times) {
             writeToOutput(`>> ${constants.track_names[time.track]}:${time.flap ? " flap" : ""}${time.nosc ? " nosc" : ""} ${formatMsToTime(time.time)}${" " + time.comment}`);
+            let catString = "Combined";
+            if (time.nosc && !constants.track_category[time.track]) catString = "NonSC";
+            if (time.track === 29 && !time.flap) catString = "NonSC";
+            out.push(`(${data.players[submission.name]},${catString},${time.track*2 + time.flap},${time.time / 1000},${submission.date},${time.comment === "" ? "N/A" : time.comment})`);
         }
     }
+    for (let i of out) writeToOutput(i);
 });
 
 function formatMsToTime(i32) {
