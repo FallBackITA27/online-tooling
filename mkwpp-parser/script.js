@@ -165,12 +165,12 @@ document.getElementById("readInput").addEventListener("click", async function() 
                     trackData1.push(token);
                 }
             }
-            if (trackData1.length !== 0) trackData.submissions.times.push(handleTime(trackData1,track,nosc,false));
-            if (trackData2.length !== 0) trackData.submissions.times.push(handleTime(trackData2,track,nosc,true));
+            if (trackData1.length !== 0) currentSubmission.times.push(handleTime(trackData1,track,nosc,false));
+            if (trackData2.length !== 0) currentSubmission.times.push(handleTime(trackData2,track,nosc,true));
             continue;
         }
 
-        data.submissions.times.push(handleTime(trackData,track,nosc,flap));
+        currentSubmission.times.push(handleTime(trackData,track,nosc,flap));
     }
     data.submissions.push(currentSubmission);
     console.log("Finished");
