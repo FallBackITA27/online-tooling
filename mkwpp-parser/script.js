@@ -66,6 +66,7 @@ function resetOutput() {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
+    console.log(document.getElementById("readInput"));
     document.getElementById("readInput").addEventListener("click", async function() {
         console.log("Started");
         let parserData = document.getElementById("inputTextArea").value.split("\n").filter(r=>r !== "");
