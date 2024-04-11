@@ -226,7 +226,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
     }
 });
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded",async function() {
 
     fetch("https://corsproxy.io/?https://www.mariokart64.com/mkw/profile.php").then(r=>r.text()).then(r=>{
         let profileDocument = new DOMParser().parseFromString(r);
