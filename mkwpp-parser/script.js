@@ -27,7 +27,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
     for (let line of parserData) {
         let keywords = line.toLowerCase().split(" ").filter(r=>r !== "");
         console.log(keywords);
-        if (keywords[0].contains("name")) {
+        if (keywords[0].includes("name")) {
             currentSubmission = {
                 name: keywords.slice(1,keywords.length).join(" "),
                 date: "",
