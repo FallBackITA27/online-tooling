@@ -220,7 +220,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
         writeToOutput("Date: "+submission.date);
         writeToOutput("Times submitted: "+submission.times.length);
         for (let time of submission.times) {
-            writeToOutput(`${track_names[time[track]]}:${time.flap ? " flap" : ""}${time.nosc ? " nosc" : ""} ${formatMsToTime(time.time)} ${time.comment}`);
+            writeToOutput(`${constants.track_names[time[track]]}:${time.flap ? " flap" : ""}${time.nosc ? " nosc" : ""} ${formatMsToTime(time.time)} ${time.comment}`);
         }
     }
 });
