@@ -17,14 +17,24 @@
         <div>
             <div id="info"></div>
             <h1>info</h1>
+            <p>rPG 3lap is automatically marked as NOSC. Thank me later, Cederic.</p>
             <div id="table_of_contents"></div>
             <h2>table of contents</h2>
             <ol>
                 <li><a href="#info">Top</a></li>
                 <li><a href="#table_of_contents">Table Of Contents</a></li>
+                <li><a href="#about_colons">How are colons handled</a></li>
+                <li><a href="#indicating_flap_and_nosc">How to indicate for flap and nosc</a></li>
                 <li><a href="#how_are_track_names_read?">Track Names Parsing</a></li>
             </ol>
-            <p>rPG 3lap is automatically marked as NOSC</p>
+            <div id="about_colons"></div>
+            <h2>about colons..</h2>
+            <p>Colons are no longer necessary. this parser splits with spaces and new lines, much like programming languages do during tokenization.</p>
+            <div id="indicating_flap_and_nosc"></div>
+            <h2>indicating flap and nosc</h2>
+            <p>There are multiple ways to indicate for flap and nosc. You can set all times as nosc or as flap by writing any of the accepted names before the actual time submissions.</p>
+            <p>All the parser looks for to declare times as nosc is the letter "n" within the line of a time or on the line before times. e.g. <code>lc n 1:10.315</code></p>
+            <p>The parser looks for either the letter "f" or "l" within the line of a time or on the line before times. E.g. <code>gv l 2.018</code></p>
             <div id="how_are_track_names_read?"></div>
             <h2>how are track names read?</h2>
             <p>Track names are read by first turning the name to lowercase</p>
