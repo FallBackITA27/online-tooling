@@ -28,6 +28,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
         let keywords = line.toLowerCase().split(" ").filter(r=>r !== "");
         console.log(keywords);
         if (keywords[0].includes("name")) {
+            data.submissions.push(currentSubmission);
             currentSubmission = {
                 name: keywords.slice(1,keywords.length).join(" "),
                 date: "",
