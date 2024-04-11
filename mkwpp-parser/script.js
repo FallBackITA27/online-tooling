@@ -82,8 +82,8 @@ document.getElementById("readInput").addEventListener("click", async function() 
         }
         if (skipToNextSubmission) continue;
 
-        if (line.length === 1 && (line[0].startsWith("f") || line[0].startsWith("lap"))) currentSubmission.flapCatch = true;
-        
+        if (line.length === 1 && (line[0].startsWith("f") || line[0].startsWith("l"))) currentSubmission.flapCatch = true;
+
     }
     data.submissions.push(currentSubmission);
 });
