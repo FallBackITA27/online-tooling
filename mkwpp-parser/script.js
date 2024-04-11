@@ -97,8 +97,6 @@ document.getElementById("readInput").addEventListener("click", async function() 
                     break;
                 }
                 if (_break) continue;
-                console.log(kw);
-                console.log(kw.padStart(2,"0"));
                 date = kw.padStart(2,"0");
             };
             currentSubmission = {
