@@ -25,6 +25,7 @@
                 <li><a href="#table_of_contents">Table Of Contents</a></li>
                 <li><a href="#about_colons">How are colons handled</a></li>
                 <li><a href="#indicating_flap_and_nosc">How to indicate for flap and nosc</a></li>
+                <li><a href="#how_to_format_times">How to format times</a></li>
                 <li><a href="#how_are_track_names_read?">Track Names Parsing</a></li>
             </ol>
             <div id="about_colons"></div>
@@ -35,6 +36,19 @@
             <p>There are multiple ways to indicate for flap and nosc. You can set all times as nosc or as flap by writing any of the accepted names before the actual time submissions.</p>
             <p>All the parser looks for to declare times as nosc is the letter "n" within the line of a time or on the line before times. e.g. <code>lc n 1:10.315</code></p>
             <p>The parser looks for either the letter "f" or "l" within the line of a time or on the line before times. E.g. <code>gv l 2.018</code></p>
+            <div id="how_to_format_times"></div>
+            <h2>how to format times</h2>
+            <p>The parser transforms times written in any form into Milliseconds. The process is this:</p>
+            <p>It first looks for a colon or a quotation mark, if found, every number to the left of it is multiplied by 60000. This converts minutes into milliseconds</p>
+            <p>It then looks for a period or a single quotation mark, every number to the left of it is multiplied by 1000. This converts seconds into milliseconds.</p>
+            <p>Any number that remains is added as milliseconds.</p>
+            <p>This means that all of the following are valid notations for the same time:</p>
+            <code>01:09.091</code>
+            <code>69.091</code>
+            <code>69091</code>
+            <code>00:69.091</code>
+            <code>00:60.9091</code>
+            <p>Some of these are obviously unreadable and shouldn't be used, but valid nonetheless using the rules stated.</p>
             <div id="how_are_track_names_read?"></div>
             <h2>how are track names read?</h2>
             <p>Track names are read by first turning the name to lowercase</p>
