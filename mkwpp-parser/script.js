@@ -18,3 +18,8 @@ document.addEventListener("DOMContentLoaded", async function() {
         console.log(playerList);
     });
 });
+
+document.getElementById("readInput").addEventListener("click", async function() {
+    let parserData = document.getElementById("inputTextArea").value;
+    console.log(parserData);
+});
