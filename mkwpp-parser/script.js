@@ -179,7 +179,9 @@ document.getElementById("readInput").addEventListener("click", async function() 
             if (submission.err) {
                 writeToOutput("Error with submission: " + submission.errString);
             }
+            continue;
         }
+        console.log(submission);
         writeToOutput("Name: "+submission.name);
         writeToOutput("Date: "+submission.date);
     }
