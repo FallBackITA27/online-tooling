@@ -221,7 +221,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
         submission.times.sort((a,b)=>(a.track + a.flap)-(b.track + b.flap))
         writeToOutput("Times submitted: "+submission.times.length);
         for (let time of submission.times) {
-            writeToOutput(`>> ${constants.track_names[time.track]}:${time.flap ? " flap" : ""}${time.nosc ? " nosc" : ""} ${formatMsToTime(time.time)} ${time.comment}`);
+            writeToOutput(`>> ${constants.track_names[time.track]}:${time.flap ? " flap" : ""}${time.nosc ? " nosc" : ""} ${formatMsToTime(time.time)}${" " + time.comment}`);
         }
     }
 });
