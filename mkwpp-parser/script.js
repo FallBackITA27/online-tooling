@@ -84,7 +84,6 @@ document.getElementById("readInput").addEventListener("click", async function() 
                 currentSubmission.err = true;
                 currentSubmission.errString = "Cannot parse date";
             };
-            console.log(keywords);
             for (let keyword of keywords.slice(1, keywords.length)) {
                 let kw = keyword.replace(/,/g, "");
                 if (kw.length === 4) {
@@ -98,8 +97,11 @@ document.getElementById("readInput").addEventListener("click", async function() 
                     break;
                 }
                 if (_break) continue;
+                console.log(kw);
                 let kwfiltered = kw.replace(/th/g, "").replace(/rd/g, "").replace(/nd/g, "").replace(/st/g, "");
-                date = kwfiltered.padStart(2,"0")
+                console.log(kwfiltered);
+                console.log(kwfiltered.padStart(2,"0"));
+                date = kwfiltered.padStart(2,"0");
             };
             currentSubmission = {
                 name: "",
