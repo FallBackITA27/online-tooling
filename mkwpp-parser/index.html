@@ -35,10 +35,10 @@
             <p>Colons are no longer necessary. this parser splits with spaces and new lines, much like programming languages do during tokenization.</p>
             <div id="insert_the_name"></div>
             <h2>inserting a name</h2>
-            <p>the parser will look for a line that starts with <code>name</code>, to determine if there's a new submission to deal with.</p>
+            <p>the parser will look for a line that starts with <code>name</code>.</p>
             <div id="insert_the_date"></div>
             <h2>inserting a date</h2>
-            <p>the parser will look for a line that starts with <code>date</code>, to determine the date of the times. dates are read like this: it first looks for four numbers in a row, and reads that as the year. Then it looks at any other string containing numbers, and reads that as the day. Lastly, it looks at the remaining string, and reads that as the month. If there are more than three parts to a date, it will fail with a warning and skip the submission.</p>
+            <p>the parser will look for a line that starts with <code>date</code>, to determine the date of the times and more importantly if there's a new submission to deal with. dates are read like this: it first looks for four numbers in a row, and reads that as the year. Then it looks at any other string containing numbers, and reads that as the day. Lastly, it looks at the remaining string, and reads that as the month. If there are more than three parts to a date, it will fail with a warning and skip the submission.</p>
             <p>Months are read like track names:</p>
             <ol>
                 <li>January: <code>ja</code></li>
