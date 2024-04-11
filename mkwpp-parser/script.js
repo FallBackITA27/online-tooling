@@ -173,6 +173,16 @@ document.getElementById("readInput").addEventListener("click", async function() 
     }
     data.submissions.push(currentSubmission);
     console.log("Finished");
+
+    for (let submission in data.submissions) {
+        if (submission.err || submission.skip) {
+            if (submission.err) {
+                writeToOutput("Error with submission: " + submission.errString);
+            }
+        }
+        writeToOutput("Name: "+submission.name);
+        writeToOutput("Date: "+submission.date);
+    }
 });
 
 document.addEventListener("DOMContentLoaded", function() {
