@@ -2,6 +2,23 @@ let data = {
     submissions: [],
 };
 
+let constants = {
+    months: {
+        "ja": "01",
+        "f": "02",
+        "mar": "03",
+        "ap": "04",
+        "may": "05",
+        "jun": "06",
+        "jul": "07",
+        "au": "08",
+        "s": "09",
+        "o": "10",
+        "n": "11",
+        "d": "12",
+    }
+}
+
 function writeToOutput(d) {
     if (d == null) return;
     let out = document.createElement("p");
@@ -24,10 +41,12 @@ document.addEventListener("DOMContentLoaded", async function() {
 document.getElementById("readInput").addEventListener("click", async function() {
     let parserData = document.getElementById("inputTextArea").value.split("\n").filter(r=>r !== "");
     let currentSubmission = {skip:true};
+    let skipToNextSubmission = false;
     for (let line of parserData) {
         let keywords = line.toLowerCase().split(" ").filter(r=>r !== "");
         console.log(keywords);
-        if (keywords[0].includes("name")) {
+        if (keywords[0].startsWith("name")) {
+            skipToNextSubmission = false
             data.submissions.push(currentSubmission);
             currentSubmission = {
                 name: keywords.slice(1,keywords.length).join(" "),
@@ -36,7 +55,34 @@ document.getElementById("readInput").addEventListener("click", async function() 
                 noscCatch: false,
             };
             console.log(currentSubmission);
+        } else if (keywords[0].startsWith("date")) {
+            let year;
+            let month;
+            let date;
+            if (keywords.length > 4) {
+                skipToNextSubmission = true;
+                currentSubmission.skip = true;
+            };
+            for (let keyword of keywords.slice(1, keywords.length)) {
+                let kw = keyword.replace(/,/g, "");
+                if (kw.length === 4) {
+                    year = kw;
+                    continue;
+                }
+                let _break = false;
+                for (let abbr in constants.months.keys()) if (kw.startsWith(abbr)) {
+                    month = constants.months[abbr];
+                    _break = true;
+                    break;
+                }
+                if (_break) continue;
+                let kwfiltered = kw.replace(/nth/g, "").replace(/rd/g, "").replace(/nd/g, "").replace(/st/g, "");
+                date = kwfiltered.padStart(2,"0")
+            };
+            currentSubmission.date = `${year}-${month}-${date}`;
         }
+
+        if (skipToNextSubmission) continue;
     }
     data.submissions.push(currentSubmission);
 });
