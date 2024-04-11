@@ -17,6 +17,15 @@ a {
     color: aquamarine;
 }
 
+.Tool {
+    display: flex;
+    flex-direction: column;
+    left: 50%;
+    top: 0;
+    gap: 10px;
+    align-items: center;
+}
+
 .x-axis {
     display: flex;
     align-items: center;
