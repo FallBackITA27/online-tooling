@@ -65,118 +65,117 @@ function resetOutput() {
     document.getElementById("output").innerHTML = "";
 }
 
-document.getElementById("readInput").addEventListener("click", async function() {
-    console.log("Started");
-    let parserData = document.getElementById("inputTextArea").value.split("\n").filter(r=>r !== "");
-    let currentSubmission = {skip:true};
-    let skipToNextSubmission = false;
-    for (let line of parserData) {
-        let lowercaseLine = line.toLowerCase();
-        if (lowercaseLine.startsWith("date")) {
-            skipToNextSubmission = false
-            data.submissions.push(currentSubmission);
-            let year;
-            let month;
-            let date;
-            let keywords = lowercaseLine.split(" ").filter(r=>r !== " ");
-            if (keywords.length > 4) {
-                skipToNextSubmission = true;
-                currentSubmission.err = true;
-                currentSubmission.errString = "Cannot parse date";
-            };
-            for (let keyword of keywords.slice(1, keywords.length)) {
-                let kw = keyword.replace(/,/g, "");
-                if (kw.length === 4) {
-                    year = kw;
-                    continue;
-                }
-                let _break = false;
-                for (let abbr of Object.keys(constants.months)) if (kw.startsWith(abbr)) {
-                    month = constants.months[abbr];
-                    _break = true;
-                    break;
-                }
-                if (_break) continue;
-                let kwfiltered = kw.replace(/nth/g, "").replace(/rd/g, "").replace(/nd/g, "").replace(/st/g, "");
-                date = kwfiltered.padStart(2,"0")
-            };
-            currentSubmission = {
-                name: "",
-                date: `${year}-${month}-${date}`,
-                flapCatch: false,
-                times: [],
-            };
-        } else if (lowercaseLine.startsWith("name")) {
-            let keywords = lowercaseLine.split(" ").filter(r=>r !== " ");
-            currentSubmission.name = keywords.slice(1,keywords.length).join(" ");
-        }
-        if (skipToNextSubmission) continue;
-
-        if (lowercaseLine.split(" ").filter(r=>r !== "").length === 1 && (lowercaseLine.startsWith("f") || lowercaseLine.startsWith("l"))) {
-            currentSubmission.flapCatch = true
-            continue;
-        };
-
-        let track = -1;
-        let data = lowercaseLine.split(" ").filter(r=>r!=="");
-
-        for (let abbr of Object.keys(constants.tracks)) if (data[0].startsWith(abbr)) {
-            track = constants.tracks[abbr];
-            break;
-        }
-        data.slice(1,data.length);
-
-        if (track === -1) {
-            // report line skip
-            continue
-        }
-
-        let nosc = false;
-        let flap = currentSubmission.flapCatch;
-
-        let i = 0;
-        let remove = [];
-        for (let token of data) {
-            if (token.startsWith("n")) {
-                nosc = true;
-                remove.push(i);
-            }
-            if (token.startsWith("f") || token.startsWith("l")) {
-                flap = true;
-                remove.push(i);
-            }
-            i++;
-        }
-        for (let x of remove) data[x] = "";
-        data = data.filter(r=>r!=="");
-
-        if (lowercaseLine.contains("/") || lowercaseLine.contains("\\")) {
-            let data1 = [];
-            let data2 = [];
-            let x = false;
-            for (let token of data) {
-                if (token === "/" || token === "\\") {
-                    x = true;
-                    continue;
-                }
-                if (x) {
-                    data2.push(token);
-                } else {
-                    data1.push(token);
-                }
-            }
-            if (data1.length !== 0) data.submissions.times.push(handleTime(data1,track,nosc,false));
-            if (data2.length !== 0) data.submissions.times.push(handleTime(data2,track,nosc,true));
-            continue;
-        }
-
-        data.submissions.times.push(handleTime(data,track,nosc,flap));
-    }
-    data.submissions.push(currentSubmission);
-    console.log("Finished");
-});
-
 document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("readInput").addEventListener("click", async function() {
+        console.log("Started");
+        let parserData = document.getElementById("inputTextArea").value.split("\n").filter(r=>r !== "");
+        let currentSubmission = {skip:true};
+        let skipToNextSubmission = false;
+        for (let line of parserData) {
+            let lowercaseLine = line.toLowerCase();
+            if (lowercaseLine.startsWith("date")) {
+                skipToNextSubmission = false
+                data.submissions.push(currentSubmission);
+                let year;
+                let month;
+                let date;
+                let keywords = lowercaseLine.split(" ").filter(r=>r !== " ");
+                if (keywords.length > 4) {
+                    skipToNextSubmission = true;
+                    currentSubmission.err = true;
+                    currentSubmission.errString = "Cannot parse date";
+                };
+                for (let keyword of keywords.slice(1, keywords.length)) {
+                    let kw = keyword.replace(/,/g, "");
+                    if (kw.length === 4) {
+                        year = kw;
+                        continue;
+                    }
+                    let _break = false;
+                    for (let abbr of Object.keys(constants.months)) if (kw.startsWith(abbr)) {
+                        month = constants.months[abbr];
+                        _break = true;
+                        break;
+                    }
+                    if (_break) continue;
+                    let kwfiltered = kw.replace(/nth/g, "").replace(/rd/g, "").replace(/nd/g, "").replace(/st/g, "");
+                    date = kwfiltered.padStart(2,"0")
+                };
+                currentSubmission = {
+                    name: "",
+                    date: `${year}-${month}-${date}`,
+                    flapCatch: false,
+                    times: [],
+                };
+            } else if (lowercaseLine.startsWith("name")) {
+                let keywords = lowercaseLine.split(" ").filter(r=>r !== " ");
+                currentSubmission.name = keywords.slice(1,keywords.length).join(" ");
+            }
+            if (skipToNextSubmission) continue;
+
+            if (lowercaseLine.split(" ").filter(r=>r !== "").length === 1 && (lowercaseLine.startsWith("f") || lowercaseLine.startsWith("l"))) {
+                currentSubmission.flapCatch = true
+                continue;
+            };
+
+            let track = -1;
+            let data = lowercaseLine.split(" ").filter(r=>r!=="");
+
+            for (let abbr of Object.keys(constants.tracks)) if (data[0].startsWith(abbr)) {
+                track = constants.tracks[abbr];
+                break;
+            }
+            data.slice(1,data.length);
+
+            if (track === -1) {
+                // report line skip
+                continue
+            }
+
+            let nosc = false;
+            let flap = currentSubmission.flapCatch;
+
+            let i = 0;
+            let remove = [];
+            for (let token of data) {
+                if (token.startsWith("n")) {
+                    nosc = true;
+                    remove.push(i);
+                }
+                if (token.startsWith("f") || token.startsWith("l")) {
+                    flap = true;
+                    remove.push(i);
+                }
+                i++;
+            }
+            for (let x of remove) data[x] = "";
+            data = data.filter(r=>r!=="");
+
+            if (lowercaseLine.contains("/") || lowercaseLine.contains("\\")) {
+                let data1 = [];
+                let data2 = [];
+                let x = false;
+                for (let token of data) {
+                    if (token === "/" || token === "\\") {
+                        x = true;
+                        continue;
+                    }
+                    if (x) {
+                        data2.push(token);
+                    } else {
+                        data1.push(token);
+                    }
+                }
+                if (data1.length !== 0) data.submissions.times.push(handleTime(data1,track,nosc,false));
+                if (data2.length !== 0) data.submissions.times.push(handleTime(data2,track,nosc,true));
+                continue;
+            }
+
+            data.submissions.times.push(handleTime(data,track,nosc,flap));
+        }
+        data.submissions.push(currentSubmission);
+        console.log("Finished");
+    });
 
     // fetch("https://www.mariokart64.com/mkw/profile.php").then(r=>r.text()).then(r=>{
     //     let profileDocument = new DOMParser().parseFromString(r);
