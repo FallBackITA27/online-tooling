@@ -183,6 +183,10 @@ document.getElementById("readInput").addEventListener("click", async function() 
         }
         writeToOutput("Name: "+submission.name);
         writeToOutput("Date: "+submission.date);
+        writeToOutput("Times submitted: "+submission.times.length);
+        for (let time of submission.times) {
+            console.log(time);
+        }
     }
 });
 
