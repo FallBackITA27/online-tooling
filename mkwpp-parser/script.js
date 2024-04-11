@@ -65,15 +65,7 @@ function resetOutput() {
     document.getElementById("output").innerHTML = "";
 }
 
-document.addEventListener("DOMContentLoaded", async function() {
-    fetch("https://www.mariokart64.com/mkw/profile.php").then(r=>r.text()).then(r=>{
-        let profileDocument = new DOMParser().parseFromString(r);
-        let playerList = profileDocument.getElementsByClassName("playerslist")[0]
-        console.log(playerList);
-    });
-});
-
-document.getElementById("readInput").addEventListener("click", function() {
+async function parseData() {
     let parserData = document.getElementById("inputTextArea").value.split("\n").filter(r=>r !== "");
     let currentSubmission = {skip:true};
     let skipToNextSubmission = false;
@@ -180,6 +172,16 @@ document.getElementById("readInput").addEventListener("click", function() {
         data.submissions.times.push(handleTime(data,track,nosc,flap));
     }
     data.submissions.push(currentSubmission);
+}
+
+document.addEventListener("DOMContentLoaded", async function() {
+    document.getElementById("readInput").addEventListener("click", parseData);
+
+    // fetch("https://www.mariokart64.com/mkw/profile.php").then(r=>r.text()).then(r=>{
+    //     let profileDocument = new DOMParser().parseFromString(r);
+    //     let playerList = profileDocument.getElementsByClassName("playerslist")[0]
+    //     console.log(playerList);
+    // });
 });
 
 function handleTime(data, track, nosc, flap) {
