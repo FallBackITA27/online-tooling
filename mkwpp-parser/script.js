@@ -76,13 +76,14 @@ document.getElementById("readInput").addEventListener("click", async function() 
                 name: "",
                 date: `${year}-${month}-${date}`,
                 flapCatch: false,
-                noscCatch: false,
             };
         } else if (keywords[0].startsWith("name")) {
             currentSubmission.name = keywords.slice(1,keywords.length).join(" ");
         }
-
         if (skipToNextSubmission) continue;
+
+        if (line.length === 1 && (line[0].startsWith("f") || line[0].startsWith("lap"))) currentSubmission.flapCatch = true;
+        
     }
     data.submissions.push(currentSubmission);
 });
