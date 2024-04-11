@@ -209,7 +209,7 @@ function handleTime(data, track, nosc, flap) {
                 total += parseInt(token.split("'")[1]);
             }
         } else {
-            time = parseInt(str)
+            time = parseInt(token)
         }
         time = total;
     }
