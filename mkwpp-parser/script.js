@@ -97,7 +97,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
                     break;
                 }
                 if (_break) continue;
-                let kwfiltered = kw.replace(/nth/g, "").replace(/rd/g, "").replace(/nd/g, "").replace(/st/g, "");
+                let kwfiltered = kw.replace(/th/g, "").replace(/rd/g, "").replace(/nd/g, "").replace(/st/g, "");
                 date = kwfiltered.padStart(2,"0")
             };
             currentSubmission = {
