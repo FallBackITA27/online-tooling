@@ -150,7 +150,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
         for (let x of remove) trackData[x] = "";
         trackData = trackData.filter(r=>r!=="");
 
-        if (lowercaseLine.contains("/") || lowercaseLine.contains("\\")) {
+        if (lowercaseLine.includes("/") || lowercaseLine.includes("\\")) {
             let trackData1 = [];
             let trackData2 = [];
             let x = false;
