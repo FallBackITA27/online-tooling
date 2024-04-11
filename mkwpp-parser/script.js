@@ -89,6 +89,16 @@ let constants = {
     ]
 }
 
+document.addEventListener("DOMContentLoaded",async function() {
+    console.log("enters");
+    await fetch("https://corsproxy.io/?https://www.mariokart64.com/mkw/profile.php").then(r=>r.text()).then(r=>{
+        console.log(r);
+        let profileDocument = new DOMParser().parseFromString(r);
+        let playerList = profileDocument.getElementsByClassName("playerslist")[0].children[0];
+        console.log(playerList);
+    });
+}, false);
+
 function writeToOutput(d) {
     if (d == null) return;
     let out = document.createElement("p");
@@ -225,16 +235,6 @@ document.getElementById("readInput").addEventListener("click", async function() 
         }
     }
 });
-
-document.addEventListener("DOMContentLoaded",async function() {
-    console.log("enters");
-    await fetch("https://corsproxy.io/?https://www.mariokart64.com/mkw/profile.php").then(r=>r.text()).then(r=>{
-        console.log(r);
-        let profileDocument = new DOMParser().parseFromString(r);
-        let playerList = profileDocument.getElementsByClassName("playerslist")[0].children[0];
-        console.log(playerList);
-    });
-}, false);
 
 function formatMsToTime(i32) {
     let mins = Math.trunc(i32 / 60000);
