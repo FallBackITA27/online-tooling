@@ -36,6 +36,7 @@
             <p>There are multiple ways to indicate for flap and nosc. You can set all times as nosc or as flap by writing any of the accepted names before the actual time submissions.</p>
             <p>All the parser looks for to declare times as nosc is the letter <code>n</code> within the line of a time or on the line before times. E.g. <code>lc n 1:10.315</code></p>
             <p>The parser looks for either the letter <code>f</code> or <code>l</code> within the line of a time or on the line before times. E.g. <code>gv l 2.018</code></p>
+            <p>Lastly, only in the case of single times, if you have a slash or backslash (<code>/</code> or <code>\</code>) within the line for your time, anything to the right of it will be counted as flap, and anything on the left will be counted as 3lap. E.g. <code>lc 69999 https://youtu.be/link / </code> counts as a 3lap submission <code>lc / 69999 https://youtu.be/link</code> counts as a flap submission, <code>lc 69999 https://youtu.be/link / 69999 https://youtu.be/link</code> are two submissions in one line</p>
             <div id="how_to_format_times"></div>
             <h2>how to format times</h2>
             <p>The parser transforms times written in any form into Milliseconds. The process is this:</p>
