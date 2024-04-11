@@ -228,11 +228,11 @@ document.getElementById("readInput").addEventListener("click", async function() 
 
 document.addEventListener("DOMContentLoaded", function() {
 
-    // fetch("https://www.mariokart64.com/mkw/profile.php").then(r=>r.text()).then(r=>{
-    //     let profileDocument = new DOMParser().parseFromString(r);
-    //     let playerList = profileDocument.getElementsByClassName("playerslist")[0]
-    //     console.log(playerList);
-    // });
+    fetch("https://corsproxy.io/?https://www.mariokart64.com/mkw/profile.php").then(r=>r.text()).then(r=>{
+        let profileDocument = new DOMParser().parseFromString(r);
+        let playerList = profileDocument.getElementsByClassName("playerslist")[0]
+        console.log(playerList);
+    });
 });
 
 function formatMsToTime(i32) {
