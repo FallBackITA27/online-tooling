@@ -94,7 +94,7 @@ async function loadStuff() {
     await fetch("https://corsproxy.io/?https://www.mariokart64.com/mkw/profile.php").then(r=>r.text()).then(r=>{
         let profileDocument = new DOMParser().parseFromString(r, "text/html");
         let playerList = profileDocument.getElementsByClassName("playerslist")[0].children[0];
-        for (let row in playerList.children) {
+        for (let row of playerList.children) {
             console.log(row);
             let starterData = row.children[0].children[0];
             if (row.children[0].innerHTML === "Name") continue;
