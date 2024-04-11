@@ -173,15 +173,14 @@ document.getElementById("readInput").addEventListener("click", async function() 
     }
     data.submissions.push(currentSubmission);
     console.log("Finished");
-
-    for (let submission in data.submissions) {
+    resetOutput();
+    for (let submission of data.submissions) {
         if (submission.err || submission.skip) {
             if (submission.err) {
                 writeToOutput("Error with submission: " + submission.errString);
             }
             continue;
         }
-        console.log(submission);
         writeToOutput("Name: "+submission.name);
         writeToOutput("Date: "+submission.date);
     }
