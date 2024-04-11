@@ -21,7 +21,20 @@ document.addEventListener("DOMContentLoaded", async function() {
 
 document.getElementById("readInput").addEventListener("click", async function() {
     let parserData = document.getElementById("inputTextArea").value.split("\n").filter(r=>r !== "");
-    console.log(parserData);
+    let currentSubmission = {
+        name: "",
+        date: "",
+        flapCatch: false,
+        noscCatch: false,
+    };
+    for (let line of parserData) {
+        let keywords = line.toLowerCase().split(" ").filter(r=>r !== "");
+        console.log(keywords);
+        if (keywords[0] === "name") {
+            let name = keywords.slice(1,keywords.length).join(" ");
+            console.log(name);
+        }
+    }
 });
 
 /* example data
