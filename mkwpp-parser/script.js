@@ -89,7 +89,7 @@ let constants = {
     ]
 }
 
-document.addEventListener("DOMContentLoaded",async function() {
+async function loadStuff() {
     console.log("enters");
     await fetch("https://corsproxy.io/?https://www.mariokart64.com/mkw/profile.php").then(r=>r.text()).then(r=>{
         console.log(r);
@@ -97,7 +97,8 @@ document.addEventListener("DOMContentLoaded",async function() {
         let playerList = profileDocument.getElementsByClassName("playerslist")[0].children[0];
         console.log(playerList);
     });
-}, false);
+}
+loadStuff();
 
 function writeToOutput(d) {
     if (d == null) return;
