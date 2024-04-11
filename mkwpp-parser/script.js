@@ -20,6 +20,31 @@ document.addEventListener("DOMContentLoaded", async function() {
 });
 
 document.getElementById("readInput").addEventListener("click", async function() {
-    let parserData = document.getElementById("inputTextArea").value;
+    let parserData = document.getElementById("inputTextArea").value.split("\n");
     console.log(parserData);
 });
+
+/* example data
+
+Date: April 10, 2024
+Name: ChromaQ
+
+rSGB nosc: 1:27.593
+DKS: 1:58.875
+LC flap: 23.035
+MMM flap: 25.464
+MG flap: 16.692
+TF nosc flap: 37.231
+MC flap: 12.179
+CM flap: 11.130
+DKS flap: 39.208
+WGM flap: 15.958
+DC flap: 30.843
+KC flap: 47.642
+MT flap: 33.636
+GV flap: 6.167
+BC flap: 47.880
+RSL flap: 22.502
+RBC3 flap: 42.815
+
+*/
