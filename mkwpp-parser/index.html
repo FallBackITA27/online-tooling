@@ -39,6 +39,21 @@
             <div id="insert_the_date"></div>
             <h2>inserting a date</h2>
             <p>the parser will look for a line that starts with <code>date</code>, to determine the date of the times. dates are read like this: it first looks for four numbers in a row, and reads that as the year. Then it looks at any other string containing numbers, and reads that as the day. Lastly, it looks at the remaining string, and reads that as the month. If there are more than three parts to a date, it will fail with a warning and skip the submission.</p>
+            <p>Months are read like track names:</p>
+            <ol>
+                <li>January: <code>ja</code></li>
+                <li>February: <code>f</code></li>
+                <li>March: <code>mar</code></li>
+                <li>April: <code>ap</code></li>
+                <li>May: <code>may</code></li>
+                <li>June: <code>jun</code></li>
+                <li>July: <code>jul</code></li>
+                <li>August: <code>au</code></li>
+                <li>September: <code>s</code></li>
+                <li>October: <code>o</code></li>
+                <li>November: <code>n</code></li>
+                <li>December: <code>d</code></li>
+            </ol>
             <div id="indicating_flap_and_nosc"></div>
             <h2>indicating flap and nosc</h2>
             <p>There are multiple ways to indicate for flap and nosc. You can set all times as nosc or as flap by writing any of the accepted names before the actual time submissions.</p>
