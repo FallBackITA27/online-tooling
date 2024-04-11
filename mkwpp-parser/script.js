@@ -176,7 +176,7 @@ async function parseData() {
     console.log("Finished");
 }
 
-document.addEventListener("DOMContentLoaded", async function() {
+document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("readInput").addEventListener("click", parseData);
 
     // fetch("https://www.mariokart64.com/mkw/profile.php").then(r=>r.text()).then(r=>{
