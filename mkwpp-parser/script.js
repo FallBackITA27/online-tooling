@@ -84,6 +84,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
                 currentSubmission.err = true;
                 currentSubmission.errString = "Cannot parse date";
             };
+            console.log(keywords);
             for (let keyword of keywords.slice(1, keywords.length)) {
                 let kw = keyword.replace(/,/g, "");
                 if (kw.length === 4) {
