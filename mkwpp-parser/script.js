@@ -72,7 +72,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
                     continue;
                 }
                 let _break = false;
-                for (let abbr in constants.months.keys()) if (kw.startsWith(abbr)) {
+                for (let abbr of Object.keys(constants.months)) if (kw.startsWith(abbr)) {
                     month = constants.months[abbr];
                     _break = true;
                     break;
