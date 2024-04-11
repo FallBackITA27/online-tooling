@@ -95,6 +95,7 @@ async function loadStuff() {
         let profileDocument = new DOMParser().parseFromString(r, "text/html");
         let playerList = profileDocument.getElementsByClassName("playerslist")[0].children[0];
         for (let row in playerList.children) {
+            console.log(row);
             let starterData = row.children[0].children[0];
             if (row.children[0].innerHTML === "Name") continue;
             data.players[starterData.innerHTML.toLowerCase()] = parseInt(starterData.href.split("=")[1]);
