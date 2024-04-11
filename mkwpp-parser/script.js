@@ -1,4 +1,10 @@
 function writeToOutput(d) {
     if (d == null) return;
-    document.createElement("p")
+    let out = document.createElement("p");
+    out.innerHTML = d;
+    document.getElementById("output").append(out);
+}
+
+function resetOutput() {
+    document.getElementById("output").innerHTML = "";
 }
