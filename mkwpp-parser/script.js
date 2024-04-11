@@ -1,5 +1,6 @@
 let data = {
     submissions: [],
+    players: {}
 };
 
 let constants = {
@@ -91,10 +92,14 @@ let constants = {
 
 async function loadStuff() {
     await fetch("https://corsproxy.io/?https://www.mariokart64.com/mkw/profile.php").then(r=>r.text()).then(r=>{
-        console.log(r);
         let profileDocument = new DOMParser().parseFromString(r, "text/html");
         let playerList = profileDocument.getElementsByClassName("playerslist")[0].children[0];
-        console.log(playerList.children);
+        for (let row in playerList.children) {
+            let starterData = row.children[0].children[0];
+            if (row.children[0].innerHTML === "Name") continue;
+            data.players[starterData.innerHTML.toLowerCase()] = parseInt(starterData.href.split("=")[1]);
+        }
+        document.getElementById("readInput").disabled = "";
     });
 }
 loadStuff();
