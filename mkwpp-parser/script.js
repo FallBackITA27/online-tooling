@@ -193,23 +193,23 @@ function handleTime(data, track, nosc, flap) {
     for (let token of data) {
         if (token.includes("youtu") || token.includes("twitch")) comment = token;
         let total = 0;
-        if ((str.includes(":")) || (str.includes(".")) || (str.includes("\"")) || (str.includes("'"))) {
-            if (str.includes(":")) {
-                total += parseInt(str.split(":")[0]) * 60000;
-                str = str.split(":")[1];
-            } else if (str.includes("\"")) {
-                total += parseInt(str.split("\"")[0]) * 60000;
-                str = str.split("\"")[1];
+        if ((token.includes(":")) || (token.includes(".")) || (token.includes("\"")) || (token.includes("'"))) {
+            if (token.includes(":")) {
+                total += parseInt(token.split(":")[0]) * 60000;
+                token = token.split(":")[1];
+            } else if (token.includes("\"")) {
+                total += parseInt(token.split("\"")[0]) * 60000;
+                token = token.split("\"")[1];
             }
-            if (str.includes(".")) {
-                total += parseInt(str.split(".")[0]) * 1000;
-                total += parseInt(str.split(".")[1]);
-            } else if (str.includes("'")) {
-                total += parseInt(str.split("'")[0]) * 1000;
-                total += parseInt(str.split("'")[1]);
+            if (token.includes(".")) {
+                total += parseInt(token.split(".")[0]) * 1000;
+                total += parseInt(token.split(".")[1]);
+            } else if (token.includes("'")) {
+                total += parseInt(token.split("'")[0]) * 1000;
+                total += parseInt(token.split("'")[1]);
             }
         } else {
-            time = parseInt("str")
+            time = parseInt(str)
         }
         time = total;
     }
