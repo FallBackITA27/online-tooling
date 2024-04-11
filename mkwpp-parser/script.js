@@ -65,7 +65,7 @@ function resetOutput() {
     document.getElementById("output").innerHTML = "";
 }
 
-document.addEventListener("DOMContentLoaded", async function() {
+document.addEventListener("DOMContentLoaded", function() {
     fetch("https://www.mariokart64.com/mkw/profile.php").then(r=>r.text()).then(r=>{
         let profileDocument = new DOMParser().parseFromString(r);
         let playerList = profileDocument.getElementsByClassName("playerslist")[0]
