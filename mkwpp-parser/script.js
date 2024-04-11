@@ -228,9 +228,10 @@ document.getElementById("readInput").addEventListener("click", async function() 
 
 document.addEventListener("DOMContentLoaded",async function() {
 
-    fetch("https://corsproxy.io/?https://www.mariokart64.com/mkw/profile.php").then(r=>r.text()).then(r=>{
+    await fetch("https://corsproxy.io/?https://www.mariokart64.com/mkw/profile.php").then(r=>r.text()).then(r=>{
+        console.log(r);
         let profileDocument = new DOMParser().parseFromString(r);
-        let playerList = profileDocument.getElementsByClassName("playerslist")[0]
+        let playerList = profileDocument.getElementsByClassName("playerslist")[0];
         console.log(playerList);
     });
 });
