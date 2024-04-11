@@ -1,0 +1,35 @@
+body {
+    background-color: rgb(19, 19, 19);
+    color: white;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: grid;
+}
+
+p {
+    margin: 0
+}
+
+a {
+    color: aquamarine;
+}
+
+.x-axis {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.y-axis {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
