@@ -62,6 +62,8 @@ document.getElementById("readInput").addEventListener("click", async function() 
             if (keywords.length > 4) {
                 skipToNextSubmission = true;
                 currentSubmission.skip = true;
+                currentSubmission.err = true;
+                currentSubmission.errString = "Cannot parse date";
             };
             for (let keyword of keywords.slice(1, keywords.length)) {
                 let kw = keyword.replace(/,/g, "");
