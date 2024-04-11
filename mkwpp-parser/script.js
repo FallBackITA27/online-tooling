@@ -1,59 +1,3 @@
-var data = {
-    submissions: [],
-};
-
-var constants = {
-    months: {
-        "ja": "01",
-        "f": "02",
-        "mar": "03",
-        "ap": "04",
-        "may": "05",
-        "jun": "06",
-        "jul": "07",
-        "au": "08",
-        "s": "09",
-        "o": "10",
-        "n": "11",
-        "d": "12",
-    },
-
-    tracks: {
-        "l": 0,
-        "mm": 1,
-        "mg": 2,
-        "t": 3,
-        "mc": 4,
-        "cm": 5,
-        "dk": 6,
-        "w": 7,
-        "dc": 8,
-        "k": 9,
-        "mt": 10,
-        "g": 11,
-        "dd": 12,
-        "mh": 13,
-        "b": 14,
-        "rr": 15,
-        "rpb": 16,
-        "ry": 17,
-        "rg": 18,
-        "rmr": 19,
-        "rsl": 20,
-        "rsg": 21,
-        "rds": 22,
-        "rw": 23,
-        "rdh": 24,
-        "rbc3": 25,
-        "rdkj": 26,
-        "rmc": 27,
-        "rmc3": 28,
-        "rpb": 29,
-        "rdkm": 30,
-        "rbc": 31,
-    }
-}
-
 function writeToOutput(d) {
     if (d == null) return;
     let out = document.createElement("p");
@@ -66,6 +10,57 @@ function resetOutput() {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
+    let data = {submissions:[]};
+    let constants = {
+        months: {
+            "ja": "01",
+            "f": "02",
+            "mar": "03",
+            "ap": "04",
+            "may": "05",
+            "jun": "06",
+            "jul": "07",
+            "au": "08",
+            "s": "09",
+            "o": "10",
+            "n": "11",
+            "d": "12",
+        },
+        tracks: {
+            "l": 0,
+            "mm": 1,
+            "mg": 2,
+            "t": 3,
+            "mc": 4,
+            "cm": 5,
+            "dk": 6,
+            "w": 7,
+            "dc": 8,
+            "k": 9,
+            "mt": 10,
+            "g": 11,
+            "dd": 12,
+            "mh": 13,
+            "b": 14,
+            "rr": 15,
+            "rpb": 16,
+            "ry": 17,
+            "rg": 18,
+            "rmr": 19,
+            "rsl": 20,
+            "rsg": 21,
+            "rds": 22,
+            "rw": 23,
+            "rdh": 24,
+            "rbc3": 25,
+            "rdkj": 26,
+            "rmc": 27,
+            "rmc3": 28,
+            "rpb": 29,
+            "rdkm": 30,
+            "rbc": 31,
+        }
+    };
     console.log(document.getElementById("readInput"));
     document.getElementById("readInput").addEventListener("click", async function() {
         console.log("Started");
