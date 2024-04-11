@@ -55,7 +55,7 @@ let constants = {
 
     track_names: [
         "Luigi Circuit",
-        "Moo Moo meadows",
+        "Moo Moo Meadows",
         "Mushroom Gorge",
         "Toad's Factory",
         "Mario Circuit",
