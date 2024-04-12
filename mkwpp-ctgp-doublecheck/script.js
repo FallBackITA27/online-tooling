@@ -82,7 +82,9 @@ async function writeObservedPlayers() {
             let ppid = starterData.href.split("=")[1];
             if (!Object.keys(ctgpLinks).includes(ppid)) continue;
             starterData.href = `https://www.mariokart64.com/mkw/profile=${ppid}`;
-            document.getElementById("info").appendChild(starterData);
+            let out = document.createElement("p");
+            out.appendChild(starterData);
+            document.getElementById("info").appendChild(out);
         }
         document.getElementById("startChecker").disabled = "";
     });
