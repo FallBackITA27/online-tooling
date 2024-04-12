@@ -49,7 +49,7 @@ let constants = {
         "rdkj": 26,
         "rmc3": 28,
         "rmc": 27,
-        "rpb": 29,
+        "rpg": 29,
         "rdkm": 30,
         "rbc": 31,
     },
