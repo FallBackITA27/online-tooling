@@ -162,11 +162,15 @@ document.getElementById("startChecker").addEventListener("click", async function
             }));
         }
 
+        console.log("here 1");
+
         for (let i of awaiting) await i;
         return data;
     }));
 
+    console.log("here 2");
     for (let player of awaitingPlayerCompletion) {
+        console.log("here --- 3");
         let data = await player;
         console.log(data);
     }
