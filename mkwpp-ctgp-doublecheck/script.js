@@ -56,8 +56,8 @@ document.getElementById("startChecker").addEventListener("click", async function
         let mkwppTimesheetRequest = fetch(`https://corsproxy.io/?https://www.mariokart64.com/mkw/profile.php?pid=${ppid}`).then(r=>r.text()).then(r=>{
             let profileDocument = new DOMParser().parseFromString(r, "text/html");
             data[ppid] = {
-                normal: parseMKWPPTable(profileDocument.getElementsByClassName("c")[0]),
-                unrestricted: parseMKWPPTable(profileDocument.getElementsByClassName("k")[0])
+                unrestricted: parseMKWPPTable(profileDocument.getElementsByClassName("c")[0]),
+                normal: parseMKWPPTable(profileDocument.getElementsByClassName("k")[0])
             }
         });
 
