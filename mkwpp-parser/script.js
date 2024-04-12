@@ -193,7 +193,8 @@ document.getElementById("readInput").addEventListener("click", async function() 
                 flapCatch: false,
                 times: [],
             };
-        } else if (lowercaseLine.startsWith("name")) {
+        }
+        if (lowercaseLine.startsWith("name")) {
             let keywords = lowercaseLine.split(" ").filter(r=>r !== " ");
             currentSubmission.name = keywords.slice(1,keywords.length).join(" ");
         }
