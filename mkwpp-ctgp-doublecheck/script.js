@@ -122,8 +122,7 @@ function resetOutput() {
 document.getElementById("startChecker").addEventListener("click", async function() {
     document.getElementById("startChecker").disabled = "disabled";
     for (let ppid in ctgpLinks) {
-        let chadsoftTimeSheet = {unrestricted: {"3lap": {}, flap: {}}, normal: {"3lap": {}, flap: {}}};
-        let mkwppTimesheetRequest = fetch(`https://corsproxy.io/?https://www.mariokart64.com/mkw/profile.php?pid=${ppid}`).then(r=>r.text()).then(r=>{
+        await fetch(`https://corsproxy.io/?https://www.mariokart64.com/mkw/profile.php?pid=${ppid}`).then(r=>r.text()).then(r=>{
             let profileDocument = new DOMParser().parseFromString(r, "text/html");
             let unrestrictedTimes = parseMKWPPTable(profileDocument.getElementsByClassName("c")[0]);
             for (let track in unrestrictedTimes.flap) if (track_category[track]) delete unrestrictedTimes.flap[track];
@@ -150,25 +149,20 @@ document.getElementById("startChecker").addEventListener("click", async function
                     let bestSplit = timeToMsColons(ghost.finishTimeSimple);
                     let finishTime = timeToMsColons(ghost.finishTimeSimple);
 
-                    if (chadsoftTimeSheet[category]["3lap"][track] == null || chadsoftTimeSheet[category]["3lap"][track] == undefined) {
-                        chadsoftTimeSheet[category]["3lap"][track] = finishTime;
-                    } else if (chadsoftTimeSheet[category]["3lap"][track] > finishTime) {
-                        chadsoftTimeSheet[category]["3lap"][track] = finishTime;
+                    if (data[ppid][category]["3lap"][track] != null || data[ppid][category]["3lap"][track] != undefined) {
+                        if (data[ppid][category]["3lap"][track] >= finishTime) {
+                            delete data[ppid][category]["3lap"][track];
+                        }
                     }
 
-                    if (chadsoftTimeSheet[category].flap[track] == null || chadsoftTimeSheet[category].flap[track] == undefined) {
-                        chadsoftTimeSheet[category].flap[track] = bestSplit;
-                    } else if (chadsoftTimeSheet[category].flap[track] > bestSplit) {
-                        chadsoftTimeSheet[category].flap[track] = bestSplit;
+                    if (data[ppid][category].flap[track] != null || data[ppid][category].flap[track] != undefined) {
+                        if (data[ppid][category].flap[track] >= bestSplit) delete data[ppid][category].flap[track];
                     }
                 }
             }));
         }
 
         for (let i of awaiting) await i;
-        console.log(chadsoftTimeSheet);
-
-        await mkwppTimesheetRequest;
     }
     document.getElementById("startChecker").disabled = "";
 });
