@@ -277,6 +277,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
         players.add(submission.name);
     }
 
+    console.log(players);
     for (let player of players)
         for (let iSub = 0; iSub < data.submissions; iSub++) {
             let submission = data.submissions[iSub];
