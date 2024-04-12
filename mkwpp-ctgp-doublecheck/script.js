@@ -163,6 +163,7 @@ document.getElementById("startChecker").addEventListener("click", async function
 
         for (let i of awaiting) await i;
 
+        console.log(ppid);
         console.log(data);
     }
     document.getElementById("startChecker").disabled = "";
