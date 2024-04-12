@@ -204,16 +204,6 @@ document.getElementById("startChecker").addEventListener("click", async function
         for (let i of awaiting) await i;
 
         console.log(data);
-        for (let category in data){
-            console.log(category);
-            for (let lapType in data[category]){
-                console.log(lapType);
-                for (let track in data[category][lapType]){
-                    console.log(track);
-                    console.log(data[category][lapType][track]);
-                }
-            }
-        }
         for (let category in data)
             for (let lapType in data[category])
                 for (let track in data[category][lapType])
