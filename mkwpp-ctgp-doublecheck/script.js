@@ -73,8 +73,9 @@ async function writeObservedPlayers() {
         for (let row of playerList.children) {
             let starterData = row.children[0].children[0];
             if (row.children[0].innerHTML === "Name") continue;
-            if (!Object.keys(ctgpLinks).includes(starterData.href.split("=")[1])) continue;
-            starterData.href = "https://www.mariokart64.com/mkw/" + starterData.href;
+            let ppid = starterData.href.split("=")[1];
+            if (!Object.keys(ctgpLinks).includes(ppid)) continue;
+            starterData.href = `https://www.mariokart64.com/mkw/profile=${ppid}`;
             document.getElementById("info").appendChild(starterData);
         }
         document.getElementById("startChecker").disabled = "";
