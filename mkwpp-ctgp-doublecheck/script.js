@@ -168,6 +168,10 @@ document.getElementById("startChecker").addEventListener("click", async function
                 unrestricted: unrestrictedTimes,
                 normal: parseMKWPPTable(profileDocument.getElementsByClassName("k")[0])
             }
+            for (let trackUnr in data.unrestricted["3lap"]){
+                console.log(trackUnr);
+                console.log(data.unrestricted["3lap"][trackUnr]);
+            }
             for (let trackUnr in data.unrestricted["3lap"]) for (let trackNor in data.normal["3lap"]) if (data.unrestricted["3lap"][trackUnr].time === data.normal["3lap"][trackNor].time) delete data.unrestricted["3lap"][trackUnr];
             for (let trackUnr in data.unrestricted.flap) for (let trackNor in data.normal.flap) if (data.unrestricted.flap[trackUnr].time === data.normal.flap[trackNor].time) delete data.unrestricted.flap[trackUnr];
         });
