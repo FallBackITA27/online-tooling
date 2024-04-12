@@ -8,7 +8,9 @@ const ctgpLinks = {
     1497: ["BA0BD8BF709C1E35"], // Ragemodepigeon
 }
 
-let ctgpIdsToTrackNums = {
+let players = {};
+
+const ctgpIdsToTrackNums = {
     "1AE1A7D894960B38E09E7494373378D87305A163": 0,
     "90720A7D57A7C76E2347782F6BDE5D22342FB7DD": 1,
     "0E380357AFFCFD8722329994885699D9927F8276": 2,
@@ -43,7 +45,42 @@ let ctgpIdsToTrackNums = {
     "15B303B288F4707E5D0AF28367C8CE51CDEAB490": 31,
 }
 
-let track_category = {
+const track_names = [
+    "Luigi Circuit",
+    "Moo Moo Meadows",
+    "Mushroom Gorge",
+    "Toad's Factory",
+    "Mario Circuit",
+    "Coconut Mall",
+    "DK's Snowboard Cross",
+    "Wario's Gold Mine",
+    "Daisy Circuit",
+    "Koopa Cape",
+    "Maple Treeway",
+    "Grumble Volcano",
+    "Dry Dry Ruins",
+    "Moonview Highway",
+    "Bowser's Castle",
+    "Rainbow Road",
+    "GCN Peach Beach",
+    "DS Yoshi Falls",
+    "SNES Ghost Valley 2",
+    "N64 Mario Raceway",
+    "N64 Sherbet Land",
+    "GBA Shy Guy Beach",
+    "DS Delfino Square",
+    "GCN Waluigi Stadium",
+    "DS Desert Hills",
+    "GBA Bowser Castle 3",
+    "N64 DK's Jungle Parkway",
+    "GCN Mario Circuit",
+    "SNES Mario Circuit 3",
+    "DS Peach Gardens",
+    "GCN DK Mountain",
+    "N64 Bowser's Castle",
+];
+
+const track_category = {
     0: true,
     1: true,
     2: false,
@@ -164,9 +201,13 @@ document.getElementById("startChecker").addEventListener("click", async function
         }
 
         for (let i of awaiting) await i;
+        resetOutput();
 
-        console.log(ppid);
-        console.log(data);
+        for (let category in data)
+            for (let lapType in data[category])
+                for (let track in data[category][lapType])
+                    for (let time in data[category][lapType][track])
+                        writeToOutput(`Missing Time for ${players[ppid]}: ${track_names[track]} ${category} ${lapType} ${formatMsToTime(time)}`);
     }
     document.getElementById("startChecker").disabled = "";
 });
@@ -194,6 +235,7 @@ async function writeObservedPlayers() {
             starterData.href = `https://www.mariokart64.com/mkw/profile.php?pid=${ppid}`;
             let out = document.createElement("p");
             out.appendChild(starterData);
+            players[ppid] = starterData.innerHTML;
             document.getElementById("info").appendChild(out);
         }
         document.getElementById("startChecker").disabled = "";
