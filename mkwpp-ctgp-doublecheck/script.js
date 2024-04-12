@@ -74,8 +74,8 @@ function parseMKWPPTable(table) {
     for (let i = 1; i < 65; i++) {
         let cell = tbody.children[i].children[1];
         if (cell.innerHTML === "NT") continue;
-        output[i % 2 == 0] = {};
-        output[i % 2 == 0][Math.floor((i-1)/2)] = timeToMs(cell.children[0].innerHTML);
+        output[i % 2 == 0 ? "flap" : "3lap"] = {};
+        output[i % 2 == 0 ? "flap" : "3lap"][Math.floor((i-1)/2)] = timeToMs(cell.children[0].innerHTML);
     }
     return output;
 }
