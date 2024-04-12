@@ -168,12 +168,14 @@ document.getElementById("startChecker").addEventListener("click", async function
                 unrestricted: unrestrictedTimes,
                 normal: parseMKWPPTable(profileDocument.getElementsByClassName("k")[0])
             }
-            for (let trackUnr in data.unrestricted["flap"]){
-                console.log(trackUnr);
-                console.log(data.unrestricted["flap"][trackUnr]);
+
+            for (let track in data.unrestricted["3lap"]) {
+                if ((data.normal["3lap"][track] != undefined && data.normal["3lap"][track] != undefined) && data.unrestricted["3lap"][track].time === data.normal["3lap"][track].time) delete data.unrestricted["3lap"][track];
             }
-            for (let trackUnr in data.unrestricted["3lap"]) for (let trackNor in data.normal["3lap"]) if (data.unrestricted["3lap"][trackUnr].time === data.normal["3lap"][trackNor].time) delete data.unrestricted["3lap"][trackUnr];
-            for (let trackUnr in data.unrestricted.flap) for (let trackNor in data.normal.flap) if (data.unrestricted.flap[trackUnr].time === data.normal.flap[trackNor].time) delete data.unrestricted.flap[trackUnr];
+
+            for (let track in data.unrestricted.flap) {
+                if ((data.normal.flap[track] != undefined && data.normal.flap[track] != undefined) && data.unrestricted.flap[track].time === data.normal.flap[track].time) delete data.unrestricted.flap[track];
+            }
         });
         let awaiting = [];
         for (let id of ctgpLinks[ppid]) {
@@ -192,13 +194,13 @@ document.getElementById("startChecker").addEventListener("click", async function
                     let bestSplit = timeToMsColons(ghost.bestSplitSimple);
                     let finishTime = timeToMsColons(ghost.finishTimeSimple);
 
-                    if (data[category]["3lap"][track] != null || data[category]["3lap"][track] != undefined) {
+                    if (data[category]["3lap"][track] != null && data[category]["3lap"][track] != undefined) {
                         if (data[category]["3lap"][track].time >= finishTime) {
                             delete data[category]["3lap"][track];
                         }
                     }
 
-                    if (data[category].flap[track] != null || data[category].flap[track] != undefined) {
+                    if (data[category].flap[track] != null && data[category].flap[track] != undefined) {
                         if (data[category].flap[track].time >= bestSplit) delete data[category].flap[track];
                     }
                 }
