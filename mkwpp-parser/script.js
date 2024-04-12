@@ -224,18 +224,18 @@ document.getElementById("readInput").addEventListener("click", async function() 
         let nosc = false;
         let flap = flapCatch;
 
-        let i = 0;
-        let remove = [];
-        for (let token of trackData) {
+        for (let i = 0; i < trackData.length; i++) {
+            let token = trackData[i];
             if (token.startsWith("n")) {
                 nosc = true;
-                remove.push(i);
+                trackData = trackData.splice(i,1);
+                i--;
             }
             if (token.startsWith("f") || token.startsWith("l")) {
                 flap = true;
-                remove.push(i);
+                trackData = trackData.splice(i,1);
+                i--;
             }
-            i++;
         }
         for (let x of remove) trackData[x] = "";
         trackData = trackData.filter(r=>r!=="");
