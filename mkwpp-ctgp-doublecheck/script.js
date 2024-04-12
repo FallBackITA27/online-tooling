@@ -61,8 +61,10 @@ document.getElementById("startChecker").addEventListener("click", async function
             }
         });
         for (let id of ctgpLinks[ppid]) {
-            fetch(`https://tt.chadsoft.co.uk/players/${id.splice(0,2)}/${id}.json?times=pb`).then(r=>r.json()).then(r=>{
-                
+            fetch(`https://tt.chadsoft.co.uk/players/${id.splice(0,2)}/${id}.json`).then(r=>r.json()).then(r=>{
+                for (let ghost in r.ghosts) {
+
+                }
             })
         }
         await mkwppTimesheetRequest;
@@ -71,15 +73,11 @@ document.getElementById("startChecker").addEventListener("click", async function
 });
 
 function parseMKWPPTable(table) {
-    let output = {};
+    let output = {"flap": {}, "3lap": {}};
     let tbody = table.children[0];
     for (let i = 1; i < 65; i++) {
-        console.log(i);
         let cell = tbody.children[i].children[1];
-        console.log(cell);
-        if (cell.innerHTML === "NT") continue;
-        console.log(timeToMs(cell.children[0].innerHTML));
-        output[i % 2 == 0 ? "flap" : "3lap"] = {};
+        if (cell.innerHTML === "NT") continue; 
         output[i % 2 == 0 ? "flap" : "3lap"][Math.floor((i-1)/2)] = timeToMs(cell.children[0].innerHTML);
     }
     return output;
