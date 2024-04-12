@@ -237,7 +237,6 @@ document.getElementById("readInput").addEventListener("click", async function() 
                 i--;
             }
         }
-        for (let x of remove) trackData[x] = "";
         trackData = trackData.filter(r=>r!=="");
 
         let pushToUser = [];
