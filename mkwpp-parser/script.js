@@ -310,6 +310,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
             if (submission.err) writeToOutput("Error with submission: " + submission.errString);
             continue;
         }
+        if (submission.times.length == 0) continue;
         writeToOutput("Name: "+submission.name);
         writeToOutput("Date: "+submission.date);
         submission.times.sort((a,b)=>(a.track*2 + a.flap)-(b.track*2 + b.flap))
