@@ -280,15 +280,15 @@ document.getElementById("readInput").addEventListener("click", async function() 
 
     for (let player of Object.keys(megamerge)) {
         let removal = new Set();
-        let removedTimes = [];
+        let checkedAlready = new Set();
         megamerge[player].sort((a,b)=>a.nosc - b.nosc).sort((a,b)=>(a.track*2 + a.flap)-(b.track*2 + b.flap))
         for (let i in megamerge[player]) for (let j in megamerge[player]) {
-            if (i == j) continue;
+            if (i == j || checkedAlready.has(i)) continue;
             let time = megamerge[player][i];
             let cmpTime = megamerge[player][j];
             if (time.track != cmpTime.track || time.flap != cmpTime.flap) continue;
             if (time.time == cmpTime.time && !removal.has(i)) {
-                for (let removedTime of removedTimes) {console.log(removedTime);if (JSON.stringify(removedTime) === JSON.stringify(time)) continue;}
+                checkedAlready.add(j);
                 removal.add(i);
                 removedTimes.push(time);
                 writeToOutput(`Removed ${writeTimeOutput(time)}, it has been submitted twice.`);
