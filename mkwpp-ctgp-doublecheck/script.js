@@ -135,6 +135,7 @@ document.getElementById("startChecker").addEventListener("click", async function
         });
         let awaiting = [];
         for (let id of ctgpLinks[ppid]) {
+            console.log(id);
             awaiting.push(fetch(`https://tt.chadsoft.co.uk/players/${id.splice(0,2)}/${id}.json`).then(r=>r.json()).then(r=>{
                 for (let ghost in r.ghosts) {
                     if (ghost["200cc"]) continue;
