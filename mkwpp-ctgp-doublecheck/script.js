@@ -119,8 +119,7 @@ function resetOutput() {
 
 document.getElementById("startChecker").addEventListener("click", async function() {
     document.getElementById("startChecker").disabled = "disabled";
-    let awaitingPlayerCompletion = [];
-    for (let ppid in ctgpLinks) awaitingPlayerCompletion.push(new Promise(async function() {
+    for (let ppid in ctgpLinks) {
         let data;
         await fetch(`https://corsproxy.io/?https://www.mariokart64.com/mkw/profile.php?pid=${ppid}`).then(r=>r.text()).then(r=>{
             let profileDocument = new DOMParser().parseFromString(r, "text/html");
@@ -162,16 +161,8 @@ document.getElementById("startChecker").addEventListener("click", async function
             }));
         }
 
-        console.log("here 1");
-
         for (let i of awaiting) await i;
-        return data;
-    }));
 
-    console.log("here 2");
-    for (let player of awaitingPlayerCompletion) {
-        console.log("here --- 3");
-        let data = await player;
         console.log(data);
     }
     document.getElementById("startChecker").disabled = "";
