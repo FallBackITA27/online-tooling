@@ -135,14 +135,15 @@ document.getElementById("startChecker").addEventListener("click", async function
         });
         let awaiting = [];
         for (let id of ctgpLinks[ppid]) {
-                    console.log(`https://tt.chadsoft.co.uk/players/${id.slice(0,2)}/${id.slice(2)}.json`);
-                    awaiting.push(fetch(`https://tt.chadsoft.co.uk/players/${id.slice(0,2)}/${id.slice(2)}.json`).then(r=>r.json()).then(r=>{
+            awaiting.push(fetch(`https://tt.chadsoft.co.uk/players/${id.slice(0,2)}/${id.slice(2)}.json`).then(r=>r.json()).then(r=>{
                 for (let ghost in r.ghosts) {
-                    console.log("I am going into ghosts");
                     if (ghost["200cc"]) continue;
                     let track = ctgpIdsToTrackNums[ghost.hash];
+                    console.log(`debug 0`);
                     if (track == null || track == undefined) continue;
+                    console.log(`debug 1`);
                     if (ghost.categoryId == 3 || ghost.categoryId == 5) continue;
+                    console.log(`debug 2`);
                     let category;
                     if (ghost.categoryId == null || ghost.categoryId == undefined || ghost.categoryId == 2 || ghost.categoryId == 0) {
                         category = "normal";
