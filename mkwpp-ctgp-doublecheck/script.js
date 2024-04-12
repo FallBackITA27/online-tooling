@@ -131,7 +131,7 @@ document.getElementById("startChecker").addEventListener("click", async function
                 normal: parseMKWPPTable(profileDocument.getElementsByClassName("k")[0])
             }
             for (let trackUnr of data.unrestricted["3lap"]) for (let trackNor of data.normal["3lap"]) if (data.unrestricted["3lap"][trackUnr] === data.normal["3lap"][trackNor]) delete data.unrestricted["3lap"][trackUnr];
-            for (let trackUnr of data.unrestricted.flap) for (let trackNor of data.normal.flap) if (data.unrestricted.flap[trackUnr] === data.normal.flap[trackNor]) delete data.unrestricted.flap[trackUnr];
+            for (let trackUnr in data.unrestricted.flap) for (let trackNor in data.normal.flap) if (data.unrestricted.flap[trackUnr] === data.normal.flap[trackNor]) delete data.unrestricted.flap[trackUnr];
         });
         let awaiting = [];
         for (let id of ctgpLinks[ppid]) {
