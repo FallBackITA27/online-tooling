@@ -5,7 +5,7 @@ const ctgpLinks = {
     1556: ["9ED97E25E8149323"], // Cederic
     1441: ["A50190B9301E0C7A"], // ArthurOww
     1520: ["5F22F87EE4FFFD80","8B2AA1EB59B08E78","BBD2EC73FF52D568"], // Danny Boy
-    1497: ["BA0BD8BF709C1E35", "FA422FB224A8AAD5"], // Ragemodepigeon
+    1497: ["BA0BD8BF709C1E35"], // Ragemodepigeon
 }
 
 let players = {};
