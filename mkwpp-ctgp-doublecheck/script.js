@@ -8,35 +8,29 @@ const ctgpLinks = {
     1497: ["BA0BD8BF709C1E35"], // Ragemodepigeon
 }
 
+let data = {};
+
 /*
 This is a timesheet
 {
     playerPPID: {
         Normal: {
             3lap: {
-                trackId: {
-                    time: timeInMilliseconds
-                }
+                trackId: timeInMilliseconds,
                 ...
             },
             flap: {
-                trackId: {
-                    time: timeInMilliseconds
-                }
+                trackId: timeInMilliseconds,
                 ...
             },
         },
         Unrestricted: {
             3lap: {
-                trackId: {
-                    time: timeInMilliseconds
-                }
+                trackId: timeInMilliseconds,
                 ...
             },
             flap: {
-                trackId: {
-                    time: timeInMilliseconds
-                }
+                trackId: timeInMilliseconds,
                 ...
             },
         }
@@ -59,18 +53,29 @@ document.getElementById("startChecker").addEventListener("click", async function
     document.getElementById("startChecker").disabled = "disabled";
     for (let ppid in ctgpLinks) {
         let chadsoftTimeSheet = {};
-        let mkwppTimesheetRequest = parseTimesheetMKWPP(`https://corsproxy.io/?https://www.mariokart64.com/mkw/profile.php?pid=${ppid}`);
+        let mkwppTimesheetRequest = fetch(`https://corsproxy.io/?https://www.mariokart64.com/mkw/profile.php?pid=${ppid}`).then(r=>r.text()).then(r=>{
+            let profileDocument = new DOMParser().parseFromString(r, "text/html");
+            data[ppid] = {
+                normal: parseMKWPPTable(profileDocument.getElementsByClassName("c")[0]),
+                unrestricted: parseMKWPPTable(profileDocument.getElementsByClassName("k")[0])
+            }
+        });
 
-        let mkwppTimesheet = await mkwppTimesheetRequest;
+        await mkwppTimesheetRequest;
     }
     document.getElementById("startChecker").disabled = "";
 });
 
-async function parseTimesheetMKWPP(link) {
-    fetch(link).then(r=>r.text()).then(r=>{
-        let profileDocument = new DOMParser().parseFromString(r, "text/html");
-        profileDocument.getElementsByClassName
-    });
+function parseMKWPPTable(table) {
+    let output = {};
+    let tbody = table.children[0];
+    for (let i = 1; i < 65; i++) {
+        let cell = tbody.children[i].children[1];
+        if (cell.innerHTML.includes("NT")) continue;
+        output[i % 2 == 0] = {};
+        output[i % 2 == 0][(i-1)/2] = timeToMs(cell.children[0].innerHTML);
+    }
+    return output;
 }
 
 async function parseTimesheetCTGP(link) {
@@ -95,3 +100,20 @@ async function writeObservedPlayers() {
     });
 }
 writeObservedPlayers();
+
+function formatMsToTime(i32) {
+    let mins = Math.trunc(i32 / 60000);
+    i32 %= 60000;
+    let sec = Math.trunc(i32 / 1000);
+    i32 %= 1000;
+    let ret = `${mins.toString().padStart(2, "0")}:${sec.toString().padStart(2, "0")}.${Math.trunc(i32).toString().padStart(3, "0")}`;
+    return ret;
+}
+function timeToMs(timeStr) {
+    let split = timeStr.split("\"");
+    let mins = parseInt(split[0]);
+    let split2 = split[1].split("'");
+    let secs = parseInt(split2[0]);
+    let ms = parseInt(split2[1]);
+    return mins * 60000 + secs * 1000 + ms
+}
