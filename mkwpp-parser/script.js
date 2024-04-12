@@ -288,7 +288,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
 
     let out = [];
     for (let player of Object.keys(data.submissions)) {
-        writeToOutput("Name: "+submission.name);
+        writeToOutput("Name: "+player);
         for (let track of Object.keys(data.submissions[player]).sort((a,b)=>a-b))
             for (let nosc of Object.keys(data.submissions[player][track]).sort((a,b)=>a-b))
                 for (let flap of Object.keys(data.submissions[player][track][nosc]).sort((a,b)=>b-a)) {
@@ -297,7 +297,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
                     let catString = "Combined";
                     if (nosc && !constants.track_category[track]) catString = "NonSC";
                     if (track === 29 && !flap) catString = "NonSC";
-                    out.push(`(${data.players[submission.name]},${catString},${track*2 + flap},${time.time / 1000},${time.date},${time.comment === "" ? "N/A" : time.comment})`);
+                    out.push(`(${data.players[player]},${catString},${track*2 + flap},${time.time / 1000},${time.date},${time.comment === "" ? "N/A" : time.comment})`);
                 }
     }
 
