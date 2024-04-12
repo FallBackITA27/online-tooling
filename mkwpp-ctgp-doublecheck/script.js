@@ -74,6 +74,7 @@ async function writeObservedPlayers() {
             let starterData = row.children[0].children[0];
             if (row.children[0].innerHTML === "Name") continue;
             if (!Object.keys(ctgpLinks).includes(starterData.href.split("=")[1])) continue;
+            starterData.href = "https://www.mariokart64.com/mkw/" + starterData.href;
             document.getElementById("info").appendChild(starterData);
         }
         document.getElementById("startChecker").disabled = "";
