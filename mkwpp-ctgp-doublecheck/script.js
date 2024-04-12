@@ -1,9 +1,9 @@
 const ctgpLinks = {
     1662: ["1F7B7D3331A3A008"], // FalB
     1597: ["1C6A832CF6B30CFF"], // Electrick
-    1772: ["858060403046B78E"], // Eli
+    1772: ["858060403046B78E"], // EliDiscord
     1556: ["9ED97E25E8149323"], // Cederic
-    1441: ["A50190B9301E0C7A"], // Arthur'Oww
+    1441: ["A50190B9301E0C7A"], // ArthurOww
     1520: ["5F22F87EE4FFFD80","8B2AA1EB59B08E78","BBD2EC73FF52D568"], // Danny Boy
     1497: ["BA0BD8BF709C1E35"], // Ragemodepigeon
 }
