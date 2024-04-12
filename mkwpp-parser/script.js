@@ -288,7 +288,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
                         let cmpSubmission = data.submissions[jSub];
                         if (cmpSubmission.name === player)
                             for (let j = 0; j < cmpSubmission.times.length; j++) {
-                                if (JSON.stringify(cmpSubmission.times[j]) == timeStr && j!=i && iSub!=jSub) {
+                                if (JSON.stringify(cmpSubmission.times[j]) == timeStr && (j!=i || iSub!=jSub)) {
                                     writeToOutput(`Removed ${writeTimeOutput(t)}, it has been submitted twice.`);
                                     cmpSubmission.times = cmpSubmission.times.slice(j,1);
                                     j--
