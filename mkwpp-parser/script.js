@@ -327,7 +327,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
 });
 
 function writeTimeOutput(time) {
-    return `${constants.track_names[time.track]}:${time.flap ? " flap" : ""}${time.nosc ? " nosc" : ""} ${formatMsToTime(time.time)}${" " + time.comment}`
+    return `${constants.track_names[time.track]}:${time.flap ? " flap" : ""}${time.nosc ? " nosc" : ""} ${formatMsToTime(time.time)}${time.comment !== "" ? " " + time.comment : ""}`
 }
 
 function formatMsToTime(i32) {
