@@ -67,7 +67,10 @@ document.getElementById("startChecker").addEventListener("click", async function
 });
 
 async function parseTimesheetMKWPP(link) {
-
+    fetch(link).then(r=>r.text()).then(r=>{
+        let profileDocument = new DOMParser().parseFromString(r, "text/html");
+        profileDocument.getElementsByClassName
+    });
 }
 
 async function parseTimesheetCTGP(link) {
@@ -83,7 +86,7 @@ async function writeObservedPlayers() {
             if (row.children[0].innerHTML === "Name") continue;
             let ppid = starterData.href.split("=")[1];
             if (!Object.keys(ctgpLinks).includes(ppid)) continue;
-            starterData.href = `https://www.mariokart64.com/mkw/profile=${ppid}`;
+            starterData.href = `https://www.mariokart64.com/mkw/profile.php?pid=${ppid}`;
             let out = document.createElement("p");
             out.appendChild(starterData);
             document.getElementById("info").appendChild(out);
