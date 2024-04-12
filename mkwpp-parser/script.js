@@ -288,7 +288,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
 
     let out = [];
     for (let player of Object.keys(data.submissions)) {
-        writeToOutput("Name: "+player);
+        writeToOutput("Name: "+data.players[player]);
         for (let track of Object.keys(data.submissions[player]).sort((a,b)=>a-b))
             for (let nosc of Object.keys(data.submissions[player][track]).sort((a,b)=>a-b))
                 for (let flap of Object.keys(data.submissions[player][track][nosc]).sort((a,b)=>b-a)) {
