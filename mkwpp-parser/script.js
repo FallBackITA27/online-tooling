@@ -228,12 +228,12 @@ document.getElementById("readInput").addEventListener("click", async function() 
             let token = trackData[i];
             if (token.startsWith("n")) {
                 nosc = true;
-                trackData = trackData.splice(i,1);
+                trackData.splice(i,1);
                 i--;
             }
             if (token.startsWith("f") || token.startsWith("l")) {
                 flap = true;
-                trackData = trackData.splice(i,1);
+                trackData.splice(i,1);
                 i--;
             }
         }
