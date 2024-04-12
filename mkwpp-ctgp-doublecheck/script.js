@@ -139,6 +139,7 @@ document.getElementById("startChecker").addEventListener("click", async function
                 for (let ghost in r.ghosts) {
                     if (ghost["200cc"]) continue;
                     let track = ctgpIdsToTrackNums[ghost.trackId];
+                    console.log(ghost.trackId);
                     console.log(track);
                     if (track == null || track == undefined) continue;
                     console.log(`debug 1`);
