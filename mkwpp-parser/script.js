@@ -214,7 +214,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
             track = constants.tracks[abbr];
             break;
         }
-        trackData.slice(1,trackData.length);
+        trackData = trackData.slice(1,trackData.length);
 
         if (track === -1) {
             writeToOutput(`Skipped line "${line}" for player ${data.players[currentName]}, could not detect track.`);
