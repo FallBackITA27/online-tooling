@@ -158,6 +158,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
     let skipToNextSubmission = false;
     for (let line of parserData) {
         let lowercaseLine = line.toLowerCase();
+        console.log(lowercaseLine);
         if (lowercaseLine.startsWith("date")) {
             skipToNextSubmission = false
             data.submissions.push(currentSubmission);
