@@ -319,12 +319,13 @@ function handleTime(data, date) {
     let time = 0;
     let comment = "";
     for (let token of data) {
+        console.log(token);
         if (token.includes("youtu") || token.includes("twitch")) {
             comment = token;
             continue;
         }
         let total = 0;
-        if ((token.includes(":")) || (token.includes(".")) || (token.includes("\"")) || (token.includes("'"))) {
+        if (token.includes(":") || token.includes(".") || token.includes("\"") || token.includes("'")) {
             if (token.includes(":")) {
                 total += parseInt(token.split(":")[0]) * 60000;
                 token = token.split(":")[1];
@@ -383,4 +384,97 @@ Name: ARK..
 MG no-sc 1:53.782
 MC no-sc 1:26.557
 MH 1:55.099
+
+Date: April 11, 2024
+Name: ARK..
+
+MG no-sc 1:53.782
+MC no-sc 1:26.557
+MH 1:55.099
+Date: April 12 2024
+Name: Falco
+
+MG nosc: 1:42.665 
+Date: April 11th, 2024
+Name: Pabloski
+
+rGV2 nosc: 53.401
+Date: April 11, 2024
+Name: ARK..
+
+rYF 1:04.987
+rMC3 1:25.044
+rPB no-sc 1:17.670
+rGV2 no-sc 0:57.315 
+Date: April 11, 2024
+Name: Owen Smith
+
+DKSC: 1:52.909 https://youtu.be/z_2gws0rwro
+DKSC Flap: 36.523 https://youtu.be/-UMkQo4-HK4
+WGM: 38.688 https://youtu.be/G0ycgipn5ko
+WGM flap: 10.915 https://youtu.be/xJT65pN8ClI
+GV flap: 4.287 https://youtu.be/JVjQ7gLOrQA
+DDR: 1:51.651 https://youtu.be/4a0ZofupAAQ
+DDR flap: 34.036 https://youtu.be/uiFPtQHqFgM
+rDKJP: 1:51.801 https://youtu.be/sZJjn_bLkh4
+rDKJP Flap: 19.272 https://youtu.be/xng9cMsWkyk
+Date: April 11, 2024
+Name: ChromaQ
+
+CM: 48.669
+DDR flap: 36.379
+MH flap: 35.370
+RR nosc flap: 51.796
+RPB nosc flap: 23.999
+RYF flap: 19.770
+RGV2 nosc flap: 17.531
+RMR flap: 33.884
+RSGB nosc flap: 26.691
+RDS flap: 41.854
+RWS nosc flap: 39.340
+RDH nosc flap: 31.982
+RDKJP nosc flap: 47.850
+RMC nosc flap: 30.910
+RMC3 flap: 25.955
+RPG nosc flap: 40.808
+RDKM nosc flap: 43.833
+RBC nosc flap: 51.590
+Date: April 11, 2024
+Name: Cqrt3r
+
+rSL: 1:41.816 / 13.860
+rSL nosc flap: 40.327
+DDR nosc flap: 34.246
+WGM nosc flap: 35.982 
+bryce729 Bryce — Today at 07:43
+Date: April 11, 2024
+Name: Bryce
+
+DC: 1:30.170
+DC Flap: 28.863
+Date: April 12, 2024
+Name: rey00
+
+DDR: 1:48.139 
+Date: April 12, 2024
+Name: Lauchlan L
+
+WGM nosc flap: 35.564
+Date: 12th April 2024
+Name: Shojiro
+
+rMC nosc: 1:33.181 
+Date: April 12, 2024
+Name: Lauchlan L
+
+rPG nosc: 38.485
+Date: April 12, 2024
+Name: ARK..
+
+MG no-sc 1:49.630
+rMC no-sc 1:43.463
+Date: April 12, 2024
+Name: ARK..
+
+MMM 1:21.373
 */
