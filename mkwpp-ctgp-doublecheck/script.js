@@ -60,7 +60,9 @@ document.getElementById("startChecker").addEventListener("click", async function
                 normal: parseMKWPPTable(profileDocument.getElementsByClassName("k")[0])
             }
         });
-
+        for (let id of ctgpLinks[ppid]) {
+            
+        }
         await mkwppTimesheetRequest;
     }
     document.getElementById("startChecker").disabled = "";
@@ -71,9 +73,9 @@ function parseMKWPPTable(table) {
     let tbody = table.children[0];
     for (let i = 1; i < 65; i++) {
         let cell = tbody.children[i].children[1];
-        if (cell.innerHTML.includes("NT")) continue;
+        if (cell.innerHTML === "NT") continue;
         output[i % 2 == 0] = {};
-        output[i % 2 == 0][(i-1)/2] = timeToMs(cell.children[0].innerHTML);
+        output[i % 2 == 0][Math.floor((i-1)/2)] = timeToMs(cell.children[0].innerHTML);
     }
     return output;
 }
@@ -110,9 +112,9 @@ function formatMsToTime(i32) {
     return ret;
 }
 function timeToMs(timeStr) {
-    let split = timeStr.split("\"");
+    let split = timeStr.split("'");
     let mins = parseInt(split[0]);
-    let split2 = split[1].split("'");
+    let split2 = split[1].split("\"");
     let secs = parseInt(split2[0]);
     let ms = parseInt(split2[1]);
     return mins * 60000 + secs * 1000 + ms
