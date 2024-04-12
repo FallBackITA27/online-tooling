@@ -61,7 +61,9 @@ document.getElementById("startChecker").addEventListener("click", async function
             }
         });
         for (let id of ctgpLinks[ppid]) {
-            
+            fetch(`https://tt.chadsoft.co.uk/players/${id.splice(0,2)}/${id}.json?times=pb`).then(r=>r.json()).then(r=>{
+                
+            })
         }
         await mkwppTimesheetRequest;
     }
