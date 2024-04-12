@@ -145,7 +145,7 @@ document.getElementById("startChecker").addEventListener("click", async function
                     } else {
                         category = "unrestricted";
                     }
-                    let bestSplit = timeToMsColons(ghost.finishTimeSimple);
+                    let bestSplit = timeToMsColons(ghost.bestSplitSimple);
                     let finishTime = timeToMsColons(ghost.finishTimeSimple);
 
                     if (data[category]["3lap"][track] != null || data[category]["3lap"][track] != undefined) {
