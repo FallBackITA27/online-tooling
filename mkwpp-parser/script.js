@@ -287,7 +287,8 @@ document.getElementById("readInput").addEventListener("click", async function() 
             let time = megamerge[player][i];
             let cmpTime = megamerge[player][j];
             if (time.track != cmpTime.track || time.flap != cmpTime.flap) continue;
-            if (time.time == cmpTime.time && !removal.has(i) && !removedTimes.includes(time)) {
+            if (time.time == cmpTime.time && !removal.has(i)) {
+                for (let removedTime in removedTimes) if (JSON.stringify(removedTime) === JSON.stringify(time)) continue;
                 removal.add(i);
                 removedTimes.push(time);
                 writeToOutput(`Removed ${writeTimeOutput(time)}, it has been submitted twice.`);
