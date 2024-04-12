@@ -169,7 +169,7 @@ document.getElementById("startChecker").addEventListener("click", async function
                 normal: parseMKWPPTable(profileDocument.getElementsByClassName("k")[0])
             }
             for (let trackUnr in data.unrestricted["3lap"]) for (let trackNor in data.normal["3lap"]) if (data.unrestricted["3lap"][trackUnr] === data.normal["3lap"][trackNor]) delete data.unrestricted["3lap"][trackUnr];
-            for (let trackUnr in data.unrestricted.flap) for (let trackNor in data.normal.flap) if (data.unrestricted.flap[trackUnr] === data.normal.flap[trackNor]) delete data.unrestricted.flap[trackUnr];
+            for (let trackUnr in data.unrestricted.flap) for (let trackNor in data.normal.flap) if (data.unrestricted.flap[trackUnr].time === data.normal.flap[trackNor].time) delete data.unrestricted.flap[trackUnr];
         });
         let awaiting = [];
         for (let id of ctgpLinks[ppid]) {
@@ -189,13 +189,13 @@ document.getElementById("startChecker").addEventListener("click", async function
                     let finishTime = timeToMsColons(ghost.finishTimeSimple);
 
                     if (data[category]["3lap"][track] != null || data[category]["3lap"][track] != undefined) {
-                        if (data[category]["3lap"][track] >= finishTime) {
+                        if (data[category]["3lap"][track].time >= finishTime) {
                             delete data[category]["3lap"][track];
                         }
                     }
 
                     if (data[category].flap[track] != null || data[category].flap[track] != undefined) {
-                        if (data[category].flap[track] >= bestSplit) delete data[category].flap[track];
+                        if (data[category].flap[track].time >= bestSplit) delete data[category].flap[track];
                     }
                 }
             }));
@@ -207,7 +207,7 @@ document.getElementById("startChecker").addEventListener("click", async function
         for (let category in data)
             for (let lapType in data[category])
                 for (let track in data[category][lapType])
-                        writeToOutput(`Missing Time for ${players[ppid]}: ${track_names[track]} ${category} ${lapType} ${formatMsToTime(data[category][lapType][track])}`);
+                        writeToOutput(`(${data[category][lapType][track].date}) Missing Time for ${players[ppid]}: ${track_names[track]} ${category} ${lapType} ${formatMsToTime(data[category][lapType][track].time)}`);
     }
     document.getElementById("startChecker").disabled = "";
 });
@@ -218,7 +218,8 @@ function parseMKWPPTable(table) {
     for (let i = 1; i < 65; i++) {
         let cell = tbody.children[i].children[1];
         if (cell.innerHTML === "NT") continue;
-        output[i % 2 == 0 ? "flap" : "3lap"][Math.floor((i-1)/2)] = timeToMs(cell.children[0].innerHTML);
+        let dateCell = tbody.children[i].children[6 - (i % 2 == 0)];
+        output[i % 2 == 0 ? "flap" : "3lap"][Math.floor((i-1)/2)] = {time: timeToMs(cell.children[0].innerHTML), date: dateCell.innerHTML};
     }
     return output;
 }
