@@ -293,13 +293,13 @@ document.getElementById("readInput").addEventListener("click", async function() 
             for (let nosc of Object.keys(data.submissions[player][track]).sort((a,b)=>a-b))
                 for (let flap of Object.keys(data.submissions[player][track][nosc]).sort((a,b)=>b-a)) {
                     let time = data.submissions[player][track][nosc][flap];
-                    let flap = flap === "true";
-                    let nosc = nosc === "true";
-                    writeToOutput(`>> ${constants.track_names[track]}: ${time.date} ${flap ? " flap" : ""}${nosc ? " nosc" : ""} ${formatMsToTime(time.time)}${time.comment !== "" ? " " + time.comment : ""}`);
+                    let bflap = flap === "true";
+                    let bnosc = nosc === "true";
+                    writeToOutput(`>> ${constants.track_names[track]}: ${time.date} ${bflap ? " flap" : ""}${bnosc ? " nosc" : ""} ${formatMsToTime(time.time)}${time.comment !== "" ? " " + time.comment : ""}`);
                     let catString = "Combined";
-                    if (nosc && !constants.track_category[track]) catString = "NonSC";
-                    if (track === 29 && !flap) catString = "NonSC";
-                    out.push(`(${data.players[player]},${catString},${track*2 + flap},${time.time / 1000},${time.date},${time.comment === "" ? "N/A" : time.comment})`);
+                    if (bnosc && !constants.track_category[track]) catString = "NonSC";
+                    if (track === 29 && !bflap) catString = "NonSC";
+                    out.push(`(${data.players[player]},${catString},${track*2 + bflap},${time.time / 1000},${time.date},${time.comment === "" ? "N/A" : time.comment})`);
                 }
     }
     writeToOutput("<sub>-------</sub> FINAL OUTPUT <sub>-------</sub>");
