@@ -290,7 +290,6 @@ document.getElementById("readInput").addEventListener("click", async function() 
             if (time.time == cmpTime.time && !removal.has(i)) {
                 checkedAlready.add(j);
                 removal.add(i);
-                removedTimes.push(time);
                 writeToOutput(`Removed ${writeTimeOutput(time)}, it has been submitted twice.`);
             } else if (time.time < cmpTime.time) {
 
