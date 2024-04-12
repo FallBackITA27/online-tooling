@@ -138,7 +138,7 @@ document.getElementById("startChecker").addEventListener("click", async function
             awaiting.push(fetch(`https://tt.chadsoft.co.uk/players/${id.splice(0,2)}/${id}.json`).then(r=>r.json()).then(r=>{
                 for (let ghost in r.ghosts) {
                     if (ghost["200cc"]) continue;
-                    let track = ctgpIdsToTrackNums[ghost.track];
+                    let track = ctgpIdsToTrackNums[ghost.hash];
                     if (track == null || track == undefined) continue;
                     if (ghost.categoryId == 3 || ghost.categoryId == 5) continue;
                     let category;
