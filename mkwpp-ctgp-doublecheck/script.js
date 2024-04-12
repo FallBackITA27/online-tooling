@@ -221,9 +221,9 @@ function timeToMs(timeStr) {
     return mins * 60000 + secs * 1000 + ms
 }
 function timeToMsColons(timeStr) {
-    let split = timeStr.split("'");
+    let split = timeStr.split(":");
     let mins = parseInt(split[0]);
-    let split2 = split[1].split("\"");
+    let split2 = split[1].split(".");
     let secs = parseInt(split2[0]);
     let ms = parseInt(split2[1]);
     return mins * 60000 + secs * 1000 + ms
