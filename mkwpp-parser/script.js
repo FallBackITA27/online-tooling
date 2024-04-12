@@ -295,7 +295,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
                     let time = data.submissions[player][track][nosc][flap];
                     let bflap = flap === "true";
                     let bnosc = nosc === "true";
-                    writeToOutput(`>> ${constants.track_names[track]}: ${time.date} ${bflap ? " flap" : ""}${bnosc ? " nosc" : ""} ${formatMsToTime(time.time)}${time.comment !== "" ? " " + time.comment : ""}`);
+                    writeToOutput(`>> ${time.date} ${constants.track_names[track]}: ${bflap ? " flap" : ""}${bnosc ? " nosc" : ""} ${formatMsToTime(time.time)}${time.comment !== "" ? " " + time.comment : ""}`);
                     let catString = "Combined";
                     if (bnosc && !constants.track_category[track]) catString = "NonSC";
                     if (track === 29 && !bflap) catString = "NonSC";
