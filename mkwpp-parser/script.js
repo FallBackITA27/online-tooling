@@ -269,13 +269,45 @@ document.getElementById("readInput").addEventListener("click", async function() 
     data.submissions.push(currentSubmission);
     console.log("Finished");
     resetOutput();
-    let out = [];
     data.submissions.sort((a,b)=>a.date - b.date).sort((a,b)=>a.name - b.name);
+
+    let megamerge = {};
+    for (let submission of data.submissions) {
+        if (submission.err || submission.skip) continue;
+        if (megamerge[submission.name] == undefined || megamerge[submission.name] == null) megamerge[submission.name] = [];
+        for (let time of submission.times) megamerge[submission.name].push(time);
+    }
+
+    for (let player of Object.keys(megamerge)) {
+        let removal = new Set();
+        megamerge[player].sort((a,b)=>a.nosc - b.nosc).sort((a,b)=>(a.track*2 + a.flap)-(b.track*2 + b.flap))
+        for (let i in megamerge[player]) for (let j in megamerge[player]) {
+            if (i == j) continue;
+            let time = megamerge[player][i];
+            let cmpTime = megamerge[player][j];
+            if (time.track != cmpTime.track || time.flap != cmpTime.flap) continue;
+            if (time.time == cmpTime.time && !removal.has(i)) {
+                removal.add(i);
+                writeToOutput(`Removed ${writeTimeOutput(time)}, it has been submitted twice.`);
+            } else if (time.time < cmpTime.time) {
+
+            }
+        }
+        for (let i of removal) {
+            let time = megamerge[player][i];
+            for (let submission of data.submissions) {
+                let remove = [];
+                if (submission.err || submission.skip) continue;
+                if (submission.name === player) for (let j in submission.times) if (JSON.stringify(submission.times[j]) === JSON.stringify(time)) remove.push(parseInt(j) - remove.length);
+                for (let x in remove) submission.times.splice(x,1);
+            }
+        }
+    }
+
+    let out = [];
     for (let submission of data.submissions) {
         if (submission.err || submission.skip) {
-            if (submission.err) {
-                writeToOutput("Error with submission: " + submission.errString);
-            }
+            if (submission.err) writeToOutput("Error with submission: " + submission.errString);
             continue;
         }
         writeToOutput("Name: "+submission.name);
@@ -283,7 +315,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
         submission.times.sort((a,b)=>(a.track*2 + a.flap)-(b.track*2 + b.flap))
         writeToOutput("Times submitted: "+submission.times.length);
         for (let time of submission.times) {
-            writeToOutput(`>> ${constants.track_names[time.track]}:${time.flap ? " flap" : ""}${time.nosc ? " nosc" : ""} ${formatMsToTime(time.time)}${" " + time.comment}`);
+            writeToOutput(`>> ${writeTimeOutput(time)}`);
             let catString = "Combined";
             if (time.nosc && !constants.track_category[time.track]) catString = "NonSC";
             if (time.track === 29 && !time.flap) catString = "NonSC";
@@ -292,6 +324,10 @@ document.getElementById("readInput").addEventListener("click", async function() 
     }
     for (let i of out) writeToOutput(i);
 });
+
+function writeTimeOutput(t) {
+    return `${constants.track_names[time.track]}:${time.flap ? " flap" : ""}${time.nosc ? " nosc" : ""} ${formatMsToTime(time.time)}${" " + time.comment}`
+}
 
 function formatMsToTime(i32) {
     let mins = Math.trunc(i32 / 60000);
