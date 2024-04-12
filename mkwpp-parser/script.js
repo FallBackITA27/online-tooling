@@ -340,7 +340,7 @@ function handleTime(data, date) {
                 total += parseInt(token.split("'")[1]);
             }
         } else {
-            time = parseInt(token)
+            time = parseInt(token);
         }
         time = total;
     }
