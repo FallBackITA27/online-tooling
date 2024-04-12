@@ -326,7 +326,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
     for (let i of out) writeToOutput(i);
 });
 
-function writeTimeOutput(t) {
+function writeTimeOutput(time) {
     return `${constants.track_names[time.track]}:${time.flap ? " flap" : ""}${time.nosc ? " nosc" : ""} ${formatMsToTime(time.time)}${" " + time.comment}`
 }
 
