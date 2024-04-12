@@ -152,6 +152,7 @@ function resetOutput() {
 }
 
 document.getElementById("readInput").addEventListener("click", async function() {
+    document.getElementById("readInput").disabled = "disabled";
     console.log("Started");
     data.submissions = {};
     resetOutput();
@@ -303,6 +304,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
     }
     writeToOutput("<sub>-------</sub> FINAL OUTPUT <sub>-------</sub>");
     for (let i of out) writeToOutput(i);
+    document.getElementById("readInput").disabled = "";
 });
 
 function formatMsToTime(i32) {

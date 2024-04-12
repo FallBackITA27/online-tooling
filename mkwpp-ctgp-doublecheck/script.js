@@ -56,12 +56,14 @@ function resetOutput() {
 }
 
 document.getElementById("startChecker").addEventListener("click", async function() {
+    document.getElementById("startChecker").disabled = "disabled";
     for (let ppid in ctgpLinks) {
         let chadsoftTimeSheet = {};
         let mkwppTimesheetRequest = parseTimesheetMKWPP(`https://corsproxy.io/?https://www.mariokart64.com/mkw/profile.php?pid=${ppid}`);
 
         let mkwppTimesheet = await mkwppTimesheetRequest;
     }
+    document.getElementById("startChecker").disabled = "";
 });
 
 async function parseTimesheetMKWPP(link) {
