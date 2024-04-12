@@ -271,40 +271,32 @@ document.getElementById("readInput").addEventListener("click", async function() 
     resetOutput();
     data.submissions.sort((a,b)=>a.date - b.date).sort((a,b)=>a.name - b.name);
 
-    let megamerge = {};
+    let players = new Set();
     for (let submission of data.submissions) {
         if (submission.err || submission.skip) continue;
-        if (megamerge[submission.name] == undefined || megamerge[submission.name] == null) megamerge[submission.name] = [];
-        for (let time of submission.times) megamerge[submission.name].push(time);
+        players.add(submission.name);
     }
 
-    for (let player of Object.keys(megamerge)) {
-        let removal = new Set();
-        let checkedAlready = new Set();
-        megamerge[player].sort((a,b)=>a.nosc - b.nosc).sort((a,b)=>(a.track*2 + a.flap)-(b.track*2 + b.flap))
-        for (let i in megamerge[player]) for (let j in megamerge[player]) {
-            if (i == j || checkedAlready.has(i)) continue;
-            let time = megamerge[player][i];
-            let cmpTime = megamerge[player][j];
-            if (time.track != cmpTime.track || time.flap != cmpTime.flap) continue;
-            if (time.time == cmpTime.time && !removal.has(i)) {
-                checkedAlready.add(j);
-                removal.add(i);
-                writeToOutput(`Removed ${writeTimeOutput(time)}, it has been submitted twice.`);
-            } else if (time.time < cmpTime.time) {
-
-            }
+    for (let player of players)
+        for (let iSub = 0; iSub < data.submissions; iSub++) {
+            let submission = data.submissions[iSub];
+            if (submission.name === player)
+                for (let i = 0; i < submission.times.length; i++) {
+                    let time = submission.times[i];
+                    let timeStr = JSON.stringify(time);
+                    for (let jSub = 0; jSub < data.submissions.length; jSub++) {
+                        let cmpSubmission = data.submissions[jSub];
+                        if (cmpSubmission.name === player)
+                            for (let j = 0; j < cmpSubmission.times.length; j++) {
+                                if (JSON.stringify(cmpSubmission.times[j]) == timeStr && j!=i && iSub!=jSub) {
+                                    writeToOutput(`Removed ${writeTimeOutput(t)}, it has been submitted twice.`);
+                                    cmpSubmission.times = cmpSubmission.times.slice(j,1);
+                                    j--
+                                }
+                            }
+                    }
+                }
         }
-        for (let i of removal) {
-            let time = megamerge[player][i];
-            for (let submission of data.submissions) {
-                let remove = [];
-                if (submission.err || submission.skip) continue;
-                if (submission.name === player) for (let j in submission.times) if (JSON.stringify(submission.times[j]) === JSON.stringify(time)) remove.push(parseInt(j) - remove.length);
-                for (let x in remove) submission.times.splice(x,1);
-            }
-        }
-    }
 
     let out = [];
     for (let submission of data.submissions) {
