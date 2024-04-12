@@ -319,7 +319,7 @@ function handleTime(data, date) {
     let time = 0;
     let comment = "";
     for (let token of data) {
-        console.log(token);
+        console.log("new token: "+ token);
         if (token.includes("youtu") || token.includes("twitch")) {
             comment = token;
             continue;
