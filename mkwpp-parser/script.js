@@ -1,5 +1,5 @@
 let data = {
-    submissions: [],
+    submissions: {},
     players: {}
 };
 
@@ -153,9 +153,12 @@ function resetOutput() {
 
 document.getElementById("readInput").addEventListener("click", async function() {
     console.log("Started");
-    data.submissions = [];
+    data.submissions = {};
+    resetOutput();
     let parserData = document.getElementById("inputTextArea").value.split("\n").filter(r=>r !== "");
-    let currentSubmission = {skip:true};
+    let currentName = "";
+    let currentDate = "";
+    let flapCatch = false;
     let skipToNextSubmission = false;
     console.log(parserData);
     for (let line of parserData) {
@@ -163,15 +166,14 @@ document.getElementById("readInput").addEventListener("click", async function() 
         console.log(lowercaseLine);
         if (lowercaseLine.startsWith("date")) {
             skipToNextSubmission = false
-            data.submissions.push(currentSubmission);
+            flapCatch = false;
             let year;
             let month;
             let date;
             let keywords = lowercaseLine.split(" ").filter(r=>r !== " ");
             if (keywords.length > 4) {
                 skipToNextSubmission = true;
-                currentSubmission.err = true;
-                currentSubmission.errString = "Cannot parse date";
+                writeToOutput(`submission starting at "${line}", cannot parse date`);
             };
             for (let keyword of keywords.slice(1, keywords.length)) {
                 let kw = keyword.replace(/,/g, "").replace(/th/g, "").replace(/rd/g, "").replace(/nd/g, "").replace(/st/g, "");
@@ -188,25 +190,20 @@ document.getElementById("readInput").addEventListener("click", async function() 
                 if (_break) continue;
                 date = kw.padStart(2,"0");
             };
-            currentSubmission = {
-                name: "",
-                date: `${year}-${month}-${date}`,
-                flapCatch: false,
-                times: [],
-            };
+            currentDate = `${year}-${month}-${date}`;
             continue;
         }
+        if (skipToNextSubmission) continue;
         if (lowercaseLine.startsWith("name")) {
             let keywords = lowercaseLine.split(" ").filter(r=>r !== " ");
-            currentSubmission.name = keywords.slice(1,keywords.length).join(" ");
-            if (data.players[currentSubmission.name] != null || data.players[currentSubmission.name] != undefined) continue;
-            currentSubmission.err = true;
-            currentSubmission.errString = `Skipped line "${line}", could not identify the player.`;
+            currentName = keywords.slice(1,keywords.length).join(" ");
+            if (data.players[currentName] != null || data.players[currentName] != undefined) continue;
+            skipToNextSubmission = true;
+            writeToOutput(`Skipped submission starting at "${line}", could not identify the player.`);
         }
-        if (skipToNextSubmission) continue;
 
         if (lowercaseLine.split(" ").filter(r=>r !== "").length === 1 && (lowercaseLine.startsWith("f") || lowercaseLine.startsWith("l"))) {
-            currentSubmission.flapCatch = true
+            flapCatch = true;
             continue;
         };
 
@@ -220,13 +217,12 @@ document.getElementById("readInput").addEventListener("click", async function() 
         trackData.slice(1,trackData.length);
 
         if (track === -1) {
-            currentSubmission.err = true;
-            currentSubmission.errString = `Skipped line "${line}" for player ${data.players[currentSubmission.name]}, could not detect track.`;
-            continue
+            writeToOutput(`Skipped line "${line}" for player ${data.players[currentName]}, could not detect track.`);
+            continue;
         }
 
         let nosc = false;
-        let flap = currentSubmission.flapCatch;
+        let flap = flapCatch;
 
         let i = 0;
         let remove = [];
@@ -244,6 +240,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
         for (let x of remove) trackData[x] = "";
         trackData = trackData.filter(r=>r!=="");
 
+        let pushToUser = [];
         if (lowercaseLine.includes("/") || lowercaseLine.includes("\\")) {
             let trackData1 = [];
             let trackData2 = [];
@@ -259,74 +256,61 @@ document.getElementById("readInput").addEventListener("click", async function() 
                     trackData1.push(token);
                 }
             }
-            if (trackData1.length !== 0) currentSubmission.times.push(handleTime(trackData1,track,nosc,false));
-            if (trackData2.length !== 0) currentSubmission.times.push(handleTime(trackData2,track,nosc,true));
-            continue;
+            let finalData1 = handleTime(trackData1,currentDate);
+            finalData1.flap = false;
+            let finalData2 = handleTime(trackData2,currentDate);
+            finalData2.flap = false;
+            pushToUser.push(finalData1);
+            pushToUser.push(finalData2);
+        } else {
+            let finalData = handleTime(trackData,currentDate);
+            finalData.flap = flap;
+            pushToUser.push(finalData);
         }
 
-        currentSubmission.times.push(handleTime(trackData,track,nosc,flap));
+        for (let time of pushToUser) {
+            let finalIsFlap = time.flap;
+            delete time.flap;
+            if (data.submissions[currentName] == null || data.submissions[currentName] == undefined) data.submissions[currentName] = {};
+            if (data.submissions[currentName][track] == null || data.submissions[currentName][track] == undefined) data.submissions[currentName][track] = {};
+            if (data.submissions[currentName][track][nosc] == null || data.submissions[currentName][track][nosc] == undefined) data.submissions[currentName][track][nosc] = {};
+            if (data.submissions[currentName][track][nosc][finalIsFlap] == null || data.submissions[currentName][track][nosc][finalIsFlap] == undefined) {
+                data.submissions[currentName][track][nosc][finalIsFlap] = time;
+            } else {
+                let cmpTime = data.submissions[currentName][track][nosc][finalIsFlap];
+                if (cmpTime.time < time.time) continue;
+                if (cmpTime.comment === "" && time.comment === "") continue;
+                data.submissions[currentName][track][nosc][finalIsFlap] = time;
+            }
+        }
     }
-    data.submissions.push(currentSubmission);
     console.log("Finished");
-    resetOutput();
-    data.submissions.sort((a,b)=>a.date - b.date).sort((a,b)=>a.name - b.name);
-
-    let players = new Set();
-    for (let submission of data.submissions) {
-        if (submission.err || submission.skip) continue;
-        players.add(submission.name);
-    }
-
-    console.log(players);
-    for (let player of players)
-        for (let iSub = 0; iSub < data.submissions; iSub++) {
-            let submission = data.submissions[iSub];
-            console.log(player);
-            if (submission.name === player)
-                for (let i = 0; i < submission.times.length; i++) {
-                    let time = submission.times[i];
-                    let timeStr = JSON.stringify(time);
-                    console.log(time);
-                    for (let jSub = 0; jSub < data.submissions.length; jSub++) {
-                        let cmpSubmission = data.submissions[jSub];
-                        if (cmpSubmission.name === player)
-                            for (let j = 0; j < cmpSubmission.times.length; j++) {
-                                console.log(cmpSubmission.times[j]);
-                                if (JSON.stringify(cmpSubmission.times[j]) == timeStr && (j!=i || iSub!=jSub)) {
-                                    writeToOutput(`Removed ${writeTimeOutput(t)}, it has been submitted twice.`);
-                                    cmpSubmission.times = cmpSubmission.times.slice(j,1);
-                                    j--;
-                                }
-                            }
-                    }
-                }
-        }
 
     let out = [];
-    for (let submission of data.submissions) {
-        if (submission.err || submission.skip) {
-            if (submission.err) writeToOutput("Error with submission: " + submission.errString);
-            continue;
-        }
-        if (submission.times.length == 0) continue;
+    for (let player of Object.keys(data.submissions)) {
         writeToOutput("Name: "+submission.name);
+        for (let track of Object.keys(data.submissions[player]).sort((a,b)=>a-b))
+            for (let nosc of Object.keys(data.submissions[player][track]).sort((a,b)=>a-b))
+                for (let flap of Object.keys(data.submissions[player][track][nosc]).sort((a,b)=>b-a)) {
+                    let time = data.submissions[player][track][nosc][flap];
+                    writeToOutput(`${constants.track_names[track]}: ${time.date} ${flap ? " flap" : ""}${nosc ? " nosc" : ""} ${formatMsToTime(time.time)}${time.comment !== "" ? " " + time.comment : ""}`);
+                    let catString = "Combined";
+                    if (nosc && !constants.track_category[track]) catString = "NonSC";
+                    if (track === 29 && !flap) catString = "NonSC";
+                    out.push(`(${data.players[submission.name]},${catString},${track*2 + flap},${time.time / 1000},${time.date},${time.comment === "" ? "N/A" : time.comment})`);
+                }
+    }
+
+    for (let submission of data.submissions) {
         writeToOutput("Date: "+submission.date);
         submission.times.sort((a,b)=>(a.track*2 + a.flap)-(b.track*2 + b.flap))
         writeToOutput("Times submitted: "+submission.times.length);
         for (let time of submission.times) {
             writeToOutput(`>> ${writeTimeOutput(time)}`);
-            let catString = "Combined";
-            if (time.nosc && !constants.track_category[time.track]) catString = "NonSC";
-            if (time.track === 29 && !time.flap) catString = "NonSC";
-            out.push(`(${data.players[submission.name]},${catString},${time.track*2 + time.flap},${time.time / 1000},${submission.date},${time.comment === "" ? "N/A" : time.comment})`);
         }
     }
     for (let i of out) writeToOutput(i);
 });
-
-function writeTimeOutput(time) {
-    return `${constants.track_names[time.track]}:${time.flap ? " flap" : ""}${time.nosc ? " nosc" : ""} ${formatMsToTime(time.time)}${time.comment !== "" ? " " + time.comment : ""}`
-}
 
 function formatMsToTime(i32) {
     let mins = Math.trunc(i32 / 60000);
@@ -337,7 +321,7 @@ function formatMsToTime(i32) {
     return ret;
 }
 
-function handleTime(data, track, nosc, flap) {
+function handleTime(data, date) {
     let time = 0;
     let comment = "";
     for (let token of data) {
@@ -364,11 +348,9 @@ function handleTime(data, track, nosc, flap) {
         time = total;
     }
     return {
-        track: track,
-        flap: flap,
         time: time,
         comment: comment,
-        nosc: nosc
+        date: date
     }
 }
 
