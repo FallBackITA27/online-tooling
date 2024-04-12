@@ -135,8 +135,10 @@ document.getElementById("startChecker").addEventListener("click", async function
         });
         let awaiting = [];
         for (let id of ctgpLinks[ppid]) {
-            awaiting.push(fetch(`https://tt.chadsoft.co.uk/players/${id.slice(0,2)}/${id.slice(2)}.json`).then(r=>r.json()).then(r=>{
+                    console.log(`https://tt.chadsoft.co.uk/players/${id.slice(0,2)}/${id.slice(2)}.json`);
+                    awaiting.push(fetch(`https://tt.chadsoft.co.uk/players/${id.slice(0,2)}/${id.slice(2)}.json`).then(r=>r.json()).then(r=>{
                 for (let ghost in r.ghosts) {
+                    console.log("I am going into ghosts");
                     if (ghost["200cc"]) continue;
                     let track = ctgpIdsToTrackNums[ghost.hash];
                     if (track == null || track == undefined) continue;
