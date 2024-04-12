@@ -157,6 +157,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
     let parserData = document.getElementById("inputTextArea").value.split("\n").filter(r=>r !== "");
     let currentSubmission = {skip:true};
     let skipToNextSubmission = false;
+    console.log(parserData);
     for (let line of parserData) {
         let lowercaseLine = line.toLowerCase();
         console.log(lowercaseLine);
