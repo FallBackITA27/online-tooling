@@ -194,6 +194,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
                 flapCatch: false,
                 times: [],
             };
+            continue;
         }
         if (lowercaseLine.startsWith("name")) {
             let keywords = lowercaseLine.split(" ").filter(r=>r !== " ");
