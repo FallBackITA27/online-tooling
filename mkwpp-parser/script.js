@@ -300,15 +300,6 @@ document.getElementById("readInput").addEventListener("click", async function() 
                     out.push(`(${data.players[player]},${catString},${track*2 + flap},${time.time / 1000},${time.date},${time.comment === "" ? "N/A" : time.comment})`);
                 }
     }
-
-    for (let submission of data.submissions) {
-        writeToOutput("Date: "+submission.date);
-        submission.times.sort((a,b)=>(a.track*2 + a.flap)-(b.track*2 + b.flap))
-        writeToOutput("Times submitted: "+submission.times.length);
-        for (let time of submission.times) {
-            writeToOutput(`>> ${writeTimeOutput(time)}`);
-        }
-    }
     for (let i of out) writeToOutput(i);
 });
 
