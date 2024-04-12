@@ -8,8 +8,6 @@ const ctgpLinks = {
     1497: ["BA0BD8BF709C1E35"], // Ragemodepigeon
 }
 
-let data = {};
-
 let ctgpIdsToTrackNums = {
     "1AE1A7D894960B38E09E7494373378D87305A163": 0,
     "90720A7D57A7C76E2347782F6BDE5D22342FB7DD": 1,
@@ -121,13 +119,15 @@ function resetOutput() {
 
 document.getElementById("startChecker").addEventListener("click", async function() {
     document.getElementById("startChecker").disabled = "disabled";
-    for (let ppid in ctgpLinks) {
+    let awaitingPlayerCompletion = [];
+    for (let ppid in ctgpLinks) awaitingPlayerCompletion.push(new Promise(async function() {
+        let data;
         await fetch(`https://corsproxy.io/?https://www.mariokart64.com/mkw/profile.php?pid=${ppid}`).then(r=>r.text()).then(r=>{
             let profileDocument = new DOMParser().parseFromString(r, "text/html");
             let unrestrictedTimes = parseMKWPPTable(profileDocument.getElementsByClassName("c")[0]);
             for (let track in unrestrictedTimes.flap) if (track_category[track]) delete unrestrictedTimes.flap[track];
             for (let track in unrestrictedTimes["3lap"]) if (track_category[track]) delete unrestrictedTimes["3lap"][track];
-            data[ppid] = {
+            data = {
                 unrestricted: unrestrictedTimes,
                 normal: parseMKWPPTable(profileDocument.getElementsByClassName("k")[0])
             }
@@ -149,20 +149,26 @@ document.getElementById("startChecker").addEventListener("click", async function
                     let bestSplit = timeToMsColons(ghost.finishTimeSimple);
                     let finishTime = timeToMsColons(ghost.finishTimeSimple);
 
-                    if (data[ppid][category]["3lap"][track] != null || data[ppid][category]["3lap"][track] != undefined) {
-                        if (data[ppid][category]["3lap"][track] >= finishTime) {
-                            delete data[ppid][category]["3lap"][track];
+                    if (data[category]["3lap"][track] != null || data[category]["3lap"][track] != undefined) {
+                        if (data[category]["3lap"][track] >= finishTime) {
+                            delete data[category]["3lap"][track];
                         }
                     }
 
-                    if (data[ppid][category].flap[track] != null || data[ppid][category].flap[track] != undefined) {
-                        if (data[ppid][category].flap[track] >= bestSplit) delete data[ppid][category].flap[track];
+                    if (data[category].flap[track] != null || data[category].flap[track] != undefined) {
+                        if (data[category].flap[track] >= bestSplit) delete data[category].flap[track];
                     }
                 }
             }));
         }
 
         for (let i of awaiting) await i;
+        return data;
+    }));
+
+    for (let player of awaitingPlayerCompletion) {
+        let data = await player;
+        console.log(data);
     }
     document.getElementById("startChecker").disabled = "";
 });
