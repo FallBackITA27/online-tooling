@@ -156,6 +156,7 @@ function resetOutput() {
 
 document.getElementById("startChecker").addEventListener("click", async function() {
     document.getElementById("startChecker").disabled = "disabled";
+    resetOutput();
     for (let ppid in ctgpLinks) {
         let data;
         await fetch(`https://corsproxy.io/?https://www.mariokart64.com/mkw/profile.php?pid=${ppid}`).then(r=>r.text()).then(r=>{
@@ -201,7 +202,6 @@ document.getElementById("startChecker").addEventListener("click", async function
         }
 
         for (let i of awaiting) await i;
-        resetOutput();
 
         console.log(data);
         for (let category in data){
