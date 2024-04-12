@@ -150,6 +150,7 @@ document.getElementById("startChecker").addEventListener("click", async function
                     let bestSplit = timeToMsColons(ghost.finishTimeSimple);
                     let finishTime = timeToMsColons(ghost.finishTimeSimple);
 
+                    console.log(`${track} / ${category} / ${bestSplit}`);
                     if (chadsoftTimeSheet[category]["3lap"][track] == null || chadsoftTimeSheet[category]["3lap"][track] == undefined) {
                         chadsoftTimeSheet[category]["3lap"][track] = finishTime;
                     } else if (chadsoftTimeSheet[category]["3lap"][track] > finishTime) {
