@@ -198,6 +198,9 @@ document.getElementById("readInput").addEventListener("click", async function() 
         if (lowercaseLine.startsWith("name")) {
             let keywords = lowercaseLine.split(" ").filter(r=>r !== " ");
             currentSubmission.name = keywords.slice(1,keywords.length).join(" ");
+            if (data.players[currentSubmission.name] != null || data.players[currentSubmission.name] != undefined) continue;
+            currentSubmission.err = true;
+            currentSubmission.errString = `Skipped line "${line}", could not identify the player.`;
         }
         if (skipToNextSubmission) continue;
 
