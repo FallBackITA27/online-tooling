@@ -240,7 +240,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
         trackData = trackData.filter(r=>r!=="");
 
         let pushToUser = [];
-        if (lowercaseLine.includes("/") || lowercaseLine.includes("\\")) {
+        if (trackData.includes("/") || trackData.includes("\\")) {
             let trackData1 = [];
             let trackData2 = [];
             let x = false;
