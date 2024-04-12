@@ -83,10 +83,6 @@ function parseMKWPPTable(table) {
     return output;
 }
 
-async function parseTimesheetCTGP(link) {
-    
-}
-
 async function writeObservedPlayers() {
     fetch("https://corsproxy.io/?https://www.mariokart64.com/mkw/profile.php").then(r=>r.text()).then(r=>{
         let profileDocument = new DOMParser().parseFromString(r, "text/html");
