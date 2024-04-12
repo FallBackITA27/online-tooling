@@ -212,8 +212,8 @@ document.getElementById("readInput").addEventListener("click", async function() 
         trackData.slice(1,trackData.length);
 
         if (track === -1) {
-            submission.err = true;
-            submission.errString = `Skipped line "${line}" for player ${data.players[submission.name]}, could not detect track.`;
+            currentSubmission.err = true;
+            currentSubmission.errString = `Skipped line "${line}" for player ${data.players[currentSubmission.name]}, could not detect track.`;
             continue
         }
 
