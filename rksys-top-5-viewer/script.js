@@ -303,7 +303,7 @@ const licenseInput = document.getElementById("license");
 const trackInput = document.getElementById("trackSelect");
 
 const rksysInput = document.getElementById("savefile");
-rksysInput.addEventListener("change", function checkFile(){
+rksysInput.addEventListener("change", function(){
     rksysByteArray = [];
     const rksysHeader = [82,75,83,68,48,48,48,54];
     const corrFile = new Error("File is corrupted.");
