@@ -50,6 +50,7 @@ document.getElementById("categoryPicker").addEventListener("change", function(e)
 
 function setClickableToUsable() {
     Array.from(document.getElementsByClassName("clickable")).forEach(r=>r.addEventListener("click", function(e) {
+        console.log(e.target);
         let type = "a";
         if (e.target.classList.includes("a")) type = "b";
         if (e.target.classList.includes("b")) type = "r";
