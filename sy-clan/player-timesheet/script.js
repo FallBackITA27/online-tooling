@@ -89,9 +89,10 @@ async function updateDisplay() {
         selectionData.dataSort[1] === 1 ? element.classList.add("a") : element.classList.add("b");
     }
     for (let data of selectionData.dataSorted) {
+        let date = new Date(data[2]);
         pushElementToTimesheet(data[0]);
         pushElementToTimesheet(formatMsToTime(data[1]));
-        pushElementToTimesheet(data[2]);
+        pushElementToTimesheet(`${date.getFullYear()}-${`${date.getMonth()}`.padStart(2,"0")}-${`${date.getDate()}`.padStart(2,"0")}`);
         pushElementToTimesheet(data[3]);
     }
     pushElementToTimesheet("Total");
