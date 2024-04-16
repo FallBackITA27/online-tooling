@@ -61,7 +61,7 @@ async function updateDisplay() {
 }
 
 function pushElementToTimesheet(data) {
-    let p = document.createElement(p);
+    let p = document.createElement("p");
     p.innerHTML = data;
     document.getElementById("timesheet").appendChild(p);
 }
