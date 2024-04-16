@@ -14,14 +14,15 @@ document.getElementById("categoryPicker").addEventListener("change", function(e)
 });
 
 async function updateDisplay() {
-    await selectionData.playerData;
-    for (let i = 0; i < 32; i++) {
-        console.log(selectionData.playerData);
-        console.log(i.toString());
-        console.log(selectionData.category);
-        let data = selectionData.playerData[i.toString()][selectionData.category];
-        console.log(data);
-    }
+    await selectionData.playerData.then(r=>{
+        for (let i = 0; i < 32; i++) {
+            console.log(r);
+            console.log(i.toString());
+            console.log(selectionData.category);
+            let data = r[i.toString()][selectionData.category];
+            console.log(data);
+        }
+    });
 }
 
 function formatMsToTime(i32) {
