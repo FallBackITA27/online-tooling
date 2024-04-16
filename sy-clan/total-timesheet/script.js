@@ -53,9 +53,6 @@ async function start() {
             let player = await fetch(`../assets/${filename}.json`).then(r=>r.json());
             for (let track in player) {
                 for (let category in player[track]) {
-                    console.log(player);
-                    console.log(track);
-                    console.log(category);
                     let timeData = player[track][category];
                     if (total[category][track] == null || total[category][track] == undefined) {
                         total[category][track] = timeData;
