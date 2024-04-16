@@ -53,9 +53,9 @@ function setClickableToUsable() {
         let type = "a";
         if (e.target.classList.contains("a")) type = "b";
         if (e.target.classList.contains("b")) type = "r";
-        Array.from(document.getElementsByClassName("clickable")).classList.remove("selected");
-        Array.from(document.getElementsByClassName("clickable")).classList.remove("a");
-        Array.from(document.getElementsByClassName("clickable")).classList.remove("b");
+        Array.from(document.getElementsByClassName("clickable")).forEach(r=>r.classList.remove("selected"));
+        Array.from(document.getElementsByClassName("clickable")).forEach(r=>r.classList.remove("a"));
+        Array.from(document.getElementsByClassName("clickable")).forEach(r=>r.classList.remove("b"));
         if (type === "r") return;
         e.target.classList.add("selected");
         e.target.classList.add(type);
