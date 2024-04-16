@@ -73,7 +73,7 @@ async function start() {
                 i,
                 total.unr[i].player,
                 total.unr[i].time,
-                total.unr[i].date,
+                Date.parse(total.unr[i].date),
                 total.unr[i].pos,
             ]);
             selectionData.totalPos.unr += total.unr[i].pos;
@@ -84,7 +84,7 @@ async function start() {
                 i,
                 total.nosc[i].player,
                 total.nosc[i].time,
-                total.nosc[i].date,
+                Date.parse(total.nosc[i].date),
                 total.nosc[i].pos,
             ]);
             selectionData.totalPos.nosc += total.nosc[i].pos;
@@ -153,6 +153,16 @@ async function updateDisplay() {
 }
 
 async function sortDataSorted() {
+    if (selectionData.dataSort[0] == 1) {
+        if (selectionData.dataSort[1] == 1 || selectionData.dataSort[0] == 0) {
+            selectionData.dataSorted.unr.sort((a,b) => a[1].localeCompare(b[1]));
+            selectionData.dataSorted.nosc.sort((a,b) => a[1].localeCompare(b[1]));
+        } else if (selectionData.dataSort[1] == 2) {
+            selectionData.dataSorted.unr.sort((a,b) => b[1].localeCompare(a[1]));
+            selectionData.dataSorted.nosc.sort((a,b) => b[1].localeCompare(a[1]));
+        }
+        return;
+    }
     if (selectionData.dataSort[1] == 1 || selectionData.dataSort[0] == 0) {
         selectionData.dataSorted.unr.sort((a,b) => a[selectionData.dataSort[0]] - b[selectionData.dataSort[0]]);
         selectionData.dataSorted.nosc.sort((a,b) => a[selectionData.dataSort[0]] - b[selectionData.dataSort[0]]);
