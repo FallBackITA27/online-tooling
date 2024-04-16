@@ -43,6 +43,7 @@ let selectionData = {
 
 document.getElementById("categoryPicker").addEventListener("change", function(e) {
     selectionData.category = e.target.value;
+    updateDisplay();
 });
 
 async function start() {
