@@ -119,7 +119,7 @@ async function updateDataSorted() {
             selectionData.dataSorted.push(
                 [
                     trackNumToName[i],
-                    formatMsToTime(data.time),
+                    data.time,
                     data.date,
                     data.pos
                 ]
