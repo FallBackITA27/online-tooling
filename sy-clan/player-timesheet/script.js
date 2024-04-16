@@ -92,6 +92,8 @@ async function updateDisplay() {
     }
     for (let data of selectionData.dataSorted) {
         let date = new Date(data[2]);
+        console.log(data[0]);
+        console.log(trackNumToName[data[0]]);
         pushElementToTimesheet(trackNumToName[data[0]]);
         pushElementToTimesheet(formatMsToTime(data[1]));
         pushElementToTimesheet(`${date.getFullYear()}-${`${date.getMonth()}`.padStart(2,"0")}-${`${date.getDate()}`.padStart(2,"0")}`);
