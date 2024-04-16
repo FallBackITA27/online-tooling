@@ -1,0 +1,8 @@
+{
+    "svg.preview.background": "transparent",
+    "rust-analyzer.linkedProjects": [
+        "./sy-clan/personal_mkw_updater/Cargo.toml",
+    ],
+    "rust-analyzer.showUnlinkedFileNotification": false,
+    "rust-analyzer.checkOnSave": true,
+}

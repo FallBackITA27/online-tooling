@@ -1,9 +1,3 @@
-struct JSONData {
-    track: u8,
-    position: u32,
-    date: String
-}
-
 const ONLY_UNR: [i32; 10] = [0, 2, 12, 16, 24, 26, 34, 38, 44, 56];
 
 pub fn time_to_ms(time: String) -> i32 {
