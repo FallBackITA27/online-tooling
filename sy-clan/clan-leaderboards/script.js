@@ -82,7 +82,7 @@ async function updateDisplay() {
 
         pushElementToLeaderboard(timeData.player);
         pushImageElementToLeaderboard(`http://165.232.116.130/imgs/miis/${timeData.mii}`, "mii");
-        pushImageElementToLeaderboard(`https://www.mkleaderboards.com/images/flags/${timeData.nationality}.png`, timeData.nationality);
+        pushImageElementToLeaderboard(`https://www.mkleaderboards.com/images/flags/${timeData.nationality}.png`, timeData.nationality, ["country_flag"]);
         pushElementToLeaderboard(formatMsToTime(timeData.time));
         pushElementToLeaderboard(timeData.date);
         pushElementToLeaderboard(timeData.pos);
@@ -101,10 +101,13 @@ function pushElementToLeaderboard(data) {
     pushCustomElementToLeaderboard(p)
 }
 
-function pushImageElementToLeaderboard(src, alt="") {
+function pushImageElementToLeaderboard(src, alt="", classes=[]) {
     let img = document.createElement("img");
     img.src = src;
     img.alt = alt;
+    for (let addClass of classes) {
+        img.classList.add(addClass);
+    }
     pushCustomElementToLeaderboard(img);
 }
 
