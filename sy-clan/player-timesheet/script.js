@@ -36,16 +36,20 @@ const trackNumToName = {
 let selectionData = {
     playerData: fetch(`../assets/falb.json`).then(r=>r.json()),
     category: "nosc",
+    totalTime: 0,
+    totalPos: 0,
+    dataSort: [0, 0],
+    dataSorted: []
 };
 
 document.getElementById("playerPicker").addEventListener("change", function(e) {
     selectionData.playerData = fetch(`../assets/${e.target.value}.json`).then(r=>r.json());
-    updateDisplay();
+    updateDataSorted();
 });
 
 document.getElementById("categoryPicker").addEventListener("change", function(e) {
     selectionData.category = e.target.value;
-    updateDisplay();
+    updateDataSorted();
 });
 
 function setClickableToUsable() {
@@ -56,32 +60,63 @@ function setClickableToUsable() {
         Array.from(document.getElementsByClassName("clickable")).forEach(r=>r.classList.remove("selected"));
         Array.from(document.getElementsByClassName("clickable")).forEach(r=>r.classList.remove("a"));
         Array.from(document.getElementsByClassName("clickable")).forEach(r=>r.classList.remove("b"));
-        if (type === "r") return;
+        if (type === "r") {
+            selectionData.dataSort = [0,0];
+            return;
+        }
         e.target.classList.add("selected");
         e.target.classList.add(type);
+        let x;
+        if (e.target.innerHTML === "Time") x = 1;
+        if (e.target.innerHTML === "Date") x = 2;
+        if (e.target.innerHTML === "Position") x = 3;
+        let y;
+        if (type === "a") y = 1;
+        if (type === "b") y = 2;
+        selectionData.dataSort = [x, y];
     }))
 }
 
 async function updateDisplay() {
+    for (let data of selectionData.dataSorted) {
+        pushElementToTimesheet(data[0]);
+        pushElementToTimesheet(formatMsToTime(data[1]));
+        pushElementToTimesheet(data[2]);
+        pushElementToTimesheet(data[3]);
+    }
+    pushElementToTimesheet("Total");
+    pushElementToTimesheet(formatMsToTime(selectionData.totalTime));
+    pushElementToTimesheet("");
+    pushElementToTimesheet(selectionData.totalPos / 32);
+}
+
+async function updateDataSorted() {
     await selectionData.playerData.then(r=>{
         document.getElementById("timesheet").innerHTML = "<p>Track</p><p class=\"clickable\">Time</p><p class=\"clickable\">Date</p><p class=\"clickable\">Position</p>";
         setClickableToUsable();
-        let sumPos = 0;
-        let sumTime = 0;
+        selectionData.totalPos = 0;
+        selectionData.totalTime = 0;
         for (let i = 0; i < 32; i++) {
             let data = r[i.toString()][selectionData.category];
-            pushElementToTimesheet(trackNumToName[i]);
-            pushElementToTimesheet(formatMsToTime(data.time));
-            pushElementToTimesheet(data.date);
-            pushElementToTimesheet(data.pos);
-            sumPos += data.pos;
-            sumTime += data.time;
+            selectionData.dataSorted.push(
+                [
+                    trackNumToName[i],
+                    formatMsToTime(data.time),
+                    data.date,
+                    data.pos
+                ]
+            );
+            selectionData.totalPos += data.pos;
+            selectionData.totalTime += data.time;
         }
-        pushElementToTimesheet("Total");
-        pushElementToTimesheet(formatMsToTime(sumTime));
-        pushElementToTimesheet("");
-        pushElementToTimesheet(sumPos / 32);
+        if (selectionData.dataSort[0] == 0) return;
+        if (selectionData.dataSort[1] == 1) {
+            selectionData.dataSorted.sort((a,b) => a[selectionData.dataSort[0]] - b[selectionData.dataSort[0]]);
+        } else if (selectionData.dataSort[1] == 2) {
+            selectionData.dataSorted.sort((a,b) => b[selectionData.dataSort[0]] - a[selectionData.dataSort[0]]);
+        }
     });
+    updateDisplay();
 }
 
 function pushElementToTimesheet(data) {
