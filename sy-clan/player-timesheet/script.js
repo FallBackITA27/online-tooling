@@ -110,6 +110,7 @@ async function sortDataSorted() {
 }
 
 async function updateDataSorted() {
+    selectionData.dataSorted = [];
     await selectionData.playerData.then(r=>{
         selectionData.totalPos = 0;
         selectionData.totalTime = 0;
