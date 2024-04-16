@@ -50,6 +50,7 @@ document.getElementById("categoryPicker").addEventListener("change", function(e)
 
 async function updateDisplay() {
     await selectionData.playerData.then(r=>{
+        document.getElementById("timesheet").innerHTML = "";
         for (let i = 0; i < 32; i++) {
             let data = r[i.toString()][selectionData.category];
             pushElementToTimesheet(trackNumToName[i]);
