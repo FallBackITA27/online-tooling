@@ -1,4 +1,21 @@
 #membersTable {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    grid-template-columns: 2fr 1fr 1fr 4fr 1fr 1fr 1fr 1fr;
+}
+
+#proposedTable {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 2fr 1fr 4fr 1fr;
+}
+
+#membersTable > *, #proposedTable > * {
+    justify-self: center;
+    align-self: center;
+}
+
+.country_flag {
+    aspect-ratio: 16/9;
+    width: 50px;
 }
