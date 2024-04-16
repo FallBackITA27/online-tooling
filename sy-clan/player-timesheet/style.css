@@ -4,6 +4,18 @@
     grid-template-columns: 2fr 1fr 1fr 1fr;
 }
 
+@media only screen and (max-width: 520px) {
+    p {
+        font-size: .8em;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    p {
+        font-size: .6em;
+    }
+}
+
 #timesheet > * {
     justify-self: center;
     align-self: center;
