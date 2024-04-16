@@ -368,7 +368,7 @@ async fn ts_to_json(player_ts: &Timesheet, mut file: std::fs::File) {
         let normal_time = player_ts.normal.get(header);
         let glitch_time = player_ts.glitch.get(header);
 
-        write!(file, r#""{header}":{{"#).unwrap();
+        write!(file, r#""{}":{{"#, i >> 1).unwrap();
 
         if ONLY_UNR.contains(&i) {
             if normal_time.is_some() {
