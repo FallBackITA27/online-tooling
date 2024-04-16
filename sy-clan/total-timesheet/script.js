@@ -87,6 +87,7 @@ document.addEventListener("DOMContentLoaded", async function() {
             selectionData.totalTime.nosc += total.nosc[i].time;
         }
     });
+    updateDisplay();
 });
 
 function setClickableToUsable() {
