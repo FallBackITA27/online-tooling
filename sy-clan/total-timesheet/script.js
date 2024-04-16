@@ -52,7 +52,7 @@ async function start() {
         for (let filename of r) {
             let player = await fetch(`../assets/${filename}.json`).then(r=>r.json());
             for (let track in player) {
-                for (let category in track) {
+                for (let category in player[track]) {
                     console.log(player);
                     console.log(track);
                     console.log(category);
