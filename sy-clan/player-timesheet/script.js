@@ -52,9 +52,18 @@ async function updateDisplay() {
     await selectionData.playerData.then(r=>{
         for (let i = 0; i < 32; i++) {
             let data = r[i.toString()][selectionData.category];
-            let trackName = trackNumToName[i];
+            pushElementToTimesheet(trackNumToName[i]);
+            pushElementToTimesheet(formatMsToTime(data.time));
+            pushElementToTimesheet(data.date);
+            pushElementToTimesheet(data.pos);
         }
     });
+}
+
+function pushElementToTimesheet(data) {
+    let p = document.createElement(p);
+    p.innerHTML = data;
+    document.getElementById("timesheet").appendChild(p);
 }
 
 function formatMsToTime(i32) {
