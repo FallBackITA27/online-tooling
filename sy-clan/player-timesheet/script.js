@@ -52,9 +52,11 @@ function setClickableToUsable() {
     Array.from(document.getElementsByClassName("clickable")).forEach(r=>r.addEventListener("click", function(e) {
         let type = "a";
         if (e.target.classList.includes("a")) type = "b";
+        if (e.target.classList.includes("b")) type = "r";
         Array.from(document.getElementsByClassName("clickable")).classList.remove("selected");
         Array.from(document.getElementsByClassName("clickable")).classList.remove("a");
         Array.from(document.getElementsByClassName("clickable")).classList.remove("b");
+        if (type === "r") return;
         e.target.classList.add("selected");
         e.target.classList.add(type);
     }))
@@ -62,7 +64,7 @@ function setClickableToUsable() {
 
 async function updateDisplay() {
     await selectionData.playerData.then(r=>{
-        document.getElementById("timesheet").innerHTML = "<p class=\"clickable\">Track</p><p class=\"clickable\">Time</p><p class=\"clickable\">Date</p><p class=\"clickable\">Position</p>";
+        document.getElementById("timesheet").innerHTML = "<p>Track</p><p class=\"clickable\">Time</p><p class=\"clickable\">Date</p><p class=\"clickable\">Position</p>";
         setClickableToUsable();
         let sumPos = 0;
         let sumTime = 0;
