@@ -120,7 +120,7 @@ async function updateDataSorted() {
                 [
                     trackNumToName[i],
                     data.time,
-                    data.date,
+                    Date.parse(data.date),
                     data.pos
                 ]
             );
