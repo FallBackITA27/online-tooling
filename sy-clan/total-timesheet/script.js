@@ -45,7 +45,7 @@ document.getElementById("categoryPicker").addEventListener("change", function(e)
     selectionData.category = e.target.value;
 });
 
-document.addEventListener("DOMContentLoaded", async function() {
+async function start() {
     await fetch("../assets/filenames.json").then(r=>r.json()).then(async r=>{
         let namesConvert = await fetch("../assets/filenametoplayername.json").then(r=>r.json());
         let total = {unr: {}, nosc: {}};
@@ -88,7 +88,8 @@ document.addEventListener("DOMContentLoaded", async function() {
         }
     });
     updateDisplay();
-});
+};
+start();
 
 function setClickableToUsable() {
     Array.from(document.getElementsByClassName("clickable")).forEach(r=>r.addEventListener("click", function(e) {
