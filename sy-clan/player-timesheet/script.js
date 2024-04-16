@@ -62,6 +62,8 @@ function setClickableToUsable() {
         Array.from(document.getElementsByClassName("clickable")).forEach(r=>r.classList.remove("b"));
         if (type === "r") {
             selectionData.dataSort = [0,0];
+            sortDataSorted();
+            updateDisplay();
             return;
         }
         e.target.classList.add("selected");
