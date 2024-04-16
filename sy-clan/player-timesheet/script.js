@@ -5,11 +5,21 @@ let selectionData = {
 
 document.getElementById("playerPicker").addEventListener("change", function(e) {
     selectionData.playerData = fetch(`../assets/${e.target.value}.json`).then(r=>r.json());
+    updateDisplay();
 });
 
 document.getElementById("categoryPicker").addEventListener("change", function(e) {
     selectionData.category = e.target.value;
+    updateDisplay();
 });
+
+async function updateDisplay() {
+    await selectionData.playerData;
+    for (let i = 0; i < 32; i++) {
+        let data = selectionData.playerData[i.toString()][selectionData.category];
+        console.log(data);
+    }
+}
 
 function formatMsToTime(i32) {
     let mins = Math.trunc(i32 / 60000);
