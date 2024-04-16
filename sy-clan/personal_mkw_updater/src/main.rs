@@ -140,7 +140,7 @@ macro_rules! user {
         }
         timesheet_cleanup(&mut timesheet);
         let mut file = std::fs::File::create(path).unwrap();
-        file.write(ts_to_csv(&timesheet).await.as_bytes()).unwrap();
+        file.write(ts_to_json(&timesheet).await.as_bytes()).unwrap();
     };
 }
 
@@ -267,8 +267,8 @@ fn timesheet_cleanup(player_ts: &mut Timesheet) {
     }
 }
 
-async fn get_last_place_in_tops(mut url: String) -> u32 {
-    let mut page = reqwest::get(url.split("&start=").next().unwrap())
+async fn get_last_place_in_tops(url: String) -> u32 {
+    let page = reqwest::get(url.split("&start=").next().unwrap())
         .await
         .unwrap()
         .text()
@@ -345,12 +345,16 @@ async fn get_pos_from_pp(mut url: String) -> u32 {
     .unwrap();
 }
 
-async fn ts_to_csv(player_ts: &Timesheet) -> String {
-    let mut out = String::new();
+async fn ts_to_json(player_ts: &Timesheet) -> String {
+    let mut out = String::from("{");
     let mut i = 0;
     for header in CSV_HEADERS {
         let normal_time = player_ts.normal.get(header);
         let glitch_time = player_ts.glitch.get(header);
+
+        out += "\"";
+        out += header;
+        out += "\":{";
 
         if ONLY_UNR.contains(&i) {
             if normal_time.is_some() {
@@ -358,31 +362,24 @@ async fn ts_to_csv(player_ts: &Timesheet) -> String {
                 let time_str = time.time.to_string();
                 let time_str = time_str.split_at(time_str.len() - 3);
                 let out_str = format!(
-                    "{}\t{}\t{}",
-                    ms_to_time(time.time),
+                    r##"{{"time":{},"date":"{}","pos":{}"}},"##,
+                    time.time,
                     time.date.split("T").next().unwrap(),
                     get_pos_from_pp(format!(
-                    "https://www.mariokartplayers.com/mkw/coursec.php?cid={i}&hl={}.{}&start=001",
-                    time_str.0, time_str.1
-                ))
-                    .await
-                );
-                out += &out_str;
-                out += "\t\t";
-                out += &out_str;
-                out += "\n";
-            } else {
-                let out_str = format!(
-                    "05:59.999\t2009-04-01\t{}",
-                    get_last_place_in_tops(format!(
-                        "https://www.mariokartplayers.com/mkw/coursec.php?cid={i}"
+                        "https://www.mariokartplayers.com/mkw/coursec.php?cid={i}&hl={}.{}&start=001",
+                        time_str.0, time_str.1
                     ))
                     .await
                 );
+                out += "\"nosc\":";
                 out += &out_str;
-                out += "\t\t";
+                out += ",\"unr\":";
                 out += &out_str;
-                out += "\n";
+            } else {
+                let last_place = get_last_place_in_tops(format!(
+                    "https://www.mariokartplayers.com/mkw/coursec.php?cid={i}"
+                )).await;
+                out += &format!(r##""nosc":{{"time":359999,"date":"2009-04-01","pos":{}"}},"unr":{{"time":359999,"date":"2009-04-01","pos":{}"}}"##, last_place, last_place);
             }
             i += 2;
             continue;
@@ -393,8 +390,8 @@ async fn ts_to_csv(player_ts: &Timesheet) -> String {
             let time_str = time.time.to_string();
             let time_str = time_str.split_at(time_str.len() - 3);
             out += &format!(
-                "{}\t{}\t{}\t\t",
-                ms_to_time(time.time),
+                r##""nosc":{{"time":{},"date":"{}","pos":{}"}},"##,
+                time.time,
                 time.date.split("T").next().unwrap(),
                 get_pos_from_pp(format!(
                     "https://www.mariokartplayers.com/mkw/coursek.php?cid={i}&hl={}.{}&start=001",
@@ -407,8 +404,8 @@ async fn ts_to_csv(player_ts: &Timesheet) -> String {
                 let time_str = time.time.to_string();
                 let time_str = time_str.split_at(time_str.len() - 3);
                 out += &format!(
-                    "{}\t{}\t{}\n",
-                    ms_to_time(time.time),
+                    r##""unr":{{"time":{},"date":"{}","pos":{}"}}"##,
+                    time.time,
                     time.date.split("T").next().unwrap(),
                     get_pos_from_pp(format!(
                         "https://www.mariokartplayers.com/mkw/coursec.php?cid={i}&hl={}.{}&start=001",
@@ -418,11 +415,11 @@ async fn ts_to_csv(player_ts: &Timesheet) -> String {
                 );
             } else {
                 out += &format!(
-                    "{}\t{}\t{}\n",
-                    ms_to_time(time.time),
+                    r##""unr":{{"time":{},"date":"{}","pos":{}"}},"##,
+                    time.time,
                     time.date.split("T").next().unwrap(),
                     get_pos_from_pp(format!(
-                        "https://www.mariokartplayers.com/mkw/coursec.php?cid={i}&hl={}.{}&start=001",
+                        "https://www.mariokartplayers.com/mkw/coursek.php?cid={i}&hl={}.{}&start=001",
                         time_str.0, time_str.1
                     ))
                     .await
@@ -430,7 +427,7 @@ async fn ts_to_csv(player_ts: &Timesheet) -> String {
             }
         } else {
             out += &format!(
-                "05:59.999\t2009-04-01\t{}\t\t",
+                r##""nosc":{{"time":359999,"date":"2009-04-01","pos":{}"}},"##,
                 get_last_place_in_tops(format!(
                     "https://www.mariokartplayers.com/mkw/coursek.php?cid={i}"
                 ))
@@ -441,8 +438,8 @@ async fn ts_to_csv(player_ts: &Timesheet) -> String {
                 let time_str = time.time.to_string();
                 let time_str = time_str.split_at(time_str.len() - 3);
                 out += &format!(
-                    "{}\t{}\t{}\n",
-                    ms_to_time(time.time),
+                    r##""unr":{{"time":{},"date":"{}","pos":{}"}}"##,
+                    time.time,
                     time.date.split("T").next().unwrap(),
                     get_pos_from_pp(format!(
                         "https://www.mariokartplayers.com/mkw/coursec.php?cid={i}&hl={}.{}&start=001",
@@ -452,7 +449,7 @@ async fn ts_to_csv(player_ts: &Timesheet) -> String {
                 );
             } else {
                 out += &format!(
-                    "05:59.999\t2009-04-01\t{}\n",
+                    r##""unr":{{"time":359999,"date":"2009-04-01","pos":{}"}}"##,
                     get_last_place_in_tops(format!(
                         "https://www.mariokartplayers.com/mkw/coursec.php?cid={i}"
                     ))
@@ -461,7 +458,8 @@ async fn ts_to_csv(player_ts: &Timesheet) -> String {
             }
         }
         i += 2;
+        out += "},";
     }
 
-    return out;
+    return out.strip_suffix(',').unwrap().to_string() + "}";
 }
