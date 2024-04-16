@@ -74,10 +74,20 @@ function setClickableToUsable() {
         if (type === "a") y = 1;
         if (type === "b") y = 2;
         selectionData.dataSort = [x, y];
+        sortDataSorted();
+        updateDisplay();
     }))
 }
 
 async function updateDisplay() {
+    let ts = document.getElementById("timesheet");
+    ts.innerHTML = "<p>Track</p><p class=\"clickable\">Time</p><p class=\"clickable\">Date</p><p class=\"clickable\">Position</p>";
+    setClickableToUsable();
+    if (selectionData.dataSort[0] != 0) {
+        let element = ts.children[selectionData.dataSort[0]];
+        element.classList.add("selected");
+        selectionData.dataSort[1] === 1 ? element.classList.add("a") : element.classList.add("b");
+    }
     for (let data of selectionData.dataSorted) {
         pushElementToTimesheet(data[0]);
         pushElementToTimesheet(formatMsToTime(data[1]));
@@ -90,10 +100,17 @@ async function updateDisplay() {
     pushElementToTimesheet(selectionData.totalPos / 32);
 }
 
+async function sortDataSorted() {
+    if (selectionData.dataSort[0] == 0) return;
+    if (selectionData.dataSort[1] == 1) {
+        selectionData.dataSorted.sort((a,b) => a[selectionData.dataSort[0]] - b[selectionData.dataSort[0]]);
+    } else if (selectionData.dataSort[1] == 2) {
+        selectionData.dataSorted.sort((a,b) => b[selectionData.dataSort[0]] - a[selectionData.dataSort[0]]);
+    }
+}
+
 async function updateDataSorted() {
     await selectionData.playerData.then(r=>{
-        document.getElementById("timesheet").innerHTML = "<p>Track</p><p class=\"clickable\">Time</p><p class=\"clickable\">Date</p><p class=\"clickable\">Position</p>";
-        setClickableToUsable();
         selectionData.totalPos = 0;
         selectionData.totalTime = 0;
         for (let i = 0; i < 32; i++) {
@@ -109,13 +126,8 @@ async function updateDataSorted() {
             selectionData.totalPos += data.pos;
             selectionData.totalTime += data.time;
         }
-        if (selectionData.dataSort[0] == 0) return;
-        if (selectionData.dataSort[1] == 1) {
-            selectionData.dataSorted.sort((a,b) => a[selectionData.dataSort[0]] - b[selectionData.dataSort[0]]);
-        } else if (selectionData.dataSort[1] == 2) {
-            selectionData.dataSorted.sort((a,b) => b[selectionData.dataSort[0]] - a[selectionData.dataSort[0]]);
-        }
     });
+    sortDataSorted();
     updateDisplay();
 }
 
