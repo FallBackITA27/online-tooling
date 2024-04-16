@@ -47,7 +47,6 @@ const LOWERCASELETTERS_CHADSOFT: [&str; 1] =
 const BROOKE_CHADSOFT: [&str; 2] = [
     "https://tt.chadsoft.co.uk/players/61/101EC38298F2A9.json?times=pb",
     "https://tt.chadsoft.co.uk/players/97/9EC358D2E93FF6.json?times=pb",
-
 ];
 const DANNYBOY_CHADSOFT: [&str; 3] = [
     "https://tt.chadsoft.co.uk/players/5F/22F87EE4FFFD80.json?times=pb",
@@ -133,14 +132,24 @@ static CSV_HEADERS: [&str; 32] = [
 
 macro_rules! user {
     ($arr: ident, $path: literal) => {
-        let mut timesheet = Timesheet::new();
-        let path = format!("../assets/{}.json",$path);
-        for url in $arr {
-            grab_pbs_from_chadsoft(url, &mut timesheet).await;
-        }
-        timesheet_cleanup(&mut timesheet);
-        let mut file = std::fs::File::create(path).unwrap();
-        file.write(ts_to_json(&timesheet).await.as_bytes()).unwrap();
+        tokio::spawn(async {
+            let mut timesheet = Timesheet::new();
+            let path = format!("../assets/{}.json", $path);
+            for url in $arr {
+                grab_pbs_from_chadsoft(url, &mut timesheet).await;
+            }
+            timesheet_cleanup(&mut timesheet);
+            if std::path::Path::new(&path).is_file() {
+                std::fs::remove_file(&path).unwrap();
+            }
+            let file = std::fs::OpenOptions::new()
+                .create(true)
+                .write(true)
+                .append(true)
+                .open(path)
+                .unwrap();
+            ts_to_json(&timesheet, file).await
+        })
     };
 }
 
@@ -150,24 +159,31 @@ async fn main() {
     if !std::path::Path::new("../assets").is_dir() {
         std::fs::create_dir("../assets").unwrap();
     }
+
+    let mut handles = vec![];
     println!("Started Brooke");
-    user!(BROOKE_CHADSOFT, "brooke");
+    handles.push(user!(BROOKE_CHADSOFT, "brooke"));
     println!("Started ElecTrick");
-    user!(ELECTRICK_CHADSOFT, "electrick");
+    handles.push(user!(ELECTRICK_CHADSOFT, "electrick"));
     println!("Started FalB");
-    user!(FALB_CHADSOFT, "falb");
+    handles.push(user!(FALB_CHADSOFT, "falb"));
     println!("Started Arthur");
-    user!(ARTHUR_CHADSOFT, "arthur");
+    handles.push(user!(ARTHUR_CHADSOFT, "arthur"));
     println!("Started Cederic");
-    user!(CEDERIC_CHADSOFT, "cederic");
+    handles.push(user!(CEDERIC_CHADSOFT, "cederic"));
     println!("Started LCL");
-    user!(LOWERCASELETTERS_CHADSOFT, "lowercaseletters");
+    handles.push(user!(LOWERCASELETTERS_CHADSOFT, "lowercaseletters"));
     println!("Started Danny");
-    user!(DANNYBOY_CHADSOFT, "dannyboy");
+    handles.push(user!(DANNYBOY_CHADSOFT, "dannyboy"));
     println!("Started Ragemodepigeon");
-    user!(RAGEMODEPIGEON_CHADSOFT, "ragemodepigeon");
+    handles.push(user!(RAGEMODEPIGEON_CHADSOFT, "ragemodepigeon"));
     println!("Started Eli");
-    user!(ELI_CHADSOFT, "eli");
+    handles.push(user!(ELI_CHADSOFT, "eli"));
+
+    for handle in handles {
+        handle.await.unwrap();
+    }
+
     println!("Ended");
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone)]
@@ -345,16 +361,14 @@ async fn get_pos_from_pp(mut url: String) -> u32 {
     .unwrap();
 }
 
-async fn ts_to_json(player_ts: &Timesheet) -> String {
-    let mut out = String::from("{");
+async fn ts_to_json(player_ts: &Timesheet, mut file: std::fs::File) {
+    write!(file, "{{").unwrap();
     let mut i = 0;
     for header in CSV_HEADERS {
         let normal_time = player_ts.normal.get(header);
         let glitch_time = player_ts.glitch.get(header);
 
-        out += "\"";
-        out += header;
-        out += "\":{";
+        write!(file, r#""{header}":{{"#).unwrap();
 
         if ONLY_UNR.contains(&i) {
             if normal_time.is_some() {
@@ -362,7 +376,7 @@ async fn ts_to_json(player_ts: &Timesheet) -> String {
                 let time_str = time.time.to_string();
                 let time_str = time_str.split_at(time_str.len() - 3);
                 let out_str = format!(
-                    r##"{{"time":{},"date":"{}","pos":{}"}},"##,
+                    r##"{{"time":{},"date":"{}","pos":{}}}"##,
                     time.time,
                     time.date.split("T").next().unwrap(),
                     get_pos_from_pp(format!(
@@ -371,17 +385,20 @@ async fn ts_to_json(player_ts: &Timesheet) -> String {
                     ))
                     .await
                 );
-                out += "\"nosc\":";
-                out += &out_str;
-                out += ",\"unr\":";
-                out += &out_str;
+                write!(file, r##""nosc":{out_str},"unr":{out_str}"##).unwrap();
             } else {
                 let last_place = get_last_place_in_tops(format!(
                     "https://www.mariokartplayers.com/mkw/coursec.php?cid={i}"
-                )).await;
-                out += &format!(r##""nosc":{{"time":359999,"date":"2009-04-01","pos":{}"}},"unr":{{"time":359999,"date":"2009-04-01","pos":{}"}}"##, last_place, last_place);
+                ))
+                .await;
+                write!(
+                    file,
+                    r##""nosc":{{"time":359999,"date":"2009-04-01","pos":{}}},"unr":{{"time":359999,"date":"2009-04-01","pos":{}}}"##,
+                    last_place, last_place
+                ).unwrap();
             }
             i += 2;
+            write!(file, "}},").unwrap();
             continue;
         }
 
@@ -389,8 +406,9 @@ async fn ts_to_json(player_ts: &Timesheet) -> String {
             let time = normal_time.unwrap();
             let time_str = time.time.to_string();
             let time_str = time_str.split_at(time_str.len() - 3);
-            out += &format!(
-                r##""nosc":{{"time":{},"date":"{}","pos":{}"}},"##,
+            write!(
+                file,
+                r##""nosc":{{"time":{},"date":"{}","pos":{}}},"##,
                 time.time,
                 time.date.split("T").next().unwrap(),
                 get_pos_from_pp(format!(
@@ -398,13 +416,14 @@ async fn ts_to_json(player_ts: &Timesheet) -> String {
                     time_str.0, time_str.1
                 ))
                 .await
-            );
+            )
+            .unwrap();
             if glitch_time.is_some() {
                 let time = glitch_time.unwrap();
                 let time_str = time.time.to_string();
                 let time_str = time_str.split_at(time_str.len() - 3);
-                out += &format!(
-                    r##""unr":{{"time":{},"date":"{}","pos":{}"}}"##,
+                write!( file,
+                    r##""unr":{{"time":{},"date":"{}","pos":{}}}"##,
                     time.time,
                     time.date.split("T").next().unwrap(),
                     get_pos_from_pp(format!(
@@ -412,10 +431,10 @@ async fn ts_to_json(player_ts: &Timesheet) -> String {
                         time_str.0, time_str.1
                     ))
                     .await
-                );
+                ).unwrap();
             } else {
-                out += &format!(
-                    r##""unr":{{"time":{},"date":"{}","pos":{}"}},"##,
+                write!( file,
+                    r##""unr":{{"time":{},"date":"{}","pos":{}}}"##,
                     time.time,
                     time.date.split("T").next().unwrap(),
                     get_pos_from_pp(format!(
@@ -423,22 +442,24 @@ async fn ts_to_json(player_ts: &Timesheet) -> String {
                         time_str.0, time_str.1
                     ))
                     .await
-                );
+                ).unwrap();
             }
         } else {
-            out += &format!(
-                r##""nosc":{{"time":359999,"date":"2009-04-01","pos":{}"}},"##,
+            write!(
+                file,
+                r##""nosc":{{"time":359999,"date":"2009-04-01","pos":{}}},"##,
                 get_last_place_in_tops(format!(
                     "https://www.mariokartplayers.com/mkw/coursek.php?cid={i}"
                 ))
                 .await
-            );
+            )
+            .unwrap();
             if glitch_time.is_some() {
                 let time = glitch_time.unwrap();
                 let time_str = time.time.to_string();
                 let time_str = time_str.split_at(time_str.len() - 3);
-                out += &format!(
-                    r##""unr":{{"time":{},"date":"{}","pos":{}"}}"##,
+                write!( file,
+                    r##""unr":{{"time":{},"date":"{}","pos":{}}}"##,
                     time.time,
                     time.date.split("T").next().unwrap(),
                     get_pos_from_pp(format!(
@@ -446,20 +467,24 @@ async fn ts_to_json(player_ts: &Timesheet) -> String {
                         time_str.0, time_str.1
                     ))
                     .await
-                );
+                ).unwrap();
             } else {
-                out += &format!(
-                    r##""unr":{{"time":359999,"date":"2009-04-01","pos":{}"}}"##,
+                write!(
+                    file,
+                    r##""unr":{{"time":359999,"date":"2009-04-01","pos":{}}}"##,
                     get_last_place_in_tops(format!(
                         "https://www.mariokartplayers.com/mkw/coursec.php?cid={i}"
                     ))
                     .await
-                );
+                )
+                .unwrap();
             }
         }
         i += 2;
-        out += "},";
+        write!(file, "}}").unwrap();
+        if i != 64 {
+            write!(file, ",").unwrap();
+        }
     }
-
-    return out.strip_suffix(',').unwrap().to_string() + "}";
+    write!(file, "}}").unwrap();
 }
