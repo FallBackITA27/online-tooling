@@ -50,14 +50,22 @@ document.getElementById("categoryPicker").addEventListener("change", function(e)
 
 async function updateDisplay() {
     await selectionData.playerData.then(r=>{
-        document.getElementById("timesheet").innerHTML = "";
+        document.getElementById("timesheet").innerHTML = "<p>Track</p><p>Time</p><p>Date</p><p>Position</p>";
+        let sumPos = 0;
+        let sumTime = 0;
         for (let i = 0; i < 32; i++) {
             let data = r[i.toString()][selectionData.category];
             pushElementToTimesheet(trackNumToName[i]);
             pushElementToTimesheet(formatMsToTime(data.time));
             pushElementToTimesheet(data.date);
             pushElementToTimesheet(data.pos);
+            sumPos += data.pos;
+            sumTime += data.time;
         }
+        pushElementToTimesheet("Total");
+        pushElementToTimesheet(formatMsToTime(sumTime));
+        pushElementToTimesheet("");
+        pushElementToTimesheet(sumPos / 32);
     });
 }
 
