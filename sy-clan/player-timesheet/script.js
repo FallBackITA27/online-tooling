@@ -48,9 +48,22 @@ document.getElementById("categoryPicker").addEventListener("change", function(e)
     updateDisplay();
 });
 
+function setClickableToUsable() {
+    Array.from(document.getElementsByClassName("clickable")).forEach(r=>r.addEventListener("click", function(e) {
+        let type = "a";
+        if (e.target.classList.includes("a")) type = "b";
+        Array.from(document.getElementsByClassName("clickable")).classList.remove("selected");
+        Array.from(document.getElementsByClassName("clickable")).classList.remove("a");
+        Array.from(document.getElementsByClassName("clickable")).classList.remove("b");
+        e.target.classList.add("selected");
+        e.target.classList.add(type);
+    }))
+}
+
 async function updateDisplay() {
     await selectionData.playerData.then(r=>{
-        document.getElementById("timesheet").innerHTML = "<p>Track</p><p>Time</p><p>Date</p><p>Position</p>";
+        document.getElementById("timesheet").innerHTML = "<p class=\"clickable\">Track</p><p class=\"clickable\">Time</p><p class=\"clickable\">Date</p><p class=\"clickable\">Position</p>";
+        setClickableToUsable();
         let sumPos = 0;
         let sumTime = 0;
         for (let i = 0; i < 32; i++) {

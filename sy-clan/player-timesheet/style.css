@@ -7,3 +7,15 @@
     justify-self: center;
     align-self: center;
 }
+
+.clickable {
+    cursor: pointer;
+}
+
+.a::after {
+    content: "↓";
+}
+
+.b::after {
+    content: "↑";
+}
