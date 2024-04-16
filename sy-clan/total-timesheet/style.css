@@ -20,3 +20,21 @@
 .b::after {
     content: "↑";
 }
+
+@media only screen and (max-width: 620px) {
+    p {
+        font-size: .8em;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    p {
+        font-size: .6em;
+    }
+}
+
+@media only screen and (max-width: 390px) {
+    p {
+        font-size: .5em;
+    }
+}
