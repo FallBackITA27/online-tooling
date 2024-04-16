@@ -81,8 +81,8 @@ async function updateDisplay() {
         }
 
         pushElementToLeaderboard(timeData.player);
-        pushImageElementToLeaderboard(`https://www.mkleaderboards.com/images/flags/${timeData.mii}.png`, "mii");
-        pushImageElementToLeaderboard(`http://165.232.116.130/imgs/miis/{timeData.nationality}`, timeData.nationality);
+        pushImageElementToLeaderboard(`http://165.232.116.130/imgs/miis/${timeData.mii}`, "mii");
+        pushImageElementToLeaderboard(`https://www.mkleaderboards.com/images/flags/${timeData.nationality}.png`, timeData.nationality);
         pushElementToLeaderboard(formatMsToTime(timeData.time));
         pushElementToLeaderboard(timeData.date);
         pushElementToLeaderboard(timeData.pos);
