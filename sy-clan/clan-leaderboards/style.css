@@ -1,0 +1,21 @@
+#timesheet {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+}
+
+#timesheet > * {
+    justify-self: center;
+    align-self: center;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.a::after {
+    content: "↓";
+}
+
+.b::after {
+    content: "↑";
+}
