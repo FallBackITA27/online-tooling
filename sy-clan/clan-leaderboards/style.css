@@ -1,21 +1,9 @@
-#timesheet {
+#leaderboard {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
-#timesheet > * {
+#leaderboard > * {
     justify-self: center;
     align-self: center;
-}
-
-.clickable {
-    cursor: pointer;
-}
-
-.a::after {
-    content: "↓";
-}
-
-.b::after {
-    content: "↑";
 }

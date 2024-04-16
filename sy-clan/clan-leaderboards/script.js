@@ -91,8 +91,8 @@ async function updateDisplay() {
     }
 }
 
-function pushCustomElementToLeaderboard(data) {
-    document.getElementById("leaderboard").appendChild(data);
+function pushCustomElementToLeaderboard(element) {
+    document.getElementById("leaderboard").appendChild(element);
 }
 
 function pushElementToLeaderboard(data) {
@@ -102,10 +102,10 @@ function pushElementToLeaderboard(data) {
 }
 
 function pushImageElementToLeaderboard(src, alt="") {
-    let img = document.createElement("p");
+    let img = document.createElement("img");
     img.src = src;
     img.alt = alt;
-    pushCustomElementToLeaderboard(img)
+    pushCustomElementToLeaderboard(img);
 }
 
 function formatMsToTime(i32) {
