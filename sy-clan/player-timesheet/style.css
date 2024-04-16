@@ -16,6 +16,12 @@
     }
 }
 
+@media only screen and (max-width: 320px) {
+    p {
+        font-size: .5em;
+    }
+}
+
 #timesheet > * {
     justify-self: center;
     align-self: center;
