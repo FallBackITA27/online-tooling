@@ -102,8 +102,7 @@ async function updateDisplay() {
 }
 
 async function sortDataSorted() {
-    if (selectionData.dataSort[0] == 0) return;
-    if (selectionData.dataSort[1] == 1) {
+    if (selectionData.dataSort[1] == 1 || selectionData.dataSort[0] == 0) {
         selectionData.dataSorted.sort((a,b) => a[selectionData.dataSort[0]] - b[selectionData.dataSort[0]]);
     } else if (selectionData.dataSort[1] == 2) {
         selectionData.dataSorted.sort((a,b) => b[selectionData.dataSort[0]] - a[selectionData.dataSort[0]]);
@@ -119,7 +118,7 @@ async function updateDataSorted() {
             let data = r[i.toString()][selectionData.category];
             selectionData.dataSorted.push(
                 [
-                    trackNumToName[i],
+                    i,
                     data.time,
                     Date.parse(data.date),
                     data.pos
