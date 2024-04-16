@@ -142,7 +142,7 @@ async function updateDisplay() {
         pushElementToTimesheet(trackNumToName[data[0]]);
         pushElementToTimesheet(data[1]);
         pushElementToTimesheet(formatMsToTime(data[2]));
-        pushElementToTimesheet(`${date.getFullYear()}-${`${date.getMonth()}`.padStart(2,"0")}-${`${date.getDate()}`.padStart(2,"0")}`);
+        pushElementToTimesheet(`${date.getFullYear()}-${`${date.getMonth() + 1}`.padStart(2,"0")}-${`${date.getDate()}`.padStart(2,"0")}`);
         pushElementToTimesheet(data[4]);
     }
     pushElementToTimesheet("Total");

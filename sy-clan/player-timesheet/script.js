@@ -94,7 +94,7 @@ async function updateDisplay() {
         let date = new Date(data[2]);
         pushElementToTimesheet(trackNumToName[data[0]]);
         pushElementToTimesheet(formatMsToTime(data[1]));
-        pushElementToTimesheet(`${date.getFullYear()}-${`${date.getMonth()}`.padStart(2,"0")}-${`${date.getDate()}`.padStart(2,"0")}`);
+        pushElementToTimesheet(`${date.getFullYear()}-${`${date.getMonth() + 1}`.padStart(2,"0")}-${`${date.getDate()}`.padStart(2,"0")}`);
         pushElementToTimesheet(data[3]);
     }
     pushElementToTimesheet("Total");
