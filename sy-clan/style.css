@@ -15,6 +15,11 @@
     align-self: center;
 }
 
+.mii {
+    aspect-ratio: 1/1;
+    height: 25px;
+}
+
 .country_flag {
     aspect-ratio: 16/9;
     width: 50px;
