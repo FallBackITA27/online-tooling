@@ -37,6 +37,7 @@ let selectionData = {
     category: "nosc",
     totalTime: {nosc: 0, unr: 0},
     totalPos: {nosc: 0, unr: 0},
+    totalPlayers: {nosc: 0, unr: 0},
     dataSort: [0, 0],
     dataSorted: {nosc: [], unr: []},
 };
@@ -66,6 +67,7 @@ async function start() {
                 }
             }
         }
+        let hashset = {unr: new Set(), nosc: new Set()};
         for (let i = 0; i < 32; i++) {
             selectionData.dataSorted.unr.push([
                 i,
@@ -76,6 +78,7 @@ async function start() {
             ]);
             selectionData.totalPos.unr += total.unr[i].pos;
             selectionData.totalTime.unr += total.unr[i].time;
+            hashset.unr.add(total.unr[i].player);
 
             selectionData.dataSorted.nosc.push([
                 i,
@@ -86,7 +89,10 @@ async function start() {
             ]);
             selectionData.totalPos.nosc += total.nosc[i].pos;
             selectionData.totalTime.nosc += total.nosc[i].time;
+            hashset.nosc.add(total.nosc[i].player);
         }
+        selectionData.totalPlayers.unr = hashset.unr.size;
+        selectionData.totalPlayers.nosc = hashset.nosc.size;
     });
     updateDisplay();
 };
@@ -140,7 +146,7 @@ async function updateDisplay() {
         pushElementToTimesheet(data[4]);
     }
     pushElementToTimesheet("Total");
-    pushElementToTimesheet("0");
+    pushElementToTimesheet(selectionData.totalPlayers[selectionData.category]);
     pushElementToTimesheet(formatMsToTime(selectionData.totalTime[selectionData.category]));
     pushElementToTimesheet("");
     pushElementToTimesheet(selectionData.totalPos[selectionData.category] / 32);
