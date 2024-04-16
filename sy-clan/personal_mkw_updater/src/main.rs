@@ -148,7 +148,7 @@ macro_rules! user {
                 .append(true)
                 .open(path)
                 .unwrap();
-            ts_to_json(&timesheet, file).await
+            timesheet
         })
     };
 }
@@ -180,8 +180,37 @@ async fn main() {
     println!("Started Eli");
     handles.push(user!(ELI_CHADSOFT, "eli"));
 
+    let mut new_timesheet = Timesheet::new();
     for handle in handles {
-        handle.await.unwrap();
+        let timesheet = handle.await.unwrap();
+
+        for key in timesheet.glitch.keys() {
+            let cmp_track = new_timesheet.glitch.get(key);
+            let this = timesheet.glitch.get(key).unwrap();
+            if cmp_track.is_none() || cmp_track.unwrap().time > this.time {
+                new_timesheet.glitch.insert(
+                    key.to_string(),
+                    Time {
+                        time: this.time,
+                        date: this.date.clone(),
+                    },
+                );
+            }
+        }
+
+        for key in timesheet.normal.keys() {
+            let cmp_track = new_timesheet.normal.get(key);
+            let this = timesheet.normal.get(key).unwrap();
+            if cmp_track.is_none() || cmp_track.unwrap().time > this.time {
+                new_timesheet.normal.insert(
+                    key.to_string(),
+                    Time {
+                        time: this.time,
+                        date: this.date.clone(),
+                    },
+                );
+            }
+        }
     }
 
     println!("Ended");
