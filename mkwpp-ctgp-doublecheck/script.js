@@ -231,7 +231,7 @@ function parseMKWPPTable(table) {
 }
 
 async function writeObservedPlayers() {
-    fetch("https://corsproxy.io/?https://www.mariokart64.com/mkw/profile.php").then(r=>r.text()).then(r=>{
+    fetch("https://www.mariokart64.com/mkw/profile.php").then(r=>r.text()).then(r=>{
         let profileDocument = new DOMParser().parseFromString(r, "text/html");
         let playerList = profileDocument.getElementsByClassName("playerslist")[0].children[0];
         for (let row of playerList.children) {
