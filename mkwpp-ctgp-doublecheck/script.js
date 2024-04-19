@@ -159,7 +159,7 @@ document.getElementById("startChecker").addEventListener("click", async function
     resetOutput();
     for (let ppid in ctgpLinks) {
         let data;
-        await fetch(`https://corsproxy.io/?https://www.mariokart64.com/mkw/profile.php?pid=${ppid}`).then(r=>r.text()).then(r=>{
+        await fetch(`https://www.mariokart64.com/mkw/profile.php?pid=${ppid}`).then(r=>r.text()).then(r=>{
             let profileDocument = new DOMParser().parseFromString(r, "text/html");
             let unrestrictedTimes = parseMKWPPTable(profileDocument.getElementsByClassName("c")[0]);
             for (let track in unrestrictedTimes.flap) if (track_category[track]) delete unrestrictedTimes.flap[track];
@@ -231,7 +231,7 @@ function parseMKWPPTable(table) {
 }
 
 async function writeObservedPlayers() {
-    fetch("https://corsproxy.io/?https://www.mariokart64.com/mkw/profile.php").then(r=>r.text()).then(r=>{
+    fetch("https://www.mariokart64.com/mkw/profile.php").then(r=>r.text()).then(r=>{
         let profileDocument = new DOMParser().parseFromString(r, "text/html");
         let playerList = profileDocument.getElementsByClassName("playerslist")[0].children[0];
         for (let row of playerList.children) {
