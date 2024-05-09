@@ -1,9 +1,12 @@
 var map = L.map('map', {
-    center: [0, 0],
-    zoom: 0,
+    center: [15, -100],
+    zoom: 3,
     inertia: true,
     worldCopyJump: false,
 });
+
+L.imageOverlay('./overlayedMapItems/fortZancudo.svg', [[63.4, -154.4], [55.4, -128.9]]).addTo(map);
+
 
 let tileLayerData = {
     mainMap: {
