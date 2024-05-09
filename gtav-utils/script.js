@@ -5,7 +5,18 @@ var map = L.map('map', {
     worldCopyJump: false,
 });
 
-L.imageOverlay('./overlayedMapItems/fortZancudo.svg', [[63.4, -154.4], [55.4, -128.9]]).addTo(map);
+async function addSVGOverlay(url, coords) {
+    let test = document.createElement('html');
+    console.log("a")
+    test.innerHTML = await fetch(url).then(r=>r.text());
+    console.log("a")
+    let svg = Array.from(test.getElementsByTagName('svg'))[0];
+    L.svgOverlay(svg, coords).addTo(map);
+}
+
+addSVGOverlay('./overlayedMapItems/fortZancudo.svg', [[63.4, -128.9], [55.4, -154.4]]);
+
+// L.imageOverlay('./overlayedMapItems/kortzCenter.svg', [[20.5, -145], [15.1, -139.9]]).addTo(map);
 
 
 let tileLayerData = {
