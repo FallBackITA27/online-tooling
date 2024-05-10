@@ -15,7 +15,7 @@ async function addSVGOverlay(url, coords) {
 addSVGOverlay('./overlayedMapItems/fortZancudo.svg', [[63.5, -154.7], [55.1, -128.5]]);
 addSVGOverlay('./overlayedMapItems/kortzCenter.svg', [[20.6, -145], [14.8, -139.7]]);
 addSVGOverlay('./overlayedMapItems/vespucciBeachSewer.svg', [[-1.755, -132.3], [-9.7, -121.755]]);
-addSVGOverlay('./overlayedMapItems/prison.svg', [[0, 0], [10, 10]]);
+addSVGOverlay('./overlayedMapItems/prison.svg', [[55.9, -67], [50.9, -59.35]]);
 
 
 let tileLayerData = {
