@@ -35,7 +35,7 @@ async function registerMarker(icon, coordinates, title = "",) {
 }
 
 if (insertMarkersMode) map.on('click', async function(e) {
-    alert(e.latlng);
+    alert(e.latlng.lat.toFixed(6) + ", " + e.latlng.lng.toFixed(6));
 });
 
 addSVGOverlay('overlayedMapItems/kortzCenter.svg', [[20.6, -145], [14.8, -139.7]]);
@@ -68,35 +68,35 @@ for (let coords of [
     [3.83137, -84.737549], // Inside the sewers
     [0.703107, -93.768311], // Inside the under construction underground metro
     [4.718778, -102.930908], // Inside the underground metro
-    [0,0],
-    [0,0],
-    [0,0],
-    [0,0],
-    [0,0],
-    [0,0],
-    [0,0],
-    [0,0],
-    [0,0],
-    [0,0],
-    [0,0],
-    [0,0],
-    [0,0],
-    [0,0],
-    [0,0],
-    [0,0],
-    [0,0],
-    [0,0],
-    [0,0],
-    [0,0],
-    [0,0],
-    [0,0],
-    [0,0],
-    [0,0],
-    [0,0],
-    [0,0],
-    [0,0],
-    [0,0],
-    [0,0],
+    [-0.725078, -100.623779], // On the Arcadius statue
+    [-5.101887, -99.547119], // On the fountain
+    [-6.064086, -111.335449], // Inside the market
+    [-10.844096, -115.411377], // On the ladder to the billboard
+    [-6.500899, -121.717529], // On the small wooden pier
+    [-18.573362, -124.266357], // In the shark statue's mouth
+    [-9.795678, -130.133057], // On the trash can under the pillar
+    [-2.054003, -135.241699], // On the lifeguard's cabin
+    [7.351571, -131.726074], // Next to a tomb on the first row behind the bench
+    [3.00887, -128.0896], // On a table, on the second floor of the plaza
+    [1.713612, -118.278809], // Inside the camper used for the Creator mode
+    [10.844096, -106.940918], // Past the gate.
+    [13.816744, -92.867432], // On the black metal stairs in the lot next to the small parking lot
+    [16.488765, -100.041504], // On the comic's store sign
+    [19.47695, -107.358398], // Inside the house, behind the second plant on the right from the main entrance
+    [15.623037, -117.663574], // Under the arch of the small building next to the tennis court
+    [15.707663, -126.210938], // Inside the pool's cave
+    [10.087854, -117.301025], // Right in front of the hole 6 sign
+    [16.730907, -141.921387], // On the fountain
+    [20.07657, -133.341064], // On the leftmost couch on the balcony
+    [27.235095, -127.111816], // On a lamp on the gravelly path
+    [28.246328, -112.543945], // On the slide
+    [29.42046, -98.997803], // On the sun lounger
+    [27.166695, -95.493164], // On the right side of the rail
+    [22.116177, -84.034424], // Second last column, second block of benches
+    [33.979809, -83.408203], // On top of the letter N of the VINEWOOD sign
+    [33.220308, -68.928223], // On the Kitchen area in front of the pool in Madrazo's backyard
+    [11.910354, -63.885498], // Inside the dam's restricted area
+    [4.171115, -47.186279], // On the entrance's sign
     [0,0],
     [0,0],
     [0,0],
