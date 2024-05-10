@@ -1,3 +1,8 @@
+let insertMarkersMode = false;
+if (insertMarkersMode) map.on('click', async function(e) {
+    alert(e.latlng);
+});
+
 var map = L.map('map', {
     center: [-90, 64.69999694824219],
     zoom: 0,
@@ -32,10 +37,6 @@ async function registerMarker(icon, coordinates, title = "",) {
     L.marker(coordinates, { icon: icon, title: title }).addTo(map);
 }
 
-map.on('click', async function(e) {
-    alert(e.latlng);
-});
-
 addSVGOverlay('overlayedMapItems/kortzCenter.svg', [[20.6, -145], [14.8, -139.7]]);
 addSVGOverlay('overlayedMapItems/prisonBlaineCounty.svg', [[55.9, -67], [50.9, -59.35]]);
 addSVGOverlay('overlayedMapItems/ship.svg', [[-41.43, -72.9], [-44.05, -71.9]]);
@@ -58,13 +59,13 @@ for (let coords of [
     [-17.947381, -89.79126], // On the washbasin in the building
     [-12.103781, -93.823242], // Under the bridge
     [-3.283114, -87.945557], // On the floor in between the tied up carpets
-    [-8.928487, -84.089355], // Inside the security's cubicle 
-    [0,0],
-    [0,0],
-    [0,0],
-    [0,0],
-    [0,0],
-    [0,0],
+    [-8.928487, -84.089355], // Inside the security's cubicle
+    [-17.947381, -83.638916], // Inside the rusty bobcat bucket
+    [-17.332843, -72.966712], // Inside the fire department
+    [-1.30726, -74.476318], // In the washbasin inside the building
+    [9.275622, -77.431641], // Past the Automatic Garage door
+    [3.83137, -84.737549], // Inside the sewers
+    [0.703107, -93.768311], // Inside the under construction underground metro
     [0,0],
     [0,0],
     [0,0],
