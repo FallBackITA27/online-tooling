@@ -1,22 +1,19 @@
 var map = L.map('map', {
-    center: [15, -100],
-    zoom: 3,
+    center: [-90, 64.69999694824219],
+    zoom: 0,
     inertia: true,
     worldCopyJump: false,
 });
 
 async function addSVGOverlay(url, coords) {
     let test = document.createElement('html');
-    console.log("a")
     test.innerHTML = await fetch(url).then(r=>r.text());
-    console.log("a")
     let svg = Array.from(test.getElementsByTagName('svg'))[0];
     L.svgOverlay(svg, coords).addTo(map);
 }
 
-addSVGOverlay('./overlayedMapItems/fortZancudo.svg', [[63.4, -128.9], [55.4, -154.4]]);
-
-// L.imageOverlay('./overlayedMapItems/kortzCenter.svg', [[20.5, -145], [15.1, -139.9]]).addTo(map);
+addSVGOverlay('./overlayedMapItems/fortZancudo.svg', [[63.5, -154.7], [55.1, -128.5]]);
+addSVGOverlay('./overlayedMapItems/kortzCenter.svg', [[20.6, -145], [14.8, -139.7]]);
 
 
 let tileLayerData = {
@@ -35,10 +32,17 @@ let tileLayerData = {
                 minZoom: 0,
             }
         },
+        print: {
+            oceanColor: "#4EB1D0",
+            tileLayerOpts: {
+                maxZoom: 7,
+                minZoom: 0,
+            }
+        },
     }
 }
 
-L.tileLayer('https://s.rsg.sc/sc/images/games/GTAV/map/game/{z}/{x}/{y}.jpg', {
+L.tileLayer('https://s.rsg.sc/sc/images/games/GTAV/map/render/{z}/{x}/{y}.jpg', {
     maxZoom: 7,
     minZoom: 0,
     noWrap: true,
@@ -57,3 +61,5 @@ L.tileLayer('https://s.rsg.sc/sc/images/games/GTAV/map/game/{z}/{x}/{y}.jpg', {
     https://gtalens.com/assets/images/8c3883.svg
     https://gtalens.com/assets/images/a4f19c.svg
 */
+
+console.log(map);
