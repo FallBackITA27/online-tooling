@@ -1,7 +1,4 @@
 let insertMarkersMode = false;
-if (insertMarkersMode) map.on('click', async function(e) {
-    alert(e.latlng);
-});
 
 var map = L.map('map', {
     center: [-90, 64.69999694824219],
@@ -37,6 +34,10 @@ async function registerMarker(icon, coordinates, title = "",) {
     L.marker(coordinates, { icon: icon, title: title }).addTo(map);
 }
 
+if (insertMarkersMode) map.on('click', async function(e) {
+    alert(e.latlng);
+});
+
 addSVGOverlay('overlayedMapItems/kortzCenter.svg', [[20.6, -145], [14.8, -139.7]]);
 addSVGOverlay('overlayedMapItems/prisonBlaineCounty.svg', [[55.9, -67], [50.9, -59.35]]);
 addSVGOverlay('overlayedMapItems/ship.svg', [[-41.43, -72.9], [-44.05, -71.9]]);
@@ -66,7 +67,7 @@ for (let coords of [
     [9.275622, -77.431641], // Past the Automatic Garage door
     [3.83137, -84.737549], // Inside the sewers
     [0.703107, -93.768311], // Inside the under construction underground metro
-    [0,0],
+    [4.718778, -102.930908], // Inside the underground metro
     [0,0],
     [0,0],
     [0,0],
