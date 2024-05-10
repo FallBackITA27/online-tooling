@@ -5,6 +5,13 @@ var map = L.map('map', {
     worldCopyJump: false,
 });
 
+L.tileLayer('https://s.rsg.sc/sc/images/games/GTAV/map/render/{z}/{x}/{y}.jpg', {
+    maxZoom: 7,
+    minZoom: 0,
+    noWrap: true,
+    attribution: '&copy; Rockstar Games'
+}).addTo(map);
+
 async function addSVGOverlay(url, coords) {
     let test = document.createElement('html');
     test.innerHTML = await fetch(url).then(r=>r.text());
@@ -12,11 +19,10 @@ async function addSVGOverlay(url, coords) {
     L.svgOverlay(svg, coords).addTo(map);
 }
 
-addSVGOverlay('./overlayedMapItems/fortZancudo.svg', [[63.5, -154.7], [55.1, -128.5]]);
-addSVGOverlay('./overlayedMapItems/kortzCenter.svg', [[20.6, -145], [14.8, -139.7]]);
-addSVGOverlay('./overlayedMapItems/vespucciBeachSewer.svg', [[-1.755, -132.3], [-9.7, -121.755]]);
-addSVGOverlay('./overlayedMapItems/prison.svg', [[55.9, -67], [50.9, -59.35]]);
-
+addSVGOverlay('overlayedMapItems/fortZancudo.svg', [[63.5, -154.7], [55.1, -128.5]]);
+addSVGOverlay('overlayedMapItems/kortzCenter.svg', [[20.6, -145], [14.8, -139.7]]);
+addSVGOverlay('overlayedMapItems/vespucciBeachSewer.svg', [[-1.755, -132.3], [-9.7, -121.755]]);
+addSVGOverlay('overlayedMapItems/prison.svg', [[55.9, -67], [50.9, -59.35]]);
 
 let tileLayerData = {
     mainMap: {
@@ -43,13 +49,6 @@ let tileLayerData = {
         },
     }
 }
-
-L.tileLayer('https://s.rsg.sc/sc/images/games/GTAV/map/render/{z}/{x}/{y}.jpg', {
-    maxZoom: 7,
-    minZoom: 0,
-    noWrap: true,
-    attribution: '&copy; Rockstar Games'
-}).addTo(map);
 
 /*
     https://gtalens.com/assets/images/f2b13a.svg
