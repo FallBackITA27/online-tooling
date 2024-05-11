@@ -11,3 +11,66 @@ body {
 .leaflet-container {
     background: #384950;
 }
+
+
+/* document.getElementById("popupgui").classList.toggle("s"); */
+#popupgui {
+    position: absolute;
+    height: calc(98vh - 8px);
+    width: calc(99vw - 8px);
+    top: 1vh;
+    left: .5vw;
+    margin: 0;
+    z-index: 2147483646;
+    display: none;
+    opacity: 0;
+    background: rgb(19, 19, 19, .99);
+    padding: 4px;
+    border-radius: 10px;
+}
+
+#popupgui.s {
+    animation: fadeInFromNone .1s;
+    opacity: 1;
+    display: grid;
+}
+
+#gui_toggle_button_div {
+    position: absolute;
+    height: 24px;
+    width: 24px;
+    bottom: 1vh;
+    left: .5vw;
+    z-index: 2147483647;
+    background: rgb(19, 19, 19, .99);
+    padding: 4px;
+    border-radius: 10px;
+    transform: rotate(180deg);
+    transition: .1s all linear;
+}
+
+#gui_toggle_button_div.s {
+    transform: rotate(0deg);
+    transition: .1s all linear;
+}
+
+@keyframes fadeInFromNone {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: grid;
+        opacity: 0;
+    }
+
+    100% {
+        display: grid;
+        opacity: 1;
+    }
+}
+
+#gui_toggle_button {
+    cursor: pointer;
+}
