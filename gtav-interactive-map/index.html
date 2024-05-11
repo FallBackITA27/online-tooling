@@ -3,24 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leila FalB's GTA V/Online Utils</title>
-</head>
-<body>
-    <main id="popupgui">
-    </main>
-    <div id="gui_toggle_button_div"><img id="gui_toggle_button" src="website-icons/arrow_back.svg"></img></div>
-    <div id="map"></div>
-</body>
+    <title>FalB's GTA V Companion</title>
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
     crossorigin=""/>
 
     <link rel="stylesheet" href="./stylesheet.css">
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""></script>
 
 
-    <script src="./script.js"></script>
+    <script defer src="./script.js"></script>
+</head>
+<body>
+    <main id="popupgui">
+        <h1>Leila FalB's GTA V and Online Tools</h1>
+        <h2>Contents</h2>
+        <ol style="list-style-position: inside;">
+            <li><a href="#markers">Map Markers</a></li>
+            <li><a href="#changelog">Changelog</a></li>
+            <li><a href="#faq">FAQ</a></li>
+        </ol>
+        <div id="markers"></div>
+        <h2>Map Markers</h2>
+        <div id="changelog"></div>
+        <h2>Changelog</h2>
+        <p>All the dates are in <a target="_blank" href="https://en.wikipedia.org/wiki/Central_European_Time">CET</a>.</p>
+        <h3>2024 - 05 - 01 / 23:22</h3>
+        <p>Made the map work, aligned the SVGs kindly <del>stolen from</del> provided by GTALens.com</p>
+        <p>Manually got all the datapoints for Action Figures and descriptions</p>
+        <div id="faq"></div>
+        <h2>FAQ</h2>
+        <h3>- Why did you make this?</h3>
+        <p>In short: I ran into GTALens' completion limit. In full: I know why they made that a thing and I know why they made themselves make that a thing. They created themselves a problem by saving data on their servers, which cost money to maintain, and instead of moving this data to the local browser storage they decided to make a subscription. I absolutely despise this marketing, so, seen the lack of open source Interactive maps, I tried to make what I could of their minified Vue source code and other interactive maps out there to make a good, up to date, open source one.</p>
+        <h3>- How do I contribute?</h3>
+        <p>If you know anything about JavaScript, or coding really, just make a pull request on the github page. Otherwise, contact me on discord @fallbackita27 (or anywhere else really) and I'll see what could be done. I'll eventually make a roadmap.</p>
+        <h3>- I found a bug!</h3>
+        <p>Read the answer above.</p>
+    </main>
+    <div id="gui_toggle_button_div"><img id="gui_toggle_button" src="website-icons/arrow_back.svg"></img></div>
+    <div id="map"></div>
+</body>
 </html>

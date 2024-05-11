@@ -1,4 +1,4 @@
-let insertMarkersMode = false;
+let insertMarkersMode = true;
 
 var map = L.map('map', {
     center: [-90, 64.69999694824219],
