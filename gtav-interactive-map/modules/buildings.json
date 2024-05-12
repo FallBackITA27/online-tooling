@@ -58,5 +58,95 @@
         "coords": [65.238307, -25.598145],
         "description": "",
         "fandom_url": ""
+    },
+    {
+        "name": "Gas Station",
+        "coords": [50.443513, -148.073730],
+        "description": "",
+        "fandom_url": ""
+    },
+    {
+        "name": "Paint Shop",
+        "coords": [54.749991, -119.718018],
+        "description": "",
+        "fandom_url": ""
+    },
+    {
+        "name": "Ammunation",
+        "coords": [54.863963, -119.487305],
+        "description": "",
+        "fandom_url": ""
+    },
+    {
+        "name": "Shooting Range",
+        "coords": [54.952386, -119.344482],
+        "description": "",
+        "fandom_url": ""
+    },
+    {
+        "name": "Discount Clothing Shop",
+        "coords": [55.046909, -119.157715],
+        "description": "",
+        "fandom_url": ""
+    },
+    {
+        "name": "8754 Route 68 Garage",
+        "coords": [54.971308, -119.663086],
+        "description": "",
+        "fandom_url": ""
+    },
+    {
+        "name": "Closed Hardware store",
+        "coords": [55.147488, -119.080811],
+        "description": "",
+        "fandom_url": ""
+    },
+    {
+        "name": "St. Brigid Baptist Church",
+        "coords": [56.108810, -103.546143],
+        "description": "",
+        "fandom_url": ""
+    },
+    {
+        "name": "Gas Station",
+        "coords": [55.967650, -96.075439],
+        "description": "",
+        "fandom_url": ""
+    },
+    {
+        "name": "870 Route 68 Approach Garage",
+        "coords": [55.899956, -93.526611],
+        "description": "",
+        "fandom_url": ""
+    },
+    {
+        "name": "Stoner Cement Works",
+        "coords": [56.722594, -91.263428],
+        "description": "",
+        "fandom_url": "https://gta.fandom.com/wiki/Stoner_Cement_Works"
+    },
+    {
+        "name": "197 Route 68 Garage",
+        "coords": [53.716216, -92.8125],
+        "description": "",
+        "fandom_url": ""
+    },
+    {
+        "name": "Gas Station",
+        "coords": [53.722717, -91.900635],
+        "description": "",
+        "fandom_url": ""
+    },
+    {
+        "name": "Eastern Motel",
+        "coords": [53.917281, -90.296631],
+        "description": "",
+        "fandom_url": ""
+    },
+    {
+        "name": "Eastern Motel (Bar)",
+        "coords": [53.994854, -90.856934],
+        "description": "",
+        "fandom_url": ""
     }
 ]
