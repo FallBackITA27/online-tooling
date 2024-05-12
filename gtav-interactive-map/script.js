@@ -1,5 +1,5 @@
-let insertMarkersMode = false;
-// let insertMarkersMode = true;
+// let insertmarkersmode = false;
+let insertMarkersMode = true;
 
 let saveData = {
     profile0: {
@@ -19,6 +19,10 @@ const constantData = {
     icons: {
         figurine: L.icon({
             iconUrl: 'gtav-icons/figurine.svg',
+            iconSize: [22,22]
+        }),
+        building: L.icon({
+            iconUrl: 'gtav-icons/building.svg',
             iconSize: [22,22]
         }),
     },
@@ -276,11 +280,22 @@ async function loadDynamicData() {
         })
     );
     x.push(
+        fetch("./modules/buildings.json").then(r=>r.json()).then(r=>{
+            constantData.markers.buildings = r;
+            for (marker of constantData.markers.buildings) {
+                let actualMarker = L.marker(marker.coords, { icon: constantData.icons.building, title: marker.name });
+                let onMapMarker = L.layerGroup([actualMarker]);
+
+                map.addLayer(onMapMarker);
+            }
+        })
+    );
+    x.push(
         fetch("./modules/counties.json").then(r=>r.json()).then(r=>{
             constantData.counties = r;
             genericCollectibleInsert(document.getElementById("actionFiguresDiv"), constantData.markers.figurines, constantData.icons.figurine);
-            let lsCountyPolygon = L.polygon(constantData.counties.ls.points, {color: constantData.counties.ls.color}).bindTooltip(constantData.counties.ls.name, {permanent:true,direction:"center"}).addTo(map);
-            let blCountyPolygon = L.polygon(constantData.counties.bl.points, {color: constantData.counties.bl.color}).bindTooltip(constantData.counties.bl.name, {permanent:true,direction:"center"}).addTo(map);
+            let lsCountyPolygon = L.polygon(constantData.counties.ls.points, {color: constantData.counties.ls.color}).bindTooltip(constantData.counties.ls.name, {permanent:true,direction:"center"});
+            let blCountyPolygon = L.polygon(constantData.counties.bl.points, {color: constantData.counties.bl.color}).bindTooltip(constantData.counties.bl.name, {permanent:true,direction:"center"});
 
             document.getElementById("markers-locations-counties-blaine-show-btn").addEventListener("click", function(){
                 map.addLayer(blCountyPolygon);

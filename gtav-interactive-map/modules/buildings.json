@@ -1,0 +1,62 @@
+[
+    {
+        "name": "Clinton Residence",
+        "coords": [-16.499299, -97.459717],
+        "description": "First Safehouse for Franklin",
+        "fandom_url": "https://gta.fandom.com/wiki/Clinton_Residence"
+    },
+    {
+        "name": "De Santa Residence",
+        "coords": [15.326572, -113.345947],
+        "description": "House of the De Santa family",
+        "fandom_url": "https://gta.fandom.com/wiki/De_Santa_Residence"
+    },
+    {
+        "name": "N.O.O.S.E. Headquarters",
+        "coords": [4.390229, -47.460938],
+        "description": "",
+        "fandom_url": "https://gta.fandom.com/wiki/NOOSE_Headquarters"
+    },
+    {
+        "name": "Maze Bank Arena",
+        "coords": [-26.362342, -103.546143],
+        "description": "",
+        "fandom_url": "https://gta.fandom.com/wiki/Maze_Bank_Arena"
+    },
+    {
+        "name": "The Diamond Casino & Resort",
+        "coords": [12.768946, -78.574219],
+        "description": "",
+        "fandom_url": "https://gta.fandom.com/wiki/The_Diamond_Casino_%26_Resort"
+    },
+    {
+        "name": "Maze Bank Tower",
+        "coords": [-4.346411, -98.701172],
+        "description": "",
+        "fandom_url": "https://gta.fandom.com/wiki/Maze_Bank_Tower"
+    },
+    {
+        "name": "Mile High Club Construction Site",
+        "coords": [-7.732765, -100.019531],
+        "description": "",
+        "fandom_url": "https://gta.fandom.com/wiki/Mile_High_Club"
+    },
+    {
+        "name": "Floyd Hebert's House",
+        "coords": [-18.198044, -120.036621],
+        "description": "7611 Goma Street",
+        "fandom_url": "https://gta.fandom.com/wiki/Floyd%27s_Apartment"
+    },
+    {
+        "name": "Bolingbroke Penitentiary",
+        "coords": [53.826597, -59.787598],
+        "description": "",
+        "fandom_url": "https://gta.fandom.com/wiki/Bolingbroke_Penitentiary"
+    },
+    {
+        "name": "Humane Labs",
+        "coords": [65.238307, -25.598145],
+        "description": "",
+        "fandom_url": ""
+    }
+]
