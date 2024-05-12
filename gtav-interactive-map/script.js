@@ -346,6 +346,7 @@ async function genericCollectibleInsert(parentDiv, array, icon) {
             func: function(e) {
                 document.getElementById("gui_toggle_button_div").click();
                 linkDiv.scrollIntoView();
+                map.setView(marker.coords, 4);
             }
         });
     }
