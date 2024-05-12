@@ -37,7 +37,7 @@ a {
 /* document.getElementById("popupgui").classList.toggle("s"); */
 #popupgui {
     position: absolute;
-    height: calc(98vh - 8px);
+    height: calc(98% - 8px);
     width: calc(99vw - 8px);
     top: 1vh;
     left: .5vw;
