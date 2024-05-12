@@ -11,6 +11,7 @@ var map = L.map('map', {
     zoom: 0,
     inertia: true,
     worldCopyJump: false,
+    attributionControl: false
 });
 
 const constantData = {
@@ -273,7 +274,6 @@ L.tileLayer('https://s.rsg.sc/sc/images/games/GTAV/map/game/{z}/{x}/{y}.jpg', {
     maxZoom: 7,
     minZoom: 0,
     noWrap: true,
-    attribution: '&copy; Rockstar Games'
 }).addTo(map);
 
 async function addSVGOverlay(url, coords) {
@@ -283,9 +283,13 @@ async function addSVGOverlay(url, coords) {
     L.svgOverlay(svg, coords).addTo(map);
 }
 
-async function registerMarker(icon, coordinates, title = "",) {
+async function registerMarker(icon, coordinates, title = "", event = null) {
     let marker = L.marker(coordinates, { icon: icon, title: title });
-    marker.addTo(map);
+    if (event == null) {
+        marker.addTo(map);
+    } else {
+        marker.on(event.event, event.func).addTo(map);
+    }
     return marker;
 }
 
@@ -310,7 +314,7 @@ async function genericCollectibleInsert(parentDiv, array, icon) {
         parentDiv.append(hr);
 
         let linkDiv = document.createElement("div");
-        linkDiv.id = "#" + marker.display_name;
+        linkDiv.id = "#" + marker.display_name.replaceAll(" ", "-");
         parentDiv.append(linkDiv);
 
         let title = document.createElement("h2");
@@ -332,11 +336,18 @@ async function genericCollectibleInsert(parentDiv, array, icon) {
         let zoom = document.createElement("button");
         zoom.innerHTML = "Zoom to Marker";
         zoom.addEventListener("click", function() {
+            document.getElementById("gui_toggle_button_div").click();
             map.setView(marker.coords, 7);
         })
         parentDiv.append(zoom);
 
-        let onMapMarker = registerMarker(icon, marker.coords, marker.display_name);
+        let onMapMarker = registerMarker(icon, marker.coords, marker.display_name, {
+            event: "click",
+            func: function(e) {
+                document.getElementById("gui_toggle_button_div").click();
+                linkDiv.scrollIntoView();
+            }
+        });
     }
 }
 
