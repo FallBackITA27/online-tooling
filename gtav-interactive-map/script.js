@@ -308,15 +308,15 @@ async function genericCollectibleInsert(parentDiv, array, icon) {
         parentDiv.append(linkDiv);
 
         let title = document.createElement("h2");
-        title.textContent = marker.display_name;
+        title.innerHTML = marker.display_name;
         parentDiv.append(title);
 
         let description = document.createElement("p");
-        description.textContent = marker.description;
+        description.innerHTML = marker.description;
         parentDiv.append(description);
 
         let video = document.createElement("button");
-        video.textContent = "Video";
+        video.innerHTML = "Video";
         video.addEventListener("click", function() {
             document.getElementById("videoplayeriframe").src = marker.video_url;
             document.getElementById("videoplayer").classList.add("s");
