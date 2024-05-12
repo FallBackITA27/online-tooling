@@ -290,18 +290,50 @@ addSVGOverlay('overlayedMapItems/kortzCenter.svg', [[20.6, -145], [14.8, -139.7]
 addSVGOverlay('overlayedMapItems/prisonBlaineCounty.svg', [[55.9, -67], [50.9, -59.35]]);
 addSVGOverlay('overlayedMapItems/ship.svg', [[-41.43, -72.9], [-44.05, -71.9]]);
 addSVGOverlay('overlayedMapItems/vespucciBeachSewer.svg', [[-1.755, -132.3], [-9.7, -121.755]]);
+// addSVGOverlay('overlayedMapItems/fortZancudo.svg', [[63.5, -154.7], [55.1, -128.5]]);
 L.imageOverlay('overlayedMapItems/fortZancudo.svg', [[63.5, -154.7], [55.1, -128.5]]).addTo(map); // I don't get this bs.
 
-async function addFigurinesMarkers() {
-    if (constantData.markers.figurines == null) constantData.markers.figurines = await fetch("./modules/figurines.json").then(r=>r.json());
-    for (let marker of constantData.markers.figurines) {
-        let onMapMarker = registerMarker(constantData.icons.figurine, marker.coords, marker.display_name);
+document.getElementById("videoplayer").addEventListener("click", function(e) {
+    e.target.classList.remove("s");
+});
+
+async function genericCollectibleInsert(parentDiv, array, icon) {
+    for (let marker of array) {
+        let hr = document.createElement("hr");
+        hr.classList.add("twentyfive");
+        parentDiv.append(hr);
+
+        let linkDiv = document.createElement("div");
+        linkDiv.id = "#" + marker.display_name;
+        parentDiv.append(linkDiv);
+
+        let title = document.createElement("h2");
+        title.textContent = marker.display_name;
+        parentDiv.append(title);
+
+        let description = document.createElement("p");
+        description.textContent = marker.description;
+        parentDiv.append(description);
+
+        let video = document.createElement("button");
+        video.textContent = "Video";
+        video.addEventListener("click", function() {
+            document.getElementById("videoplayeriframe").src = marker.video_url;
+            document.getElementById("videoplayer").classList.add("s");
+        })
+        parentDiv.append(video);
+
+        let onMapMarker = registerMarker(icon, marker.coords, marker.display_name);
         marker.marker = onMapMarker;
     }
 }
 
-L.tooltip
-// addFigurinesMarkers();
+async function addFigurinesMarkers() {
+    if (constantData.markers.figurines == null) constantData.markers.figurines = await fetch("./modules/figurines.json").then(r=>r.json());genericCollectibleInsert(document.getElementById("actionFiguresDiv"), constantData.markers.figurines, constantData.icons.figurine);
+
+}
+
+addFigurinesMarkers();
 
 // Load districts
 // for (let polygon of constantData.polygons) {

@@ -19,22 +19,57 @@
     <script defer src="./script.js"></script>
 </head>
 <body>
+    <div id="videoplayer">
+        <iframe id="videoplayeriframe" width="560" height="315" src="https://www.youtube.com/embed/K19ap2onKa8?si=5qHR16huiCWC_vk4&start=47" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
     <main id="popupgui">
         <h1>Leila FalB's GTA V and Online Tools</h1>
         <h2>Contents</h2>
-        <ol style="list-style-position: inside;">
-            <li><a href="#markers">Map Markers</a></li>
-            <li><a href="#changelog">Changelog</a></li>
-            <li><a href="#faq">FAQ</a></li>
-        </ol>
+        <div class="custom-ol">
+            <ol class="outermost">
+                <li>
+                    <a href="#markers">Map Markers</a>
+                    <ol>
+                        <li type="i">
+                            <a href="#markers-collectibles">Collectibles</a>
+                            <ul>
+                                <li>
+                                    <a href="#markers-collectibles-actionfigures">Action Figures</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ol>
+                </li>
+                <li><a href="#changelog">Changelog</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ol>
+        </div>
+        <hr>
         <div id="markers"></div>
         <h2>Map Markers</h2>
+        <hr class="fifty">
+        <div id="markers"></div>
+        <div id="markers-collectibles"></div>
+        <h2>Collectibles</h2>
+        <hr class="fifty">
+        <div id="markers-collectibles-actionfigures"></div>
+        <h2>Action Figures</h2>
+        <button>Show All</button>
+        <button>Hide All</button>
+        <button>Show Completed</button>
+        <button>Hide Completed</button>
+        <p>Completed: 0/100</p>
+        <p>Percentage: %</p>
+        <div id="actionFiguresDiv" class="collectibleDiv">
+        </div>
+        <hr>
         <div id="changelog"></div>
         <h2>Changelog</h2>
         <p>All the dates are in <a target="_blank" href="https://en.wikipedia.org/wiki/Central_European_Time">CET</a>.</p>
         <h3>2024 - 05 - 01 / 23:22</h3>
         <p>Made the map work, aligned the SVGs kindly <del>stolen from</del> provided by GTALens.com</p>
         <p>Manually got all the datapoints for Action Figures and descriptions</p>
+        <hr>
         <div id="faq"></div>
         <h2>FAQ</h2>
         <h3>- Why did you make this?</h3>

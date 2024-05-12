@@ -34,15 +34,36 @@ a {
 }
 
 
-/* document.getElementById("popupgui").classList.toggle("s"); */
+/* document.getElementById("videoplayer").classList.toggle("s") */
+#videoplayer {
+    position: absolute;
+    height: 100%;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    display: none;
+    z-index: 2147483647;
+    animation: fadeInFromNone .1s;
+    display: none;
+    background-color: rgb(19, 19, 19, .9);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#videoplayer.s {
+    display: flex;
+    animation: fadeInFromNone .1s;
+}
+
 #popupgui {
     position: absolute;
     height: calc(98% - 8px);
     width: calc(99vw - 8px);
-    top: 1vh;
+    top: 1%;
     left: .5vw;
     margin: 0;
-    z-index: 2147483646;
+    z-index: 2147483645;
     display: none;
     opacity: 0;
     background: rgb(19, 19, 19, .95);
@@ -57,25 +78,6 @@ a {
     animation: fadeInFromNone .1s;
     opacity: 1;
     display: block;
-}
-
-#gui_toggle_button_div {
-    position: absolute;
-    height: 24px;
-    width: 24px;
-    bottom: 1%;
-    left: .5vw;
-    z-index: 2147483647;
-    background: rgb(19, 19, 19, .99);
-    padding: 4px;
-    border-radius: 10px;
-    transform: rotate(180deg);
-    transition: .1s all linear;
-}
-
-#gui_toggle_button_div.s {
-    transform: rotate(0deg);
-    transition: .1s all linear;
 }
 
 @keyframes fadeInFromNone {
@@ -95,6 +97,55 @@ a {
     }
 }
 
+#gui_toggle_button_div {
+    position: absolute;
+    height: 24px;
+    width: 24px;
+    bottom: 1%;
+    left: .5vw;
+    z-index: 2147483646;
+    background: rgb(19, 19, 19, .99);
+    padding: 4px;
+    border-radius: 10px;
+    transform: rotate(180deg);
+    transition: .1s all linear;
+}
+
+#gui_toggle_button_div.s {
+    transform: rotate(0deg);
+    transition: .1s all linear;
+}
+
 #gui_toggle_button {
     cursor: pointer;
+}
+
+hr {
+    border-top: 3px solid #bbb;
+    border-radius: 10px;
+    width: 75%;
+}
+
+hr.fifty {
+    width: 50%;
+}
+
+hr.twentyfive {
+    width: 25%;
+}
+
+div.custom-ol {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+div.custom-ol > ol {
+    list-style-position: inside;
+    padding: 0;
+}
+
+ul {
+    list-style-type: disc;
 }
