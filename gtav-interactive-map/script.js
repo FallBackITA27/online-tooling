@@ -279,8 +279,34 @@ async function loadDynamicData() {
         fetch("./modules/counties.json").then(r=>r.json()).then(r=>{
             constantData.counties = r;
             genericCollectibleInsert(document.getElementById("actionFiguresDiv"), constantData.markers.figurines, constantData.icons.figurine);
-            L.polygon(constantData.counties.ls.points, {color: constantData.counties.ls.color}).bindTooltip(constantData.counties.ls.name, {permanent:true,direction:"center"}).addTo(map);
-            L.polygon(constantData.counties.bl.points, {color: constantData.counties.bl.color}).bindTooltip(constantData.counties.bl.name, {permanent:true,direction:"center"}).addTo(map);
+            let lsCountyPolygon = L.polygon(constantData.counties.ls.points, {color: constantData.counties.ls.color}).bindTooltip(constantData.counties.ls.name, {permanent:true,direction:"center"}).addTo(map);
+            let blCountyPolygon = L.polygon(constantData.counties.bl.points, {color: constantData.counties.bl.color}).bindTooltip(constantData.counties.bl.name, {permanent:true,direction:"center"}).addTo(map);
+
+            document.getElementById("markers-locations-counties-blaine-show-btn").addEventListener("click", function(){
+                map.addLayer(blCountyPolygon);
+            })
+
+            document.getElementById("markers-locations-counties-ls-show-btn").addEventListener("click", function(){
+                map.addLayer(lsCountyPolygon);
+            })
+
+            document.getElementById("markers-locations-counties-blaine-hide-btn").addEventListener("click", function(){
+                map.removeLayer(blCountyPolygon);
+            })
+
+            document.getElementById("markers-locations-counties-ls-hide-btn").addEventListener("click", function(){
+                map.removeLayer(lsCountyPolygon);
+            })
+
+            document.getElementById("markers-locations-counties-show-btn").addEventListener("click", function(){
+                map.addLayer(lsCountyPolygon);
+                map.addLayer(blCountyPolygon);
+            });
+
+            document.getElementById("markers-locations-counties-hide-btn").addEventListener("click", function(){
+                map.removeLayer(lsCountyPolygon);
+                map.removeLayer(blCountyPolygon);
+            });
         })
     );
 
@@ -293,7 +319,7 @@ document.getElementById("gui_toggle_button_div").addEventListener("click", funct
     document.getElementById("gui_toggle_button").classList.toggle("s");
 });
 
-L.tileLayer('https://s.rsg.sc/sc/images/games/GTAV/map/game/{z}/{x}/{y}.jpg', {
+L.tileLayer('https://s.rsg.sc/sc/images/games/GTAV/map/render/{z}/{x}/{y}.jpg', {
     maxZoom: 7,
     minZoom: 0,
     noWrap: true,
@@ -351,13 +377,14 @@ async function genericCollectibleInsert(parentDiv, array, icon) {
         zoom.addEventListener("click", function() {
             document.getElementById("gui_toggle_button_div").click();
             map.setView(marker.coords, 7);
+            map.addLayer(onMapMarker);
         })
         parentDiv.append(zoom);
 
-        let onMapMarker = L.layerGroup([L.marker(marker.coords, { icon: icon, title: marker.display_name })]);
-        map.addLayer(onMapMarker);
+        let actualMarker = L.marker(marker.coords, { icon: icon, title: marker.display_name });
+        let onMapMarker = L.layerGroup([actualMarker]);
 
-        onMapMarker.on("click",function(e) {
+        actualMarker.on("click",function(e) {
             document.getElementById("gui_toggle_button_div").click();
             linkDiv.scrollIntoView();
             map.setView(marker.coords, 6);
