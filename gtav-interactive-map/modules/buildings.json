@@ -190,5 +190,41 @@
         "coords": [52.875761, -82.749023],
         "description": "",
         "fandom_url": ""
+    },
+    {
+        "name": "LS Custom",
+        "coords": [54.233130, -73.597412],
+        "description": "",
+        "fandom_url": ""
+    },
+    {
+        "name": "Gas Station",
+        "coords": [54.393352, -73.256836],
+        "description": "",
+        "fandom_url": ""
+    },
+    {
+        "name": "Larry's RV Sales",
+        "coords": [55.335394, -72.696533],
+        "description": "",
+        "fandom_url": ""
+    },
+    {
+        "name": "Discount",
+        "coords": [55.002826, -73.278809],
+        "description": "",
+        "fandom_url": ""
+    },
+    {
+        "name": "Fleeca Bank Branch",
+        "coords": [54.952386, -73.597412],
+        "description": "",
+        "fandom_url": ""
+    },
+    {
+        "name": "24/7 Store",
+        "coords": [54.958694, -73.905029],
+        "description": "",
+        "fandom_url": ""
     }
 ]
