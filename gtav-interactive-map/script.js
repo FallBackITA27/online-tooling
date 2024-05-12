@@ -1,5 +1,5 @@
-// let insertMarkersMode = false;
-let insertMarkersMode = true;
+let insertMarkersMode = false;
+// let insertMarkersMode = true;
 
 let saveData = {
     profile0: {
@@ -293,7 +293,7 @@ document.getElementById("gui_toggle_button_div").addEventListener("click", funct
     document.getElementById("gui_toggle_button").classList.toggle("s");
 });
 
-L.tileLayer('https://s.rsg.sc/sc/images/games/GTAV/map/render/{z}/{x}/{y}.jpg', {
+L.tileLayer('https://s.rsg.sc/sc/images/games/GTAV/map/game/{z}/{x}/{y}.jpg', {
     maxZoom: 7,
     minZoom: 0,
     noWrap: true,
