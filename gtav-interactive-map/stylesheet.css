@@ -56,6 +56,12 @@ a {
     animation: fadeInFromNone .1s;
 }
 
+#videoplayeriframe {
+    aspect-ratio: 16/9;
+    max-width: 100%;
+    min-width: 50%;
+}
+
 #popupgui {
     position: absolute;
     height: calc(98% - 8px);
