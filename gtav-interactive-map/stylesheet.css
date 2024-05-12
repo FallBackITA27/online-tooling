@@ -1,6 +1,7 @@
 body {
     margin: 0;
     color: white;
+    height: 100%;
 }
 
 p {
@@ -20,7 +21,7 @@ a {
 }
 
 #map {
-    height: 100vh;
+    height: 100%;
     width: 100vw;
     cursor: crosshair;
 }
@@ -59,7 +60,7 @@ a {
     position: absolute;
     height: 24px;
     width: 24px;
-    bottom: 1vh;
+    bottom: 1%;
     left: .5vw;
     z-index: 2147483647;
     background: rgb(19, 19, 19, .99);
