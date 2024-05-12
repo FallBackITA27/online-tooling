@@ -1,5 +1,11 @@
 let insertMarkersMode = false;
 
+let saveData = {
+    profile0: {
+        
+    }
+}
+
 var map = L.map('map', {
     center: [-90, 64.69999694824219],
     zoom: 0,
@@ -258,9 +264,9 @@ const constantData = {
     ],
 }
 
-document.getElementById("gui_toggle_button").addEventListener("click", function(e){
+document.getElementById("gui_toggle_button_div").addEventListener("click", function(e){
     document.getElementById("popupgui").classList.toggle("s");
-    e.target.parentElement.classList.toggle("s");
+    document.getElementById("gui_toggle_button").classList.toggle("s");
 });
 
 L.tileLayer('https://s.rsg.sc/sc/images/games/GTAV/map/game/{z}/{x}/{y}.jpg', {
@@ -323,8 +329,14 @@ async function genericCollectibleInsert(parentDiv, array, icon) {
         })
         parentDiv.append(video);
 
+        let zoom = document.createElement("button");
+        zoom.innerHTML = "Zoom to Marker";
+        zoom.addEventListener("click", function() {
+            map.setView(marker.coords, 7);
+        })
+        parentDiv.append(zoom);
+
         let onMapMarker = registerMarker(icon, marker.coords, marker.display_name);
-        marker.marker = onMapMarker;
     }
 }
 
