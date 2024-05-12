@@ -279,8 +279,8 @@ async function loadDynamicData() {
         fetch("./modules/counties.json").then(r=>r.json()).then(r=>{
             constantData.counties = r;
             genericCollectibleInsert(document.getElementById("actionFiguresDiv"), constantData.markers.figurines, constantData.icons.figurine);
-            L.polygon(constantData.counties.ls.points, {color: "green"}).bindTooltip(constantData.counties.ls.name, {permanent:true,direction:"center"}).addTo(map);
-            L.polygon(constantData.counties.bl.points, {color: "orange"}).bindTooltip(constantData.counties.bl.name, {permanent:true,direction:"center"}).addTo(map);
+            L.polygon(constantData.counties.ls.points, {color: constantData.counties.ls.color}).bindTooltip(constantData.counties.ls.name, {permanent:true,direction:"center"}).addTo(map);
+            L.polygon(constantData.counties.bl.points, {color: constantData.counties.bl.color}).bindTooltip(constantData.counties.bl.name, {permanent:true,direction:"center"}).addTo(map);
         })
     );
 
@@ -304,16 +304,6 @@ async function addSVGOverlay(url, coords) {
     test.innerHTML = await fetch(url).then(r=>r.text());
     let svg = Array.from(test.getElementsByTagName('svg'))[0];
     L.svgOverlay(svg, coords).addTo(map);
-}
-
-async function registerMarker(icon, coordinates, title = "", event = null) {
-    let marker = L.marker(coordinates, { icon: icon, title: title });
-    if (event == null) {
-        marker.addTo(map);
-    } else {
-        marker.on(event.event, event.func).addTo(map);
-    }
-    return marker;
 }
 
 if (insertMarkersMode) map.on('click', async function(e) {
@@ -364,13 +354,13 @@ async function genericCollectibleInsert(parentDiv, array, icon) {
         })
         parentDiv.append(zoom);
 
-        let onMapMarker = registerMarker(icon, marker.coords, marker.display_name, {
-            event: "click",
-            func: function(e) {
-                document.getElementById("gui_toggle_button_div").click();
-                linkDiv.scrollIntoView();
-                map.setView(marker.coords, 6);
-            }
+        let onMapMarker = L.layerGroup([L.marker(marker.coords, { icon: icon, title: marker.display_name })]);
+        map.addLayer(onMapMarker);
+
+        onMapMarker.on("click",function(e) {
+            document.getElementById("gui_toggle_button_div").click();
+            linkDiv.scrollIntoView();
+            map.setView(marker.coords, 6);
         });
     }
 }
