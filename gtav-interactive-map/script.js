@@ -1,5 +1,5 @@
-let insertMarkersMode = false;
-// let insertMarkersMode = true;
+// let insertMarkersMode = false;
+let insertMarkersMode = true;
 
 let saveData = {
     profile0: {
@@ -23,55 +23,7 @@ const constantData = {
         }),
     },
     markers: {}, // Load these dinamically
-    counties: {
-        bl: {
-            name: "Blaine County",
-            points: [
-                [82.648222, -96.547852],
-
-            ]
-        },
-        ls: {
-            name: "Los Santos County",
-            points: [
-                [53.826597, -121.376953],
-
-                [52.187405, -131.308594],
-                [50.555325, -151.149902],
-                [49.667628, -159.345703],
-                [29.840644, -166.289063],
-                [11.523088, -159.521484],
-                [-8.059230, -135.087891],
-                [-12.811801, -135.175781],
-                [-24.686952, -123.222656],
-                [-29.916852, -130.429688],
-                [-42.972502, -139.042969],
-                [-46.073231, -137.636719],
-                [-53.696706, -117.158203],
-                [-46.498392, -111.005859],
-                [-44.087585, -113.115234],
-                [-40.446947, -111.269531],
-                [-40.346544, -109.204102],
-                [-42.730874, -107.841797],
-                [-39.960280, -100.612793],
-                [-40.780541, -96.503906],
-                [-48.224673, -95.998535],
-                [-49.181703, -87.451172],
-                [-48.400032, -70.795898],
-                [-40.963308, -70.598145],
-                [-41.277806, -60.776367],
-                [-36.668419, -52.415771],
-                [-28.806174, -43.637695],
-                [-15.453680, -37.705078],
-                [-0.351560, -39.550781],
-                [6.358975, -29.443359],
-                [12.382928, -26.718750],
-                [27.059126, -32.783203],
-
-
-            ],
-        }
-    },
+    counties: {}, // Load these dinamically
     polygons: [
         {
             name: "Los Santos International Airport",
@@ -315,12 +267,33 @@ const constantData = {
     ],
 }
 
+async function loadDynamicData() {
+    let x = [];
+    x.push(
+        fetch("./modules/figurines.json").then(r=>r.json()).then(r=>{
+            constantData.markers.figurines = r;
+            genericCollectibleInsert(document.getElementById("actionFiguresDiv"), constantData.markers.figurines, constantData.icons.figurine);
+        })
+    );
+    x.push(
+        fetch("./modules/counties.json").then(r=>r.json()).then(r=>{
+            constantData.counties = r;
+            genericCollectibleInsert(document.getElementById("actionFiguresDiv"), constantData.markers.figurines, constantData.icons.figurine);
+            L.polygon(constantData.counties.ls.points, {color: "green"}).bindTooltip(constantData.counties.ls.name, {permanent:true,direction:"center"}).addTo(map);
+            L.polygon(constantData.counties.bl.points, {color: "orange"}).bindTooltip(constantData.counties.bl.name, {permanent:true,direction:"center"}).addTo(map);
+        })
+    );
+
+    for (let handle of x) await handle;
+}
+loadDynamicData();
+
 document.getElementById("gui_toggle_button_div").addEventListener("click", function(e){
     document.getElementById("popupgui").classList.toggle("s");
     document.getElementById("gui_toggle_button").classList.toggle("s");
 });
 
-L.tileLayer('https://s.rsg.sc/sc/images/games/GTAV/map/game/{z}/{x}/{y}.jpg', {
+L.tileLayer('https://s.rsg.sc/sc/images/games/GTAV/map/render/{z}/{x}/{y}.jpg', {
     maxZoom: 7,
     minZoom: 0,
     noWrap: true,
@@ -402,21 +375,10 @@ async function genericCollectibleInsert(parentDiv, array, icon) {
     }
 }
 
-async function addFigurinesMarkers() {
-    if (constantData.markers.figurines == null) constantData.markers.figurines = await fetch("./modules/figurines.json").then(r=>r.json());genericCollectibleInsert(document.getElementById("actionFiguresDiv"), constantData.markers.figurines, constantData.icons.figurine);
-
-}
-
-addFigurinesMarkers();
-
 // Load districts
 // for (let polygon of constantData.polygons) {
 //     L.polygon(polygon.points, {color:polygon.color}).bindTooltip(polygon.name, {permanent:true,direction:"center"}).addTo(map);
 // }
-
-// Load both counties
-// L.polygon(constantData.counties.ls.points, {color: "green"}).bindTooltip(constantData.counties.ls.name, {permanent:true,direction:"center"}).addTo(map)
-// L.polygon(constantData.counties.bl.points, {color: "orange"}).bindTooltip(constantData.counties.bl.name, {permanent:true,direction:"center"}).addTo(map)
 
 let tileLayerData = {
     mainMap: {

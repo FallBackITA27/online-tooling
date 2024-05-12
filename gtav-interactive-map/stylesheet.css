@@ -150,6 +150,7 @@ hr.twentyfive {
     width: 25%;
 }
 
+
 div.custom-ol {
     display: flex;
     align-items: center;
@@ -160,6 +161,10 @@ div.custom-ol {
 div.custom-ol > ol {
     list-style-position: inside;
     padding: 0;
+}
+
+div.custom-ol > ol li {
+    text-align: left;
 }
 
 ul {
