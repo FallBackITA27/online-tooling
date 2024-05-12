@@ -106,24 +106,34 @@ a {
 #gui_toggle_button_div {
     position: absolute;
     height: 24px;
-    width: 24px;
+    width: auto;
+    max-width: 24px;
     bottom: 1%;
     left: .5vw;
     z-index: 2147483646;
     background: rgb(19, 19, 19, .99);
     padding: 4px;
     border-radius: 10px;
+    display: flex;
+    gap: 7px;
+    transition: all .2s linear;
+    overflow-x: hidden;
+    cursor: pointer;
+}
+
+#gui_toggle_button_div:hover {
+    transition: all .2s linear;
+    max-width: 100px;
+}
+
+#gui_toggle_button {
     transform: rotate(180deg);
     transition: .1s all linear;
 }
 
-#gui_toggle_button_div.s {
+#gui_toggle_button.s {
     transform: rotate(0deg);
     transition: .1s all linear;
-}
-
-#gui_toggle_button {
-    cursor: pointer;
 }
 
 hr {
