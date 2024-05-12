@@ -139,13 +139,55 @@
     },
     {
         "name": "Eastern Motel",
-        "coords": [53.917281, -90.296631],
+        "coords": [54.046489, -89.736328],
         "description": "",
         "fandom_url": ""
     },
     {
         "name": "Eastern Motel (Bar)",
         "coords": [53.994854, -90.856934],
+        "description": "",
+        "fandom_url": ""
+    },
+    {
+        "name": "Liquor Market",
+        "coords": [54.584797, -85.638428],
+        "description": "",
+        "fandom_url": ""
+    },
+    {
+        "name": "24/7 Store",
+        "coords": [54.572062, -86.286621],
+        "description": "",
+        "fandom_url": ""
+    },
+    {
+        "name": "Animal Ark",
+        "coords": [55.491304, -85.902100],
+        "description": "",
+        "fandom_url": ""
+    },
+    {
+        "name": "Dollar Pills Pharmacy",
+        "coords": [55.534848, -85.385742],
+        "description": "",
+        "fandom_url": ""
+    },
+    {
+        "name": "Suburban",
+        "coords": [55.491304, -84.869385],
+        "description": "",
+        "fandom_url": ""
+    },
+    {
+        "name": "The Taco Farmer - Vegetarian Tacos",
+        "coords": [55.229023, -84.232178],
+        "description": "",
+        "fandom_url": ""
+    },
+    {
+        "name": "Rebel Radio Station HQ",
+        "coords": [52.875761, -82.749023],
         "description": "",
         "fandom_url": ""
     }
