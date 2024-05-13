@@ -50,6 +50,11 @@ async function loadDynamicData() {
     //         }
     //     })
     // );
+    // x.push(
+    //     fetch("./assets/inGameDistricts.json").then(r=>r.json()).then(r=>{
+    //         for (polygon of r) L.polygon(polygon.points, {color:polygon.color}).bindTooltip(polygon.name, {permanent:true,direction:"center"}).addTo(map);
+    //     })
+    // );
     x.push(
         fetch("./assets/counties.json").then(r=>r.json()).then(r=>{
             let lsCountyPolygon = L.polygon(r.ls.points, {color: r.ls.color}).bindTooltip(r.ls.name, {permanent:true,direction:"center"});
@@ -158,11 +163,6 @@ async function genericCollectibleInsert(parentDiv, array, icon) {
         });
     }
 }
-
-// Load districts
-// for (let polygon of constantData.polygons) {
-//     L.polygon(polygon.points, {color:polygon.color}).bindTooltip(polygon.name, {permanent:true,direction:"center"}).addTo(map);
-// }
 
 /*
     https://gtalens.com/assets/images/f2b13a.svg
