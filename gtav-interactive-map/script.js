@@ -3,7 +3,7 @@ let insertMarkersMode = false;
 
 let saveData = {
     profile0: {
-        
+        selectedTileLayer: "game",
     }
 }
 
@@ -14,12 +14,6 @@ var map = L.map('map', {
     worldCopyJump: false,
     attributionControl: false
 });
-
-L.tileLayer('https://s.rsg.sc/sc/images/games/GTAV/map/render/{z}/{x}/{y}.jpg', {
-    maxZoom: 7,
-    minZoom: 0,
-    noWrap: true,
-}).addTo(map);
 
 const constantData = {
     icons: {
@@ -53,6 +47,45 @@ async function loadDynamicData() {
     //         for (polygon of r) L.polygon(polygon.points, {color:polygon.color}).bindTooltip(polygon.name, {permanent:true,direction:"center"}).addTo(map);
     //     })
     // );
+    x.push(
+        fetch("./assets/mapStyle.json").then(r=>r.json()).then(r=>{
+            let tileLayers = {
+                render: L.tileLayer(r.mainMap.render.url, {
+                    maxZoom: r.mainMap.render.maxZoom,
+                    minZoom: r.mainMap.render.minZoom,
+                    noWrap: true,
+                }),
+                game: L.tileLayer(r.mainMap.game.url, {
+                    maxZoom: r.mainMap.game.maxZoom,
+                    minZoom: r.mainMap.game.minZoom,
+                    noWrap: true,
+                }),
+                print: L.tileLayer(r.mainMap.print.url, {
+                    maxZoom: r.mainMap.print.maxZoom,
+                    minZoom: r.mainMap.print.minZoom,
+                    noWrap: true,
+                }),
+            }
+
+            Array.from(document.getElementsByClassName("mapStyle")).forEach(function(btn){
+                btn.addEventListener("click",function(e){
+                    updateTileLayer(e.target.value);
+                })
+            })
+
+            function updateTileLayer(newLayer) {
+                let sl = saveData.profile0.selectedTileLayer;
+                if (sl === newLayer) return;
+                map.removeLayer(tileLayers[sl]);
+                saveData.profile0.selectedTileLayer = newLayer;
+                map.addLayer(tileLayers[newLayer]);
+                document.getElementById("map").style.background = r.mainMap[newLayer].oceanColor;
+            }
+
+                document.getElementById("map").style.background = r.mainMap[saveData.profile0.selectedTileLayer].oceanColor;
+                map.addLayer(tileLayers[saveData.profile0.selectedTileLayer]);
+        })
+    )
     x.push(
         fetch("./assets/counties.json").then(r=>r.json()).then(r=>{
             let lsCountyPolygon = L.polygon(r.ls.points, {color: r.ls.color}).bindTooltip(r.ls.name, {permanent:true,direction:"center"});

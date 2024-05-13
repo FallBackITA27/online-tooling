@@ -29,10 +29,6 @@ a {
     cursor: crosshair;
 }
 
-.leaflet-container {
-    background: #384950;
-}
-
 
 /* document.getElementById("videoplayer").classList.toggle("s") */
 #videoplayer {

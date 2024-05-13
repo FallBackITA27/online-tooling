@@ -1,20 +1,23 @@
 {
     "mainMap": {
         "render": {
-            "oceanColor": "#384950",
-            "tileLayerOpts": {
-                "maxZoom": 7,
-                "minZoom": 0
-            }
-        },
-        "game": {
+            "url": "https://s.rsg.sc/sc/images/games/GTAV/map/render/{z}/{x}/{y}.jpg",
             "oceanColor": "#0D2B4F",
             "tileLayerOpts": {
                 "maxZoom": 7,
                 "minZoom": 0
             }
         },
+        "game": {
+            "url": "https://s.rsg.sc/sc/images/games/GTAV/map/game/{z}/{x}/{y}.jpg",
+            "oceanColor": "#384950",
+            "tileLayerOpts": {
+                "maxZoom": 7,
+                "minZoom": 0
+            }
+        },
         "print": {
+            "url": "https://s.rsg.sc/sc/images/games/GTAV/map/print/{z}/{x}/{y}.jpg",
             "oceanColor": "#4EB1D0",
             "tileLayerOpts": {
                 "maxZoom": 7,
