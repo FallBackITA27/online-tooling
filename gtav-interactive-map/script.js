@@ -1,5 +1,5 @@
-// let insertmarkersmode = false;
-let insertMarkersMode = true;
+// true false;
+let insertMarkersMode = false;
 
 let saveData = {
     profile0: {
@@ -279,17 +279,16 @@ async function loadDynamicData() {
             genericCollectibleInsert(document.getElementById("actionFiguresDiv"), constantData.markers.figurines, constantData.icons.figurine);
         })
     );
-    x.push(
-        fetch("./modules/buildings.json").then(r=>r.json()).then(r=>{
-            constantData.markers.buildings = r;
-            for (marker of constantData.markers.buildings) {
-                let actualMarker = L.marker(marker.coords, { icon: constantData.icons.building, title: marker.name });
-                let onMapMarker = L.layerGroup([actualMarker]);
-
-                map.addLayer(onMapMarker);
-            }
-        })
-    );
+    // x.push(
+    //     fetch("./modules/buildings.json").then(r=>r.json()).then(r=>{
+    //         constantData.markers.buildings = r;
+    //         for (marker of constantData.markers.buildings) {
+    //             let actualMarker = L.marker(marker.coords, { icon: constantData.icons.building, title: marker.name });
+    //             let onMapMarker = L.layerGroup([actualMarker]);
+    //             map.addLayer(onMapMarker);
+    //         }
+    //     })
+    // );
     x.push(
         fetch("./modules/counties.json").then(r=>r.json()).then(r=>{
             constantData.counties = r;
