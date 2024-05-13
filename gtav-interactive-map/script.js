@@ -27,7 +27,6 @@ const constantData = {
         }),
     },
     markers: {}, // Load these dinamically
-    counties: {}, // Load these dinamically
     polygons: [
         {
             name: "Los Santos International Airport",
@@ -291,10 +290,8 @@ async function loadDynamicData() {
     // );
     x.push(
         fetch("./assets/counties.json").then(r=>r.json()).then(r=>{
-            constantData.counties = r;
-
-            let lsCountyPolygon = L.polygon(constantData.counties.ls.points, {color: constantData.counties.ls.color}).bindTooltip(constantData.counties.ls.name, {permanent:true,direction:"center"});
-            let blCountyPolygon = L.polygon(constantData.counties.bl.points, {color: constantData.counties.bl.color}).bindTooltip(constantData.counties.bl.name, {permanent:true,direction:"center"});
+            let lsCountyPolygon = L.polygon(r.ls.points, {color: r.ls.color}).bindTooltip(r.ls.name, {permanent:true,direction:"center"});
+            let blCountyPolygon = L.polygon(r.bl.points, {color: r.bl.color}).bindTooltip(r.bl.name, {permanent:true,direction:"center"});
 
             document.getElementById("markers-locations-counties-blaine-show-btn").addEventListener("click", function(){
                 map.addLayer(blCountyPolygon);
