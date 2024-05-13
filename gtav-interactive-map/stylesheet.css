@@ -170,3 +170,8 @@ div.custom-ol > ol li {
 ul {
     list-style-type: disc;
 }
+
+#mapStyleRadioButtons {
+    display: flex;
+    flex-direction: column;
+}
