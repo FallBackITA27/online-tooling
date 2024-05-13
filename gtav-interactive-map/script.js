@@ -278,8 +278,7 @@ async function loadDynamicData() {
     );
     // x.push(
     //     fetch("./assets/buildings.json").then(r=>r.json()).then(r=>{
-    //         constantData.markers.buildings = r;
-    //         for (marker of constantData.markers.buildings) {
+    //         for (marker of r) {
     //             let actualMarker = L.marker(marker.coords, { icon: constantData.icons.building, title: marker.name });
     //             let onMapMarker = L.layerGroup([actualMarker]);
     //             map.addLayer(onMapMarker);
