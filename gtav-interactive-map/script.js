@@ -274,13 +274,13 @@ const constantData = {
 async function loadDynamicData() {
     let x = [];
     x.push(
-        fetch("./modules/figurines.json").then(r=>r.json()).then(r=>{
+        fetch("./assets/figurines.json").then(r=>r.json()).then(r=>{
             constantData.markers.figurines = r;
             genericCollectibleInsert(document.getElementById("actionFiguresDiv"), constantData.markers.figurines, constantData.icons.figurine);
         })
     );
     // x.push(
-    //     fetch("./modules/buildings.json").then(r=>r.json()).then(r=>{
+    //     fetch("./assets/buildings.json").then(r=>r.json()).then(r=>{
     //         constantData.markers.buildings = r;
     //         for (marker of constantData.markers.buildings) {
     //             let actualMarker = L.marker(marker.coords, { icon: constantData.icons.building, title: marker.name });
@@ -290,7 +290,7 @@ async function loadDynamicData() {
     //     })
     // );
     x.push(
-        fetch("./modules/counties.json").then(r=>r.json()).then(r=>{
+        fetch("./assets/counties.json").then(r=>r.json()).then(r=>{
             constantData.counties = r;
             genericCollectibleInsert(document.getElementById("actionFiguresDiv"), constantData.markers.figurines, constantData.icons.figurine);
             let lsCountyPolygon = L.polygon(constantData.counties.ls.points, {color: constantData.counties.ls.color}).bindTooltip(constantData.counties.ls.name, {permanent:true,direction:"center"});
