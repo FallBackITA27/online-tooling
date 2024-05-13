@@ -1,0 +1,25 @@
+{
+    "mainMap": {
+        "render": {
+            "oceanColor": "#384950",
+            "tileLayerOpts": {
+                "maxZoom": 7,
+                "minZoom": 0
+            }
+        },
+        "game": {
+            "oceanColor": "#0D2B4F",
+            "tileLayerOpts": {
+                "maxZoom": 7,
+                "minZoom": 0
+            }
+        },
+        "print": {
+            "oceanColor": "#4EB1D0",
+            "tileLayerOpts": {
+                "maxZoom": 7,
+                "minZoom": 0
+            }
+        }
+    }
+}

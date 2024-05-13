@@ -411,32 +411,6 @@ async function genericCollectibleInsert(parentDiv, array, icon) {
 //     L.polygon(polygon.points, {color:polygon.color}).bindTooltip(polygon.name, {permanent:true,direction:"center"}).addTo(map);
 // }
 
-let tileLayerData = {
-    mainMap: {
-        render: {
-            oceanColor: "#384950",
-            tileLayerOpts: {
-                maxZoom: 7,
-                minZoom: 0,
-            }
-        },
-        game: {
-            oceanColor: "#0D2B4F",
-            tileLayerOpts: {
-                maxZoom: 7,
-                minZoom: 0,
-            }
-        },
-        print: {
-            oceanColor: "#4EB1D0",
-            tileLayerOpts: {
-                maxZoom: 7,
-                minZoom: 0,
-            }
-        },
-    }
-}
-
 /*
     https://gtalens.com/assets/images/f2b13a.svg
     https://gtalens.com/assets/images/d12003.svg
