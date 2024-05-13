@@ -24,11 +24,11 @@ L.tileLayer('https://s.rsg.sc/sc/images/games/GTAV/map/render/{z}/{x}/{y}.jpg', 
 const constantData = {
     icons: {
         figurine: L.icon({
-            iconUrl: 'gtav-icons/figurine.svg',
+            iconUrl: 'gtavIcons/figurine.svg',
             iconSize: [22,22]
         }),
         building: L.icon({
-            iconUrl: 'gtav-icons/building.svg',
+            iconUrl: 'gtavIcons/building.svg',
             iconSize: [22,22]
         }),
     },
