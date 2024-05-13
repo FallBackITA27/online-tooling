@@ -37,9 +37,7 @@ const constantData = {
 async function loadDynamicData() {
     let x = [];
     x.push(
-        fetch("./assets/figurines.json").then(r=>r.json()).then(r=>{
-            genericCollectibleInsert(document.getElementById("actionFiguresDiv"), r, constantData.icons.figurine);
-        })
+        fetch("./assets/figurines.json").then(r=>r.json()).then(r=>genericCollectibleInsert(document.getElementById("actionFiguresDiv"), r, constantData.icons.figurine))
     );
     // x.push(
     //     fetch("./assets/buildings.json").then(r=>r.json()).then(r=>{
