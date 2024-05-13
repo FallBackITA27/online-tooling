@@ -292,7 +292,7 @@ async function loadDynamicData() {
     x.push(
         fetch("./assets/counties.json").then(r=>r.json()).then(r=>{
             constantData.counties = r;
-            genericCollectibleInsert(document.getElementById("actionFiguresDiv"), constantData.markers.figurines, constantData.icons.figurine);
+
             let lsCountyPolygon = L.polygon(constantData.counties.ls.points, {color: constantData.counties.ls.color}).bindTooltip(constantData.counties.ls.name, {permanent:true,direction:"center"});
             let blCountyPolygon = L.polygon(constantData.counties.bl.points, {color: constantData.counties.bl.color}).bindTooltip(constantData.counties.bl.name, {permanent:true,direction:"center"});
 
