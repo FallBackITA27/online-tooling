@@ -26,7 +26,6 @@ const constantData = {
             iconSize: [22,22]
         }),
     },
-    markers: {}, // Load these dinamically
     polygons: [
         {
             name: "Los Santos International Airport",
@@ -274,8 +273,7 @@ async function loadDynamicData() {
     let x = [];
     x.push(
         fetch("./assets/figurines.json").then(r=>r.json()).then(r=>{
-            constantData.markers.figurines = r;
-            genericCollectibleInsert(document.getElementById("actionFiguresDiv"), constantData.markers.figurines, constantData.icons.figurine);
+            genericCollectibleInsert(document.getElementById("actionFiguresDiv"), r, constantData.icons.figurine);
         })
     );
     // x.push(
