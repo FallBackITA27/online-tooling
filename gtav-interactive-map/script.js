@@ -158,7 +158,7 @@ document.getElementById("gui_toggle_button_div").addEventListener("click", funct
     document.getElementById("popupgui").classList.toggle("s");
     document.getElementById("gui_toggle_button").classList.toggle("s");
 });
-if (window.location.href.includes("#")) document.getElementById("gui_toggle_button_div");
+if (window.location.href.includes("#")) document.getElementById("gui_toggle_button_div").click();
 
 async function addSVGOverlay(url, coords) {
     let test = document.createElement('html');
