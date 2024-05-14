@@ -1,5 +1,5 @@
 // true false;
-let insertMarkersMode = false;
+let insertMarkersMode = true;
 
 let saveData = {
     profile0: {
@@ -72,8 +72,10 @@ let map = L.map('map', {
     attributionControl: false,
     maxZoom: 7,
     minZoom: 0,
+    maxBounds: [[400, -270],[-60, 90]],
+    maxBoundsViscosity: 0.5,
 });
-
+// -90
 const constantData = {
     icons: {
         figurine: L.icon({
@@ -273,12 +275,11 @@ async function genericCollectibleInsert(parentDiv, array, icon) {
         zoom.addEventListener("click", function() {
             document.getElementById("gui_toggle_button_div").click();
             map.setView(marker.coords, 7);
-            map.addLayer(onMapMarker);
+            if (!map.hasLayer(actualMarker)) actualMarker.addTo(map);
         })
         parentDiv.append(zoom);
 
         let actualMarker = L.marker(marker.coords, { icon: icon, title: marker.display_name });
-        let onMapMarker = L.layerGroup([actualMarker]);
 
         actualMarker.on("click",function(e) {
             document.getElementById("gui_toggle_button_div").click();
