@@ -9,8 +9,16 @@ let saveData = {
     }
 }
 
-let temporarySaveData = localStorage.getItem("saveData");
-if (temporarySaveData != null) saveData = JSON.parse(temporarySaveData);
+let temporarySaveDataStr = localStorage.getItem("saveData");
+if (temporarySaveDataStr != null) {
+    let temporarySaveData = JSON.parse(temporarySaveDataStr);
+    for (key in saveData.profile0) {
+        temporarySaveData.profile0[key] === null;
+        temporarySaveData.profile0[key] = saveData.profile0[key];
+    }
+    saveData = temporarySaveData;
+
+}
 saveDataSave();
 
 let map = L.map('map', {
