@@ -1,5 +1,5 @@
 // true false;
-let insertMarkersMode = true;
+let insertMarkersMode = false;
 
 let saveData = {
     profile0: {
