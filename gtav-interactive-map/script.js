@@ -54,6 +54,11 @@ map.on("moveend", function(e) {
     saveDataSave();
 });
 
+document.getElementById("gui_toggle_button_div").addEventListener("click", function(e){
+    document.getElementById("popupgui").classList.toggle("s");
+    document.getElementById("gui_toggle_button").classList.toggle("s");
+});
+
 function saveDataSave() {
     console.log(saveData);
     localStorage.setItem("saveData", JSON.stringify(saveData));
@@ -151,14 +156,12 @@ async function loadDynamicData() {
     );
 
     for (let handle of x) await handle;
+    if (window.location.href.includes("#")) {
+        document.getElementById("gui_toggle_button_div").click();
+        document.getElementById(window.location.href.split("#")[1]).scrollIntoView();
+    }
 }
 loadDynamicData();
-
-document.getElementById("gui_toggle_button_div").addEventListener("click", function(e){
-    document.getElementById("popupgui").classList.toggle("s");
-    document.getElementById("gui_toggle_button").classList.toggle("s");
-});
-if (window.location.href.includes("#")) document.getElementById("gui_toggle_button_div").click();
 
 async function addSVGOverlay(url, coords) {
     let test = document.createElement('html');
