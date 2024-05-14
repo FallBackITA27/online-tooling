@@ -28,10 +28,14 @@ const constantData = {
     },
 }
 
+function saveDataSave() {
+    localStorage.setItem("saveData", JSON.stringify(saveData));
+}
+
 async function loadDynamicData() {
     let temporarySaveData = localStorage.getItem("saveData");
     if (temporarySaveData != null) saveData = JSON.parse(temporarySaveData);
-    localStorage.setItem("saveData", JSON.stringify(saveData));
+    saveDataSave();
 
     let x = [];
     x.push(
@@ -71,21 +75,20 @@ async function loadDynamicData() {
                 }),
             }
 
-            Array.from(document.getElementsByClassName("mapStyle")).forEach(function(btn){
+            let mapStyleClassElements = Array.from(document.getElementsByClassName("mapStyle"));
+
+            mapStyleClassElements.forEach(function(btn){
                 btn.addEventListener("click",function(e){
-                    updateTileLayer(e.target.value);
-                })
+                    let sl = saveData.profile0.selectedTileLayer;
+                    if (sl === e.target.value) return;
+                    map.removeLayer(tileLayers[sl]);
+                    saveData.profile0.selectedTileLayer = e.target.value;
+                    saveDataSave();
+                    map.addLayer(tileLayers[e.target.value]);
+                    document.getElementById("map").style.background = r.mainMap[e.target.value].oceanColor;
+                });
+                if (saveData.profile0.selectedTileLayer == btn.value) btn.click();
             })
-
-            function updateTileLayer(newLayer) {
-                let sl = saveData.profile0.selectedTileLayer;
-                if (sl === newLayer) return;
-                map.removeLayer(tileLayers[sl]);
-                saveData.profile0.selectedTileLayer = newLayer;
-                map.addLayer(tileLayers[newLayer]);
-                document.getElementById("map").style.background = r.mainMap[newLayer].oceanColor;
-            }
-
 
             document.getElementById("map").style.background = r.mainMap[saveData.profile0.selectedTileLayer].oceanColor;
             map.addLayer(tileLayers[saveData.profile0.selectedTileLayer]);
