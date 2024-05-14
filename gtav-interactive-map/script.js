@@ -30,8 +30,8 @@ const constantData = {
 
 async function loadDynamicData() {
     let temporarySaveData = localStorage.getItem("saveData");
-    if (temporarySaveData != null) saveData = temporarySaveData;
-    localStorage.setItem("saveData", saveData);
+    if (temporarySaveData != null) saveData = JSON.parse(temporarySaveData);
+    localStorage.setItem("saveData", JSON.stringify(saveData));
 
     let x = [];
     x.push(
