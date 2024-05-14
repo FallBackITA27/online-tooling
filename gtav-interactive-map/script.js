@@ -46,6 +46,7 @@ setInterval(async function() {
                 new Notification(notifString);
                 progressBarElement.value = cooldown;
                 heistData.startDate = false;
+                saveDataSave();
             } else {
                 progressBarElement.value = currentTime - heistData.startDate;
             }
@@ -115,7 +116,7 @@ function saveDataSave() {
 async function loadDynamicData() {
     let x = [];
     x.push(
-        fetch("./assets/figurines.json").then(r=>r.json()).then(r=>genericCollectibleInsert(document.getElementById("actionFiguresDiv"), r, constantData.icons.figurine))
+        fetch("./assets/figurines.json").then(r=>r.json()).then(r=>genericCollectibleInsert(document.getElementById("actionFiguresDiv"), r, constantData.icons.figurine, document.getElementById("markers-collectibles-show-all-btn"), document.getElementById("markers-collectibles-hide-all-btn"), document.getElementById("markers-collectibles-show-completed-btn"), document.getElementById("markers-collectibles-hide-completed-btn")))
     );
     // x.push(
     //     fetch("./assets/buildings.json").then(r=>r.json()).then(r=>{
@@ -244,7 +245,8 @@ document.getElementById("videoplayer").addEventListener("click", function(e) {
     e.target.classList.remove("s");
 });
 
-async function genericCollectibleInsert(parentDiv, array, icon) {
+async function genericCollectibleInsert(parentDiv, array, icon, showAllButton, hideAllButton, showCompletedButton, hideCompletedButton) {
+    let onMapMarkers = [];
     for (let marker of array) {
         let hr = document.createElement("hr");
         hr.classList.add("twentyfive");
@@ -270,6 +272,9 @@ async function genericCollectibleInsert(parentDiv, array, icon) {
         })
         parentDiv.append(video);
 
+        let actualMarker = L.marker(marker.coords, { icon: icon, title: marker.display_name });
+        onMapMarkers.push(actualMarker);
+
         let zoom = document.createElement("button");
         zoom.innerHTML = "Zoom to Marker";
         zoom.addEventListener("click", function() {
@@ -279,14 +284,15 @@ async function genericCollectibleInsert(parentDiv, array, icon) {
         })
         parentDiv.append(zoom);
 
-        let actualMarker = L.marker(marker.coords, { icon: icon, title: marker.display_name });
-
         actualMarker.on("click",function(e) {
             document.getElementById("gui_toggle_button_div").click();
             linkDiv.scrollIntoView();
             map.setView(marker.coords, 6);
         });
     }
+
+    showAllButton.addEventListener("click", ()=>{for (let marker of onMapMarkers) if (!map.hasLayer(marker)) marker.addTo(map)});
+    hideAllButton.addEventListener("click", ()=>{for (let marker of onMapMarkers) if (map.hasLayer(marker)) marker.remove()});
 }
 
 /*
