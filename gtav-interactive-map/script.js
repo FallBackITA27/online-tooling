@@ -75,7 +75,7 @@ let map = L.map('map', {
     maxBounds: [[400, -270],[-60, 90]],
     maxBoundsViscosity: 0.5,
 });
-// -90
+
 const constantData = {
     icons: {
         figurine: L.icon({
