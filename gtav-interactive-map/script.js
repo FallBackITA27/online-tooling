@@ -82,8 +82,8 @@ async function loadDynamicData() {
                 document.getElementById("map").style.background = r.mainMap[newLayer].oceanColor;
             }
 
-                document.getElementById("map").style.background = r.mainMap[saveData.profile0.selectedTileLayer].oceanColor;
-                map.addLayer(tileLayers[saveData.profile0.selectedTileLayer]);
+            document.getElementById("map").style.background = r.mainMap[saveData.profile0.selectedTileLayer].oceanColor;
+            map.addLayer(tileLayers[saveData.profile0.selectedTileLayer]);
         })
     )
     x.push(
