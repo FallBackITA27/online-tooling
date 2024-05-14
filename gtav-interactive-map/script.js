@@ -29,6 +29,10 @@ const constantData = {
 }
 
 async function loadDynamicData() {
+    let temporarySaveData = localStorage.getItem("saveData");
+    if (temporarySaveData != null) saveData = temporarySaveData;
+    localStorage.setItem("saveData", saveData);
+
     let x = [];
     x.push(
         fetch("./assets/figurines.json").then(r=>r.json()).then(r=>genericCollectibleInsert(document.getElementById("actionFiguresDiv"), r, constantData.icons.figurine))
@@ -82,6 +86,7 @@ async function loadDynamicData() {
                 document.getElementById("map").style.background = r.mainMap[newLayer].oceanColor;
             }
 
+            
             document.getElementById("map").style.background = r.mainMap[saveData.profile0.selectedTileLayer].oceanColor;
             map.addLayer(tileLayers[saveData.profile0.selectedTileLayer]);
         })
