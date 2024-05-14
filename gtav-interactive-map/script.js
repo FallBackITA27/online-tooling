@@ -4,12 +4,18 @@ let insertMarkersMode = false;
 let saveData = {
     profile0: {
         selectedTileLayer: "game",
+        lastZoom: 0,
+        lastCoords: [-90, 64.69999694824219],
     }
 }
 
-var map = L.map('map', {
-    center: [-90, 64.69999694824219],
-    zoom: 0,
+let temporarySaveData = localStorage.getItem("saveData");
+if (temporarySaveData != null) saveData = JSON.parse(temporarySaveData);
+saveDataSave();
+
+let map = L.map('map', {
+    center: saveData.profile0.lastCoords,
+    zoom: saveData.profile0.lastZoom,
     inertia: true,
     worldCopyJump: false,
     attributionControl: false
@@ -28,15 +34,25 @@ const constantData = {
     },
 }
 
+map.on("zoomend", function (e) {
+    let x = map.getCenter();
+    saveData.profile0.lastCoords = [x.lat.toFixed(6), x.lng.toFixed(6)];
+    saveData.profile0.lastZoom = map.getZoom();
+    saveDataSave();
+});
+
+map.on("moveend", function(e) {
+    let x = map.getCenter();
+    saveData.profile0.lastCoords = [x.lat.toFixed(6), x.lng.toFixed(6)];
+    saveDataSave();
+});
+
 function saveDataSave() {
+    console.log(saveData);
     localStorage.setItem("saveData", JSON.stringify(saveData));
 }
 
 async function loadDynamicData() {
-    let temporarySaveData = localStorage.getItem("saveData");
-    if (temporarySaveData != null) saveData = JSON.parse(temporarySaveData);
-    saveDataSave();
-
     let x = [];
     x.push(
         fetch("./assets/figurines.json").then(r=>r.json()).then(r=>genericCollectibleInsert(document.getElementById("actionFiguresDiv"), r, constantData.icons.figurine))
