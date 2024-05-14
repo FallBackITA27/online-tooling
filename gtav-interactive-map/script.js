@@ -4,8 +4,8 @@ let insertMarkersMode = false;
 let saveData = {
     profile0: {
         selectedTileLayer: "game",
-        lastZoom: 0,
-        lastCoords: [-90, 64.69999694824219],
+        lastZoom: 2,
+        lastCoords: [38.959409, -75.410156],
         heistData: {
             casinoHeist: {
                 startDate: false
@@ -69,7 +69,9 @@ let map = L.map('map', {
     zoom: saveData.profile0.lastZoom,
     inertia: true,
     worldCopyJump: false,
-    attributionControl: false
+    attributionControl: false,
+    maxZoom: 7,
+    minZoom: 0,
 });
 
 const constantData = {
@@ -87,14 +89,14 @@ const constantData = {
 
 map.on("zoomend", function (e) {
     let x = map.getCenter();
-    saveData.profile0.lastCoords = [x.lat.toFixed(6), x.lng.toFixed(6)];
+    saveData.profile0.lastCoords = [parseFloat(x.lat.toFixed(6)), parseFloat(x.lng.toFixed(6))];
     saveData.profile0.lastZoom = map.getZoom();
     saveDataSave();
 });
 
 map.on("moveend", function(e) {
     let x = map.getCenter();
-    saveData.profile0.lastCoords = [x.lat.toFixed(6), x.lng.toFixed(6)];
+    saveData.profile0.lastCoords = [parseFloat(x.lat.toFixed(6)), parseFloat(x.lng.toFixed(6))];
     saveDataSave();
 });
 
@@ -131,19 +133,31 @@ async function loadDynamicData() {
         fetch("./assets/mapStyle.json").then(r=>r.json()).then(r=>{
             let tileLayers = {
                 render: L.tileLayer(r.mainMap.render.url, {
-                    maxZoom: r.mainMap.render.maxZoom,
-                    minZoom: r.mainMap.render.minZoom,
+                    maxNativeZoom: r.mainMap.render.maxNativeZoom,
+                    maxZoom: r.mainMap.render.maxNativeZoom,
+                    minNativeZoom: r.mainMap.render.minNativeZoom,
+                    minZoom: r.mainMap.render.minNativeZoom,
+                    keepBuffer: 4,
                     noWrap: true,
+                    updateWhenIdle: true,
                 }),
                 game: L.tileLayer(r.mainMap.game.url, {
-                    maxZoom: r.mainMap.game.maxZoom,
-                    minZoom: r.mainMap.game.minZoom,
+                    maxNativeZoom: r.mainMap.game.maxNativeZoom,
+                    maxZoom: r.mainMap.game.maxNativeZoom,
+                    minNativeZoom: r.mainMap.game.minNativeZoom,
+                    minZoom: r.mainMap.game.minNativeZoom,
+                    keepBuffer: 4,
                     noWrap: true,
+                    updateWhenIdle: true,
                 }),
                 print: L.tileLayer(r.mainMap.print.url, {
-                    maxZoom: r.mainMap.print.maxZoom,
-                    minZoom: r.mainMap.print.minZoom,
+                    maxNativeZoom: r.mainMap.print.maxNativeZoom ,
+                    maxZoom: r.mainMap.print.maxNativeZoom,
+                    minNativeZoom: r.mainMap.print.minNativeZoom,
+                    minZoom: r.mainMap.print.minNativeZoom,
+                    keepBuffer: 4,
                     noWrap: true,
+                    updateWhenIdle: true,
                 }),
             }
 
@@ -153,17 +167,17 @@ async function loadDynamicData() {
                 btn.addEventListener("click",function(e){
                     let sl = saveData.profile0.selectedTileLayer;
                     if (sl === e.target.value) return;
-                    map.removeLayer(tileLayers[sl]);
+                    tileLayers[sl].remove();
                     saveData.profile0.selectedTileLayer = e.target.value;
                     saveDataSave();
-                    map.addLayer(tileLayers[e.target.value]);
+                    tileLayers[e.target.value].addTo(map);
                     document.getElementById("map").style.background = r.mainMap[e.target.value].oceanColor;
                 });
                 if (saveData.profile0.selectedTileLayer == btn.value) btn.click();
             })
 
             document.getElementById("map").style.background = r.mainMap[saveData.profile0.selectedTileLayer].oceanColor;
-            map.addLayer(tileLayers[saveData.profile0.selectedTileLayer]);
+            tileLayers[saveData.profile0.selectedTileLayer].addTo(map);
         })
     )
     x.push(
