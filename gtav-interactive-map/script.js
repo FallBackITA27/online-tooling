@@ -6,6 +6,14 @@ let saveData = {
         selectedTileLayer: "game",
         lastZoom: 0,
         lastCoords: [-90, 64.69999694824219],
+        heistData: {
+            casinoHeist: {
+                startDate: false
+            },
+            cayoPericoHeist: {
+                startDate: false
+            }
+        }
     }
 }
 
@@ -19,6 +27,36 @@ if (temporarySaveDataStr != null) {
 
 }
 saveDataSave();
+
+document.getElementById("casinoHeistStart").addEventListener("click", function() {
+    saveData.profile0.heistData.casinoHeist.startDate = (+ new Date());
+    saveDataSave();
+    Notification.requestPermission();
+})
+document.getElementById("cayoPericoHeistStart").addEventListener("click", function() {
+    saveData.profile0.heistData.cayoPericoHeist.startDate = (+ new Date());
+    saveDataSave();
+    Notification.requestPermission();
+})
+
+setInterval(async function() {
+    function genericTimer(heistData, currentTime, progressBarElement, notifString, cooldown = 2880000) {
+        if (heistData.startDate !== false) {
+            if ((heistData.startDate + cooldown) < currentTime) {
+                new Notification(notifString);
+                progressBarElement.value = cooldown;
+                heistData.startDate = false;
+            } else {
+                progressBarElement.value = currentTime - heistData.startDate;
+            }
+            progressBarElement.innerHTML = `${Math.floor((cooldown - progressBarElement.value) / 1000)} Seconds left`;
+        }
+    }
+
+    let currentTime = (+ new Date());
+    genericTimer(saveData.profile0.heistData.casinoHeist, currentTime, document.getElementById("casinoHeistProgressBar"), "Your Casino Heist is ready.");
+    genericTimer(saveData.profile0.heistData.cayoPericoHeist, currentTime, document.getElementById("cayoPericoHeistProgressBar"), "Your Cayo Perico Heist is ready.", 8640000);
+}, 500);
 
 let map = L.map('map', {
     center: saveData.profile0.lastCoords,

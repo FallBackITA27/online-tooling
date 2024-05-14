@@ -44,6 +44,7 @@
                         </li>
                     </ol>
                 </li>
+                <li><a href="#tools">Tools</a></li>
                 <li><a href="#settings">Settings</a></li>
                 <li><a href="#changelog">Changelog</a></li>
                 <li><a href="#faq">FAQ</a></li>
@@ -89,6 +90,7 @@
         <hr>
         <div id="settings"></div>
         <h2>Settings</h2>
+        <hr class="fifty">
         <h3>Use different map style</h3>
         <div id="mapStyleRadioButtons">
             <div>
@@ -103,6 +105,27 @@
                 <label for="print">Manual Map</label>
                 <input type="radio" value="print" name="mapStyle" class="mapStyle">
             </div>
+        </div>
+        <hr>
+        <div id="tools"></div>
+        <h2>Tools</h2>
+        <hr class="fifty">
+        <h3>Diamond Casino Heist Timer</h3>
+        <div>
+            <p>Click this at the end of the Heist to know when you'll be able to repeat it.</p>
+            <label>
+                Timer: <progress id="casinoHeistProgressBar" max="2880000" value="2880000"></progress>
+            </label>
+            <button id="casinoHeistStart">Start Timer</button>
+        </div>
+        <hr class="fifty">
+        <h3>Cayo Perico Heist Timer</h3>
+        <div>
+            <p>Click this at the end of the Heist to know when you'll be able to repeat it.</p>
+            <label>
+                Timer: <progress id="cayoPericoHeistProgressBar" max="8640000" value="8640000"></progress>
+            </label>
+            <button id="cayoPericoHeistStart">Start Timer</button>
         </div>
         <hr>
         <div id="changelog"></div>
