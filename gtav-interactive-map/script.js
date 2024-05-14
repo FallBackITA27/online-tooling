@@ -49,7 +49,13 @@ setInterval(async function() {
             } else {
                 progressBarElement.value = currentTime - heistData.startDate;
             }
-            progressBarElement.innerHTML = `${Math.floor((cooldown - progressBarElement.value) / 1000)} Seconds left`;
+            let sec = Math.floor((cooldown - progressBarElement.value) / 1000);
+            let hrs = Math.trunc(sec / 3600);
+            sec %= 3600;
+            let min = Math.trunc(sec / 60);
+            sec %= 60;
+            progressBarElement.innerHTML = `${hrs.toString().padStart(1, "0")}hrs ${min.toString().padStart(2, "0")}min ${sec.toString().padStart(2, "0")}sec left`;
+            progressBarElement.title = progressBarElement.innerHTML;
         }
     }
 
