@@ -1,6 +1,8 @@
 // true false;
 let insertMarkersMode = false;
 
+if (window.location.href.includes("#")) document.getElementById("gui_toggle_button_div");
+
 let saveData = {
     profile0: {
         selectedTileLayer: "game",
