@@ -4,7 +4,9 @@ body {
     padding: 0;
 }
 
-html, body, #map {
+html,
+body,
+#map {
     height: 100%;
     width: 100vw;
 }
@@ -37,9 +39,9 @@ a {
     left: 0;
     display: none;
     z-index: 2147483647;
-    animation: fadeInFromNone .1s;
+    animation: fadeInFromNone 0.1s;
     display: none;
-    background-color: rgb(19, 19, 19, .9);
+    background-color: rgb(19, 19, 19, 0.9);
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -47,7 +49,7 @@ a {
 
 #videoplayer.s {
     display: flex;
-    animation: fadeInFromNone .1s;
+    animation: fadeInFromNone 0.1s;
 }
 
 #player {
@@ -61,12 +63,12 @@ a {
     height: calc(98% - 8px);
     width: calc(99vw - 8px);
     top: 1%;
-    left: .5vw;
+    left: 0.5vw;
     margin: 0;
     z-index: 2147483645;
     display: none;
     opacity: 0;
-    background: rgb(19, 19, 19, .95);
+    background: rgb(19, 19, 19, 0.95);
     padding: 4px;
     border-radius: 10px;
     text-align: center;
@@ -75,7 +77,7 @@ a {
 }
 
 #popupgui.s {
-    animation: fadeInFromNone .1s;
+    animation: fadeInFromNone 0.1s;
     opacity: 1;
     display: block;
 }
@@ -103,31 +105,31 @@ a {
     width: auto;
     max-width: 24px;
     bottom: 1%;
-    left: .5vw;
+    left: 0.5vw;
     z-index: 2147483646;
-    background: rgb(19, 19, 19, .99);
+    background: rgb(19, 19, 19, 0.99);
     padding: 4px;
     border-radius: 10px;
     display: flex;
     gap: 7px;
-    transition: all .2s linear;
+    transition: all 0.2s linear;
     overflow-x: hidden;
     cursor: pointer;
 }
 
 #gui_toggle_button_div:hover {
-    transition: all .2s linear;
+    transition: all 0.2s linear;
     max-width: 100px;
 }
 
 #gui_toggle_button {
     transform: rotate(180deg);
-    transition: .1s all linear;
+    transition: 0.1s all linear;
 }
 
 #gui_toggle_button.s {
     transform: rotate(0deg);
-    transition: .1s all linear;
+    transition: 0.1s all linear;
 }
 
 hr {
@@ -144,12 +146,10 @@ hr.twentyfive {
     width: 25%;
 }
 
-
 div.custom-ol {
     display: flex;
     align-items: center;
     flex-direction: column;
-
 }
 
 div.custom-ol > ol {
@@ -168,4 +168,15 @@ ul {
 #mapStyleRadioButtons {
     display: flex;
     flex-direction: column;
+}
+
+.figurine {
+    background-image: url("gtavIcons/figurine.svg");
+}
+.collectible.completed::after {
+    content: url("websiteIcons/verified.svg");
+    height: 11px;
+    aspect-ratio: 1/1;
+    display: inline-block;
+    opacity: .8;
 }

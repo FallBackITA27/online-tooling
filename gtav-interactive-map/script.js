@@ -29,7 +29,6 @@ saveDataSave();
 let player;
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
-        videoId: 'M7lc1UVf-VE',
         playerVars: {
             autoplay: 1,
             enablejsapi: 1,
@@ -95,12 +94,12 @@ let map = L.map('map', {
 
 const constantData = {
     icons: {
-        figurine: L.icon({
-            iconUrl: 'gtavIcons/figurine.svg',
+        figurine: L.divIcon({
+            className: 'collectible figurine',
             iconSize: [22,22]
         }),
-        building: L.icon({
-            iconUrl: 'gtavIcons/building.svg',
+        building: L.divIcon({
+            className: 'building',
             iconSize: [22,22]
         }),
     },
@@ -264,6 +263,9 @@ L.imageOverlay('overlayedMapItems/fortZancudo.svg', [[63.5, -154.7], [55.1, -128
 async function genericCollectibleInsert(parentDiv, array, icon, showAllButton, hideAllButton, showCompletedButton, hideCompletedButton, completionSetName, lastPickVarName) {
     let onMapMarkers = [];
     for (let i = 0; i < array.length; i++) {
+        let actualMarker = L.marker(array[i].coords, { icon: icon, title: array[i].display_name });
+        onMapMarkers.push(actualMarker);
+
         let hr = document.createElement("hr");
         hr.classList.add("twentyfive");
         parentDiv.append(hr);
@@ -291,8 +293,22 @@ async function genericCollectibleInsert(parentDiv, array, icon, showAllButton, h
         markAsCompleteBtn.addEventListener("click", e=>{
             if (e.target.checked) {
                 saveData[completionSetName].add(i);
+                if (saveData[lastPickVarName] === "showCompleted") {
+                    if (!map.hasLayer(actualMarker)) actualMarker.addTo(map);
+                } else if (saveData[lastPickVarName] === "hideCompleted") {
+                    if (map.hasLayer(actualMarker)) actualMarker.remove();
+                    return;
+                }
+                if (map.hasLayer(actualMarker)) actualMarker._icon.classList.add("completed");
             } else {
                 saveData[completionSetName].delete(i);
+                if (saveData[lastPickVarName] === "showCompleted") {
+                    if (map.hasLayer(actualMarker)) actualMarker.remove();
+                    return;
+                } else if (saveData[lastPickVarName] === "hideCompleted") {
+                    if (!map.hasLayer(actualMarker)) actualMarker.addTo(map);
+                }
+                if (map.hasLayer(actualMarker)) actualMarker._icon.classList.remove("completed");
             }
             saveDataSave();
         });
@@ -309,14 +325,9 @@ async function genericCollectibleInsert(parentDiv, array, icon, showAllButton, h
         parentDiv.append(video);
         parentDiv.append(document.createElement("br"));
 
-        let actualMarker = L.marker(array[i].coords, { icon: icon, title: array[i].display_name });
-        onMapMarkers.push(actualMarker);
-
         let zoom = document.createElement("button");
         zoom.innerHTML = "Zoom to Marker";
         zoom.addEventListener("click", function() {
-            console.log(actualMarker);
-            console.log(array[i]);
             document.getElementById("gui_toggle_button_div").click();
             map.setView(array[i].coords, 7);
             if (!map.hasLayer(actualMarker)) actualMarker.addTo(map);
@@ -332,18 +343,27 @@ async function genericCollectibleInsert(parentDiv, array, icon, showAllButton, h
 
     showAllButton.addEventListener("click", ()=>{
         saveData[lastPickVarName] = "showAll";
-        for (let marker of onMapMarkers) if (!map.hasLayer(marker)) marker.addTo(map);
+        saveDataSave();
+        let i = 0;
+        for (let marker of onMapMarkers) {
+            if (!map.hasLayer(marker)) marker.addTo(map);
+            if (saveData[completionSetName].has(i)) marker._icon.classList.add("completed");
+            i++;
+        }
     });
     hideAllButton.addEventListener("click", ()=>{
         saveData[lastPickVarName] = "hideAll";
+        saveDataSave();
         for (let marker of onMapMarkers) if (map.hasLayer(marker)) marker.remove();
     });
     showCompletedButton.addEventListener("click", ()=>{
         saveData[lastPickVarName] = "showCompleted";
+        saveDataSave();
         let i = 0;
         for (let marker of onMapMarkers) {
             if (saveData[completionSetName].has(i)) {
                 if (!map.hasLayer(marker)) marker.addTo(map);
+                marker._icon.classList.add("completed");
             } else {
                 marker.remove();
             }
@@ -352,6 +372,7 @@ async function genericCollectibleInsert(parentDiv, array, icon, showAllButton, h
     });
     hideCompletedButton.addEventListener("click", ()=>{
         saveData[lastPickVarName] = "hideCompleted";
+        saveDataSave();
         let i = 0;
         for (let marker of onMapMarkers) {
             if (!saveData[completionSetName].has(i)) {
