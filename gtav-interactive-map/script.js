@@ -2,39 +2,39 @@
 let insertMarkersMode = false;
 
 let saveData = {
-    profile0: {
-        selectedTileLayer: "game",
-        lastZoom: 2,
-        lastCoords: [38.959409, -75.410156],
-        heistData: {
-            casinoHeist: {
-                startDate: false
-            },
-            cayoPericoHeist: {
-                startDate: false
-            }
+    selectedTileLayer: "game",
+    lastZoom: 2,
+    lastCoords: [38.959409, -75.410156],
+    heistData: {
+        casinoHeist: {
+            startDate: false
+        },
+        cayoPericoHeist: {
+            startDate: false
         }
-    }
+    },
+    completionDataFigurines: new Set(),
+    completionDataLastPickFigurines: "hideAll",
 }
 
 let temporarySaveDataStr = localStorage.getItem("saveData");
 if (temporarySaveDataStr != null) {
-    let temporarySaveData = JSON.parse(temporarySaveDataStr);
-    for (key in saveData.profile0)
-        if (temporarySaveData.profile0[key] == null)
-            temporarySaveData.profile0[key] = saveData.profile0[key];
-    saveData = temporarySaveData;
+    let temporarySaveData = JSON.parse(temporarySaveDataStr, (key, value) => (["completionDataFigurines"].includes(key) ? new Set(value) : value));
+    for (key in saveData)
+        if (temporarySaveData[key] == null)
+            temporarySaveData[key] = saveData[key];
 
+    saveData = temporarySaveData;
 }
 saveDataSave();
 
 document.getElementById("casinoHeistStart").addEventListener("click", function() {
-    saveData.profile0.heistData.casinoHeist.startDate = (+ new Date());
+    saveData.heistData.casinoHeist.startDate = (+ new Date());
     saveDataSave();
     Notification.requestPermission();
 })
 document.getElementById("cayoPericoHeistStart").addEventListener("click", function() {
-    saveData.profile0.heistData.cayoPericoHeist.startDate = (+ new Date());
+    saveData.heistData.cayoPericoHeist.startDate = (+ new Date());
     saveDataSave();
     Notification.requestPermission();
 })
@@ -61,13 +61,13 @@ setInterval(async function() {
     }
 
     let currentTime = (+ new Date());
-    genericTimer(saveData.profile0.heistData.casinoHeist, currentTime, document.getElementById("casinoHeistProgressBar"), "Your Casino Heist is ready.");
-    genericTimer(saveData.profile0.heistData.cayoPericoHeist, currentTime, document.getElementById("cayoPericoHeistProgressBar"), "Your Cayo Perico Heist is ready.", 8640000);
+    genericTimer(saveData.heistData.casinoHeist, currentTime, document.getElementById("casinoHeistProgressBar"), "Your Casino Heist is ready.");
+    genericTimer(saveData.heistData.cayoPericoHeist, currentTime, document.getElementById("cayoPericoHeistProgressBar"), "Your Cayo Perico Heist is ready.", 8640000);
 }, 500);
 
 let map = L.map('map', {
-    center: saveData.profile0.lastCoords,
-    zoom: saveData.profile0.lastZoom,
+    center: saveData.lastCoords,
+    zoom: saveData.lastZoom,
     inertia: true,
     worldCopyJump: false,
     attributionControl: false,
@@ -92,14 +92,14 @@ const constantData = {
 
 map.on("zoomend", function (e) {
     let x = map.getCenter();
-    saveData.profile0.lastCoords = [parseFloat(x.lat.toFixed(6)), parseFloat(x.lng.toFixed(6))];
-    saveData.profile0.lastZoom = map.getZoom();
+    saveData.lastCoords = [parseFloat(x.lat.toFixed(6)), parseFloat(x.lng.toFixed(6))];
+    saveData.lastZoom = map.getZoom();
     saveDataSave();
 });
 
 map.on("moveend", function(e) {
     let x = map.getCenter();
-    saveData.profile0.lastCoords = [parseFloat(x.lat.toFixed(6)), parseFloat(x.lng.toFixed(6))];
+    saveData.lastCoords = [parseFloat(x.lat.toFixed(6)), parseFloat(x.lng.toFixed(6))];
     saveDataSave();
 });
 
@@ -110,13 +110,13 @@ document.getElementById("gui_toggle_button_div").addEventListener("click", funct
 
 function saveDataSave() {
     console.log(saveData);
-    localStorage.setItem("saveData", JSON.stringify(saveData));
+    localStorage.setItem("saveData", JSON.stringify(saveData, (_key, value) => (value instanceof Set ? [...value] : value)));
 }
 
 async function loadDynamicData() {
     let x = [];
     x.push(
-        fetch("./assets/figurines.json").then(r=>r.json()).then(r=>genericCollectibleInsert(document.getElementById("actionFiguresDiv"), r, constantData.icons.figurine, document.getElementById("markers-collectibles-show-all-btn"), document.getElementById("markers-collectibles-hide-all-btn"), document.getElementById("markers-collectibles-show-completed-btn"), document.getElementById("markers-collectibles-hide-completed-btn")))
+        fetch("./assets/figurines.json").then(r=>r.json()).then(r=>genericCollectibleInsert(document.getElementById("actionFiguresDiv"),r,constantData.icons.figurine,document.getElementById("markers-collectibles-show-all-btn"),document.getElementById("markers-collectibles-hide-all-btn"),document.getElementById("markers-collectibles-show-completed-btn"), document.getElementById("markers-collectibles-hide-completed-btn"),"completionDataFigurines","completionDataLastPickFigurines"))
     );
     // x.push(
     //     fetch("./assets/buildings.json").then(r=>r.json()).then(r=>{
@@ -168,19 +168,19 @@ async function loadDynamicData() {
 
             mapStyleClassElements.forEach(function(btn){
                 btn.addEventListener("click",function(e){
-                    let sl = saveData.profile0.selectedTileLayer;
+                    let sl = saveData.selectedTileLayer;
                     if (sl === e.target.value) return;
                     tileLayers[sl].remove();
-                    saveData.profile0.selectedTileLayer = e.target.value;
+                    saveData.selectedTileLayer = e.target.value;
                     saveDataSave();
                     tileLayers[e.target.value].addTo(map);
                     document.getElementById("map").style.background = r.mainMap[e.target.value].oceanColor;
                 });
-                if (saveData.profile0.selectedTileLayer == btn.value) btn.click();
+                if (saveData.selectedTileLayer == btn.value) btn.click();
             })
 
-            document.getElementById("map").style.background = r.mainMap[saveData.profile0.selectedTileLayer].oceanColor;
-            tileLayers[saveData.profile0.selectedTileLayer].addTo(map);
+            document.getElementById("map").style.background = r.mainMap[saveData.selectedTileLayer].oceanColor;
+            tileLayers[saveData.selectedTileLayer].addTo(map);
         })
     )
     x.push(
@@ -245,9 +245,10 @@ document.getElementById("videoplayer").addEventListener("click", function(e) {
     e.target.classList.remove("s");
 });
 
-async function genericCollectibleInsert(parentDiv, array, icon, showAllButton, hideAllButton, showCompletedButton, hideCompletedButton) {
+async function genericCollectibleInsert(parentDiv, array, icon, showAllButton, hideAllButton, showCompletedButton, hideCompletedButton, completionSetName, lastPickVarName) {
     let onMapMarkers = [];
-    for (let marker of array) {
+    for (let i = 0; i < array.length; i++) {
+        marker = array[i];
         let hr = document.createElement("hr");
         hr.classList.add("twentyfive");
         parentDiv.append(hr);
@@ -264,6 +265,26 @@ async function genericCollectibleInsert(parentDiv, array, icon, showAllButton, h
         description.innerHTML = marker.description;
         parentDiv.append(description);
 
+        let label = document.createElement("label");
+        label.for = "check";
+        label.innerHTML = "Completed?";
+        parentDiv.append(label);
+
+        let markAsCompleteBtn = document.createElement("input");
+        markAsCompleteBtn.name = "check";
+        markAsCompleteBtn.type = "checkbox";
+        markAsCompleteBtn.addEventListener("click", e=>{
+            if (e.target.checked) {
+                saveData[completionSetName].add(i);
+            } else {
+                saveData[completionSetName].delete(i);
+            }
+            saveDataSave();
+        });
+        markAsCompleteBtn.checked = saveData[completionSetName].has(i);
+        parentDiv.append(markAsCompleteBtn);
+        parentDiv.append(document.createElement("br"));
+
         let video = document.createElement("button");
         video.innerHTML = "Video";
         video.addEventListener("click", function() {
@@ -271,6 +292,7 @@ async function genericCollectibleInsert(parentDiv, array, icon, showAllButton, h
             document.getElementById("videoplayer").classList.add("s");
         })
         parentDiv.append(video);
+        parentDiv.append(document.createElement("br"));
 
         let actualMarker = L.marker(marker.coords, { icon: icon, title: marker.display_name });
         onMapMarkers.push(actualMarker);
@@ -291,8 +313,45 @@ async function genericCollectibleInsert(parentDiv, array, icon, showAllButton, h
         });
     }
 
-    showAllButton.addEventListener("click", ()=>{for (let marker of onMapMarkers) if (!map.hasLayer(marker)) marker.addTo(map)});
-    hideAllButton.addEventListener("click", ()=>{for (let marker of onMapMarkers) if (map.hasLayer(marker)) marker.remove()});
+    showAllButton.addEventListener("click", ()=>{
+        for (let marker of onMapMarkers) if (!map.hasLayer(marker)) marker.addTo(map);
+    });
+    hideAllButton.addEventListener("click", ()=>{
+        for (let marker of onMapMarkers) if (map.hasLayer(marker)) marker.remove();
+    });
+    showCompletedButton.addEventListener("click", ()=>{
+        let i = 0;
+        for (let marker of onMapMarkers) {
+            i++;
+            if (saveData[completionSetName].has(i)) {
+                if (!map.hasLayer(marker)) marker.addTo(map);
+            } else {
+                marker.remove();
+            }
+        }
+    });
+    hideCompletedButton.addEventListener("click", ()=>{
+        let i = 0;
+        for (let marker of onMapMarkers) {
+            i++;
+            if (!saveData[completionSetName].has(i)) {
+                if (!map.hasLayer(marker)) marker.addTo(map);
+            } else {
+                marker.remove();
+            }
+        }
+    });
+
+    let lastPick = saveData[lastPickVarName];
+    if (lastPick === "showAll") {
+        showAllButton.click();
+    } else if (lastPick === "hideAll") {
+        hideAllButton.click();
+    } else if (lastPick === "showCompleted") {
+        showCompletedButton.click();
+    } else if (lastPick === "hideCompleted") {
+        hideCompletedButton.click();
+    }
 }
 
 /*
