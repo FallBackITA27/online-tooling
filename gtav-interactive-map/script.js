@@ -328,7 +328,7 @@ async function genericCollectibleInsert(parentDiv, array, icon, showAllButton, h
         actualMarker.on("click",function(e) {
             document.getElementById("gui_toggle_button_div").click();
             linkDiv.scrollIntoView();
-            map.setView(marker.coords, 6);
+            map.setView(array[i].coords, 6);
         });
     }
 
