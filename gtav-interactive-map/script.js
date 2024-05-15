@@ -2,7 +2,7 @@
 let insertMarkersMode = false;
 
 let saveData = {
-    version: "0.1.0",
+    version: "0.1.1",
     selectedTileLayer: "game",
     lastZoom: 2,
     lastCoords: [38.959409, -75.410156],
@@ -12,6 +12,8 @@ let saveData = {
     cayoPericoHeist: {
         startDate: false,
     },
+    blCountyShow: false,
+    lsCountyShow: false,
     completionDataFigurines: new Set(),
     completionDataLastPickFigurines: "hideAll",
 };
@@ -22,8 +24,16 @@ function loadInSaveData(dataStr) {
             ["completionDataFigurines"].includes(key) ? new Set(value) : value
         );
         if (temporarySaveData.version !== saveData.version) {
-            if (temporarySaveData.version === undefined) { // Save data pre-0.1.0 had no tag, there is no way to save it at this point.
+            if (temporarySaveData.version == undefined) { // Save data pre-0.1.0 had no tag, there is no way to save it at this point.
                 return;
+            }
+            if (temporarySaveData.version === "0.1.0") {
+                temporarySaveData.version = "0.1.1";
+                temporarySaveData.blCountyShow = false;
+                temporarySaveData.lsCountyShow = false;
+            }
+            if (temporarySaveData.version === "0.1.1") {
+                // Current version
             }
             // Here you check the version tag in the savedata and modify it to match the data right after - this way old save data will not be lost.
         }
