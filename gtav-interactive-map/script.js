@@ -28,6 +28,24 @@ if (temporarySaveDataStr != null) {
 }
 saveDataSave();
 
+let player;
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+        videoId: 'M7lc1UVf-VE',
+        playerVars: {
+            autoplay: 1,
+            enablejsapi: 1,
+            rel: 0,
+            playsinline: 1,
+            origin: window.location.origin
+        },
+        events: {
+            onReady: loadDynamicData
+        }
+    });
+
+}
+
 document.getElementById("casinoHeistStart").addEventListener("click", function() {
     saveData.heistData.casinoHeist.startDate = (+ new Date());
     saveDataSave();
@@ -114,6 +132,11 @@ function saveDataSave() {
 }
 
 async function loadDynamicData() {
+    document.getElementById("videoplayer").addEventListener("click", function(e) {
+        e.target.classList.remove("s");
+        player.stopVideo();
+    });
+
     let x = [];
     x.push(
         fetch("./assets/figurines.json").then(r=>r.json()).then(r=>genericCollectibleInsert(document.getElementById("actionFiguresDiv"),r,constantData.icons.figurine,document.getElementById("markers-collectibles-show-all-btn"),document.getElementById("markers-collectibles-hide-all-btn"),document.getElementById("markers-collectibles-show-completed-btn"), document.getElementById("markers-collectibles-hide-completed-btn"),"completionDataFigurines","completionDataLastPickFigurines"))
@@ -217,12 +240,11 @@ async function loadDynamicData() {
     );
 
     for (let handle of x) await handle;
-    if (window.location.href.includes("#")) {
+    if (window.location.hash !== "") {
         document.getElementById("gui_toggle_button_div").click();
-        document.getElementById(window.location.href.split("#")[1]).scrollIntoView();
+        document.getElementById(window.location.hash.split("#")[1]).scrollIntoView();
     }
 }
-loadDynamicData();
 
 async function addSVGOverlay(url, coords) {
     let test = document.createElement('html');
@@ -240,10 +262,6 @@ addSVGOverlay('overlayedMapItems/ship.svg', [[-41.43, -72.9], [-44.05, -71.9]]);
 addSVGOverlay('overlayedMapItems/vespucciBeachSewer.svg', [[-1.755, -132.3], [-9.7, -121.755]]);
 // addSVGOverlay('overlayedMapItems/fortZancudo.svg', [[63.5, -154.7], [55.1, -128.5]]);
 L.imageOverlay('overlayedMapItems/fortZancudo.svg', [[63.5, -154.7], [55.1, -128.5]]).addTo(map); // I don't get this bs.
-
-document.getElementById("videoplayer").addEventListener("click", function(e) {
-    e.target.classList.remove("s");
-});
 
 async function genericCollectibleInsert(parentDiv, array, icon, showAllButton, hideAllButton, showCompletedButton, hideCompletedButton, completionSetName, lastPickVarName) {
     let onMapMarkers = [];
@@ -288,7 +306,7 @@ async function genericCollectibleInsert(parentDiv, array, icon, showAllButton, h
         let video = document.createElement("button");
         video.innerHTML = "Video";
         video.addEventListener("click", function() {
-            document.getElementById("videoplayeriframe").src = marker.video_url;
+            player.loadVideoById({videoId: marker.video_id, startSeconds: marker.video_timestamp})
             document.getElementById("videoplayer").classList.add("s");
         })
         parentDiv.append(video);

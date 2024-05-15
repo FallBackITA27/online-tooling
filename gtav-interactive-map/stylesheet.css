@@ -50,7 +50,7 @@ a {
     animation: fadeInFromNone .1s;
 }
 
-#videoplayeriframe {
+#player {
     aspect-ratio: 16/9;
     max-width: 100%;
     min-width: 50%;
