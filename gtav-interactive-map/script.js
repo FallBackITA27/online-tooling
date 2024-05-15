@@ -345,13 +345,15 @@ async function loadDynamicData() {
                         "markers-locations-counties-blaine-show-btn"
                     )
                     .addEventListener("click", function () {
-                        map.addLayer(blCountyPolygon);
+                        blCountyPolygon.addTo(map);
+                        saveData.blCountyShow = true;
                     });
 
                 document
                     .getElementById("markers-locations-counties-ls-show-btn")
                     .addEventListener("click", function () {
-                        map.addLayer(lsCountyPolygon);
+                        lsCountyPolygon.addTo(map);
+                        saveData.lsCountyShow = true;
                     });
 
                 document
@@ -359,27 +361,37 @@ async function loadDynamicData() {
                         "markers-locations-counties-blaine-hide-btn"
                     )
                     .addEventListener("click", function () {
-                        map.removeLayer(blCountyPolygon);
+                        blCountyPolygon.remove();
+                        saveData.blCountyShow = false;
                     });
 
                 document
                     .getElementById("markers-locations-counties-ls-hide-btn")
                     .addEventListener("click", function () {
-                        map.removeLayer(lsCountyPolygon);
+                        lsCountyPolygon.remove();
+                        saveData.lsCountyShow = false;
                     });
 
                 document
                     .getElementById("markers-locations-counties-show-btn")
                     .addEventListener("click", function () {
-                        map.addLayer(lsCountyPolygon);
-                        map.addLayer(blCountyPolygon);
+                        document
+                    .getElementById("markers-locations-counties-ls-show-btn").click()
+                    document
+                        .getElementById(
+                            "markers-locations-counties-blaine-show-btn"
+                        ).click()
                     });
 
                 document
                     .getElementById("markers-locations-counties-hide-btn")
                     .addEventListener("click", function () {
-                        map.removeLayer(lsCountyPolygon);
-                        map.removeLayer(blCountyPolygon);
+                        document
+                    .getElementById("markers-locations-counties-ls-hide-btn").click()
+                    document
+                        .getElementById(
+                            "markers-locations-counties-blaine-hide-btn"
+                        ).click()
                     });
             })
     );
