@@ -340,23 +340,23 @@ async function genericCollectibleInsert(parentDiv, array, icon, showAllButton, h
     showCompletedButton.addEventListener("click", ()=>{
         let i = 0;
         for (let marker of onMapMarkers) {
-            i++;
             if (saveData[completionSetName].has(i)) {
                 if (!map.hasLayer(marker)) marker.addTo(map);
             } else {
                 marker.remove();
             }
+            i++;
         }
     });
     hideCompletedButton.addEventListener("click", ()=>{
         let i = 0;
         for (let marker of onMapMarkers) {
-            i++;
             if (!saveData[completionSetName].has(i)) {
                 if (!map.hasLayer(marker)) marker.addTo(map);
             } else {
                 marker.remove();
             }
+            i++;
         }
     });
 
