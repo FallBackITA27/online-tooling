@@ -22,7 +22,7 @@ function loadInSaveData(dataStr) {
             ["completionDataFigurines"].includes(key) ? new Set(value) : value
         );
         if (temporarySaveData.version !== saveData.version) {
-            if (temporarySaveData.version === undefined) {
+            if (temporarySaveData.version === undefined) { // Save data pre-0.1.0 had no tag, there is no way to save it at this point.
                 return;
             }
             // Here you check the version tag in the savedata and modify it to match the data right after - this way old save data will not be lost.
