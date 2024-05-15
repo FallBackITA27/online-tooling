@@ -165,6 +165,10 @@ ul {
     list-style-type: disc;
 }
 
+.sig {
+    font-size: small;
+}
+
 #mapStyleRadioButtons {
     display: flex;
     flex-direction: column;
