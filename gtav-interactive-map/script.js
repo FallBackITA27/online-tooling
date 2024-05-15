@@ -266,21 +266,20 @@ L.imageOverlay('overlayedMapItems/fortZancudo.svg', [[63.5, -154.7], [55.1, -128
 async function genericCollectibleInsert(parentDiv, array, icon, showAllButton, hideAllButton, showCompletedButton, hideCompletedButton, completionSetName, lastPickVarName) {
     let onMapMarkers = [];
     for (let i = 0; i < array.length; i++) {
-        marker = array[i];
         let hr = document.createElement("hr");
         hr.classList.add("twentyfive");
         parentDiv.append(hr);
 
         let linkDiv = document.createElement("div");
-        linkDiv.id = "#" + marker.display_name.replaceAll(" ", "-");
+        linkDiv.id = "#" + array[i].display_name.replaceAll(" ", "-");
         parentDiv.append(linkDiv);
 
         let title = document.createElement("h2");
-        title.innerHTML = marker.display_name;
+        title.innerHTML = array[i].display_name;
         parentDiv.append(title);
 
         let description = document.createElement("p");
-        description.innerHTML = marker.description;
+        description.innerHTML = array[i].description;
         parentDiv.append(description);
 
         let label = document.createElement("label");
@@ -306,20 +305,22 @@ async function genericCollectibleInsert(parentDiv, array, icon, showAllButton, h
         let video = document.createElement("button");
         video.innerHTML = "Video";
         video.addEventListener("click", function() {
-            player.loadVideoById({videoId: marker.video_id, startSeconds: marker.video_timestamp})
+            player.loadVideoById({videoId: array[i].video_id, startSeconds: array[i].video_timestamp})
             document.getElementById("videoplayer").classList.add("s");
         })
         parentDiv.append(video);
         parentDiv.append(document.createElement("br"));
 
-        let actualMarker = L.marker(marker.coords, { icon: icon, title: marker.display_name });
+        let actualMarker = L.marker(array[i].coords, { icon: icon, title: array[i].display_name });
         onMapMarkers.push(actualMarker);
 
         let zoom = document.createElement("button");
         zoom.innerHTML = "Zoom to Marker";
         zoom.addEventListener("click", function() {
+            console.log(actualMarker);
+            console.log(array[i]);
             document.getElementById("gui_toggle_button_div").click();
-            map.setView(marker.coords, 7);
+            map.setView(array[i].coords, 7);
             if (!map.hasLayer(actualMarker)) actualMarker.addTo(map);
         })
         parentDiv.append(zoom);
