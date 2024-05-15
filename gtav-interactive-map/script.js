@@ -5,13 +5,11 @@ let saveData = {
     selectedTileLayer: "game",
     lastZoom: 2,
     lastCoords: [38.959409, -75.410156],
-    heistData: {
-        casinoHeist: {
-            startDate: false
-        },
-        cayoPericoHeist: {
-            startDate: false
-        }
+    casinoHeist: {
+        startDate: false
+    },
+    cayoPericoHeist: {
+        startDate: false
     },
     completionDataFigurines: new Set(),
     completionDataLastPickFigurines: "hideAll",
@@ -47,12 +45,12 @@ function onYouTubeIframeAPIReady() {
 }
 
 document.getElementById("casinoHeistStart").addEventListener("click", function() {
-    saveData.heistData.casinoHeist.startDate = (+ new Date());
+    saveData.casinoHeist.startDate = (+ new Date());
     saveDataSave();
     Notification.requestPermission();
 })
 document.getElementById("cayoPericoHeistStart").addEventListener("click", function() {
-    saveData.heistData.cayoPericoHeist.startDate = (+ new Date());
+    saveData.cayoPericoHeist.startDate = (+ new Date());
     saveDataSave();
     Notification.requestPermission();
 })
@@ -79,8 +77,8 @@ setInterval(async function() {
     }
 
     let currentTime = (+ new Date());
-    genericTimer(saveData.heistData.casinoHeist, currentTime, document.getElementById("casinoHeistProgressBar"), "Your Casino Heist is ready.");
-    genericTimer(saveData.heistData.cayoPericoHeist, currentTime, document.getElementById("cayoPericoHeistProgressBar"), "Your Cayo Perico Heist is ready.", 8640000);
+    genericTimer(saveData.casinoHeist, currentTime, document.getElementById("casinoHeistProgressBar"), "Your Casino Heist is ready.");
+    genericTimer(saveData.cayoPericoHeist, currentTime, document.getElementById("cayoPericoHeistProgressBar"), "Your Cayo Perico Heist is ready.", 8640000);
 }, 500);
 
 let map = L.map('map', {
@@ -333,12 +331,15 @@ async function genericCollectibleInsert(parentDiv, array, icon, showAllButton, h
     }
 
     showAllButton.addEventListener("click", ()=>{
+        saveData[lastPickVarName] = "showAll";
         for (let marker of onMapMarkers) if (!map.hasLayer(marker)) marker.addTo(map);
     });
     hideAllButton.addEventListener("click", ()=>{
+        saveData[lastPickVarName] = "hideAll";
         for (let marker of onMapMarkers) if (map.hasLayer(marker)) marker.remove();
     });
     showCompletedButton.addEventListener("click", ()=>{
+        saveData[lastPickVarName] = "showCompleted";
         let i = 0;
         for (let marker of onMapMarkers) {
             if (saveData[completionSetName].has(i)) {
@@ -350,6 +351,7 @@ async function genericCollectibleInsert(parentDiv, array, icon, showAllButton, h
         }
     });
     hideCompletedButton.addEventListener("click", ()=>{
+        saveData[lastPickVarName] = "hideCompleted";
         let i = 0;
         for (let marker of onMapMarkers) {
             if (!saveData[completionSetName].has(i)) {
