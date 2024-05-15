@@ -25,7 +25,7 @@ function loadInSaveData(dataStr) {
             if (temporarySaveData.version === undefined) {
                 return;
             }
-            // Here you check the version tag in the savedata and modify it accordingly to make it match the current save data type.
+            // Here you check the version tag in the savedata and modify it to match the data right after - this way old save data will not be lost.
         }
         saveData = temporarySaveData;
     }
