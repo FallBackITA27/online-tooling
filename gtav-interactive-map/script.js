@@ -351,6 +351,7 @@ async function loadDynamicData() {
                     .addEventListener("click", function () {
                         blCountyPolygon.addTo(map);
                         saveData.blCountyShow = true;
+                        saveDataSave();
                     });
 
                 document
@@ -358,6 +359,7 @@ async function loadDynamicData() {
                     .addEventListener("click", function () {
                         lsCountyPolygon.addTo(map);
                         saveData.lsCountyShow = true;
+                        saveDataSave();
                     });
 
                 document
@@ -367,6 +369,7 @@ async function loadDynamicData() {
                     .addEventListener("click", function () {
                         blCountyPolygon.remove();
                         saveData.blCountyShow = false;
+                        saveDataSave();
                     });
 
                 document
@@ -374,6 +377,7 @@ async function loadDynamicData() {
                     .addEventListener("click", function () {
                         lsCountyPolygon.remove();
                         saveData.lsCountyShow = false;
+                        saveDataSave();
                     });
 
                 document
