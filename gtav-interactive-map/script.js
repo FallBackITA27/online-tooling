@@ -24,7 +24,8 @@ function loadInSaveData(dataStr) {
             ["completionDataFigurines"].includes(key) ? new Set(value) : value
         );
         if (temporarySaveData.version !== saveData.version) {
-            if (temporarySaveData.version == undefined) { // Save data pre-0.1.0 had no tag, there is no way to save it at this point.
+            if (temporarySaveData.version == undefined) {
+                // Save data pre-0.1.0 had no tag, there is no way to save it at this point.
                 return;
             }
             if (temporarySaveData.version === "0.1.0") {
@@ -376,22 +377,30 @@ async function loadDynamicData() {
                     .getElementById("markers-locations-counties-show-btn")
                     .addEventListener("click", function () {
                         document
-                    .getElementById("markers-locations-counties-ls-show-btn").click()
-                    document
-                        .getElementById(
-                            "markers-locations-counties-blaine-show-btn"
-                        ).click()
+                            .getElementById(
+                                "markers-locations-counties-ls-show-btn"
+                            )
+                            .click();
+                        document
+                            .getElementById(
+                                "markers-locations-counties-blaine-show-btn"
+                            )
+                            .click();
                     });
 
                 document
                     .getElementById("markers-locations-counties-hide-btn")
                     .addEventListener("click", function () {
                         document
-                    .getElementById("markers-locations-counties-ls-hide-btn").click()
-                    document
-                        .getElementById(
-                            "markers-locations-counties-blaine-hide-btn"
-                        ).click()
+                            .getElementById(
+                                "markers-locations-counties-ls-hide-btn"
+                            )
+                            .click();
+                        document
+                            .getElementById(
+                                "markers-locations-counties-blaine-hide-btn"
+                            )
+                            .click();
                     });
             })
     );
