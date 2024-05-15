@@ -341,6 +341,9 @@ async function loadDynamicData() {
                     direction: "center",
                 });
 
+                if (saveData.blCountyShow) blCountyPolygon.addTo(map);
+                if (saveData.lsCountyShow) lsCountyPolygon.addTo(map);
+
                 document
                     .getElementById(
                         "markers-locations-counties-blaine-show-btn"
