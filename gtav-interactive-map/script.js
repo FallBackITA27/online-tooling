@@ -2,6 +2,7 @@
 let insertMarkersMode = false;
 
 let saveData = {
+    version: "0.1.0",
     selectedTileLayer: "game",
     lastZoom: 2,
     lastCoords: [38.959409, -75.410156],
@@ -15,16 +16,43 @@ let saveData = {
     completionDataLastPickFigurines: "hideAll",
 }
 
-let temporarySaveDataStr = localStorage.getItem("saveData");
-if (temporarySaveDataStr != null) {
-    let temporarySaveData = JSON.parse(temporarySaveDataStr, (key, value) => (["completionDataFigurines"].includes(key) ? new Set(value) : value));
-    for (key in saveData)
-        if (temporarySaveData[key] == null)
-            temporarySaveData[key] = saveData[key];
-
-    saveData = temporarySaveData;
+function loadInSaveData(dataStr) {
+    if (dataStr != null) {
+        let temporarySaveData = JSON.parse(dataStr, (key, value) => (["completionDataFigurines"].includes(key) ? new Set(value) : value));
+        if (temporarySaveData.version !== saveData.version) {
+            if (temporarySaveData.version === undefined) {
+                return;
+            }
+            // Here you check the version tag in the savedata and modify it accordingly to make it match the current save data type.
+        }
+        saveData = temporarySaveData;
+    }
 }
+loadInSaveData(localStorage.getItem("saveData"));
 saveDataSave();
+
+document.getElementById("backupDataButton").addEventListener("click", function() {
+    saveDataSave();
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(localStorage.getItem("saveData")));
+    element.setAttribute('download', "GTA5InteractiveMapData.json");
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+});
+
+document.getElementById("backupDataFile").addEventListener("change", function(e) {
+    let reader = new FileReader();
+    reader.readAsText(e.target.files[0]);
+    reader.addEventListener("load", function(res) {
+        console.log(res);
+        console.log(res.target.result);
+        loadInSaveData(res.target.result);
+        saveDataSave();
+        window.location.reload();
+    });
+});
 
 let player;
 function onYouTubeIframeAPIReady() {
