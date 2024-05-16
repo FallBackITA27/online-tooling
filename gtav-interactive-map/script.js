@@ -231,7 +231,7 @@ async function loadDynamicData() {
     x.push(
         fetch("./assets/figurines.json")
             .then((r) => r.json())
-            .then((r) =>{
+            .then((r) => {
                 genericCollectibleInsert(
                     document.getElementById("actionFiguresDiv"),
                     r,
@@ -251,7 +251,9 @@ async function loadDynamicData() {
                     "completionDataFigurines",
                     "completionDataLastPickFigurines"
                 );
-                document.getElementById("markers-collectibles-figurines-completion-number").innerHTML = `Completed ${saveData.completionDataFigurines.size}/100`;
+                document.getElementById(
+                    "markers-collectibles-figurines-completion-number"
+                ).innerHTML = `Completed ${saveData.completionDataFigurines.size}/100`;
             })
     );
     // x.push(
