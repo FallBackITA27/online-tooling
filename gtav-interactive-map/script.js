@@ -252,7 +252,7 @@ async function loadDynamicData() {
                     "completionDataLastPickFigurines"
                 );
                 document.getElementById(
-                    "markers-collectibles-figurines-completion-number"
+                    "markers-collectibles-actionfigures-completion-number"
                 ).innerHTML = `Completed ${saveData.completionDataFigurines.size}/100`;
             })
     );
