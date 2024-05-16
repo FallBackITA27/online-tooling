@@ -1,0 +1,63 @@
+{
+    "singleMarker": [
+        {
+        "coords": [1.988126, -117.366943],
+        "description": "Behind the trash can next to Richard Solomon's Office entrance",
+        "image_url": "",
+        "video_id": "Fee75Fz5jRw",
+        "video_timestamp": 78,
+        "display_name": "Meltdown Film Reel"
+      },
+      {
+        "coords": [-13.806075, -95.29541],
+        "description": "Inside the office of the Strip Club",
+        "image_url": "",
+        "video_id": "Fee75Fz5jRw",
+        "video_timestamp": 105,
+        "display_name": "WIFA Award"
+      },
+      {
+        "coords": [12.768946, -77.55249],
+        "description": "Inside the casino's restroom, between two urinals",
+        "image_url": "",
+        "video_id": "Fee75Fz5jRw",
+        "video_timestamp": 149,
+        "display_name": "Indian Headdress"
+      },
+      {
+        "coords": [65.617488, -46.856689],
+        "description": "On the edge of the hippie camp.",
+        "image_url": "",
+        "video_id": "Fee75Fz5jRw",
+        "video_timestamp": 176,
+        "display_name": "Alien Head"
+      },
+      {
+        "coords": [56.872998, -97.976070],
+        "description": "On the front porch of a random house",
+        "image_url": "",
+        "video_id": "Fee75Fz5jRw",
+        "video_timestamp": 203,
+        "display_name": "Mummy Head"
+      },
+      {
+        "coords": [60.962444, -144.18457],
+        "description": "Right inside the tower building of Fort Zancudo",
+        "image_url": "",
+        "video_id": "Fee75Fz5jRw",
+        "video_timestamp": 223,
+        "display_name": "Meltdown Clapperboard"
+      },
+      {
+        "coords": [73.472235, -120.783691],
+        "description": "On the sacrifice rock of the Altruist camp",
+        "image_url": "",
+        "video_id": "Fee75Fz5jRw",
+        "video_timestamp": 243,
+        "display_name": "Monster Mask"
+      }
+    ],
+    "multiMarker": [
+
+    ]
+}

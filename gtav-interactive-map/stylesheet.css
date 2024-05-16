@@ -177,6 +177,10 @@ ul {
 .figurine {
     background-image: url("gtavIcons/figurine.svg");
 }
+
+.movieprop {
+    background-image: url("gtavIcons/movieProp.svg");
+}
 .collectible.completed::after {
     content: url("websiteIcons/verified.svg");
     height: 11px;

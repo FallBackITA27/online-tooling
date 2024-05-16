@@ -1,8 +1,8 @@
 // true false;
-let insertMarkersMode = false;
+let insertMarkersMode = true;
 
 let saveData = {
-    version: "0.1.1",
+    version: "0.1.2",
     selectedTileLayer: "game",
     lastZoom: 2,
     lastCoords: [38.959409, -75.410156],
@@ -15,13 +15,19 @@ let saveData = {
     blCountyShow: false,
     lsCountyShow: false,
     completionDataFigurines: new Set(),
-    completionDataLastPickFigurines: "hideAll",
+    lastPickFigurines: "hideAll",
+    completionDataMovieProps: new Set(),
+    lastPickMovieProps: "hideAll",
 };
 
 function loadInSaveData(dataStr) {
     if (dataStr != null) {
         let temporarySaveData = JSON.parse(dataStr, (key, value) =>
-            ["completionDataFigurines"].includes(key) ? new Set(value) : value
+            ["completionDataFigurines", "completionDataMovieProps"].includes(
+                key
+            )
+                ? new Set(value)
+                : value
         );
         if (temporarySaveData.version !== saveData.version) {
             if (temporarySaveData.version == undefined) {
@@ -34,6 +40,14 @@ function loadInSaveData(dataStr) {
                 temporarySaveData.lsCountyShow = false;
             }
             if (temporarySaveData.version === "0.1.1") {
+                temporarySaveData.version = "0.1.2";
+                temporarySaveData.completionDataMovieProps = new Set();
+                temporarySaveData.lastPickMovieProps = "hideAll";
+                temporarySaveData.lastPickFigurines =
+                    temporarySaveData.completionDataLastPickFigurines;
+                delete temporarySaveData.completionDataLastPickFigurines;
+            }
+            if (temporarySaveData.version === "0.1.2") {
                 // Current version
             }
             // Here you check the version tag in the savedata and modify it to match the data right after - this way old save data will not be lost.
@@ -176,6 +190,10 @@ const constantData = {
             className: "collectible figurine",
             iconSize: [22, 22],
         }),
+        movieProp: L.divIcon({
+            className: "collectible movieprop",
+            iconSize: [22, 22],
+        }),
         building: L.divIcon({
             className: "building",
             iconSize: [22, 22],
@@ -249,11 +267,40 @@ async function loadDynamicData() {
                         "markers-collectibles-actionfigures-hide-completed-btn"
                     ),
                     "completionDataFigurines",
-                    "completionDataLastPickFigurines"
+                    "lastPickFigurines"
                 );
                 document.getElementById(
                     "markers-collectibles-actionfigures-completion-number"
                 ).innerHTML = `Completed ${saveData.completionDataFigurines.size}/100`;
+            })
+    );
+    x.push(
+        fetch("./assets/movieProps.json")
+            .then((r) => r.json())
+            .then((r) => {
+                genericCollectibleInsert(
+                    document.getElementById("moviePropsDiv"),
+                    r.singleMarker,
+                    constantData.icons.movieProp,
+                    document.getElementById(
+                        "markers-collectibles-movieprops-show-all-btn"
+                    ),
+                    document.getElementById(
+                        "markers-collectibles-movieprops-hide-all-btn"
+                    ),
+                    document.getElementById(
+                        "markers-collectibles-movieprops-show-completed-btn"
+                    ),
+                    document.getElementById(
+                        "markers-collectibles-movieprops-hide-completed-btn"
+                    ),
+                    "completionDataMovieProps",
+                    "lastPickMovieProps"
+                );
+                let collectedTotal = saveData.completionDataMovieProps.size;
+                document.getElementById(
+                    "markers-collectibles-movieprops-completion-number"
+                ).innerHTML = `Completed ${collectedTotal}/10`;
             })
     );
     // x.push(
