@@ -237,16 +237,16 @@ async function loadDynamicData() {
                     r,
                     constantData.icons.figurine,
                     document.getElementById(
-                        "markers-collectibles-show-all-btn"
+                        "markers-collectibles-actionfigures-show-all-btn"
                     ),
                     document.getElementById(
-                        "markers-collectibles-hide-all-btn"
+                        "markers-collectibles-actionfigures-hide-all-btn"
                     ),
                     document.getElementById(
-                        "markers-collectibles-show-completed-btn"
+                        "markers-collectibles-actionfigures-show-completed-btn"
                     ),
                     document.getElementById(
-                        "markers-collectibles-hide-completed-btn"
+                        "markers-collectibles-actionfigures-hide-completed-btn"
                     ),
                     "completionDataFigurines",
                     "completionDataLastPickFigurines"
