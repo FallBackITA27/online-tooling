@@ -522,33 +522,48 @@ function completionButtonsDivUpdates(
         saveData[lastPickName] = "showAll";
         saveDataSave();
         let i = 0;
-        for (let marker of onMapMarkers) {
-            if (!map.hasLayer(marker)) marker.addTo(map);
-            if (saveData[completionSetName].has(i))
-                marker._icon.classList.add("completed");
-            i++;
+        for (let markers of onMapMarkers) {
+            if (!(markers instanceof Array)) {
+                markers = [markers];
+            }
+            for (let marker of markers) {
+                if (!map.hasLayer(marker)) marker.addTo(map);
+                if (saveData[completionSetName].has(i))
+                    marker._icon.classList.add("completed");
+                i++;
+            }
         }
     }
 
     function hideAll() {
         saveData[lastPickName] = "hideAll";
         saveDataSave();
-        for (let marker of onMapMarkers)
-            if (map.hasLayer(marker)) marker.remove();
+        for (let markers of onMapMarkers) {
+            if (!(markers instanceof Array)) {
+                markers = [markers];
+            }
+            for (let marker of markers)
+                if (map.hasLayer(marker)) marker.remove();
+        }
     }
 
     function showCompleted() {
         saveData[lastPickName] = "showCompleted";
         saveDataSave();
         let i = 0;
-        for (let marker of onMapMarkers) {
-            if (saveData[completionSetName].has(i)) {
-                if (!map.hasLayer(marker)) marker.addTo(map);
-                marker._icon.classList.add("completed");
-            } else {
-                marker.remove();
+        for (let markers of onMapMarkers) {
+            if (!(markers instanceof Array)) {
+                markers = [markers];
             }
-            i++;
+            for (let marker of markers) {
+                if (saveData[completionSetName].has(i)) {
+                    if (!map.hasLayer(marker)) marker.addTo(map);
+                    marker._icon.classList.add("completed");
+                } else {
+                    marker.remove();
+                }
+                i++;
+            }
         }
     }
 
@@ -556,13 +571,18 @@ function completionButtonsDivUpdates(
         saveData[lastPickName] = "hideCompleted";
         saveDataSave();
         let i = 0;
-        for (let marker of onMapMarkers) {
-            if (!saveData[completionSetName].has(i)) {
-                if (!map.hasLayer(marker)) marker.addTo(map);
-            } else {
-                marker.remove();
+        for (let markers of onMapMarkers) {
+            if (!(markers instanceof Array)) {
+                markers = [markers];
             }
-            i++;
+            for (let marker of markers) {
+                if (!saveData[completionSetName].has(i)) {
+                    if (!map.hasLayer(marker)) marker.addTo(map);
+                } else {
+                    marker.remove();
+                }
+                i++;
+            }
         }
     }
 
@@ -584,6 +604,125 @@ function completionButtonsDivUpdates(
     } else if (saveData[lastPickName] === "hideCompleted") {
         hideCompleted();
     }
+}
+
+function multiMarkerCollectibleInsert(
+    parentDivId,
+    array,
+    icon,
+    completionSetName,
+    lastPickName,
+    completedAmountParagraphId = null,
+    maxSetSize = saveData[completionSetName].size,
+    onMapMarkers = [],
+    startIndex = 0
+) {
+    let parentDiv = document.getElementById(parentDivId);
+    for (let i = startIndex; i < array.flat().length; i++) {
+        let hr = document.createElement("hr");
+        hr.classList.add("twentyfive");
+        parentDiv.append(hr);
+        let linkDiv = document.createElement("div");
+        linkDiv.id = "#" + array[i].display_name.replaceAll(" ", "-");
+        parentDiv.append(linkDiv);
+
+        let title = document.createElement("h2");
+        title.innerHTML = array[i].display_name;
+        parentDiv.append(title);
+
+        let label = document.createElement("label");
+        label.for = "check";
+        label.innerHTML = "Completed?";
+        parentDiv.append(label);
+
+        let markAsCompleteBtn = document.createElement("input");
+        markAsCompleteBtn.name = "check";
+        markAsCompleteBtn.type = "checkbox";
+        markAsCompleteBtn.checked = saveData[completionSetName].has(i);
+        parentDiv.append(markAsCompleteBtn);
+
+        let sharedMarkers = [];
+
+        for (let j = 0; j < array[i].coords.length; j++) {
+            let actualMarker = L.marker(array[i].coords, {
+                icon: icon,
+                title: array[i].display_name,
+            });
+
+            let locationTitle = document.createElement("h3");
+            locationTitle.innerHTML = `Location ${j + 1}`;
+            parentDiv.append(locationTitle);
+
+            let description = document.createElement("p");
+            description.innerHTML = array[i].description[j];
+            parentDiv.append(description);
+
+            let video = document.createElement("button");
+            video.innerHTML = "Video";
+            video.addEventListener("click", function () {
+                player.loadVideoById({
+                    videoId: array[i].video_id,
+                    startSeconds: array[i].video_timestamp,
+                });
+                document.getElementById("videoplayer").classList.add("s");
+            });
+            parentDiv.append(video);
+
+            let zoom = document.createElement("button");
+            zoom.innerHTML = "Zoom to Marker";
+            zoom.addEventListener("click", function () {
+                document.getElementById("gui_toggle_button_div").click();
+                map.setView(array[i].coords[j], 7);
+                if (!map.hasLayer(actualMarker)) actualMarker.addTo(map);
+            });
+
+            actualMarker.on("click", function (e) {
+                document.getElementById("gui_toggle_button_div").click();
+                linkDiv.scrollIntoView();
+                map.setView(array[i].coords[j], 6);
+            });
+
+            parentDiv.append(zoom);
+            sharedMarkers.push(actualMarker);
+        }
+
+        onMapMarkers.push(sharedMarkers);
+
+        markAsCompleteBtn.addEventListener("click", (e) => {
+            if (e.target.checked) {
+                saveData[completionSetName].add(i);
+                for (let actualMarker of sharedMarkers) {
+                    if (saveData[lastPickName] === "showCompleted") {
+                        if (!map.hasLayer(actualMarker))
+                            actualMarker.addTo(map);
+                    } else if (saveData[lastPickName] === "hideCompleted") {
+                        if (map.hasLayer(actualMarker)) actualMarker.remove();
+                    }
+                    if (map.hasLayer(actualMarker))
+                        actualMarker._icon.classList.add("completed");
+                }
+            } else {
+                saveData[completionSetName].delete(i);
+                for (let actualMarker of sharedMarkers) {
+                    if (saveData[lastPickName] === "showCompleted") {
+                        if (map.hasLayer(actualMarker)) actualMarker.remove();
+                    } else if (saveData[lastPickName] === "hideCompleted") {
+                        if (!map.hasLayer(actualMarker))
+                            actualMarker.addTo(map);
+                    }
+                    if (map.hasLayer(actualMarker))
+                        actualMarker._icon.classList.remove("completed");
+                }
+            }
+            if (completedAmountParagraphId != null)
+                document.getElementById(
+                    completedAmountParagraphId
+                ).innerHTML = `Completed ${saveData[completionSetName].size}/${maxSetSize}`;
+            saveDataSave();
+        });
+    }
+
+    return onMapMarkers;
 }
 
 function genericCollectibleInsert(
