@@ -181,6 +181,13 @@ ul {
 .movieprop {
     background-image: url("gtavIcons/movieProp.svg");
 }
+
+.truck {
+    background-image: url("gtavIcons/truck.svg");
+    background-color: red;
+    background-blend-mode: multiply;
+}
+
 .collectible.completed::after {
     content: url("websiteIcons/verified.svg");
     height: 11px;

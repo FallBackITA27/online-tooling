@@ -198,6 +198,10 @@ const constantData = {
             className: "building",
             iconSize: [22, 22],
         }),
+        truck: L.divIcon({
+            className: "collectible truck",
+            iconSize: [22, 22],
+        }),
     },
 };
 
@@ -250,57 +254,58 @@ async function loadDynamicData() {
         fetch("./assets/figurines.json")
             .then((r) => r.json())
             .then((r) => {
-                genericCollectibleInsert(
-                    document.getElementById("actionFiguresDiv"),
+                let onMapMarkers = genericCollectibleInsert(
+                    "actionFiguresDiv",
                     r,
                     constantData.icons.figurine,
-                    document.getElementById(
-                        "markers-collectibles-actionfigures-show-all-btn"
-                    ),
-                    document.getElementById(
-                        "markers-collectibles-actionfigures-hide-all-btn"
-                    ),
-                    document.getElementById(
-                        "markers-collectibles-actionfigures-show-completed-btn"
-                    ),
-                    document.getElementById(
-                        "markers-collectibles-actionfigures-hide-completed-btn"
-                    ),
                     "completionDataFigurines",
-                    "lastPickFigurines"
+                    "lastPickFigurines",
+                    "markers-collectibles-actionfigures-completion-number",
+                    100
                 );
+
                 document.getElementById(
                     "markers-collectibles-actionfigures-completion-number"
                 ).innerHTML = `Completed ${saveData.completionDataFigurines.size}/100`;
+
+                completionButtonsDivUpdates(
+                    "markers-collectibles-actionfigures-show-all-btn",
+                    "markers-collectibles-actionfigures-hide-all-btn",
+                    "markers-collectibles-actionfigures-show-completed-btn",
+                    "markers-collectibles-actionfigures-hide-completed-btn",
+                    onMapMarkers,
+                    "lastPickFigurines",
+                    "completionDataFigurines"
+                );
             })
     );
     x.push(
         fetch("./assets/movieProps.json")
             .then((r) => r.json())
             .then((r) => {
-                genericCollectibleInsert(
-                    document.getElementById("moviePropsDiv"),
+                let onMapMarkers = genericCollectibleInsert(
+                    "moviePropsDiv",
                     r.singleMarker,
                     constantData.icons.movieProp,
-                    document.getElementById(
-                        "markers-collectibles-movieprops-show-all-btn"
-                    ),
-                    document.getElementById(
-                        "markers-collectibles-movieprops-hide-all-btn"
-                    ),
-                    document.getElementById(
-                        "markers-collectibles-movieprops-show-completed-btn"
-                    ),
-                    document.getElementById(
-                        "markers-collectibles-movieprops-hide-completed-btn"
-                    ),
                     "completionDataMovieProps",
-                    "lastPickMovieProps"
+                    "lastPickMovieProps",
+                    "markers-collectibles-movieprops-completion-number",
+                    10
                 );
-                let collectedTotal = saveData.completionDataMovieProps.size;
+
                 document.getElementById(
                     "markers-collectibles-movieprops-completion-number"
-                ).innerHTML = `Completed ${collectedTotal}/10`;
+                ).innerHTML = `Completed ${saveData.completionDataMovieProps.size}/10`;
+
+                completionButtonsDivUpdates(
+                    "markers-collectibles-movieprops-show-all-btn",
+                    "markers-collectibles-movieprops-hide-all-btn",
+                    "markers-collectibles-movieprops-show-completed-btn",
+                    "markers-collectibles-movieprops-hide-completed-btn",
+                    onMapMarkers,
+                    "lastPickMovieProps",
+                    "completionDataMovieProps"
+                );
             })
     );
     // x.push(
@@ -504,19 +509,96 @@ L.imageOverlay("overlayedMapItems/fortZancudo.svg", [
     [55.1, -128.5],
 ]).addTo(map); // I don't get this bs.
 
-async function genericCollectibleInsert(
-    parentDiv,
+function completionButtonsDivUpdates(
+    showAllButtonId,
+    hideAllButtonId,
+    showCompletedButtonId,
+    hideCompletedButtonId,
+    onMapMarkers,
+    lastPickName,
+    completionSetName
+) {
+    function showAll() {
+        saveData[lastPickName] = "showAll";
+        saveDataSave();
+        let i = 0;
+        for (let marker of onMapMarkers) {
+            if (!map.hasLayer(marker)) marker.addTo(map);
+            if (saveData[completionSetName].has(i))
+                marker._icon.classList.add("completed");
+            i++;
+        }
+    }
+
+    function hideAll() {
+        saveData[lastPickName] = "hideAll";
+        saveDataSave();
+        for (let marker of onMapMarkers)
+            if (map.hasLayer(marker)) marker.remove();
+    }
+
+    function showCompleted() {
+        saveData[lastPickName] = "showCompleted";
+        saveDataSave();
+        let i = 0;
+        for (let marker of onMapMarkers) {
+            if (saveData[completionSetName].has(i)) {
+                if (!map.hasLayer(marker)) marker.addTo(map);
+                marker._icon.classList.add("completed");
+            } else {
+                marker.remove();
+            }
+            i++;
+        }
+    }
+
+    function hideCompleted() {
+        saveData[lastPickName] = "hideCompleted";
+        saveDataSave();
+        let i = 0;
+        for (let marker of onMapMarkers) {
+            if (!saveData[completionSetName].has(i)) {
+                if (!map.hasLayer(marker)) marker.addTo(map);
+            } else {
+                marker.remove();
+            }
+            i++;
+        }
+    }
+
+    document.getElementById(showAllButtonId).addEventListener("click", showAll);
+    document.getElementById(hideAllButtonId).addEventListener("click", hideAll);
+    document
+        .getElementById(showCompletedButtonId)
+        .addEventListener("click", showCompleted);
+    document
+        .getElementById(hideCompletedButtonId)
+        .addEventListener("click", hideCompleted);
+
+    if (saveData[lastPickName] === "showAll") {
+        showAll();
+    } else if (saveData[lastPickName] === "hideAll") {
+        hideAll();
+    } else if (saveData[lastPickName] === "showCompleted") {
+        showCompleted();
+    } else if (saveData[lastPickName] === "hideCompleted") {
+        hideCompleted();
+    }
+}
+
+function genericCollectibleInsert(
+    parentDivId,
     array,
     icon,
-    showAllButton,
-    hideAllButton,
-    showCompletedButton,
-    hideCompletedButton,
     completionSetName,
-    lastPickVarName
+    lastPickName,
+    completedAmountParagraphId = null,
+    maxSetSize = saveData[completionSetName].size,
+    onMapMarkers = [],
+    startIndex = 0
 ) {
-    let onMapMarkers = [];
-    for (let i = 0; i < array.length; i++) {
+    let parentDiv = document.getElementById(parentDivId);
+    for (let i = startIndex; i < array.length; i++) {
         let actualMarker = L.marker(array[i].coords, {
             icon: icon,
             title: array[i].display_name,
@@ -550,25 +632,27 @@ async function genericCollectibleInsert(
         markAsCompleteBtn.addEventListener("click", (e) => {
             if (e.target.checked) {
                 saveData[completionSetName].add(i);
-                if (saveData[lastPickVarName] === "showCompleted") {
+                if (saveData[lastPickName] === "showCompleted") {
                     if (!map.hasLayer(actualMarker)) actualMarker.addTo(map);
-                } else if (saveData[lastPickVarName] === "hideCompleted") {
+                } else if (saveData[lastPickName] === "hideCompleted") {
                     if (map.hasLayer(actualMarker)) actualMarker.remove();
-                    return;
                 }
                 if (map.hasLayer(actualMarker))
                     actualMarker._icon.classList.add("completed");
             } else {
                 saveData[completionSetName].delete(i);
-                if (saveData[lastPickVarName] === "showCompleted") {
+                if (saveData[lastPickName] === "showCompleted") {
                     if (map.hasLayer(actualMarker)) actualMarker.remove();
-                    return;
-                } else if (saveData[lastPickVarName] === "hideCompleted") {
+                } else if (saveData[lastPickName] === "hideCompleted") {
                     if (!map.hasLayer(actualMarker)) actualMarker.addTo(map);
                 }
                 if (map.hasLayer(actualMarker))
                     actualMarker._icon.classList.remove("completed");
             }
+            if (completedAmountParagraphId != null)
+                document.getElementById(
+                    completedAmountParagraphId
+                ).innerHTML = `Completed ${saveData[completionSetName].size}/${maxSetSize}`;
             saveDataSave();
         });
         markAsCompleteBtn.checked = saveData[completionSetName].has(i);
@@ -603,61 +687,7 @@ async function genericCollectibleInsert(
         });
     }
 
-    showAllButton.addEventListener("click", () => {
-        saveData[lastPickVarName] = "showAll";
-        saveDataSave();
-        let i = 0;
-        for (let marker of onMapMarkers) {
-            if (!map.hasLayer(marker)) marker.addTo(map);
-            if (saveData[completionSetName].has(i))
-                marker._icon.classList.add("completed");
-            i++;
-        }
-    });
-    hideAllButton.addEventListener("click", () => {
-        saveData[lastPickVarName] = "hideAll";
-        saveDataSave();
-        for (let marker of onMapMarkers)
-            if (map.hasLayer(marker)) marker.remove();
-    });
-    showCompletedButton.addEventListener("click", () => {
-        saveData[lastPickVarName] = "showCompleted";
-        saveDataSave();
-        let i = 0;
-        for (let marker of onMapMarkers) {
-            if (saveData[completionSetName].has(i)) {
-                if (!map.hasLayer(marker)) marker.addTo(map);
-                marker._icon.classList.add("completed");
-            } else {
-                marker.remove();
-            }
-            i++;
-        }
-    });
-    hideCompletedButton.addEventListener("click", () => {
-        saveData[lastPickVarName] = "hideCompleted";
-        saveDataSave();
-        let i = 0;
-        for (let marker of onMapMarkers) {
-            if (!saveData[completionSetName].has(i)) {
-                if (!map.hasLayer(marker)) marker.addTo(map);
-            } else {
-                marker.remove();
-            }
-            i++;
-        }
-    });
-
-    let lastPick = saveData[lastPickVarName];
-    if (lastPick === "showAll") {
-        showAllButton.click();
-    } else if (lastPick === "hideAll") {
-        hideAllButton.click();
-    } else if (lastPick === "showCompleted") {
-        showCompletedButton.click();
-    } else if (lastPick === "hideCompleted") {
-        hideCompletedButton.click();
-    }
+    return onMapMarkers;
 }
 
 /*
