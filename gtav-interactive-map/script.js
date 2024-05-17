@@ -297,6 +297,18 @@ async function loadDynamicData() {
                     "markers-collectibles-movieprops-completion-number"
                 ).innerHTML = `Completed ${saveData.completionDataMovieProps.size}/10`;
 
+                onMapMarkers = multiMarkerCollectibleInsert(
+                    "moviePropsDiv",
+                    r.multiMarker,
+                    constantData.icons.truck,
+                    "competionDataMovieProps",
+                    "lastPickMovieProps",
+                    "markers-collectibles-movieprops-completion-number",
+                    10,
+                    onMapMarkers,
+                    7
+                );
+
                 completionButtonsDivUpdates(
                     "markers-collectibles-movieprops-show-all-btn",
                     "markers-collectibles-movieprops-hide-all-btn",
@@ -618,16 +630,17 @@ function multiMarkerCollectibleInsert(
     startIndex = 0
 ) {
     let parentDiv = document.getElementById(parentDivId);
-    for (let i = startIndex; i < array.flat().length; i++) {
+    console.log(array.flat().length);
+    for (let i = startIndex; (i - startIndex) < array.flat().length; i++) {
         let hr = document.createElement("hr");
         hr.classList.add("twentyfive");
         parentDiv.append(hr);
         let linkDiv = document.createElement("div");
-        linkDiv.id = "#" + array[i].display_name.replaceAll(" ", "-");
+        linkDiv.id = "#" + array[i-startIndex].display_name.replaceAll(" ", "-");
         parentDiv.append(linkDiv);
 
         let title = document.createElement("h2");
-        title.innerHTML = array[i].display_name;
+        title.innerHTML = array[i-startIndex].display_name;
         parentDiv.append(title);
 
         let label = document.createElement("label");
@@ -643,10 +656,10 @@ function multiMarkerCollectibleInsert(
 
         let sharedMarkers = [];
 
-        for (let j = 0; j < array[i].coords.length; j++) {
-            let actualMarker = L.marker(array[i].coords, {
+        for (let j = 0; j < array[i-startIndex].coords.length; j++) {
+            let actualMarker = L.marker(array[i-startIndex].coords, {
                 icon: icon,
-                title: array[i].display_name,
+                title: array[i-startIndex].display_name,
             });
 
             let locationTitle = document.createElement("h3");
@@ -654,15 +667,15 @@ function multiMarkerCollectibleInsert(
             parentDiv.append(locationTitle);
 
             let description = document.createElement("p");
-            description.innerHTML = array[i].description[j];
+            description.innerHTML = array[i-startIndex].description[j];
             parentDiv.append(description);
 
             let video = document.createElement("button");
             video.innerHTML = "Video";
             video.addEventListener("click", function () {
                 player.loadVideoById({
-                    videoId: array[i].video_id,
-                    startSeconds: array[i].video_timestamp,
+                    videoId: array[i-startIndex].video_id,
+                    startSeconds: array[i-startIndex].video_timestamp,
                 });
                 document.getElementById("videoplayer").classList.add("s");
             });
@@ -672,14 +685,14 @@ function multiMarkerCollectibleInsert(
             zoom.innerHTML = "Zoom to Marker";
             zoom.addEventListener("click", function () {
                 document.getElementById("gui_toggle_button_div").click();
-                map.setView(array[i].coords[j], 7);
+                map.setView(array[i-startIndex].coords[j], 7);
                 if (!map.hasLayer(actualMarker)) actualMarker.addTo(map);
             });
 
             actualMarker.on("click", function (e) {
                 document.getElementById("gui_toggle_button_div").click();
                 linkDiv.scrollIntoView();
-                map.setView(array[i].coords[j], 6);
+                map.setView(array[i-startIndex].coords[j], 6);
             });
 
             parentDiv.append(zoom);
