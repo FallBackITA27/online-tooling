@@ -186,6 +186,10 @@ ul {
     background-image: url("gtavIcons/truck.svg");
 }
 
+.playingcard {
+    background-image: url("gtavIcons/playingCard.svg");
+}
+
 .truck.movieprop.pony {
     background-image: url("gtavIcons/moviePropTruckPony.svg");
 }

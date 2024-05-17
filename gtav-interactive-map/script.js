@@ -205,6 +205,10 @@ const constantData = {
             className: "collectible truck",
             iconSize: [22, 22],
         }),
+        truck: L.divIcon({
+            className: "collectible playingcard",
+            iconSize: [22, 22],
+        }),
         moviePropTruckRumpo: L.divIcon({
             className: "collectible truck movieprop rumpo",
             iconSize: [22, 22],
