@@ -184,8 +184,6 @@ ul {
 
 .truck {
     background-image: url("gtavIcons/truck.svg");
-    background-color: red;
-    background-blend-mode: multiply;
 }
 
 .collectible.completed::after {
