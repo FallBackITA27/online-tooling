@@ -40,7 +40,7 @@ function loadInSaveData(dataStr) {
                 temporarySaveData.lsCountyShow = false;
             }
             if (temporarySaveData.version === "0.1.1") {
-                temporarySaveData.version = "0.2.0";
+                temporarySaveData.version = "0.1.2";
                 temporarySaveData.completionDataMovieProps = new Set();
                 temporarySaveData.lastPickMovieProps = "hideAll";
                 temporarySaveData.lastPickFigurines =
