@@ -754,10 +754,10 @@ function genericCollectibleInsert(
     startIndex = 0
 ) {
     let parentDiv = document.getElementById(parentDivId);
-    for (let i = startIndex; i < array.length; i++) {
-        let actualMarker = L.marker(array[i].coords, {
+    for (let i = startIndex; i - startIndex < array.length; i++) {
+        let actualMarker = L.marker(array[i - startIndex].coords, {
             icon: icon,
-            title: array[i].display_name,
+            title: array[i - startIndex].display_name,
         });
         onMapMarkers.push(actualMarker);
 
@@ -766,15 +766,15 @@ function genericCollectibleInsert(
         parentDiv.append(hr);
 
         let linkDiv = document.createElement("div");
-        linkDiv.id = "#" + array[i].display_name.replaceAll(" ", "-");
+        linkDiv.id = "#" + array[i - startIndex].display_name.replaceAll(" ", "-");
         parentDiv.append(linkDiv);
 
         let title = document.createElement("h2");
-        title.innerHTML = array[i].display_name;
+        title.innerHTML = array[i - startIndex].display_name;
         parentDiv.append(title);
 
         let description = document.createElement("p");
-        description.innerHTML = array[i].description;
+        description.innerHTML = array[i - startIndex].description;
         parentDiv.append(description);
 
         let label = document.createElement("label");
@@ -819,8 +819,8 @@ function genericCollectibleInsert(
         video.innerHTML = "Video";
         video.addEventListener("click", function () {
             player.loadVideoById({
-                videoId: array[i].video_id,
-                startSeconds: array[i].video_timestamp,
+                videoId: array[i - startIndex].video_id,
+                startSeconds: array[i - startIndex].video_timestamp,
             });
             document.getElementById("videoplayer").classList.add("s");
         });
@@ -831,7 +831,7 @@ function genericCollectibleInsert(
         zoom.innerHTML = "Zoom to Marker";
         zoom.addEventListener("click", function () {
             document.getElementById("gui_toggle_button_div").click();
-            map.setView(array[i].coords, 7);
+            map.setView(array[i - startIndex].coords, 7);
             if (!map.hasLayer(actualMarker)) actualMarker.addTo(map);
         });
         parentDiv.append(zoom);
@@ -839,7 +839,7 @@ function genericCollectibleInsert(
         actualMarker.on("click", function (e) {
             document.getElementById("gui_toggle_button_div").click();
             linkDiv.scrollIntoView();
-            map.setView(array[i].coords, 6);
+            map.setView(array[i - startIndex].coords, 6);
         });
     }
 
