@@ -205,6 +205,18 @@ const constantData = {
             className: "collectible truck",
             iconSize: [22, 22],
         }),
+        moviePropTruckRumpo: L.divIcon({
+            className: "collectible truck movieprop rumpo",
+            iconSize: [22, 22],
+        }),
+        moviePropTruckPony: L.divIcon({
+            className: "collectible truck movieprop pony",
+            iconSize: [22, 22],
+        }),
+        moviePropTruckRebel: L.divIcon({
+            className: "collectible truck movieprop rebel",
+            iconSize: [22, 22],
+        }),
     },
 };
 
@@ -303,7 +315,11 @@ async function loadDynamicData() {
                 onMapMarkers = multiMarkerCollectibleInsert(
                     "moviePropsDiv",
                     r.multiMarker,
-                    constantData.icons.truck,
+                    [
+                        [constantData.icons.moviePropTruckRebel, 9],
+                        [constantData.icons.moviePropTruckRumpo, 8],
+                        [constantData.icons.moviePropTruckPony, 7]
+                    ],
                     "completionDataMovieProps",
                     "lastPickMovieProps",
                     "markers-collectibles-movieprops-completion-number",
@@ -624,7 +640,7 @@ function completionButtonsDivUpdates(
 function multiMarkerCollectibleInsert(
     parentDivId,
     array,
-    icon,
+    iconData,
     completionSetName,
     lastPickName,
     completedAmountParagraphId = null,
@@ -633,8 +649,13 @@ function multiMarkerCollectibleInsert(
     startIndex = 0
 ) {
     let parentDiv = document.getElementById(parentDivId);
-    console.log(array.flat().length);
     for (let i = startIndex; i - startIndex < array.flat().length; i++) {
+        let icon = iconData;
+        if (iconData instanceof Array) for (let [possibleIcon, index] of iconData) {
+            icon = possibleIcon;
+            console.log(index);
+            if (index <= i) break;
+        }
         let hr = document.createElement("hr");
         hr.classList.add("twentyfive");
         parentDiv.append(hr);

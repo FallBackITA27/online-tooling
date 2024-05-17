@@ -186,6 +186,18 @@ ul {
     background-image: url("gtavIcons/truck.svg");
 }
 
+.truck.movieprop.pony {
+    background-image: url("gtavIcons/moviePropTruckPony.svg");
+}
+
+.truck.movieprop.rumpo {
+    background-image: url("gtavIcons/moviePropTruckRumpo.svg");
+}
+
+.truck.movieprop.rebel {
+    background-image: url("gtavIcons/moviePropTruckRebel.svg");
+}
+
 .collectible.completed::after {
     content: url("websiteIcons/verified.svg");
     height: 11px;
