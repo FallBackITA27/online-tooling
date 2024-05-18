@@ -91,7 +91,6 @@ document
         let reader = new FileReader();
         reader.readAsText(e.target.files[0]);
         reader.addEventListener("load", function (res) {
-            console.log(res);
             console.log(res.target.result);
             loadInSaveData(res.target.result);
             saveDataSave();
@@ -693,7 +692,6 @@ function multiMarkerCollectibleInsert(
         let icon = iconData;
         if (iconData instanceof Array) for (let [possibleIcon, index] of iconData) {
             icon = possibleIcon;
-            console.log(index);
             if (index <= i) break;
         }
         let hr = document.createElement("hr");
@@ -820,7 +818,6 @@ function genericCollectibleInsert(
         let icon = iconData;
         if (iconData instanceof Array) for (let [possibleIcon, index] of iconData) {
             icon = possibleIcon;
-            console.log(index);
             if (index <= i) break;
         }
 
