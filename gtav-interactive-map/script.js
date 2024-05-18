@@ -39,6 +39,8 @@ let saveData = {
     lastPickPlayingCards: "hideAll",
     completionDataMovieProps: new Set(),
     lastPickMovieProps: "hideAll",
+    completionDataSignalJammers: new Set(),
+    lastPickSignalJammers: "hideAll",
 };
 
 function loadInSaveData(dataStr) {
@@ -48,6 +50,7 @@ function loadInSaveData(dataStr) {
                 "completionDataFigurines",
                 "completionDataMovieProps",
                 "completionDataPlayingCards",
+                "completionDataSignalJammers",
             ].includes(key)
                 ? new Set(value)
                 : value
@@ -82,7 +85,6 @@ function loadInSaveData(dataStr) {
                 temporarySaveData.version = "0.3.1";
             }
             if (temporarySaveData.version === "0.3.1") {
-                // Current version
                 temporarySaveData.version = "0.4.0";
                 temporarySaveData.luckyWheelSpin = {
                     startDate: false,
@@ -95,6 +97,11 @@ function loadInSaveData(dataStr) {
                 };
             }
             if (temporarySaveData.version === "0.4.0") {
+                temporarySaveData.version = "0.5.0";
+                temporarySaveData.completionDataSignalJammers = new Set();
+                temporarySaveData.lastPickSignalJammers = "hideAll";
+            }
+            if (temporarySaveData.version === "0.5.0") {
                 // Current version
             }
             // Here you check the version tag in the savedata and modify it to match the data right after - this way old save data will not be lost.
@@ -299,6 +306,10 @@ const constantData = {
             className: "collectible truck",
             iconSize: [22, 22],
         }),
+        truck: L.divIcon({
+            className: "collectible signaljammer",
+            iconSize: [22, 22],
+        }),
         playingCard: L.divIcon({
             className: "collectible playingcard",
             iconSize: [22, 22],
@@ -377,6 +388,11 @@ async function loadDynamicData() {
         fetch("./assets/movieProps.json")
             .then((r) => r.json())
             .then(loadMovieProps)
+    );
+    x.push(
+        fetch("./assets/signalJammers.json")
+            .then((r) => r.json())
+            .then(loadSignalJammers)
     );
     // x.push(
     //     fetch("./assets/buildings.json").then(r=>r.json()).then(r=>{

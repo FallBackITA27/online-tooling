@@ -194,6 +194,10 @@ ul {
     background-image: url("gtavIcons/playingCard.svg");
 }
 
+.signaljammer {
+    background-image: url("gtavIcons/signalJammer.svg");
+}
+
 .truck.movieprop.pony {
     background-image: url("gtavIcons/moviePropTruckPony.svg");
 }
