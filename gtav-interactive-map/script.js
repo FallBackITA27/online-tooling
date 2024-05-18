@@ -2,7 +2,7 @@
 let insertMarkersMode = true;
 
 let saveData = {
-    version: "0.2.0",
+    version: "0.3.0",
     selectedTileLayer: "game",
     lastZoom: 2,
     lastCoords: [38.959409, -75.410156],
