@@ -1,14 +1,17 @@
-
 function markerClickEvent(linkDiv, coords, title) {
     document.getElementById("gui_toggle_button_div").click();
     linkDiv.scrollIntoView();
     map.setView(coords, 6);
-    Array.from(document.getElementsByClassName("hl")).forEach(r=>r.classList.remove("hl"));
+    Array.from(document.getElementsByClassName("hl")).forEach((r) =>
+        r.classList.remove("hl")
+    );
     title.classList.add("hl");
 }
 
 function iconFromIconData(iconData, i) {
-    if (iconData instanceof Array) for (let [possibleIcon, index] of iconData) if (index <= i) return possibleIcon;
+    if (iconData instanceof Array)
+        for (let [possibleIcon, index] of iconData)
+            if (index <= i) return possibleIcon;
     return iconData;
 }
 
@@ -84,7 +87,13 @@ function multiMarkerCollectibleInsert(
                 if (!map.hasLayer(actualMarker)) actualMarker.addTo(map);
             });
 
-            actualMarker.on("click", ()=>(markerClickEvent(linkDiv, array[i - startIndex].coords[j], title)));
+            actualMarker.on("click", () =>
+                markerClickEvent(
+                    linkDiv,
+                    array[i - startIndex].coords[j],
+                    title
+                )
+            );
 
             parentDiv.append(zoom);
             sharedMarkers.push(actualMarker);
@@ -155,7 +164,8 @@ function genericCollectibleInsert(
         parentDiv.append(hr);
 
         let linkDiv = document.createElement("div");
-        linkDiv.id = "#" + array[i - startIndex].display_name.replaceAll(" ", "-");
+        linkDiv.id =
+            "#" + array[i - startIndex].display_name.replaceAll(" ", "-");
         parentDiv.append(linkDiv);
 
         let title = document.createElement("h2");
@@ -225,7 +235,9 @@ function genericCollectibleInsert(
         });
         parentDiv.append(zoom);
 
-        actualMarker.on("click", ()=>(markerClickEvent(linkDiv, array[i - startIndex].coords, title)));
+        actualMarker.on("click", () =>
+            markerClickEvent(linkDiv, array[i - startIndex].coords, title)
+        );
     }
 
     return onMapMarkers;
