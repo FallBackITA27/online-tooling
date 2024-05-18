@@ -780,6 +780,8 @@ function genericCollectibleInsert(
 ) {
     let parentDiv = document.getElementById(parentDivId);
     for (let i = startIndex; i - startIndex < array.length; i++) {
+        if (array[i - startIndex].coords.length === 0) continue;
+
         let icon = iconData;
         if (iconData instanceof Array) for (let [possibleIcon, index] of iconData) {
             icon = possibleIcon;
