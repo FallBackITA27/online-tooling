@@ -145,27 +145,31 @@
         <div id="tools"></div>
         <h2>Tools</h2>
         <hr class="fifty">
-        <h3>Diamond Casino Heist Timer</h3>
-        <div>
-            <p>Click this at the end of the Heist to know when you'll be able to repeat it.</p>
-            <label>
-                Timer: <progress id="casinoHeistProgressBar" max="2880000" value="2880000"></progress>
-            </label>
-            <button id="casinoHeistStart">Start Timer</button>
-        </div>
+        <h3 id="inGameClock"></h3>
         <hr class="fifty">
-        <h3>Cayo Perico Heist Timer</h3>
-        <div>
-            <p>Click this at the end of the Heist to know when you'll be able to repeat it.</p>
-            <label>
-                Timer: <progress id="cayoPericoHeistProgressBar" max="8640000" value="8640000"></progress>
-            </label>
-            <button id="cayoPericoHeistStart">Start Timer</button>
-        </div>
+        <h3>Timers</h3>
+        <label class="x-axis">
+            Diamond Casino Heist<progress class="timerBar" id="timers-progress-casinoheist" max="2880000" value="2880000"></progress><button id="timers-button-casinoheist">Start Timer</button><p id="timers-paragraph-casinoheist">00hrs 00min 00sec left</p>
+        </label>
+        <label class="x-axis">
+            Cayo Perico Heist<progress class="timerBar" id="timers-progress-cayopericoheist" max="9000000" value="9000000"></progress><button id="timers-button-cayopericoheist">Start Timer</button><p id="timers-paragraph-cayopericoheist">00hrs 00min 00sec left</p>
+        </label>
+        <label class="x-axis">
+            Lucky Wheel Spin<progress id="timers-progress-luckywheelspin" max="86400000" value="86400000"></progress><button id="timers-button-luckywheelspin">Start Timer</button><p id="timers-paragraph-luckywheelspin">00hrs 00min 00sec left</p>
+        </label>
+        <label class="x-axis">
+            Casino Chips Buy Cooldown<progress id="timers-progress-casinochipsbuy" max="2880000" value="2880000"></progress><button id="timers-button-casinochipsbuy">Start Timer</button><p id="timers-paragraph-casinochipsbuy">00hrs 00min 00sec left</p>
+        </label>
+        <label class="x-axis">
+            VIP Registration<progress id="timers-progress-vipregistration" max="14400000" value="14400000"></progress><button id="timers-button-vipregistration">Start Timer</button><p id="timers-paragraph-vipregistration">00hrs 00min 00sec left</p>
+        </label>
         <hr>
         <div id="changelog"></div>
         <h2>Changelog</h2>
         <p>All the dates are in <a target="_blank" href="https://en.wikipedia.org/wiki/Central_European_Time">CET</a>.</p>
+        <h3>2024 - 05 - 18 | 21:30 | Version 0.4.0</h3>
+        <p>Added a bunch of timers: Casino Wheel Spin, Chips Buy Cooldown and VIP Registration</p>
+        <p class="sig">Signed: FalB</p>
         <h3>2024 - 05 - 18 | 18:09 | Version 0.3.1</h3>
         <p>The title of the marker you clicked on will now be highlighted, to avoid confusion.</p>
         <p class="sig">Signed: FalB</p>

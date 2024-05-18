@@ -1,8 +1,18 @@
+const weekday = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+];
+
 // true false;
 let insertMarkersMode = false;
 
 let saveData = {
-    version: "0.3.1",
+    version: "0.4.0",
     selectedTileLayer: "game",
     lastZoom: 2,
     lastCoords: [38.959409, -75.410156],
@@ -10,6 +20,15 @@ let saveData = {
         startDate: false,
     },
     cayoPericoHeist: {
+        startDate: false,
+    },
+    luckyWheelSpin: {
+        startDate: false,
+    },
+    chipsBuyCooldown: {
+        startDate: false,
+    },
+    vipRegistrationDuration: {
         startDate: false,
     },
     blCountyShow: false,
@@ -63,6 +82,19 @@ function loadInSaveData(dataStr) {
                 temporarySaveData.version = "0.3.1";
             }
             if (temporarySaveData.version === "0.3.1") {
+                // Current version
+                temporarySaveData.version = "0.4.0";
+                temporarySaveData.luckyWheelSpin = {
+                    startDate: false,
+                };
+                temporarySaveData.chipsBuyCooldown = {
+                    startDate: false,
+                };
+                temporarySaveData.vipRegistrationDuration = {
+                    startDate: false,
+                };
+            }
+            if (temporarySaveData.version === "0.4.0") {
                 // Current version
             }
             // Here you check the version tag in the savedata and modify it to match the data right after - this way old save data will not be lost.
@@ -119,32 +151,32 @@ function onYouTubeIframeAPIReady() {
     });
 }
 
-document
-    .getElementById("casinoHeistStart")
-    .addEventListener("click", function () {
-        saveData.casinoHeist.startDate = +new Date();
+function startTimer(buttonId, data) {
+    document.getElementById(buttonId).addEventListener("click", function () {
+        data.startDate = +new Date();
         saveDataSave();
         Notification.requestPermission();
     });
-document
-    .getElementById("cayoPericoHeistStart")
-    .addEventListener("click", function () {
-        saveData.cayoPericoHeist.startDate = +new Date();
-        saveDataSave();
-        Notification.requestPermission();
-    });
+}
 
 setInterval(async function () {
     function genericTimer(
         heistData,
         currentTime,
-        progressBarElement,
+        progressBarId,
+        paragraphId,
+        notifTitle,
         notifString,
-        cooldown = 2880000
+        cooldown = 2880000,
+        iconPath = ""
     ) {
+        progressBarElement = document.getElementById(progressBarId);
         if (heistData.startDate !== false) {
             if (heistData.startDate + cooldown < currentTime) {
-                new Notification(notifString);
+                new Notification(notifTitle, {
+                    body: notifString,
+                    icon: iconPath,
+                });
                 progressBarElement.value = cooldown;
                 heistData.startDate = false;
                 saveDataSave();
@@ -156,31 +188,82 @@ setInterval(async function () {
             sec %= 3600;
             let min = Math.trunc(sec / 60);
             sec %= 60;
-            progressBarElement.innerHTML = `${hrs
-                .toString()
-                .padStart(1, "0")}hrs ${min
-                .toString()
-                .padStart(2, "0")}min ${sec
-                .toString()
-                .padStart(2, "0")}sec left`;
-            progressBarElement.title = progressBarElement.innerHTML;
+            document.getElementById(paragraphId).innerHTML =
+                progressBarElement.innerHTML = `${hrs
+                    .toString()
+                    .padStart(2, "0")}hrs ${min
+                    .toString()
+                    .padStart(2, "0")}min ${sec
+                    .toString()
+                    .padStart(2, "0")}sec left`;
         }
     }
 
-    let currentTime = +new Date();
+    let gtaOnlineTime = ~~(Date.now() / 2000);
+    document.getElementById("inGameClock").innerHTML = `In Game Time: ${
+        weekday[~~(gtaOnlineTime / 1440) % 7]
+    }, ${`${~~((gtaOnlineTime / 60) % 24)}`.padStart(2, "0")}:${`${~~(
+        gtaOnlineTime % 60
+    )}`.padStart(2, "0")}`; // +1 Offset, idk why, look at weekday array
+
     genericTimer(
         saveData.casinoHeist,
-        currentTime,
-        document.getElementById("casinoHeistProgressBar"),
-        "Your Casino Heist is ready."
+        +new Date(),
+        "timers-progress-casinoheist",
+        "timers-paragraph-casinoheist",
+        "Time's up!",
+        "Your Casino Heist is ready.",
+        2880000,
+        "https://fallbackita27.github.io/online-tooling/gtav-interactive-map/gtavIcons/casino.svg"
     );
+    startTimer("timers-button-casinoheist", saveData.casinoHeist);
+
+    genericTimer(
+        saveData.chipsBuyCooldown,
+        +new Date(),
+        "timers-progress-casinochipsbuy",
+        "timers-paragraph-casinochipsbuy",
+        "Time's up!",
+        "You can now buy chips at the Casino again.",
+        2880000,
+        "https://fallbackita27.github.io/online-tooling/gtav-interactive-map/gtavIcons/casino.svg"
+    );
+    startTimer("timers-button-casinochipsbuy", saveData.chipsBuyCooldown);
+
     genericTimer(
         saveData.cayoPericoHeist,
-        currentTime,
-        document.getElementById("cayoPericoHeistProgressBar"),
+        +new Date(),
+        "timers-progress-cayopericoheist",
+        "timers-paragraph-cayopericoheist",
+        "Time's up!",
         "Your Cayo Perico Heist is ready.",
-        8640000
+        9000000,
+        "https://fallbackita27.github.io/online-tooling/gtav-interactive-map/gtavIcons/cayoPerico.svg"
     );
+    startTimer("timers-button-cayopericoheist", saveData.cayoPericoHeist);
+
+    genericTimer(
+        saveData.luckyWheelSpin,
+        +new Date(),
+        "timers-progress-luckywheelspin",
+        "timers-paragraph-luckywheelspin",
+        "Time's up!",
+        "You can now spin the Casino's wheel again.",
+        86400000,
+        "https://fallbackita27.github.io/online-tooling/gtav-interactive-map/gtavIcons/casino.svg"
+    );
+    startTimer("timers-button-luckywheelspin", saveData.luckyWheelSpin);
+
+    genericTimer(
+        saveData.vipRegistrationDuration,
+        +new Date(),
+        "timers-progress-vipregistration",
+        "timers-paragraph-vipregistration",
+        "Time's up!",
+        "You can now spin the Casino's wheel again.",
+        14400000,
+    );
+    startTimer("timers-button-vipregistration", saveData.vipRegistrationDuration);
 }, 500);
 
 let map = L.map("map", {
