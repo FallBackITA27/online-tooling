@@ -770,7 +770,7 @@ function multiMarkerCollectibleInsert(
 function genericCollectibleInsert(
     parentDivId,
     array,
-    icon,
+    iconData,
     completionSetName,
     lastPickName,
     completedAmountParagraphId = null,
@@ -780,6 +780,13 @@ function genericCollectibleInsert(
 ) {
     let parentDiv = document.getElementById(parentDivId);
     for (let i = startIndex; i - startIndex < array.length; i++) {
+        let icon = iconData;
+        if (iconData instanceof Array) for (let [possibleIcon, index] of iconData) {
+            icon = possibleIcon;
+            console.log(index);
+            if (index <= i) break;
+        }
+
         let actualMarker = L.marker(array[i - startIndex].coords, {
             icon: icon,
             title: array[i - startIndex].display_name,
