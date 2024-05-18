@@ -283,105 +283,17 @@ async function loadDynamicData() {
     x.push(
         fetch("./assets/figurines.json")
             .then((r) => r.json())
-            .then((r) => {
-                let onMapMarkers = genericCollectibleInsert(
-                    "actionFiguresDiv",
-                    r,
-                    constantData.icons.figurine,
-                    "completionDataFigurines",
-                    "lastPickFigurines",
-                    "markers-collectibles-actionfigures-completion-number",
-                    100
-                );
-
-                document.getElementById(
-                    "markers-collectibles-actionfigures-completion-number"
-                ).innerHTML = `Completed ${saveData.completionDataFigurines.size}/100`;
-
-                completionButtonsDivUpdates(
-                    "markers-collectibles-actionfigures-show-all-btn",
-                    "markers-collectibles-actionfigures-hide-all-btn",
-                    "markers-collectibles-actionfigures-show-completed-btn",
-                    "markers-collectibles-actionfigures-hide-completed-btn",
-                    onMapMarkers,
-                    "lastPickFigurines",
-                    "completionDataFigurines"
-                );
-            })
+            .then(loadFigurines)
     );
     x.push(
         fetch("./assets/playingCards.json")
             .then((r) => r.json())
-            .then((r) => {
-                let onMapMarkers = genericCollectibleInsert(
-                    "playingCardsDiv",
-                    r,
-                    constantData.icons.playingCard,
-                    "completionDataPlayingCards",
-                    "lastPickPlayingCards",
-                    "markers-collectibles-playingcards-completion-number",
-                    54
-                );
-
-                document.getElementById(
-                    "markers-collectibles-playingcards-completion-number"
-                ).innerHTML = `Completed ${saveData.completionDataPlayingCards.size}/54`;
-
-                completionButtonsDivUpdates(
-                    "markers-collectibles-playingcards-show-all-btn",
-                    "markers-collectibles-playingcards-hide-all-btn",
-                    "markers-collectibles-playingcards-show-completed-btn",
-                    "markers-collectibles-playingcards-hide-completed-btn",
-                    onMapMarkers,
-                    "lastPickPlayingCards",
-                    "completionDataPlayingCards"
-                );
-            })
+            .then(loadPlayingCards)
     );
     x.push(
         fetch("./assets/movieProps.json")
             .then((r) => r.json())
-            .then((r) => {
-                let onMapMarkers = genericCollectibleInsert(
-                    "moviePropsDiv",
-                    r.singleMarker,
-                    constantData.icons.movieProp,
-                    "completionDataMovieProps",
-                    "lastPickMovieProps",
-                    "markers-collectibles-movieprops-completion-number",
-                    10
-                );
-
-                document.getElementById(
-                    "markers-collectibles-movieprops-completion-number"
-                ).innerHTML = `Completed ${saveData.completionDataMovieProps.size}/10`;
-
-                onMapMarkers = multiMarkerCollectibleInsert(
-                    "moviePropsDiv",
-                    r.multiMarker,
-                    [
-                        [constantData.icons.moviePropTruckRebel, 9],
-                        [constantData.icons.moviePropTruckRumpo, 8],
-                        [constantData.icons.moviePropTruckPony, 7],
-                    ],
-                    "completionDataMovieProps",
-                    "lastPickMovieProps",
-                    "markers-collectibles-movieprops-completion-number",
-                    10,
-                    onMapMarkers,
-                    7
-                );
-
-                completionButtonsDivUpdates(
-                    "markers-collectibles-movieprops-show-all-btn",
-                    "markers-collectibles-movieprops-hide-all-btn",
-                    "markers-collectibles-movieprops-show-completed-btn",
-                    "markers-collectibles-movieprops-hide-completed-btn",
-                    onMapMarkers,
-                    "lastPickMovieProps",
-                    "completionDataMovieProps"
-                );
-            })
+            .then(loadMovieProps)
     );
     // x.push(
     //     fetch("./assets/buildings.json").then(r=>r.json()).then(r=>{
@@ -400,146 +312,12 @@ async function loadDynamicData() {
     x.push(
         fetch("./assets/mapStyle.json")
             .then((r) => r.json())
-            .then((r) => {
-                let tileLayers = {
-                    render: L.tileLayer(r.mainMap.render.url, {
-                        maxNativeZoom: r.mainMap.render.maxNativeZoom,
-                        maxZoom: r.mainMap.render.maxNativeZoom,
-                        minNativeZoom: r.mainMap.render.minNativeZoom,
-                        minZoom: r.mainMap.render.minNativeZoom,
-                        keepBuffer: 4,
-                        noWrap: true,
-                        updateWhenIdle: true,
-                    }),
-                    game: L.tileLayer(r.mainMap.game.url, {
-                        maxNativeZoom: r.mainMap.game.maxNativeZoom,
-                        maxZoom: r.mainMap.game.maxNativeZoom,
-                        minNativeZoom: r.mainMap.game.minNativeZoom,
-                        minZoom: r.mainMap.game.minNativeZoom,
-                        keepBuffer: 4,
-                        noWrap: true,
-                        updateWhenIdle: true,
-                    }),
-                    print: L.tileLayer(r.mainMap.print.url, {
-                        maxNativeZoom: r.mainMap.print.maxNativeZoom,
-                        maxZoom: r.mainMap.print.maxNativeZoom,
-                        minNativeZoom: r.mainMap.print.minNativeZoom,
-                        minZoom: r.mainMap.print.minNativeZoom,
-                        keepBuffer: 4,
-                        noWrap: true,
-                        updateWhenIdle: true,
-                    }),
-                };
-
-                let mapStyleClassElements = Array.from(
-                    document.getElementsByClassName("mapStyle")
-                );
-
-                mapStyleClassElements.forEach(function (btn) {
-                    btn.addEventListener("click", function (e) {
-                        let sl = saveData.selectedTileLayer;
-                        if (sl === e.target.value) return;
-                        tileLayers[sl].remove();
-                        saveData.selectedTileLayer = e.target.value;
-                        saveDataSave();
-                        tileLayers[e.target.value].addTo(map);
-                        document.getElementById("map").style.background =
-                            r.mainMap[e.target.value].oceanColor;
-                    });
-                    if (saveData.selectedTileLayer == btn.value) btn.click();
-                });
-
-                document.getElementById("map").style.background =
-                    r.mainMap[saveData.selectedTileLayer].oceanColor;
-                tileLayers[saveData.selectedTileLayer].addTo(map);
-            })
+            .then(loadMapStyle)
     );
     x.push(
         fetch("./assets/counties.json")
             .then((r) => r.json())
-            .then((r) => {
-                let lsCountyPolygon = L.polygon(r.ls.points, {
-                    color: r.ls.color,
-                }).bindTooltip(r.ls.name, {
-                    permanent: true,
-                    direction: "center",
-                });
-                let blCountyPolygon = L.polygon(r.bl.points, {
-                    color: r.bl.color,
-                }).bindTooltip(r.bl.name, {
-                    permanent: true,
-                    direction: "center",
-                });
-
-                if (saveData.blCountyShow) blCountyPolygon.addTo(map);
-                if (saveData.lsCountyShow) lsCountyPolygon.addTo(map);
-
-                document
-                    .getElementById(
-                        "markers-locations-counties-blaine-show-btn"
-                    )
-                    .addEventListener("click", function () {
-                        blCountyPolygon.addTo(map);
-                        saveData.blCountyShow = true;
-                        saveDataSave();
-                    });
-
-                document
-                    .getElementById("markers-locations-counties-ls-show-btn")
-                    .addEventListener("click", function () {
-                        lsCountyPolygon.addTo(map);
-                        saveData.lsCountyShow = true;
-                        saveDataSave();
-                    });
-
-                document
-                    .getElementById(
-                        "markers-locations-counties-blaine-hide-btn"
-                    )
-                    .addEventListener("click", function () {
-                        blCountyPolygon.remove();
-                        saveData.blCountyShow = false;
-                        saveDataSave();
-                    });
-
-                document
-                    .getElementById("markers-locations-counties-ls-hide-btn")
-                    .addEventListener("click", function () {
-                        lsCountyPolygon.remove();
-                        saveData.lsCountyShow = false;
-                        saveDataSave();
-                    });
-
-                document
-                    .getElementById("markers-locations-counties-show-btn")
-                    .addEventListener("click", function () {
-                        document
-                            .getElementById(
-                                "markers-locations-counties-ls-show-btn"
-                            )
-                            .click();
-                        document
-                            .getElementById(
-                                "markers-locations-counties-blaine-show-btn"
-                            )
-                            .click();
-                    });
-
-                document
-                    .getElementById("markers-locations-counties-hide-btn")
-                    .addEventListener("click", function () {
-                        document
-                            .getElementById(
-                                "markers-locations-counties-ls-hide-btn"
-                            )
-                            .click();
-                        document
-                            .getElementById(
-                                "markers-locations-counties-blaine-hide-btn"
-                            )
-                            .click();
-                    });
-            })
+            .then(loadCounties)
     );
 
     for (let handle of x) await handle;
@@ -583,103 +361,6 @@ L.imageOverlay("overlayedMapItems/fortZancudo.svg", [
     [63.5, -154.7],
     [55.1, -128.5],
 ]).addTo(map); // I don't get this bs.
-
-function completionButtonsDivUpdates(
-    showAllButtonId,
-    hideAllButtonId,
-    showCompletedButtonId,
-    hideCompletedButtonId,
-    onMapMarkers,
-    lastPickName,
-    completionSetName
-) {
-    function showAll() {
-        saveData[lastPickName] = "showAll";
-        saveDataSave();
-        let i = 0;
-        for (let markers of onMapMarkers) {
-            if (!(markers instanceof Array)) {
-                markers = [markers];
-            }
-            for (let marker of markers) {
-                if (!map.hasLayer(marker)) marker.addTo(map);
-                if (saveData[completionSetName].has(i))
-                    marker._icon.classList.add("completed");
-            }
-            i++;
-        }
-    }
-
-    function hideAll() {
-        saveData[lastPickName] = "hideAll";
-        saveDataSave();
-        for (let markers of onMapMarkers) {
-            if (!(markers instanceof Array)) {
-                markers = [markers];
-            }
-            for (let marker of markers)
-                if (map.hasLayer(marker)) marker.remove();
-        }
-    }
-
-    function showCompleted() {
-        saveData[lastPickName] = "showCompleted";
-        saveDataSave();
-        let i = 0;
-        for (let markers of onMapMarkers) {
-            if (!(markers instanceof Array)) {
-                markers = [markers];
-            }
-            for (let marker of markers) {
-                if (saveData[completionSetName].has(i)) {
-                    if (!map.hasLayer(marker)) marker.addTo(map);
-                    marker._icon.classList.add("completed");
-                } else {
-                    marker.remove();
-                }
-            }
-            i++;
-        }
-    }
-
-    function hideCompleted() {
-        saveData[lastPickName] = "hideCompleted";
-        saveDataSave();
-        let i = 0;
-        for (let markers of onMapMarkers) {
-            if (!(markers instanceof Array)) {
-                markers = [markers];
-            }
-            for (let marker of markers) {
-                if (!saveData[completionSetName].has(i)) {
-                    if (!map.hasLayer(marker)) marker.addTo(map);
-                } else {
-                    marker.remove();
-                }
-            }
-            i++;
-        }
-    }
-
-    document.getElementById(showAllButtonId).addEventListener("click", showAll);
-    document.getElementById(hideAllButtonId).addEventListener("click", hideAll);
-    document
-        .getElementById(showCompletedButtonId)
-        .addEventListener("click", showCompleted);
-    document
-        .getElementById(hideCompletedButtonId)
-        .addEventListener("click", hideCompleted);
-
-    if (saveData[lastPickName] === "showAll") {
-        showAll();
-    } else if (saveData[lastPickName] === "hideAll") {
-        hideAll();
-    } else if (saveData[lastPickName] === "showCompleted") {
-        showCompleted();
-    } else if (saveData[lastPickName] === "hideCompleted") {
-        hideCompleted();
-    }
-}
 
 /*
     https://gtalens.com/assets/images/f2b13a.svg
