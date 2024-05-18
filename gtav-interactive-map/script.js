@@ -1,5 +1,5 @@
 // true false;
-let insertMarkersMode = false;
+let insertMarkersMode = true;
 
 let saveData = {
     version: "0.2.0",
@@ -16,6 +16,8 @@ let saveData = {
     lsCountyShow: false,
     completionDataFigurines: new Set(),
     lastPickFigurines: "hideAll",
+    completionDataPlayingCards: new Set(),
+    lastPickPlayingCards: "hideAll",
     completionDataMovieProps: new Set(),
     lastPickMovieProps: "hideAll",
 };
@@ -23,7 +25,7 @@ let saveData = {
 function loadInSaveData(dataStr) {
     if (dataStr != null) {
         let temporarySaveData = JSON.parse(dataStr, (key, value) =>
-            ["completionDataFigurines", "completionDataMovieProps"].includes(
+            ["completionDataFigurines", "completionDataMovieProps", "completionDataPlayingCards"].includes(
                 key
             )
                 ? new Set(value)
@@ -51,6 +53,11 @@ function loadInSaveData(dataStr) {
                 temporarySaveData.version = "0.2.0";
             }
             if (temporarySaveData.version === "0.2.0") {
+                temporarySaveData.version = "0.3.0";
+                temporarySaveData.completionDataPlayingCards = new Set();
+                temporarySaveData.lastPickPlayingCards = "hideAll";
+            }
+            if (temporarySaveData.version === "0.3.0") {
                 // Current version
             }
             // Here you check the version tag in the savedata and modify it to match the data right after - this way old save data will not be lost.
@@ -205,7 +212,7 @@ const constantData = {
             className: "collectible truck",
             iconSize: [22, 22],
         }),
-        truck: L.divIcon({
+        playingCard: L.divIcon({
             className: "collectible playingcard",
             iconSize: [22, 22],
         }),
@@ -295,6 +302,35 @@ async function loadDynamicData() {
                     onMapMarkers,
                     "lastPickFigurines",
                     "completionDataFigurines"
+                );
+            })
+    );
+    x.push(
+        fetch("./assets/playingCards.json")
+            .then((r) => r.json())
+            .then((r) => {
+                let onMapMarkers = genericCollectibleInsert(
+                    "playingCardsDiv",
+                    r,
+                    constantData.icons.playingCard,
+                    "completionDataPlayingCards",
+                    "lastPickPlayingCards",
+                    "markers-collectibles-playingcards-completion-number",
+                    54
+                );
+
+                document.getElementById(
+                    "markers-collectibles-playingcards-completion-number"
+                ).innerHTML = `Completed ${saveData.completionDataPlayingCards.size}/54`;
+
+                completionButtonsDivUpdates(
+                    "markers-collectibles-playingcards-show-all-btn",
+                    "markers-collectibles-playingcards-hide-all-btn",
+                    "markers-collectibles-playingcards-show-completed-btn",
+                    "markers-collectibles-playingcards-hide-completed-btn",
+                    onMapMarkers,
+                    "lastPickPlayingCards",
+                    "completionDataPlayingCards"
                 );
             })
     );
@@ -780,7 +816,6 @@ function genericCollectibleInsert(
 ) {
     let parentDiv = document.getElementById(parentDivId);
     for (let i = startIndex; i - startIndex < array.length; i++) {
-        if (array[i - startIndex].coords.length === 0) continue;
 
         let icon = iconData;
         if (iconData instanceof Array) for (let [possibleIcon, index] of iconData) {

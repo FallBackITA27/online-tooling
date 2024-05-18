@@ -42,6 +42,7 @@
                             <ul>
                                 <li><a href="#markers-collectibles-actionfigures">Action Figures</a></li>
                                 <li><a href="#markers-collectibles-movieprops">Movie Props</a></li>
+                                <li><a href="#markers-collectibles-playingcards">Playing Cards</a></li>
                             </ul>
                         </li>
                     </ol>
@@ -98,6 +99,16 @@
         <p id="markers-collectibles-movieprops-completion-number">Completed: 0/10</p>
         <div id="moviePropsDiv" class="collectibleDiv">
         </div>
+        <hr class="fifty">
+        <div id="markers-collectibles-playingcards"></div>
+        <h2>Playing Cards</h2>
+        <button id="markers-collectibles-playingcards-show-all-btn">Show All</button>
+        <button id="markers-collectibles-playingcards-hide-all-btn">Hide All</button>
+        <button id="markers-collectibles-playingcards-show-completed-btn">Show Completed</button>
+        <button id="markers-collectibles-playingcards-hide-completed-btn">Hide Completed</button>
+        <p id="markers-collectibles-playingcards-completion-number">Completed: 0/54</p>
+        <div id="playingCardsDiv" class="collectibleDiv">
+        </div>
         <hr>
         <div id="settings"></div>
         <h2>Settings</h2>
@@ -148,8 +159,11 @@
         <div id="changelog"></div>
         <h2>Changelog</h2>
         <p>All the dates are in <a target="_blank" href="https://en.wikipedia.org/wiki/Central_European_Time">CET</a>.</p>
+        <h3>2024 - 05 - 18 | 14:05 | Version 0.3.0</h3>
+        <p>Now all Playing Cards have datapoints, icons and they're listed. Also made a way to give different icons to the same set of </p>
+        <p class="sig">Signed: FalB</p>
         <h3>2024 - 05 - 16 | 12:05 | Version 0.2.0</h3>
-        <p>All movie props now have a fixed location. Also finally decided on a version release scheme: bigUpdate.smallUpdate.minorFix</p>
+        <p>All movie props now have proper data points. Also finally decided on a version release scheme: bigUpdate.smallUpdate.minorFix</p>
         <p class="sig">Signed: FalB</p>
         <h3>2024 - 05 - 16 | 12:05 | Version 0.1.2</h3>
         <p>Started work on Movie Props - all the ones with a fixed location now show up on the map.</p>
@@ -179,15 +193,17 @@
         <div id="faq"></div>
         <h2>FAQ</h2>
         <h3>- Why did you make this?</h3>
-        <p>In short: I ran into GTALens' 250 completed marks limit. In full: I know why they made that a thing and I know why they made themselves make that a thing. They created themselves a problem by saving data on their servers, which cost money to maintain, and instead of moving this data to the local browser storage they decided to make a subscription. I absolutely despise this marketing, so, seen the lack of open source Interactive maps, I tried to make what I could of their minified Vue source code and other interactive maps out there to make a good, up to date, open source one. If you're a GTALens developer reading this: Fuck you. I like your work on GTACars, I like your work on these small useless statistical tools (like the map, which I had to remake for my own use, or the weather tool, which I remade out of spite), but fuck you, for pushing a feature that could've been completely free into your subscription service. Also fuck you for using Vue, because you made me lose more hours of my life than I should've lost; Client side code shouldn't be hidden, it should be as readable as possible, because users need to know what is happening on their machine. Your lack of willingness to use Vanilla JS shouldn't result in a worse product.</p>
+        <p>In short: I ran into GTALens' 250 completed marks limit. In full: I know why they made that a thing and I know why they made themselves make that a thing. They created themselves a problem by saving data on their servers, which cost money to maintain, and instead of moving this data to the local browser storage they decided to make a subscription. I absolutely despise this marketing, so, seen the lack of open source Interactive maps, I tried to make what I could of their minified Vue source code and other interactive maps out there to make a good, up to date, open source one. If you're a GTALens developer reading this: Fuck you. I like your work on GTACars, I like your work on these small useless statistical tools (like the map, which I had to remake for my own use, or the weather tool, which I remade out of spite), but fuck you, for pushing a feature that could've been completely free into your subscription service. Also fuck you for using Vue, because you made me lose more hours of my life than I should've lost; Client side code shouldn't be hidden, it should be as readable as possible, because users need to know what is happening on their machine. Your lack of willingness to use Vanilla JS shouldn't result in a worse product.</p><p class="sig">Signed: FalB</p>
+        <h3>- What about gtaweb.eu?</h3>
+        <p>While I admire their work, I have one fundamental issue with it: It's closed source. They opened a Github... but it's just for the issue tracker, which I found insulting to a degree. I most admire their `GTAO Toolkit`, which is something I plan to recreate and make better. Their UI is bad, but I shouldn't speak on that, given I'm not a web designer, I suck at that. Sadly I found out about their site way to late, and having already put several hours of work into this project of mine, I just decided to continue.</p><p class="sig">Signed: FalB</p>
         <h3>- How do I contribute?</h3>
-        <p>If you know anything about JavaScript, or coding really, just make a pull request on the github page. Otherwise, contact me on discord @fallbackita27 (or anywhere else really) and I'll see what could be done. I'll eventually make a roadmap.</p>
+        <p>If you know anything about JavaScript, or coding really, just make a pull request on the github page. Otherwise, contact me on discord @fallbackita27 (or anywhere else really) and I'll see what could be done. I'll eventually make a roadmap.</p><p class="sig">Signed: FalB</p>
         <h3>- I found a bug!</h3>
-        <p>Read the answer above.</p>
+        <p>Read the answer above.</p><p class="sig">Signed: FalB</p>
         <h3>- I wanna move my data from PC to Mobile</h3>
-        <p>This is  possible. I don't want to and can't make a profile system (not without handling the website's backend first, and sadly Github doesn't allow that). This is why websites require a subscription often times, because to do this you need a server (which takes money to maintain), which is often bought from some service (like DigitalOcean) and that service needs to be paid (at least 8 euros a month). I want to keep this free for myself and for everyone else. I made a manual way to move data from one place to the other, which is the Backup Data section in the Settings, but it's far from automatic. I might be banking on some Browser features (like Mozilla's Firefox Sync) eventually, if that's even possible.</p>
+        <p>This is  possible. I don't want to and can't make a profile system (not without handling the website's backend first, and sadly Github doesn't allow that). This is why websites require a subscription often times, because to do this you need a server (which takes money to maintain), which is often bought from some service (like DigitalOcean) and that service needs to be paid (at least 8 euros a month). I want to keep this free for myself and for everyone else. I made a manual way to move data from one place to the other, which is the Backup Data section in the Settings, but it's far from automatic. I might be banking on some Browser features (like Mozilla's Firefox Sync) eventually, if that's even possible.</p><p class="sig">Signed: FalB</p>
         <h3>- How was this made?</h3>
-        <p>You probably can't code if you're asking this. If I figured it out from obfuscated and minified code, you can figure it out from perfectly clear open source code; I think I'm not wrong in my assumption. Thank <a href="https://leafletjs.com/">leaflet</a>, it's used for tons of actually serious maps.</p>
+        <p>You probably can't code if you're asking this. If I figured it out from obfuscated and minified code, you can figure it out from perfectly clear open source code; I think I'm not wrong in my assumption. Thank <a href="https://leafletjs.com/">leaflet</a>, it's used for tons of actually serious maps.</p><p class="sig">Signed: FalB</p>
         <div style="height:200px"></div>
         <!-- Spacer! -->
     </main>
