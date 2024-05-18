@@ -25,8 +25,7 @@ function multiMarkerCollectibleInsert(
 ) {
     let parentDiv = document.getElementById(parentDivId);
     for (let i = startIndex; i - startIndex < array.flat().length; i++) {
-        let icon = iconData;
-        if (iconData instanceof Array) icon = iconFromIconData(iconData, i);
+        let icon = iconFromIconData(iconData, i);
         let hr = document.createElement("hr");
         hr.classList.add("twentyfive");
         parentDiv.append(hr);
@@ -143,6 +142,7 @@ function genericCollectibleInsert(
 ) {
     let parentDiv = document.getElementById(parentDivId);
     for (let i = startIndex; i - startIndex < array.length; i++) {
+        let icon = iconFromIconData(iconData, i);
 
         let actualMarker = L.marker(array[i - startIndex].coords, {
             icon: icon,
