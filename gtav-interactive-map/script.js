@@ -8,8 +8,8 @@ const weekday = [
     "Sunday",
 ];
 
-// true false;
-let insertMarkersMode = false;
+// true false
+let insertMarkersMode = true;
 
 let saveData = {
     version: "0.4.0",
@@ -306,7 +306,7 @@ const constantData = {
             className: "collectible truck",
             iconSize: [22, 22],
         }),
-        truck: L.divIcon({
+        signalJammer: L.divIcon({
             className: "collectible signaljammer",
             iconSize: [22, 22],
         }),
@@ -437,7 +437,7 @@ async function addSVGOverlay(url, coords) {
 
 if (insertMarkersMode)
     map.on("click", async function (e) {
-        alert(e.latlng.lat.toFixed(6) + ", " + e.latlng.lng.toFixed(6));
+        alert(e.latlng.lat.toFixed(6).replace(/0+$/, "") + ", " + e.latlng.lng.toFixed(6).replace(/0+$/, ""));
     });
 addSVGOverlay("overlayedMapItems/kortzCenter.svg", [
     [20.6, -145],
