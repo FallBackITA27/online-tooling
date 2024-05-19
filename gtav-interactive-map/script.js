@@ -9,7 +9,7 @@ const weekday = [
 ];
 
 // true false
-let insertMarkersMode = true;
+let insertMarkersMode = false;
 
 let saveData = {
     version: "0.5.0",
