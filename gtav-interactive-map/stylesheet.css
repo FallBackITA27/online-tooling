@@ -190,6 +190,10 @@ ul {
     background-image: url("gtavIcons/truck.svg");
 }
 
+.lamardavis {
+    background-image: url("gtavIcons/lamarDavis.svg")
+}
+
 .playingcard {
     background-image: url("gtavIcons/playingCard.svg");
 }

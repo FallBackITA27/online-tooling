@@ -9,10 +9,10 @@ const weekday = [
 ];
 
 // true false
-let insertMarkersMode = false;
+const insertMarkersMode = false;
 
 let saveData = {
-    version: "0.5.0",
+    version: "0.6.0",
     selectedTileLayer: "game",
     lastZoom: 2,
     lastCoords: [38.959409, -75.410156],
@@ -41,6 +41,8 @@ let saveData = {
     lastPickMovieProps: "hideAll",
     completionDataSignalJammers: new Set(),
     lastPickSignalJammers: "hideAll",
+    completionDataLDOrganics: new Set(),
+    lastPickLDOrganics: "hideAll",
 };
 
 function loadInSaveData(dataStr) {
@@ -51,6 +53,7 @@ function loadInSaveData(dataStr) {
                 "completionDataMovieProps",
                 "completionDataPlayingCards",
                 "completionDataSignalJammers",
+                "completionDataLDOrganics",
             ].includes(key)
                 ? new Set(value)
                 : value
@@ -102,6 +105,11 @@ function loadInSaveData(dataStr) {
                 temporarySaveData.lastPickSignalJammers = "hideAll";
             }
             if (temporarySaveData.version === "0.5.0") {
+                temporarySaveData.version = "0.6.0";
+                temporarySaveData.completionDataLDOrganics = new Set();
+                temporarySaveData.lastPickLDOrganics = "hideAll";
+            }
+            if (temporarySaveData.version === "0.6.0") {
                 // Current version
             }
             // Here you check the version tag in the savedata and modify it to match the data right after - this way old save data will not be lost.
@@ -314,6 +322,14 @@ const constantData = {
             className: "collectible playingcard",
             iconSize: [22, 22],
         }),
+        lamarDavis: L.divIcon({
+            className: "lamardavis",
+            iconSize: [22, 22],
+        }),
+        ldOrganics: L.divIcon({
+            className: "collectible lamardavis",
+            iconSize: [22, 22],
+        }),
         moviePropTruckRumpo: L.divIcon({
             className: "collectible truck movieprop rumpo",
             iconSize: [22, 22],
@@ -393,6 +409,11 @@ async function loadDynamicData() {
         fetch("./assets/signalJammers.json")
             .then((r) => r.json())
             .then(loadSignalJammers)
+    );
+    x.push(
+        fetch("./assets/ldOrganics.json")
+            .then((r) => r.json())
+            .then(loadLDOrganics)
     );
     // x.push(
     //     fetch("./assets/buildings.json").then(r=>r.json()).then(r=>{
