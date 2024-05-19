@@ -12,7 +12,7 @@ const weekday = [
 let insertMarkersMode = true;
 
 let saveData = {
-    version: "0.4.0",
+    version: "0.5.0",
     selectedTileLayer: "game",
     lastZoom: 2,
     lastCoords: [38.959409, -75.410156],
