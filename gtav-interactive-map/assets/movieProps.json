@@ -1,146 +1,110 @@
 {
     "singleMarker": [
         {
-        "coords": [1.988126, -117.366943],
-        "description": "Behind the trash can next to Richard Solomon's Office entrance",
-        "image_url": "",
-        "video_id": "Fee75Fz5jRw",
-        "video_timestamp": 78,
-        "display_name": "Meltdown Film Reel"
-      },
-      {
-        "coords": [-13.806075, -95.29541],
-        "description": "Inside the office of the Strip Club",
-        "image_url": "",
-        "video_id": "Fee75Fz5jRw",
-        "video_timestamp": 105,
-        "display_name": "WIFA Award"
-      },
-      {
-        "coords": [12.768946, -77.55249],
-        "description": "Inside the casino's restroom, between two urinals",
-        "image_url": "",
-        "video_id": "Fee75Fz5jRw",
-        "video_timestamp": 149,
-        "display_name": "Indian Headdress"
-      },
-      {
-        "coords": [65.617488, -46.856689],
-        "description": "On the edge of the hippie camp.",
-        "image_url": "",
-        "video_id": "Fee75Fz5jRw",
-        "video_timestamp": 176,
-        "display_name": "Alien Head"
-      },
-      {
-        "coords": [56.872998, -97.976070],
-        "description": "On the front porch of a random house",
-        "image_url": "",
-        "video_id": "Fee75Fz5jRw",
-        "video_timestamp": 203,
-        "display_name": "Mummy Head"
-      },
-      {
-        "coords": [60.962444, -144.18457],
-        "description": "Right inside the tower building of Fort Zancudo",
-        "image_url": "",
-        "video_id": "Fee75Fz5jRw",
-        "video_timestamp": 223,
-        "display_name": "Meltdown Clapperboard"
-      },
-      {
-        "coords": [73.472235, -120.783691],
-        "description": "On the sacrifice rock of the Altruist camp",
-        "image_url": "",
-        "video_id": "Fee75Fz5jRw",
-        "video_timestamp": 243,
-        "display_name": "Monster Mask"
-      }
+            "coords": [1.988126, -117.366943],
+            "description": "Behind the trash can next to Richard Solomon's Office entrance",
+            "image_url": "",
+            "video_id": "Fee75Fz5jRw",
+            "video_timestamp": 78,
+            "display_name": "Meltdown Film Reel"
+        },
+        {
+            "coords": [-13.806075, -95.29541],
+            "description": "Inside the office of the Strip Club",
+            "image_url": "",
+            "video_id": "Fee75Fz5jRw",
+            "video_timestamp": 105,
+            "display_name": "WIFA Award"
+        },
+        {
+            "coords": [12.768946, -77.55249],
+            "description": "Inside the casino's restroom, between two urinals",
+            "image_url": "",
+            "video_id": "Fee75Fz5jRw",
+            "video_timestamp": 149,
+            "display_name": "Indian Headdress"
+        },
+        {
+            "coords": [65.617488, -46.856689],
+            "description": "On the edge of the hippie camp.",
+            "image_url": "",
+            "video_id": "Fee75Fz5jRw",
+            "video_timestamp": 176,
+            "display_name": "Alien Head"
+        },
+        {
+            "coords": [56.872998, -97.97607],
+            "description": "On the front porch of a random house",
+            "image_url": "",
+            "video_id": "Fee75Fz5jRw",
+            "video_timestamp": 203,
+            "display_name": "Mummy Head"
+        },
+        {
+            "coords": [60.962444, -144.18457],
+            "description": "Right inside the tower building of Fort Zancudo",
+            "image_url": "",
+            "video_id": "Fee75Fz5jRw",
+            "video_timestamp": 223,
+            "display_name": "Meltdown Clapperboard"
+        },
+        {
+            "coords": [73.472235, -120.783691],
+            "description": "On the sacrifice rock of the Altruist camp",
+            "image_url": "",
+            "video_id": "Fee75Fz5jRw",
+            "video_timestamp": 243,
+            "display_name": "Monster Mask"
+        }
     ],
     "multiMarker": [
-      {
-        "display_name": "Mummy Coffin",
-        "coords": [
-          [13.475106, -110.577393],
-          [17.350638, -143.547363],
-          [14.583583, -134.187012]
-        ],
-        "description": [
-          "In the Pony parked at the Epsilon Program's Center; Shows up as a blue dot on the map",
-          "In the Pony parked at the Kortz Center; Shows up as a blue dot on the map",
-          "In the Pony driving north in North Rockford Drive; Shows up as a blue dot on the map"
-        ],
-        "video_id": [
-          "Fee75Fz5jRw",
-          "du8W6hMV4Z0",
-          "jg7HKWax7qc"
-        ],
-        "video_timestamp": [
-          342,
-          433,
-          263
-        ],
-        "image_url": [
-          "",
-          "",
-          ""
-        ]
-      },
-      {
-        "display_name": "Tiger Skin",
-        "coords": [
-          [-2.855263, -87.923584],
-          [-7.438731, -82.331543],
-          [-5.145657, -86.484375]
-        ],
-        "description": [
-          "In the Rumpo parked in Simmet Alley; Shows up as a blue dot on the map",
-          "In the Rumpo parked next to Lester's Garment Factory; Shows up as a blue dot on the map",
-          "In the Rumpo driving east on San Andreas Avenue Bridge; Shows up as a blue dot on the map"
-        ],
-        "video_id": [
-          "LoTfKuvC_x0",
-          "Fee75Fz5jRw",
-          "du8W6hMV4Z0"
-        ],
-        "video_timestamp": [
-          503,
-          286,
-          492
-        ],
-        "image_url": [
-          "",
-          "",
-          ""
-        ]
-      },
-      {
-        "display_name": "Globe",
-        "coords": [
-          [80.371707, -76.838379],
-          [80.542908, -98.756104],
-          [79.655668, -103.370361]
-        ],
-        "description": [
-          "In the Rebel driving east down the highway; Shows up as a blue dot on the map",
-          "In the Rebel parked next the ran down supermarket in Paleto Bay; Shows up as a blue dot on the map",
-          "In the Rebel parked nearby The Hen House in Paleto Bay; Shows up as a blue dot on the map"
-        ],
-        "video_id": [
-          "LoTfKuvC_x0",
-          "UW-OxrR9kiA",
-          "Fee75Fz5jRw"
-        ],
-        "video_timestamp": [
-          538,
-          288,
-          401
-        ],
-        "image_url": [
-          "",
-          "",
-          ""
-        ]
-      }
+        {
+            "display_name": "Mummy Coffin",
+            "coords": [
+                [13.475106, -110.577393],
+                [17.350638, -143.547363],
+                [14.583583, -134.187012]
+            ],
+            "description": [
+                "In the Pony parked at the Epsilon Program's Center; Shows up as a blue dot on the map",
+                "In the Pony parked at the Kortz Center; Shows up as a blue dot on the map",
+                "In the Pony driving north in North Rockford Drive; Shows up as a blue dot on the map"
+            ],
+            "video_id": ["Fee75Fz5jRw", "du8W6hMV4Z0", "jg7HKWax7qc"],
+            "video_timestamp": [342, 433, 263],
+            "image_url": ["", "", ""]
+        },
+        {
+            "display_name": "Tiger Skin",
+            "coords": [
+                [-2.855263, -87.923584],
+                [-7.438731, -82.331543],
+                [-5.145657, -86.484375]
+            ],
+            "description": [
+                "In the Rumpo parked in Simmet Alley; Shows up as a blue dot on the map",
+                "In the Rumpo parked next to Lester's Garment Factory; Shows up as a blue dot on the map",
+                "In the Rumpo driving east on San Andreas Avenue Bridge; Shows up as a blue dot on the map"
+            ],
+            "video_id": ["LoTfKuvC_x0", "Fee75Fz5jRw", "du8W6hMV4Z0"],
+            "video_timestamp": [503, 286, 492],
+            "image_url": ["", "", ""]
+        },
+        {
+            "display_name": "Globe",
+            "coords": [
+                [80.371707, -76.838379],
+                [80.542908, -98.756104],
+                [79.655668, -103.370361]
+            ],
+            "description": [
+                "In the Rebel driving east down the highway; Shows up as a blue dot on the map",
+                "In the Rebel parked next the ran down supermarket in Paleto Bay; Shows up as a blue dot on the map",
+                "In the Rebel parked nearby The Hen House in Paleto Bay; Shows up as a blue dot on the map"
+            ],
+            "video_id": ["LoTfKuvC_x0", "UW-OxrR9kiA", "Fee75Fz5jRw"],
+            "video_timestamp": [538, 288, 401],
+            "image_url": ["", "", ""]
+        }
     ]
 }
