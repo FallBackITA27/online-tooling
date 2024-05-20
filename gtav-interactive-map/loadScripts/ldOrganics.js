@@ -5,6 +5,7 @@ function loadLDOrganics(r) {
         constantData.icons.ldOrganics,
         "completionDataLDOrganics",
         "lastPickLDOrganics",
+        "ldOrganics",
         "markers-collectibles-ldorganics-completion-number",
         100
     );

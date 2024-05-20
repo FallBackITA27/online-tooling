@@ -5,6 +5,7 @@ function loadSignalJammers(r) {
         constantData.icons.signalJammer,
         "completionDataSignalJammers",
         "lastPickSignalJammers",
+        "signalJammers",
         "markers-collectibles-signaljammers-completion-number",
         50
     );

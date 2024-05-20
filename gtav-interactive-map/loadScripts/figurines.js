@@ -5,6 +5,7 @@ function loadFigurines(r) {
         constantData.icons.figurine,
         "completionDataFigurines",
         "lastPickFigurines",
+        "figurines",
         "markers-collectibles-actionfigures-completion-number",
         100
     );

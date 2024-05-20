@@ -5,6 +5,7 @@ function loadMovieProps(r) {
         constantData.icons.movieProp,
         "completionDataMovieProps",
         "lastPickMovieProps",
+        "movieProps",
         "markers-collectibles-movieprops-completion-number",
         10
     );

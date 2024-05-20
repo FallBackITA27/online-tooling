@@ -5,6 +5,7 @@ function loadPlayingCards(r) {
         constantData.icons.playingCard,
         "completionDataPlayingCards",
         "lastPickPlayingCards",
+        "playingCards",
         "markers-collectibles-playingcards-completion-number",
         54
     );

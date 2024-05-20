@@ -144,6 +144,7 @@ function genericCollectibleInsert(
     iconData,
     completionSetName,
     lastPickName,
+    imgName,
     completedAmountParagraphId = null,
     maxSetSize = saveData[completionSetName].size,
     onMapMarkers = [],
@@ -234,6 +235,13 @@ function genericCollectibleInsert(
             if (!map.hasLayer(actualMarker)) actualMarker.addTo(map);
         });
         parentDiv.append(zoom);
+        parentDiv.append(document.createElement("br"));
+
+        let img = document.createElement("img");
+        img.alt = "No image here? Submit one yourself on Github.";
+        img.src = `./imgs/${imgName}/${i}.jpg`;
+        img.classList.add("prevImage");
+        parentDiv.append(img);
 
         actualMarker.on("click", () =>
             markerClickEvent(linkDiv, array[i - startIndex].coords, title)
