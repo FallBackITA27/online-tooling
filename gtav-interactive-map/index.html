@@ -42,6 +42,8 @@
     <script defer src="./loadScripts/playingCards.js"></script>
     <script defer src="./loadScripts/signalJammers.js"></script>
     <script defer src="./loadScripts/ldOrganics.js"></script>
+    <script defer src="./loadScripts/kosatkaFastTravels.js"></script>
+    <script defer src="./loadScripts/cayoPericoScopeOutPlane.js"></script>
     <script defer src="./script.js"></script>
 </head>
 <body>
@@ -70,6 +72,13 @@
                                 <li><a href="#markers-collectibles-playingcards">Playing Cards</a></li>
                                 <li><a href="#markers-collectibles-signaljammers">Signal Jammers</a></li>
                                 <li><a href="#markers-collectibles-ldorganics">LD Organics Products</a></li>
+                            </ul>
+                        </li>
+                        <li type="i">
+                            <a href="#markers-cayopericoheist">Cayo Perico Heist</a>
+                            <ul>
+                                <li><a href="#markers-cayopericoheist-kosatkafasttravels">Kosatka Fast Travel Locations</a></li>
+                                <li><a href="#markers-cayopericoheist-scopeoutplane">Scope Out Plane Locations</a></li>
                             </ul>
                         </li>
                     </ol>
@@ -156,10 +165,24 @@
         <p id="markers-collectibles-ldorganics-completion-number">Completed: 0/100</p>
         <div id="ldOrganicsDiv" class="collectibleDiv">
         </div>
-        <hr>
-        <div id="settings"></div>
-        <h2>Settings</h2>
         <hr class="fifty">
+        <div id="markers-cayopericoheist"></div>
+        <h2>Cayo Perico Heist</h2>
+        <p>This will be a list of markers useful for the Cayo Perico Heist</p>
+        <div id="markers-cayopericoheist-kosatkafasttravels"></div>
+        <hr class="fifty">
+        <h2>Kosatka Fast Travels</h2>
+        <button id="markers-cayopericoheist-kosatkafasttravels-show-all-btn">Show All</button>
+        <button id="markers-cayopericoheist-kosatkafasttravels-hide-all-btn">Hide All</button>
+        <div id="kosatkaFastTravelsDiv"></div>
+        <hr class="fifty">
+        <div id="markers-cayopericoheist-scopeoutplane"></div>
+        <h2>Scoping Out Planes</h2>
+        <button id="markers-cayopericoheist-scopeoutplane-show-all-btn">Show All</button>
+        <button id="markers-cayopericoheist-scopeoutplane-hide-all-btn">Hide All</button>
+        <div id="scopeOutPlaneDiv"></div>
+        <hr>
+        <h2>Settings</h2>
         <h3>Use different map style</h3>
         <div id="mapStyleRadioButtons">
             <div>
@@ -206,6 +229,10 @@
         <hr>
         <div id="changelog"></div>
         <h2>Changelog</h2>
+        <p>All the dates are in <a target="_blank" href="https://en.wikipedia.org/wiki/Central_European_Time">CET</a>.</p>
+        <h3>2024 - 05 - 20 | 18:43 | Version 0.8.0</h3>
+        <p>Added some Cayo Perico related locations. Will add more at a later date.</p>
+        <p class="sig">Signed: FalB</p>
         <p>All the dates are in <a target="_blank" href="https://en.wikipedia.org/wiki/Central_European_Time">CET</a>.</p>
         <h3>2024 - 05 - 20 | 15:58 | Version 0.7.0</h3>
         <p>Added a few images. Nothing interesting. Also added <a href="//ogp.me">opengraph</a> tags.</p>

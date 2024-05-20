@@ -12,7 +12,7 @@ const weekday = [
 const insertMarkersMode = false;
 
 let saveData = {
-    version: "0.7.0",
+    version: "0.8.0",
     selectedTileLayer: "game",
     lastZoom: 2,
     lastCoords: [38.959409, -75.410156],
@@ -43,6 +43,8 @@ let saveData = {
     lastPickSignalJammers: "hideAll",
     completionDataLDOrganics: new Set(),
     lastPickLDOrganics: "hideAll",
+    lastPickKosatkaFastTravels: "hideAll",
+    lastPickCayoPericoScopeOutPlane: "hideAll",
 };
 
 function loadInSaveData(dataStr) {
@@ -113,6 +115,11 @@ function loadInSaveData(dataStr) {
                 temporarySaveData.version = "0.7.0";
             }
             if (temporarySaveData.version === "0.7.0") {
+                temporarySaveData.version = "0.8.0";
+                temporarySaveData.lastPickKosatkaFastTravels = "hideAll";
+                temporarySaveData.lastPickCayoPericoScopeOutPlane = "hideAll";
+            }
+            if (temporarySaveData.version === "0.8.0") {
                 // Current version
             }
             // Here you check the version tag in the savedata and modify it to match the data right after - this way old save data will not be lost.
@@ -305,6 +312,14 @@ const constantData = {
             className: "collectible figurine",
             iconSize: [22, 22],
         }),
+        kosatka: L.divIcon({
+            className: "kosatka",
+            iconSize: [22, 22],
+        }),
+        plane: L.divIcon({
+            className: "plane",
+            iconSize: [22, 22],
+        }),
         movieProp: L.divIcon({
             className: "collectible movieprop",
             iconSize: [22, 22],
@@ -417,6 +432,16 @@ async function loadDynamicData() {
         fetch("./assets/ldOrganics.json")
             .then((r) => r.json())
             .then(loadLDOrganics)
+    );
+    x.push(
+        fetch("./assets/kosatkaFastTravels.json")
+            .then((r) => r.json())
+            .then(loadKosatkaFastTravels)
+    );
+    x.push(
+        fetch("./assets/cayoPericoScopeOutPlane.json")
+            .then((r) => r.json())
+            .then(loadCayoPericoScopeOutPlane)
     );
     // x.push(
     //     fetch("./assets/buildings.json").then(r=>r.json()).then(r=>{

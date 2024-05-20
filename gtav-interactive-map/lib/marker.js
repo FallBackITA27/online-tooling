@@ -15,6 +15,54 @@ function iconFromIconData(iconData, i) {
     return iconData;
 }
 
+function genericMarkers(
+    parentDivId,
+    array,
+    iconData,
+    lastPickName,
+    onMapMarkers = [],
+    startIndex = 0
+) {
+    let parentDiv = document.getElementById(parentDivId);
+    for (let i = startIndex; i - startIndex < array.length; i++) {
+        let icon = iconFromIconData(iconData, i);
+
+        let actualMarker = L.marker(array[i - startIndex].coords, {
+            icon: icon,
+            title: array[i - startIndex].display_name,
+        });
+        onMapMarkers.push(actualMarker);
+
+        let hr = document.createElement("hr");
+        hr.classList.add("twentyfive");
+        parentDiv.append(hr);
+
+        let linkDiv = document.createElement("div");
+        linkDiv.id =
+            "#" + array[i - startIndex].display_name.replaceAll(" ", "-");
+        parentDiv.append(linkDiv);
+
+        let title = document.createElement("h2");
+        title.innerHTML = array[i - startIndex].display_name;
+        parentDiv.append(title);
+
+        let zoom = document.createElement("button");
+        zoom.innerHTML = "Zoom to Marker";
+        zoom.addEventListener("click", function () {
+            document.getElementById("gui_toggle_button_div").click();
+            map.setView(array[i - startIndex].coords, 7);
+            if (!map.hasLayer(actualMarker)) actualMarker.addTo(map);
+        });
+        parentDiv.append(zoom);
+
+        actualMarker.on("click", () =>
+            markerClickEvent(linkDiv, array[i - startIndex].coords, title)
+        );
+    }
+
+    return onMapMarkers;
+}
+
 function multiMarkerCollectibleInsert(
     parentDivId,
     array,

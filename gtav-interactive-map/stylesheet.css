@@ -183,6 +183,14 @@ ul {
     flex-direction: column;
 }
 
+.kosatka {
+    background-image: url("gtavIcons/kosatka.svg");
+}
+
+.plane {
+    background-image: url("gtavIcons/plane.svg");
+}
+
 .figurine {
     background-image: url("gtavIcons/figurine.svg");
 }

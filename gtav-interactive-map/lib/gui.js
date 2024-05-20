@@ -94,3 +94,41 @@ function completionButtonsDivUpdates(
         hideCompleted();
     }
 }
+
+function displayButtons(showAllButtonId, hideAllButtonId, onMapMarkers, lastPickName) {
+    function showAll() {
+        saveData[lastPickName] = "showAll";
+        saveDataSave();
+        let i = 0;
+        for (let markers of onMapMarkers) {
+            if (!(markers instanceof Array)) {
+                markers = [markers];
+            }
+            for (let marker of markers) {
+                if (!map.hasLayer(marker)) marker.addTo(map);
+            }
+            i++;
+        }
+    }
+
+    function hideAll() {
+        saveData[lastPickName] = "hideAll";
+        saveDataSave();
+        for (let markers of onMapMarkers) {
+            if (!(markers instanceof Array)) {
+                markers = [markers];
+            }
+            for (let marker of markers)
+                if (map.hasLayer(marker)) marker.remove();
+        }
+    }
+
+    document.getElementById(showAllButtonId).addEventListener("click", showAll);
+    document.getElementById(hideAllButtonId).addEventListener("click", hideAll);
+
+    if (saveData[lastPickName] === "showAll") {
+        showAll();
+    } else if (saveData[lastPickName] === "hideAll") {
+        hideAll();
+    }
+}
