@@ -12,7 +12,7 @@ const weekday = [
 const insertMarkersMode = false;
 
 let saveData = {
-    version: "0.6.0",
+    version: "0.7.0",
     selectedTileLayer: "game",
     lastZoom: 2,
     lastCoords: [38.959409, -75.410156],
@@ -110,6 +110,9 @@ function loadInSaveData(dataStr) {
                 temporarySaveData.lastPickLDOrganics = "hideAll";
             }
             if (temporarySaveData.version === "0.6.0") {
+                temporarySaveData.version = "0.7.0";
+            }
+            if (temporarySaveData.version === "0.7.0") {
                 // Current version
             }
             // Here you check the version tag in the savedata and modify it to match the data right after - this way old save data will not be lost.
