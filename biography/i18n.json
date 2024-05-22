@@ -33,6 +33,22 @@
     },
     "whatis_gtaocompanion": {
         "it": "In una dimostrazione di pura pazzia nel frontend, questo è il mio secondo progetto per grandezza ad oggi. Una mappa completamente interattiva di GTA Online, con una GUI fatta per assistere l'utente nelle mansioni più meccaniche del gioco.",
-        "en": "In a demonstration of pure frontend madness, this is my second biggest project to date. A fully interactive map of GTA Online, which has a GUI made for assisting the user in the most mechanical tasks of the game"
+        "en": "In a demonstration of pure frontend madness, this is my second biggest project to date. A fully interactive map of GTA Online, which has a GUI made for assisting the user in the most mechanical tasks of the game."
+    },
+    "activism": {
+        "it": "Attivismo",
+        "en": "Activism"
+    },
+    "about_activism": {
+        "it": "Sono sempre stata e probabilmente sempre sarò un'Anarcocomunista. Ho svolto molteplici studi negli anni per quanto riguarda la teoria politica e non ho mai avuto paura di nasconderlo. Ho fatto attivismo come membro cuore di OSA Ravenna, prima di abbandonare per ragioni di tipo personale. Sono una donna trans, il che m'ha regalato un sacco d'esperienza legata alla oppressione e all'odio, i quali devo ad oggi ancora soffrire all'interno del mio stesso domicilio.",
+        "en": "I always have been and probably always will be an Anarchocommunist. I spent many years studying the theory behind politics and I never had much fear in hiding it. I have been an activist as a core member of OSA Ravenna, before abandoning due to unrelated personal issues. I'm a transwoman, which has gifted me with a ton of experience related to oppression and hatred, which I had to and still endure inside my own household."
+    },
+    "school": {
+        "it": "Scuola",
+        "en": "School"
+    },
+    "about_school": {
+        "it": "Ho svolto un anno di Liceo Linguistico all'Ilaria Alpi di Cesena, dove mi bocciarono; mi trovai male coi professori e litigai abbastanza spesso particolarmente con le prof di Francese, di Italiano e di Latino. Per quanto io sia ancora interessata nelle materie, mi trovai sott'obbligo di cambiare scuola, e mi misi al ITIS di Ravenna, dove ho passato il primo anno, e sono stata bocciata in seconda sempre per problemi personali. Pianifico di tornarci ad inizio anno scolastico 2024/2025, quando alcuni di questi problemi dovrebbero esser stati alleviati parecchio",
+        "en": "I did a year of Linguistics Lyceum at the Ilaria Alpi of Cesena, where I got flunked; I had several issues with my professors and I would argue a lot with my French, Italian and Latin professors. Although I'm still highly interested in those subjects, I found myself under the obligation to change school, and I got myself into the ITIS of Ravenna, where I passed my first year, and got flunked on the second year due to personal issues. I plan to come back to it at the start of the 2024/2025 school year, as some of these issues should be solved."
     }
 }

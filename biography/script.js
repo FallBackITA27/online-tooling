@@ -16,3 +16,5 @@ document.getElementById("bilingual_btn").addEventListener("click", function() {
     currentLang === "en" ? currentLang = "it" : currentLang = "en";
     reloadLangs();
 });
+
+// 1190569740
