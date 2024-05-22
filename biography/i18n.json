@@ -6,5 +6,33 @@
     "shortbio": {
         "it": "Benvenutə alla mia breve bio. Mi chiamo Leila Massanova, anche conosciuta online come `FallBackITA27` o più semplicemente come `FalB`.",
         "en": "Welcome to my short bio! I'm Leila Massanova, known online as `FallBackITA27` or more simply `FalB`."
+    },
+    "bilingual": {
+        "it": "Sono bilingue, sono Italiana, nata e cresciuta in Romagna (seppur con forti nessi sia a Napoli che Perugia) e sono fluente in Inglese dai miei 10 anni, circa.",
+        "en": "I'm bilingual, I'm a native Italian, born and raised in Romagna (though with strong ties to both Naples and Perugia), and I'm fluent in English ever since I was about 10 years old."
+    },
+    "bilingual_btn": {
+        "it": "Clicca qui per cambiare lingua.",
+        "en": "Click here to change language."
+    },
+    "coding": {
+        "it": "Informatica",
+        "en": "Software Engineering"
+    },
+    "aboutthispage": {
+        "it": "Questa pagina non è esattamente la più impressionante, l'ho fatta in pochissimi minuti, ma ecco qua un paio di progetti ai quali puoi dare un'occhiata!",
+        "en": "This page isn't exactly the most impressive page ever, this was thrown together in a few minutes, but here are some projects of mine you can check out!"
+    },
+    "mycodingexp": {
+        "it": "Programmo da quando avevo 14 anni (Estate 2022), e in questo lungo lungo periodo di tempo sono stata capace di imparare molteplici linguaggi.",
+        "en": "I've been coding ever since I was 14 (Summer 2022), and in this long long time I've been able to learn several programming languages."
+    },
+    "whatis_mkitalia": {
+        "it": "MKItalia è il sito di classifiche italiane inerente a tutti i Mario Kart. Si tratta del progetto principale a cui lavoro, completamente da sola. Seppur incompleto e la mia pausa dal progetto non lo aiuta a crescere, penso sia una dimostrazione delle mie abilità.",
+        "en": "MKItalia is the website that contains the Italian leaderboards of every Mario Kart. It's the main project I work on, despite being completely alone. Even though it's not complete, and my recent break from it doesn't help it grow, I think it's a testament to my skills."
+    },
+    "whatis_gtaocompanion": {
+        "it": "In una dimostrazione di pura pazzia nel frontend, questo è il mio secondo progetto per grandezza ad oggi. Una mappa completamente interattiva di GTA Online, con una GUI fatta per assistere l'utente nelle mansioni più meccaniche del gioco.",
+        "en": "In a demonstration of pure frontend madness, this is my second biggest project to date. A fully interactive map of GTA Online, which has a GUI made for assisting the user in the most mechanical tasks of the game"
     }
 }

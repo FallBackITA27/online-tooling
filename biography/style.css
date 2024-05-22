@@ -3,3 +3,11 @@
     aspect-ratio: 1/1;
     height: 150px;
 }
+
+body {
+    text-align: center;
+}
+
+hr {
+    width: 75vw;
+}
