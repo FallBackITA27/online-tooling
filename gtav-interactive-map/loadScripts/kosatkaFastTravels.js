@@ -1,5 +1,5 @@
 function loadKosatkaFastTravels(r) {
-    let onMapMarkers = genericMarkers(
+    let layers = genericMarkers(
         "kosatkaFastTravelsDiv",
         r,
         constantData.icons.kosatka,
@@ -9,7 +9,7 @@ function loadKosatkaFastTravels(r) {
     displayButtons(
         "markers-cayopericoheist-kosatkafasttravels-show-all-btn",
         "markers-cayopericoheist-kosatkafasttravels-hide-all-btn",
-        onMapMarkers,
+        layers,
         "lastPickKosatkaFastTravels"
     );
 }

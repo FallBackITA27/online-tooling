@@ -3,7 +3,7 @@ function completionButtonsDivUpdates(
     hideAllButtonId,
     showCompletedButtonId,
     hideCompletedButtonId,
-    onMapMarkers,
+    layers,
     lastPickName,
     completionSetName
 ) {
@@ -11,14 +11,11 @@ function completionButtonsDivUpdates(
         saveData[lastPickName] = "showAll";
         saveDataSave();
         let i = 0;
-        for (let markers of onMapMarkers) {
-            if (!(markers instanceof Array)) {
-                markers = [markers];
-            }
-            for (let marker of markers) {
-                if (!map.hasLayer(marker)) marker.addTo(map);
+        for (let layer of layers) {
+            for (let object of layer) {
+                if (!map.hasLayer(object)) object.addTo(map);
                 if (saveData[completionSetName].has(i))
-                    marker._icon.classList.add("completed");
+                    object._icon.classList.add("completed");
             }
             i++;
         }
@@ -27,29 +24,22 @@ function completionButtonsDivUpdates(
     function hideAll() {
         saveData[lastPickName] = "hideAll";
         saveDataSave();
-        for (let markers of onMapMarkers) {
-            if (!(markers instanceof Array)) {
-                markers = [markers];
-            }
-            for (let marker of markers)
-                if (map.hasLayer(marker)) marker.remove();
-        }
+        for (let layer of layers)
+            for (let object of layer)
+                if (map.hasLayer(object)) object.remove();
     }
 
     function showCompleted() {
         saveData[lastPickName] = "showCompleted";
         saveDataSave();
         let i = 0;
-        for (let markers of onMapMarkers) {
-            if (!(markers instanceof Array)) {
-                markers = [markers];
-            }
-            for (let marker of markers) {
+        for (let layer of layers) {
+            for (let object of layer) {
                 if (saveData[completionSetName].has(i)) {
-                    if (!map.hasLayer(marker)) marker.addTo(map);
-                    marker._icon.classList.add("completed");
+                    if (!map.hasLayer(object)) object.addTo(map);
+                    object._icon.classList.add("completed");
                 } else {
-                    marker.remove();
+                    object.remove();
                 }
             }
             i++;
@@ -60,15 +50,12 @@ function completionButtonsDivUpdates(
         saveData[lastPickName] = "hideCompleted";
         saveDataSave();
         let i = 0;
-        for (let markers of onMapMarkers) {
-            if (!(markers instanceof Array)) {
-                markers = [markers];
-            }
-            for (let marker of markers) {
+        for (let layer of layers) {
+            for (let object of layer) {
                 if (!saveData[completionSetName].has(i)) {
-                    if (!map.hasLayer(marker)) marker.addTo(map);
+                    if (!map.hasLayer(object)) object.addTo(map);
                 } else {
-                    marker.remove();
+                    object.remove();
                 }
             }
             i++;
@@ -95,32 +82,21 @@ function completionButtonsDivUpdates(
     }
 }
 
-function displayButtons(showAllButtonId, hideAllButtonId, onMapMarkers, lastPickName) {
+function displayButtons(showAllButtonId, hideAllButtonId, layers, lastPickName) {
     function showAll() {
         saveData[lastPickName] = "showAll";
         saveDataSave();
-        let i = 0;
-        for (let markers of onMapMarkers) {
-            if (!(markers instanceof Array)) {
-                markers = [markers];
-            }
-            for (let marker of markers) {
-                if (!map.hasLayer(marker)) marker.addTo(map);
-            }
-            i++;
-        }
+        for (let layer of layers)
+            for (let object of layer)
+                if (!map.hasLayer(object)) object.addTo(map);
     }
 
     function hideAll() {
         saveData[lastPickName] = "hideAll";
         saveDataSave();
-        for (let markers of onMapMarkers) {
-            if (!(markers instanceof Array)) {
-                markers = [markers];
-            }
-            for (let marker of markers)
-                if (map.hasLayer(marker)) marker.remove();
-        }
+        for (let layer of layers) 
+            for (let object of layer)
+                if (map.hasLayer(object)) object.remove();
     }
 
     document.getElementById(showAllButtonId).addEventListener("click", showAll);

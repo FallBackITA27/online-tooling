@@ -1,5 +1,5 @@
 function loadLDOrganics(r) {
-    let onMapMarkers = genericCollectibleInsert(
+    let layers = genericCollectibleInsert(
         "ldOrganicsDiv",
         r,
         constantData.icons.ldOrganics,
@@ -19,7 +19,7 @@ function loadLDOrganics(r) {
         "markers-collectibles-ldorganics-hide-all-btn",
         "markers-collectibles-ldorganics-show-completed-btn",
         "markers-collectibles-ldorganics-hide-completed-btn",
-        onMapMarkers,
+        layers,
         "lastPickLDOrganics",
         "completionDataLDOrganics"
     );

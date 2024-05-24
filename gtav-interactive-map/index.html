@@ -33,7 +33,9 @@
 
     <script defer src="https://www.youtube.com/iframe_api"></script>
 
+    <script defer src="./lib/layers.js"></script>
     <script defer src="./lib/marker.js"></script>
+    <script defer src="./lib/path.js"></script>
     <script defer src="./lib/gui.js"></script>
     <script defer src="./loadScripts/counties.js"></script>
     <script defer src="./loadScripts/mapStyle.js"></script>
@@ -44,6 +46,9 @@
     <script defer src="./loadScripts/ldOrganics.js"></script>
     <script defer src="./loadScripts/kosatkaFastTravels.js"></script>
     <script defer src="./loadScripts/cayoPericoScopeOutPlane.js"></script>
+    <script defer src="./loadScripts/cayoPericoPlasmaCutter.js"></script>
+    <script defer src="./loadScripts/cayoPericoFingerprintCloner.js"></script>
+    <script defer src="./loadScripts/cayoPericoCuttingTorch.js"></script>
     <script defer src="./script.js"></script>
 </head>
 <body>
@@ -79,6 +84,9 @@
                             <ul>
                                 <li><a href="#markers-cayopericoheist-kosatkafasttravels">Kosatka Fast Travel Locations</a></li>
                                 <li><a href="#markers-cayopericoheist-scopeoutplane">Scope Out Plane Locations</a></li>
+                                <li><a href="#markers-cayopericoheist-plasmacutter">Plasma Cutter Locations</a></li>
+                                <li><a href="#markers-cayopericoheist-fingerprintcloner">Fingerprint Cloner Locations</a></li>
+                                <li><a href="#markers-cayopericoheist-cuttingtorch">Cutting Torch Locations</a></li>
                             </ul>
                         </li>
                     </ol>
@@ -181,7 +189,26 @@
         <button id="markers-cayopericoheist-scopeoutplane-show-all-btn">Show All</button>
         <button id="markers-cayopericoheist-scopeoutplane-hide-all-btn">Hide All</button>
         <div id="scopeOutPlaneDiv"></div>
+        <hr class="fifty">
+        <div id="markers-cayopericoheist-plasmacutter"></div>
+        <h2>Plasma Cutter Locations</h2>
+        <button id="markers-cayopericoheist-plasmacutter-show-all-btn">Show All</button>
+        <button id="markers-cayopericoheist-plasmacutter-hide-all-btn">Hide All</button>
+        <div id="plasmaCutterDiv"></div>
+        <hr class="fifty">
+        <div id="markers-cayopericoheist-fingerprintcloner"></div>
+        <h2>Fingerprint Cloner Locations</h2>
+        <button id="markers-cayopericoheist-fingerprintcloner-show-all-btn">Show All</button>
+        <button id="markers-cayopericoheist-fingerprintcloner-hide-all-btn">Hide All</button>
+        <div id="fingerprintClonerDiv"></div>
+        <hr class="fifty">
+        <div id="markers-cayopericoheist-cuttingtorch"></div>
+        <h2>Cutting Torch Locations</h2>
+        <button id="markers-cayopericoheist-cuttingtorch-show-all-btn">Show All</button>
+        <button id="markers-cayopericoheist-cuttingtorch-hide-all-btn">Hide All</button>
+        <div id="cuttingTorchDiv"></div>
         <hr>
+        <div id="settings">
         <h2>Settings</h2>
         <h3>Use different map style</h3>
         <div id="mapStyleRadioButtons">
@@ -198,6 +225,11 @@
                 <input type="radio" value="print" name="mapStyle" class="mapStyle">
             </div>
         </div>
+        <h3>Debug Options</h3>
+        <label>
+            Allows you to get the coordinates of wherever you're clicking
+            <input type="checkbox" id="pointerMode">
+        </label>
         <hr class="fifty">
         <h3>Backup Data</h3>
         <p>Press the button to backup your data in a file</p>
@@ -230,6 +262,9 @@
         <div id="changelog"></div>
         <h2>Changelog</h2>
         <p>All the dates are in <a target="_blank" href="https://en.wikipedia.org/wiki/Central_European_Time">CET</a>.</p>
+        <h3>2024 - 05 - 24 | 18:13 | Version 0.9.0</h3>
+        <p>Reformatted a bunch of code, added Cayo Perico Heist Prep locations: Cutting Torch, Fingerprint Cloner, Plasma Cutter</p>
+        <p class="sig">Signed: FalB</p>
         <h3>2024 - 05 - 23 | 00:45 | Version 0.8.1</h3>
         <p>Added all the images for LD Organics Products with the combined work of three people (myself, <a href="//x.com/PeIIoh">Pelloh</a> and EditChris).</p>
         <p class="sig">Signed: FalB</p>

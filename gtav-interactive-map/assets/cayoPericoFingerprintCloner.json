@@ -1,14 +1,14 @@
 [
     {
         "coords": [
-            [-15.749963, -98.85498],
-            [-4.598327, -123.640137]
+            [-33.897777, -76.036377],
+            [-12.103781, -97.009277]
         ],
         "marker_points": [0, 1],
-        "names": ["Strawberry Safehouse", "Del Perro Robbery"],
-        "display_name": "Plasma Cutter 1",
+        "names": ["Cypress Flats Warehouse", "Pillbox Hill Archive"],
+        "display_name": "Fingerprint Cloner 1",
         "options": {
-            "color": "#f00",
+            "color": "#f0f",
             "interactive": false
         },
         "tooltip_options": {
@@ -18,14 +18,14 @@
     },
     {
         "coords": [
-            [-13.218556, -89.725342],
-            [7.373362, -114.554443]
+            [-17.329664, -93.416748],
+            [3.601142, -84.100342]
         ],
         "marker_points": [0, 1],
-        "names": ["Strawberry Safehouse", "Rockford Hills Robbery"],
-        "display_name": "Plasma Cutter 2",
+        "names": ["Strawberry Warehouse", "East Vinewood Archive"],
+        "display_name": "Fingerprint Cloner 2",
         "options": {
-            "color": "#0f0",
+            "color": "#ff0",
             "interactive": false
         },
         "tooltip_options": {
@@ -35,14 +35,14 @@
     },
     {
         "coords": [
-            [-19.394068, -79.013672],
-            [5.987607, -111.390381]
+            [-17.612611, -77.651367],
+            [-7.1554, -129.594727]
         ],
         "marker_points": [0, 1],
-        "names": ["La Mesa Safehouse", "Rockford Hills Robbery"],
-        "display_name": "Plasma Cutter 3",
+        "names": ["La Mesa Warehouse", "Del Perro Archive"],
+        "display_name": "Fingerprint Cloner 3",
         "options": {
-            "color": "#00f",
+            "color": "#0ff",
             "interactive": false
         },
         "tooltip_options": {

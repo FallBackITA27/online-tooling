@@ -1,5 +1,5 @@
 function loadMovieProps(r) {
-    let onMapMarkers = genericCollectibleInsert(
+    let layers = genericCollectibleInsert(
         "moviePropsDiv",
         r.singleMarker,
         constantData.icons.movieProp,
@@ -14,7 +14,7 @@ function loadMovieProps(r) {
         "markers-collectibles-movieprops-completion-number"
     ).innerHTML = `Completed ${saveData.completionDataMovieProps.size}/10`;
 
-    onMapMarkers = multiMarkerCollectibleInsert(
+    layers = multiMarkerCollectibleInsert(
         "moviePropsDiv",
         r.multiMarker,
         [
@@ -26,7 +26,7 @@ function loadMovieProps(r) {
         "lastPickMovieProps",
         "markers-collectibles-movieprops-completion-number",
         10,
-        onMapMarkers,
+        layers,
         7
     );
 
@@ -35,7 +35,7 @@ function loadMovieProps(r) {
         "markers-collectibles-movieprops-hide-all-btn",
         "markers-collectibles-movieprops-show-completed-btn",
         "markers-collectibles-movieprops-hide-completed-btn",
-        onMapMarkers,
+        layers,
         "lastPickMovieProps",
         "completionDataMovieProps"
     );

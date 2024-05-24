@@ -1,0 +1,44 @@
+[
+    {
+        "display_name": "La Puerta Apartments",
+        "coords": [-8.678779, -106.929932],
+        "options": {
+            "radius": 10,
+            "color": "transparent",
+            "fillColor": "#ff0",
+            "fillOpacity": 0.5
+        },
+        "tooltip_options": {
+            "permanent": false,
+            "direction": "center"
+        }
+    },
+    {
+        "display_name": "Mile High Club",
+        "coords": [-7.972198, -100.458984],
+        "options": {
+            "radius": 10,
+            "color": "transparent",
+            "fillColor": "#ff0",
+            "fillOpacity": 0.5
+        },
+        "tooltip_options": {
+            "permanent": false,
+            "direction": "center"
+        }
+    },
+    {
+        "display_name": "Mansion construction site",
+        "coords": [14.849231, -115.367432],
+        "options": {
+            "radius": 10,
+            "color": "transparent",
+            "fillColor": "#ff0",
+            "fillOpacity": 0.5
+        },
+        "tooltip_options": {
+            "permanent": false,
+            "direction": "center"
+        }
+    }
+]

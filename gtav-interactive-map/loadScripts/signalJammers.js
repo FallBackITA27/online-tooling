@@ -1,5 +1,5 @@
 function loadSignalJammers(r) {
-    let onMapMarkers = genericCollectibleInsert(
+    let layers = genericCollectibleInsert(
         "signalJammersDiv",
         r,
         constantData.icons.signalJammer,
@@ -19,7 +19,7 @@ function loadSignalJammers(r) {
         "markers-collectibles-signaljammers-hide-all-btn",
         "markers-collectibles-signaljammers-show-completed-btn",
         "markers-collectibles-signaljammers-hide-completed-btn",
-        onMapMarkers,
+        layers,
         "lastPickSignalJammers",
         "completionDataSignalJammers"
     );

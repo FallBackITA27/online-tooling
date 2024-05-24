@@ -1,5 +1,5 @@
 function loadFigurines(r) {
-    let onMapMarkers = genericCollectibleInsert(
+    let layers = genericCollectibleInsert(
         "actionFiguresDiv",
         r,
         constantData.icons.figurine,
@@ -19,7 +19,7 @@ function loadFigurines(r) {
         "markers-collectibles-actionfigures-hide-all-btn",
         "markers-collectibles-actionfigures-show-completed-btn",
         "markers-collectibles-actionfigures-hide-completed-btn",
-        onMapMarkers,
+        layers,
         "lastPickFigurines",
         "completionDataFigurines"
     );

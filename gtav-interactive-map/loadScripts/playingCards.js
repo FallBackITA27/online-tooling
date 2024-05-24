@@ -1,5 +1,5 @@
 function loadPlayingCards(r) {
-    let onMapMarkers = genericCollectibleInsert(
+    let layers = genericCollectibleInsert(
         "playingCardsDiv",
         r,
         constantData.icons.playingCard,
@@ -19,7 +19,7 @@ function loadPlayingCards(r) {
         "markers-collectibles-playingcards-hide-all-btn",
         "markers-collectibles-playingcards-show-completed-btn",
         "markers-collectibles-playingcards-hide-completed-btn",
-        onMapMarkers,
+        layers,
         "lastPickPlayingCards",
         "completionDataPlayingCards"
     );

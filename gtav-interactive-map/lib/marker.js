@@ -20,7 +20,7 @@ function genericMarkers(
     array,
     iconData,
     lastPickName,
-    onMapMarkers = [],
+    layers = [],
     startIndex = 0
 ) {
     let parentDiv = document.getElementById(parentDivId);
@@ -31,7 +31,7 @@ function genericMarkers(
             icon: icon,
             title: array[i - startIndex].display_name,
         });
-        onMapMarkers.push(actualMarker);
+        layers.pushMapLayer(actualMarker, i);
 
         let hr = document.createElement("hr");
         hr.classList.add("twentyfive");
@@ -60,7 +60,52 @@ function genericMarkers(
         );
     }
 
-    return onMapMarkers;
+    return layers;
+}
+
+function genericCircles(parentDivId, array, layers = [], startIndex = 0) {
+    let parentDiv = document.getElementById(parentDivId);
+    for (let i = startIndex; i - startIndex < array.length; i++) {
+        let actualMarker = L.circleMarker(
+            array[i - startIndex].coords,
+            array[i - startIndex].options
+        );
+        layers.pushMapLayer(actualMarker, i);
+
+        if (array[i - startIndex].tooltip_options !== false)
+            actualMarker.bindTooltip(
+                array[i - startIndex].display_name,
+                array[i - startIndex].tooltip_options
+            );
+
+        let hr = document.createElement("hr");
+        hr.classList.add("twentyfive");
+        parentDiv.append(hr);
+
+        let linkDiv = document.createElement("div");
+        linkDiv.id =
+            "#" + array[i - startIndex].display_name.replaceAll(" ", "-");
+        parentDiv.append(linkDiv);
+
+        let title = document.createElement("h2");
+        title.innerHTML = array[i - startIndex].display_name;
+        parentDiv.append(title);
+
+        let zoom = document.createElement("button");
+        zoom.innerHTML = "Zoom to Marker";
+        zoom.addEventListener("click", function () {
+            document.getElementById("gui_toggle_button_div").click();
+            map.setView(array[i - startIndex].coords, 7);
+            if (!map.hasLayer(actualMarker)) actualMarker.addTo(map);
+        });
+        parentDiv.append(zoom);
+
+        actualMarker.on("click", () =>
+            markerClickEvent(linkDiv, array[i - startIndex].coords, title)
+        );
+    }
+
+    return layers;
 }
 
 function multiMarkerCollectibleInsert(
@@ -71,7 +116,7 @@ function multiMarkerCollectibleInsert(
     lastPickName,
     completedAmountParagraphId = null,
     maxSetSize = saveData[completionSetName].size,
-    onMapMarkers = [],
+    layers = [],
     startIndex = 0
 ) {
     let parentDiv = document.getElementById(parentDivId);
@@ -99,8 +144,6 @@ function multiMarkerCollectibleInsert(
         markAsCompleteBtn.type = "checkbox";
         markAsCompleteBtn.checked = saveData[completionSetName].has(i);
         parentDiv.append(markAsCompleteBtn);
-
-        let sharedMarkers = [];
 
         for (let j = 0; j < array[i - startIndex].coords.length; j++) {
             let actualMarker = L.marker(array[i - startIndex].coords[j], {
@@ -144,15 +187,13 @@ function multiMarkerCollectibleInsert(
             );
 
             parentDiv.append(zoom);
-            sharedMarkers.push(actualMarker);
+            layers.pushMapLayer(actualMarker, i);
         }
-
-        onMapMarkers.push(sharedMarkers);
 
         markAsCompleteBtn.addEventListener("click", (e) => {
             if (e.target.checked) {
                 saveData[completionSetName].add(i);
-                for (let actualMarker of sharedMarkers) {
+                for (let actualMarker of layers[i]) {
                     if (saveData[lastPickName] === "showCompleted") {
                         if (!map.hasLayer(actualMarker))
                             actualMarker.addTo(map);
@@ -164,7 +205,7 @@ function multiMarkerCollectibleInsert(
                 }
             } else {
                 saveData[completionSetName].delete(i);
-                for (let actualMarker of sharedMarkers) {
+                for (let actualMarker of layers[i]) {
                     if (saveData[lastPickName] === "showCompleted") {
                         if (map.hasLayer(actualMarker)) actualMarker.remove();
                     } else if (saveData[lastPickName] === "hideCompleted") {
@@ -183,7 +224,7 @@ function multiMarkerCollectibleInsert(
         });
     }
 
-    return onMapMarkers;
+    return layers;
 }
 
 function genericCollectibleInsert(
@@ -195,7 +236,7 @@ function genericCollectibleInsert(
     imgName,
     completedAmountParagraphId = null,
     maxSetSize = saveData[completionSetName].size,
-    onMapMarkers = [],
+    layers = [],
     startIndex = 0
 ) {
     let parentDiv = document.getElementById(parentDivId);
@@ -206,7 +247,7 @@ function genericCollectibleInsert(
             icon: icon,
             title: array[i - startIndex].display_name,
         });
-        onMapMarkers.push(actualMarker);
+        layers.pushMapLayer(actualMarker, i);
 
         let hr = document.createElement("hr");
         hr.classList.add("twentyfive");
@@ -296,5 +337,5 @@ function genericCollectibleInsert(
         );
     }
 
-    return onMapMarkers;
+    return layers;
 }

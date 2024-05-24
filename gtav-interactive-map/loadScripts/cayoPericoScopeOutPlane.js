@@ -1,5 +1,5 @@
 function loadCayoPericoScopeOutPlane(r) {
-    let onMapMarkers = genericMarkers(
+    let layers = genericMarkers(
         "scopeOutPlaneDiv",
         r,
         constantData.icons.plane,
@@ -9,7 +9,7 @@ function loadCayoPericoScopeOutPlane(r) {
     displayButtons(
         "markers-cayopericoheist-scopeoutplane-show-all-btn",
         "markers-cayopericoheist-scopeoutplane-hide-all-btn",
-        onMapMarkers,
+        layers,
         "lastPickCayoPericoScopeOutPlane"
     );
 }

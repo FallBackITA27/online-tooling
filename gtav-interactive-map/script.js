@@ -8,11 +8,9 @@ const weekday = [
     "Sunday",
 ];
 
-// true false
-const insertMarkersMode = false;
-
 let saveData = {
-    version: "0.8.1",
+    version: "0.9.0",
+    pointerMode: false,
     selectedTileLayer: "game",
     lastZoom: 2,
     lastCoords: [38.959409, -75.410156],
@@ -45,6 +43,9 @@ let saveData = {
     lastPickLDOrganics: "hideAll",
     lastPickKosatkaFastTravels: "hideAll",
     lastPickCayoPericoScopeOutPlane: "hideAll",
+    lastPickCayoPericoPlasmaCutter: "hideAll",
+    lastPickCayoPericoFingerprintCloner: "hideAll",
+    lastPickCayoPericoCuttingTorch: "hideAll",
 };
 
 function loadInSaveData(dataStr) {
@@ -123,6 +124,14 @@ function loadInSaveData(dataStr) {
                 temporarySaveData.version = "0.8.1";
             }
             if (temporarySaveData.version === "0.8.1") {
+                temporarySaveData.version = "0.9.0";
+                temporarySaveData.lastPickCayoPericoPlasmaCutter = "hideAll";
+                temporarySaveData.lastPickCayoPericoCuttingTorch = "hideAll";
+                temporarySaveData.lastPickCayoPericoFingerprintCloner =
+                    "hideAll";
+                temporarySaveData.pointerMode = false;
+            }
+            if (temporarySaveData.version === "0.9.0") {
                 // Current version
             }
             // Here you check the version tag in the savedata and modify it to match the data right after - this way old save data will not be lost.
@@ -289,9 +298,12 @@ setInterval(async function () {
         "timers-paragraph-vipregistration",
         "Time's up!",
         "You can now spin the Casino's wheel again.",
-        14400000,
+        14400000
     );
-    startTimer("timers-button-vipregistration", saveData.vipRegistrationDuration);
+    startTimer(
+        "timers-button-vipregistration",
+        saveData.vipRegistrationDuration
+    );
 }, 500);
 
 let map = L.map("map", {
@@ -402,7 +414,35 @@ function saveDataSave() {
     );
 }
 
+let clickDebugFunction = function (e) {
+    alert(
+        e.latlng.lat.toFixed(6).replace(/0+$/, "") +
+            ", " +
+            e.latlng.lng.toFixed(6).replace(/0+$/, "")
+    );
+};
+
 async function loadDynamicData() {
+    if (saveData.pointerMode !== document.getElementById("pointerMode").checked)
+        document.getElementById("pointerMode").click();
+    if (saveData.pointerMode) {
+        map.on("click", clickDebugFunction);
+    } else {
+        map.off("click", clickDebugFunction);
+    }
+    document
+        .getElementById("pointerMode")
+        .addEventListener("change", function () {
+            saveData.pointerMode =
+                document.getElementById("pointerMode").checked;
+            if (saveData.pointerMode) {
+                map.on("click", clickDebugFunction);
+            } else {
+                map.off("click", clickDebugFunction);
+            }
+            saveDataSave();
+        });
+
     document
         .getElementById("videoplayer")
         .addEventListener("click", function (e) {
@@ -446,6 +486,21 @@ async function loadDynamicData() {
             .then((r) => r.json())
             .then(loadCayoPericoScopeOutPlane)
     );
+    x.push(
+        fetch("./assets/cayoPericoPlasmaCutter.json")
+            .then((r) => r.json())
+            .then(loadCayoPericoPlasmaCutter)
+    );
+    x.push(
+        fetch("./assets/cayoPericoFingerprintCloner.json")
+            .then((r) => r.json())
+            .then(loadCayoPericoFingerprintCloner)
+    );
+    x.push(
+        fetch("./assets/cayoPericoCuttingTorch.json")
+            .then((r) => r.json())
+            .then(loadCayoPericoCuttingTorch)
+    );
     // x.push(
     //     fetch("./assets/buildings.json").then(r=>r.json()).then(r=>{
     //         for (marker of r) {
@@ -487,10 +542,6 @@ async function addSVGOverlay(url, coords) {
     L.svgOverlay(svg, coords).addTo(map);
 }
 
-if (insertMarkersMode)
-    map.on("click", async function (e) {
-        alert(e.latlng.lat.toFixed(6).replace(/0+$/, "") + ", " + e.latlng.lng.toFixed(6).replace(/0+$/, ""));
-    });
 addSVGOverlay("overlayedMapItems/kortzCenter.svg", [
     [20.6, -145],
     [14.8, -139.7],
