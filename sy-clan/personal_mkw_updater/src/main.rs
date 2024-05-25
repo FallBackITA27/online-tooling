@@ -42,8 +42,6 @@ const ARTHUR_CHADSOFT: [&str; 1] =
     ["https://tt.chadsoft.co.uk/players/A5/0190B9301E0C7A.json?times=pb"];
 const CEDERIC_CHADSOFT: [&str; 1] =
     ["https://tt.chadsoft.co.uk/players/9E/D97E25E8149323.json?times=pb"];
-const LOWERCASELETTERS_CHADSOFT: [&str; 1] =
-    ["https://tt.chadsoft.co.uk/players/6A/FF24C4CFA23817.json?times=pb"];
 const BROOKE_CHADSOFT: [&str; 2] = [
     "https://tt.chadsoft.co.uk/players/61/101EC38298F2A9.json?times=pb",
     "https://tt.chadsoft.co.uk/players/97/9EC358D2E93FF6.json?times=pb",
@@ -171,8 +169,6 @@ async fn main() {
     handles.push(user!(ARTHUR_CHADSOFT, "arthur"));
     println!("Started Cederic");
     handles.push(user!(CEDERIC_CHADSOFT, "cederic"));
-    println!("Started LCL");
-    handles.push(user!(LOWERCASELETTERS_CHADSOFT, "lowercaseletters"));
     println!("Started Danny");
     handles.push(user!(DANNYBOY_CHADSOFT, "dannyboy"));
     println!("Started Ragemodepigeon");
