@@ -183,8 +183,16 @@ ul {
     flex-direction: column;
 }
 
+.weaponLocker {
+    background-image: url("gtavIcons/weaponLocker.svg");
+}
+
 .kosatka {
     background-image: url("gtavIcons/kosatka.svg");
+}
+
+.kosatka.red {
+    background-image: url("gtavIcons/kosatkaRed.svg");
 }
 
 .plane {
@@ -204,7 +212,7 @@ ul {
 }
 
 .lamardavis {
-    background-image: url("gtavIcons/lamarDavis.svg")
+    background-image: url("gtavIcons/lamarDavis.svg");
 }
 
 .playingcard {

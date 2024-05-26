@@ -1,0 +1,35 @@
+{
+    "singleMarkers": [
+        {
+            "display_name": "Penris Building",
+            "coords": [0.35156, -92.955322]
+        },
+        {
+            "display_name": "Schlongberg Sachs Center",
+            "coords": [-2.866235, -101.239014]
+        },
+        {
+            "display_name": "707 Vespucci",
+            "coords": [-4.82826, -101.733398]
+        }
+    ],
+    "line": [
+        {
+            "coords": [
+                [-45.470265, -86.009904],
+                [36.686041, -42.835693]
+            ],
+            "marker_points": [0, 1],
+            "names": ["Merryweather HQ", "Palmer-Taylor Power Station"],
+            "display_name": "Weapon Loadout",
+            "options": {
+                "color": "#AF4",
+                "interactive": false
+            },
+            "tooltip_options": {
+                "permanent": true,
+                "direction": "center"
+            }
+        }
+    ]
+}

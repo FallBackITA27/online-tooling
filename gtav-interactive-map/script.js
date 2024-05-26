@@ -9,7 +9,7 @@ const weekday = [
 ];
 
 let saveData = {
-    version: "0.9.0",
+    version: "0.10.0",
     pointerMode: false,
     selectedTileLayer: "game",
     lastZoom: 2,
@@ -46,6 +46,8 @@ let saveData = {
     lastPickCayoPericoPlasmaCutter: "hideAll",
     lastPickCayoPericoFingerprintCloner: "hideAll",
     lastPickCayoPericoCuttingTorch: "hideAll",
+    lastPickCayoPericoWeaponLocker: "hideAll",
+    lastPickCayoPericoKosatkaApproachVehicle: "hideAll",
 };
 
 function loadInSaveData(dataStr) {
@@ -132,6 +134,12 @@ function loadInSaveData(dataStr) {
                 temporarySaveData.pointerMode = false;
             }
             if (temporarySaveData.version === "0.9.0") {
+                temporarySaveData.version = "0.10.0";
+                temporarySaveData.lastPickCayoPericoWeaponLocker = "hideAll";
+                temporarySaveData.lastPickCayoPericoKosatkaApproachVehicle =
+                    "hideAll";
+            }
+            if (temporarySaveData.version === "0.10.0") {
                 // Current version
             }
             // Here you check the version tag in the savedata and modify it to match the data right after - this way old save data will not be lost.
@@ -331,6 +339,10 @@ const constantData = {
             className: "kosatka",
             iconSize: [22, 22],
         }),
+        kosatkaRed: L.divIcon({
+            className: "kosatka red",
+            iconSize: [22, 22],
+        }),
         plane: L.divIcon({
             className: "plane",
             iconSize: [22, 22],
@@ -373,6 +385,10 @@ const constantData = {
         }),
         moviePropTruckRebel: L.divIcon({
             className: "collectible truck movieprop rebel",
+            iconSize: [22, 22],
+        }),
+        weaponLocker: L.divIcon({
+            className: "weaponLocker",
             iconSize: [22, 22],
         }),
     },
@@ -500,6 +516,16 @@ async function loadDynamicData() {
         fetch("./assets/cayoPericoCuttingTorch.json")
             .then((r) => r.json())
             .then(loadCayoPericoCuttingTorch)
+    );
+    x.push(
+        fetch("./assets/cayoPericoWeaponLoadout.json")
+            .then((r) => r.json())
+            .then(loadCayoPericoWeaponLoadout)
+    );
+    x.push(
+        fetch("./assets/cayoPericoKosatkaApproachVehicle.json")
+            .then((r) => r.json())
+            .then(loadCayoPericoKosatkaApproachVehicle)
     );
     // x.push(
     //     fetch("./assets/buildings.json").then(r=>r.json()).then(r=>{
