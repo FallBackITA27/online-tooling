@@ -195,6 +195,14 @@ ul {
     background-image: url("gtavIcons/kosatkaRed.svg");
 }
 
+.boat {
+    background-image: url("gtavIcons/boat.svg");
+}
+
+.semitruck {
+    background-image: url("gtavIcons/semitruck.svg");
+}
+
 .plane {
     background-image: url("gtavIcons/plane.svg");
 }

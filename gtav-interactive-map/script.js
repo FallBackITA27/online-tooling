@@ -391,6 +391,14 @@ const constantData = {
             className: "weaponLocker",
             iconSize: [22, 22],
         }),
+        boat: L.divIcon({
+            className: "boat",
+            iconSize: [22, 22],
+        }),
+        semitruck: L.divIcon({
+            className: "semitruck",
+            iconSize: [22, 22],
+        }),
     },
 };
 
