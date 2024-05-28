@@ -51,6 +51,7 @@
     <script defer src="./loadScripts/cayoPericoCuttingTorch.js"></script>
     <script defer src="./loadScripts/cayoPericoWeaponLoadout.js"></script>
     <script defer src="./loadScripts/cayoPericoKosatkaApproachVehicle.js"></script>
+    <script defer src="./loadScripts/cayoPericoLongfinApproachVehicle.js"></script>
     <script defer src="./script.js"></script>
 </head>
 <body>
@@ -91,6 +92,7 @@
                                 <li><a href="#markers-cayopericoheist-cuttingtorch">Cutting Torch Locations</a></li>
                                 <li><a href="#markers-cayopericoheist-weaponloadout">Weapon Loadout Locations</a></li>
                                 <li><a href="#markers-cayopericoheist-kosatkaapproachvehicle">Approach Vehicle / Kosatka Locations</a></li>
+                                <li><a href="#markers-cayopericoheist-longfinapproachvehicle">Approach Vehicle / Longfin Locations</a></li>
                             </ul>
                         </li>
                     </ol>
@@ -223,6 +225,12 @@
         <button id="markers-cayopericoheist-kosatkaapproachvehicle-show-all-btn">Show All</button>
         <button id="markers-cayopericoheist-kosatkaapproachvehicle-hide-all-btn">Hide All</button>
         <div id="kosatkaApproachVehicleDiv"></div>
+        <hr class="fifty">
+        <div id="markers-cayopericoheist-longfinapproachvehicle"></div>
+        <h2>Approach Vehicle / Longfin Locations</h2>
+        <button id="markers-cayopericoheist-longfinapproachvehicle-show-all-btn">Show All</button>
+        <button id="markers-cayopericoheist-longfinapproachvehicle-hide-all-btn">Hide All</button>
+        <div id="longfinApproachVehicleDiv"></div>
         <hr>
         <div id="settings">
         <h2>Settings</h2>
@@ -340,7 +348,7 @@
         <div id="faq"></div>
         <h2>FAQ</h2>
         <h3>- Why did you make this?</h3>
-        <p>In short: I ran into GTALens' 250 completed marks limit. In full: I know why they made that a thing and I know why they made themselves make that a thing. They created themselves a problem by saving data on their servers, which cost money to maintain, and instead of moving this data to the local browser storage they decided to make a subscription. I absolutely despise this marketing, so, seen the lack of open source Interactive maps, I tried to make what I could of their minified Vue source code and other interactive maps out there to make a good, up to date, open source one. If you're a GTALens developer reading this: Fuck you. I like your work on GTACars, I like your work on these small useless statistical tools (like the map, which I had to remake for my own use, or the weather tool, which I remade out of spite), but fuck you, for pushing a feature that could've been completely free into your subscription service. Also fuck you for using Vue, because you made me lose more hours of my life than I should've lost; Client side code shouldn't be hidden, it should be as readable as possible, because users need to know what is happening on their machine. Your lack of willingness to use Vanilla JS shouldn't result in a worse product.</p><p class="sig">Signed: FalB</p>
+        <p>In short: I ran into GTALens' 250 completed marks limit. In full: I know why they made that a thing and I know why they made themselves make that a thing. They created themselves a problem by saving data on their servers, which cost money to maintain, and instead of moving this data to the local browser storage they decided to make a subscription. I absolutely despise this marketing, so, seen the lack of open source Interactive maps, I tried to make what I could of their minified Vue source code and other interactive maps out there to make a good, up to date, open source one. If you're Andreww, the GTALens developer reading this: Fuck you. I like your work on GTACars, I like your work on these small useless statistical tools (like the map, which I had to remake for my own use, or the weather tool, which I'm remaking out of spite), but fuck you, for pushing a feature that could've been completely free into your subscription service. Also fuck you for using Vue, because you made me lose more hours of my life than I should've lost; Client side code shouldn't be hidden, it should be as readable as possible, because users need to know what is happening on their machine. Your lack of willingness to use Vanilla JS shouldn't result in a worse product.</p><p class="sig">Signed: FalB</p>
         <h3>- What about gtaweb.eu?</h3>
         <p>While I admire their work, I have one fundamental issue with it: It's closed source. They opened a Github... but it's just for the issue tracker, which I found insulting to a degree. I most admire their `GTAO Toolkit`, which is something I plan to recreate and make better. Their UI is bad, but I shouldn't speak on that, given I'm not a web designer, I suck at that. Sadly I found out about their site way to late, and having already put several hours of work into this project of mine, I just decided to continue.</p><p class="sig">Signed: FalB</p>
         <h3>- How do I contribute?</h3>

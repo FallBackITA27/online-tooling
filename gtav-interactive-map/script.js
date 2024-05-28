@@ -540,6 +540,11 @@ async function loadDynamicData() {
             .then((r) => r.json())
             .then(loadCayoPericoKosatkaApproachVehicle)
     );
+    x.push(
+        fetch("./assets/cayoPericoLongfinApproachVehicle.json")
+            .then((r) => r.json())
+            .then(loadCayoPericoLongfinApproachVehicle)
+    );
     // x.push(
     //     fetch("./assets/buildings.json").then(r=>r.json()).then(r=>{
     //         for (marker of r) {

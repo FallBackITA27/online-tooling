@@ -1,0 +1,32 @@
+{
+    "longfinMarkers": [
+        {
+            "display_name": "Vespucci LSPD Longfin",
+            "coords": [-5.561315, -118.861084]
+        },
+        {
+            "display_name": "La Mesa LSPD Longfin",
+            "coords": [-13.902076, -79.848633]
+        },
+        {
+            "display_name": "Vinewood LSPD Longfin",
+            "coords": [11.092166, -86.451416]
+        }
+    ],
+    "dockMarkers": [
+        {
+            "display_name": "Docks Longfin Delivery Point",
+            "coords": [-38.013476, -100.250244],
+            "options": {
+                "radius": 10,
+                "color": "transparent",
+                "fillColor": "#FA5",
+                "fillOpacity": 0.5
+            },
+            "tooltip_options": {
+                "permanent": false,
+                "direction": "center"
+            }
+        }
+    ]
+}

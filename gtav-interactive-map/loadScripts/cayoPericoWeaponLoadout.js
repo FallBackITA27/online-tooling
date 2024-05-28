@@ -7,7 +7,7 @@ function loadCayoPericoWeaponLoadout(r) {
         constantData.icons.weaponLocker,
         "lastPickCayoPericoWeaponLoadout",
         layers,
-        1
+        r.line.length
     );
 
     displayButtons(
