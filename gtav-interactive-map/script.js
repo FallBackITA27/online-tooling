@@ -9,7 +9,7 @@ const weekday = [
 ];
 
 let saveData = {
-    version: "0.10.0",
+    version: "0.11.0",
     pointerMode: false,
     selectedTileLayer: "game",
     lastZoom: 2,
@@ -48,6 +48,7 @@ let saveData = {
     lastPickCayoPericoCuttingTorch: "hideAll",
     lastPickCayoPericoWeaponLocker: "hideAll",
     lastPickCayoPericoKosatkaApproachVehicle: "hideAll",
+    lastPickCayoPericoLongfinApproachVehicle: "hideAll",
 };
 
 function loadInSaveData(dataStr) {
@@ -140,6 +141,10 @@ function loadInSaveData(dataStr) {
                     "hideAll";
             }
             if (temporarySaveData.version === "0.10.0") {
+                temporarySaveData.lastPickCayoPericoLongfinApproachVehicle =
+                    "hideAll";
+            }
+            if (temporarySaveData.version === "0.11.0") {
                 // Current version
             }
             // Here you check the version tag in the savedata and modify it to match the data right after - this way old save data will not be lost.
