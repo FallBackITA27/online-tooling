@@ -34,6 +34,7 @@
     <script defer src="https://www.youtube.com/iframe_api"></script>
 
     <script defer src="./lib/layers.js"></script>
+    <script defer src="./lib/polygons.js"></script>
     <script defer src="./lib/marker.js"></script>
     <script defer src="./lib/path.js"></script>
     <script defer src="./lib/gui.js"></script>
@@ -52,6 +53,12 @@
     <script defer src="./loadScripts/cayoPericoWeaponLoadout.js"></script>
     <script defer src="./loadScripts/cayoPericoKosatkaApproachVehicle.js"></script>
     <script defer src="./loadScripts/cayoPericoLongfinApproachVehicle.js"></script>
+    <script defer src="./loadScripts/vincentHeistSlushFund.js"></script>
+    <script defer src="./loadScripts/vincentHeistBreakingAndEntering.js"></script>
+    <script defer src="./loadScripts/vincentHeistConcealedWeapons.js"></script>
+    <script defer src="./loadScripts/vincentHeistHitAndRun.js"></script>
+    <script defer src="./loadScripts/vincentHeistDisorganizedCrime.js"></script>
+    <script defer src="./loadScripts/vincentHeistSceneOfTheCrime.js"></script>
     <script defer src="./script.js"></script>
 </head>
 <body>
@@ -66,13 +73,13 @@
                 <li>
                     <a href="#markers">Map Markers</a>
                     <ol>
-                        <li type="i">
+                        <li type="I">
                             <a href="#markers-locations">Locations</a>
                             <ul>
                                 <li><a href="#markers-locations-counties">Counties</a> </li>
                             </ul>
                         </li>
-                        <li type="i">
+                        <li type="I">
                             <a href="#markers-collectibles">Collectibles</a>
                             <ul>
                                 <li><a href="#markers-collectibles-actionfigures">Action Figures</a></li>
@@ -82,7 +89,7 @@
                                 <li><a href="#markers-collectibles-ldorganics">LD Organics Products</a></li>
                             </ul>
                         </li>
-                        <li type="i">
+                        <li type="I">
                             <a href="#markers-cayopericoheist">Cayo Perico Heist</a>
                             <ul>
                                 <li><a href="#markers-cayopericoheist-kosatkafasttravels">Kosatka Fast Travel Locations</a></li>
@@ -93,6 +100,12 @@
                                 <li><a href="#markers-cayopericoheist-weaponloadout">Weapon Loadout Locations</a></li>
                                 <li><a href="#markers-cayopericoheist-kosatkaapproachvehicle">Approach Vehicle / Kosatka Locations</a></li>
                                 <li><a href="#markers-cayopericoheist-longfinapproachvehicle">Approach Vehicle / Longfin Locations</a></li>
+                            </ul>
+                        </li>
+                        <li type="I">
+                            <a href="#markers-vincentheist">The Cluckin' Bell Farm Raid</a>
+                            <ul>
+                                <li><a href="#markers-vincentheist-slushfund">Slush Fund</a></li>
                             </ul>
                         </li>
                     </ol>
@@ -232,6 +245,46 @@
         <button id="markers-cayopericoheist-longfinapproachvehicle-hide-all-btn">Hide All</button>
         <p><sub>Note: Spawn locations for different semi cabs have to yet be documented.</sub></p>
         <div id="longfinApproachVehicleDiv"></div>
+        <hr class="fifty">
+        <div id="markers-vincentheist"></div>
+        <h2>The Cluckin' Bell Farm Raid</h2>
+        <p>This will be a list of markers useful for The Cluckin' Bell Farm Raid</p>
+        <div id="markers-vincentheist-slushfund"></div>
+        <hr class="fifty">
+        <h2>Slush Fund</h2>
+        <button id="markers-vincentheist-slushfund-show-all-btn">Show All</button>
+        <button id="markers-vincentheist-slushfund-hide-all-btn">Hide All</button>
+        <div id="slushFundDiv"></div>
+        <div id="markers-vincentheist-breakingandentering"></div>
+        <hr class="fifty">
+        <h2>Breaking and Entering</h2>
+        <button id="markers-vincentheist-breakingandentering-show-all-btn">Show All</button>
+        <button id="markers-vincentheist-breakingandentering-hide-all-btn">Hide All</button>
+        <div id="breakingAndEnteringDiv"></div>
+        <div id="markers-vincentheist-concealedweapons"></div>
+        <hr class="fifty">
+        <h2>Concealed Weapons</h2>
+        <button id="markers-vincentheist-concealedweapons-show-all-btn">Show All</button>
+        <button id="markers-vincentheist-concealedweapons-hide-all-btn">Hide All</button>
+        <div id="concealedWeaponsDiv"></div>
+        <div id="markers-vincentheist-hitandrun"></div>
+        <hr class="fifty">
+        <h2>Hit and Run</h2>
+        <button id="markers-vincentheist-hitandrun-show-all-btn">Show All</button>
+        <button id="markers-vincentheist-hitandrun-hide-all-btn">Hide All</button>
+        <div id="hitAndRunDiv"></div>
+        <div id="markers-vincentheist-disorganizedcrime"></div>
+        <hr class="fifty">
+        <h2>Disorganized Crime</h2>
+        <button id="markers-vincentheist-disorganizedcrime-show-all-btn">Show All</button>
+        <button id="markers-vincentheist-disorganizedcrime-hide-all-btn">Hide All</button>
+        <div id="disorganizedCrimeDiv"></div>
+        <div id="markers-vincentheist-sceneofthecrime"></div>
+        <hr class="fifty">
+        <h2>Scene of the Crime</h2>
+        <button id="markers-vincentheist-sceneofthecrime-show-all-btn">Show All</button>
+        <button id="markers-vincentheist-sceneofthecrime-hide-all-btn">Hide All</button>
+        <div id="sceneoftheCrimeDiv"></div>
         <hr>
         <div id="settings">
         <h2>Settings</h2>
@@ -287,6 +340,9 @@
         <div id="changelog"></div>
         <h2>Changelog</h2>
         <p>All the dates are in <a target="_blank" href="https://en.wikipedia.org/wiki/Central_European_Time">CET</a>.</p>
+        <h3>2024 - 05 - ?? | ??:?? | Version 0.11.0</h3>
+        <p>Inserted some data for the Longfin Approach Vehicle Prep. Also added all the data for The Cluckin' Bell Farm Raid.</p>
+        <p class="sig">Signed: FalB</p>
         <h3>2024 - 05 - 27 | 00:00 | Version 0.10.0</h3>
         <p>Obsoleted the speedrun.com/gtao map for Cayo Perico, by adding all their features. This includes the newly added Weapon Loadout mission markers and the Kosatka Approach Vehicle spawns. I will be working on adding the rest of the actual preps over the next few days.</p>
         <p class="sig">Signed: FalB</p>

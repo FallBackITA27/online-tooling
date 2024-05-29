@@ -1,0 +1,98 @@
+{
+    "searchAreas": [
+        {
+            "display_name": "Laptop Search Area",
+            "coords": [
+                [-11.361568, -130.715332],
+                [-10.141932, -132.1875],
+                [-6.435401, -128.902588],
+                [-7.558547, -127.364502]
+            ],
+            "options": {
+                "color": "#FF0"
+            },
+            "tooltip_options": {
+                "permanent": true,
+                "direction": "center"
+            }
+        },
+        {
+            "display_name": "Terrorbyte Search Area",
+            "coords": [
+                [-24.146754, -109.775391],
+                [-23.422928, -103.293457],
+                [-13.83808, -102.128906],
+                [-13.624633, -106.699219],
+                [-19.828725, -111.247559],
+                [-22.836946, -111.51123]
+            ],
+            "options": {
+                "color": "#00F"
+            },
+            "tooltip_options": {
+                "permanent": true,
+                "direction": "center"
+            }
+        }
+    ],
+    "techbroSpots": [
+        {
+            "display_name": "Laptop 1",
+            "coords": [-10.444598, -131.418457]
+        },
+        {
+            "display_name": "Laptop 2",
+            "coords": [-10.487812, -131.143799]
+        },
+        {
+            "display_name": "Laptop 3",
+            "coords": [-10.90883, -130.693359]
+        },
+        {
+            "display_name": "Laptop 4",
+            "coords": [-9.95803, -129.825439]
+        },
+        {
+            "display_name": "Laptop 5",
+            "coords": [-9.784851, -130.253906]
+        },
+        {
+            "display_name": "Laptop 6",
+            "coords": [-9.849804, -129.726563]
+        },
+        {
+            "display_name": "Laptop 7",
+            "coords": [-9.622414, -129.638672]
+        },
+        {
+            "display_name": "Laptop 8",
+            "coords": [-9.351513, -129.935303]
+        },
+        {
+            "display_name": "Laptop 9",
+            "coords": [-9.340672, -129.396973]
+        },
+        {
+            "display_name": "Laptop 10",
+            "coords": [-9.112945, -129.880371]
+        },
+        {
+            "display_name": "Laptop 11",
+            "coords": [-8.743936, -130.155029]
+        }
+    ],
+    "terrorbyteSpots": [
+        {
+            "display_name": "Terrorbyte 1",
+            "coords": [-23.372514, -108.28125]
+        },
+        {
+            "display_name": "Terrorbyte 2",
+            "coords": [-18.864707, -104.029541]
+        },
+        {
+            "display_name": "Terrorbyte 3",
+            "coords": [-14.604847, -103.557129]
+        }
+    ]
+}

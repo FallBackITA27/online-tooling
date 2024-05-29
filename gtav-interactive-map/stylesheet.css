@@ -195,6 +195,46 @@ ul {
     background-image: url("gtavIcons/kosatkaRed.svg");
 }
 
+.objective.a {
+    background-image: url("gtavIcons/objectiveA.svg");
+}
+
+.objective.b {
+    background-image: url("gtavIcons/objectiveB.svg");
+}
+
+.objective.c {
+    background-image: url("gtavIcons/objectiveC.svg");
+}
+
+.objective.a.yellow {
+    background-image: url("gtavIcons/objectiveAyellow.svg");
+}
+
+.objective.b.yellow {
+    background-image: url("gtavIcons/objectiveByellow.svg");
+}
+
+.objective.c.yellow {
+    background-image: url("gtavIcons/objectiveCyellow.svg");
+}
+
+.garage {
+    background-image: url("gtavIcons/garage.svg");
+}
+
+.garage.yellow {
+    background-image: url("gtavIcons/garageYellow.svg");
+}
+
+.laptop.green {
+    background-image: url("gtavIcons/greenLaptop.svg");
+}
+
+.terrorbyte.blue {
+    background-image: url("gtavIcons/blueTerrorbyte.svg");
+}
+
 .boat {
     background-image: url("gtavIcons/boat.svg");
 }

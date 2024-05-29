@@ -1,0 +1,16 @@
+[
+    {
+        "display_name": "Mission End Point",
+        "coords": [18.030975, -94.383545],
+        "options": {
+            "radius": 10,
+            "color": "transparent",
+            "fillColor": "#FF0",
+            "fillOpacity": 0.5
+        },
+        "tooltip_options": {
+            "permanent": false,
+            "direction": "center"
+        }
+    }
+]

@@ -49,6 +49,12 @@ let saveData = {
     lastPickCayoPericoWeaponLocker: "hideAll",
     lastPickCayoPericoKosatkaApproachVehicle: "hideAll",
     lastPickCayoPericoLongfinApproachVehicle: "hideAll",
+    lastPickVincentHeistSlushFund: "hideAll",
+    lastPickVincentHeistBreakingAndEntering: "hideAll",
+    lastPickVincentHeistConcealedWeapons: "hideAll",
+    lastPickVincentHeistHitAndRun: "hideAll",
+    lastPickVincentHeistDisorganizedCrime: "hideAll",
+    lastPickVincentHeistSceneOfTheCrime: "hideAll",
 };
 
 function loadInSaveData(dataStr) {
@@ -141,8 +147,15 @@ function loadInSaveData(dataStr) {
                     "hideAll";
             }
             if (temporarySaveData.version === "0.10.0") {
+                temporarySaveData.version = "0.11.0";
                 temporarySaveData.lastPickCayoPericoLongfinApproachVehicle =
                     "hideAll";
+                temporarySaveData.lastPickVincentHeistSlushFund = "hideAll";
+                temporarySaveData.lastPickVincentHeistBreakingAndEntering = "hideAll";
+                temporarySaveData.lastPickVincentHeistConcealedWeapons = "hideAll";
+                temporarySaveData.lastPickVincentHeistHitAndRun = "hideAll";
+                temporarySaveData.lastPickVincentHeistSceneOfTheCrime = "hideAll";
+                temporarySaveData.lastPickVincentHeistDisorganizedCrime = "hideAll";
             }
             if (temporarySaveData.version === "0.11.0") {
                 // Current version
@@ -404,6 +417,46 @@ const constantData = {
             className: "semitruck",
             iconSize: [22, 22],
         }),
+        objectiveA: L.divIcon({
+            className: "objective a",
+            iconSize: [22, 22],
+        }),
+        objectiveB: L.divIcon({
+            className: "objective b",
+            iconSize: [22, 22],
+        }),
+        objectiveC: L.divIcon({
+            className: "objective c",
+            iconSize: [22, 22],
+        }),
+        objectiveAyellow: L.divIcon({
+            className: "objective a yellow",
+            iconSize: [22, 22],
+        }),
+        objectiveByellow: L.divIcon({
+            className: "objective b yellow",
+            iconSize: [22, 22],
+        }),
+        objectiveCyellow: L.divIcon({
+            className: "objective c yellow",
+            iconSize: [22, 22],
+        }),
+        garage: L.divIcon({
+            className: "garage",
+            iconSize: [22, 22],
+        }),
+        garageyellow: L.divIcon({
+            className: "garage yellow",
+            iconSize: [22, 22],
+        }),
+        terrorbyteblue: L.divIcon({
+            className: "terrorbyte blue",
+            iconSize: [22, 22],
+        }),
+        laptopgreen: L.divIcon({
+            className: "laptop green",
+            iconSize: [22, 22],
+        }),
     },
 };
 
@@ -544,6 +597,36 @@ async function loadDynamicData() {
         fetch("./assets/cayoPericoLongfinApproachVehicle.json")
             .then((r) => r.json())
             .then(loadCayoPericoLongfinApproachVehicle)
+    );
+    x.push(
+        fetch("./assets/vincentHeistSlushFund.json")
+            .then((r) => r.json())
+            .then(loadVincentHeistSlushFund)
+    );
+    x.push(
+        fetch("./assets/vincentHeistBreakingAndEntering.json")
+            .then((r) => r.json())
+            .then(loadVincentHeistBreakingAndEntering)
+    );
+    x.push(
+        fetch("./assets/vincentHeistConcealedWeapons.json")
+            .then((r) => r.json())
+            .then(loadVincentHeistConcealedWeapons)
+    );
+    x.push(
+        fetch("./assets/vincentHeistHitAndRun.json")
+            .then((r) => r.json())
+            .then(loadVincentHeistHitAndRun)
+    );
+    x.push(
+        fetch("./assets/vincentHeistDisorganizedCrime.json")
+            .then((r) => r.json())
+            .then(loadVincentHeistDisorganizedCrime)
+    );
+    x.push(
+        fetch("./assets/vincentHeistSceneOfTheCrime.json")
+            .then((r) => r.json())
+            .then(loadVincentHeistSceneOfTheCrime)
     );
     // x.push(
     //     fetch("./assets/buildings.json").then(r=>r.json()).then(r=>{
