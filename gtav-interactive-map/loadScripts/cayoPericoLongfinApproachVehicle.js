@@ -21,7 +21,7 @@ function loadCayoPericoLongfinApproachVehicle(r) {
         constantData.layers.cayoPericoLongfinApproachVehicle,
         saveData.markerData.cayoPericoLongfinApproachVehicle,
         r.dockMarkers,
-        loadCayoPericoCuttingTorchGUI
+        loadCayoPericoLongfinApproachVehicleGUI
     );
 }
 
