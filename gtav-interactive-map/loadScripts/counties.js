@@ -1,71 +1,36 @@
+let countiesFetchData = new LayerFetchData("counties");
+
 function loadCounties(r) {
-    let lsCountyPolygon = L.polygon(r.ls.points, {
-        color: r.ls.color,
-    }).bindTooltip(r.ls.name, {
-        permanent: true,
-        direction: "center",
-    });
-    let blCountyPolygon = L.polygon(r.bl.points, {
-        color: r.bl.color,
-    }).bindTooltip(r.bl.name, {
-        permanent: true,
-        direction: "center",
-    });
+    if (constantData.layers.counties !== undefined) return;
+    constantData.layers.counties = [];
 
-    if (saveData.blCountyShow) blCountyPolygon.addTo(map);
-    if (saveData.lsCountyShow) lsCountyPolygon.addTo(map);
+    registerSinglePolygonArray(
+        "counties",
+        constantData.layers.counties,
+        saveData.markerData.counties,
+        r,
+        loadCountiesGUI
+    );
+}
 
-    document
-        .getElementById("markers-locations-counties-blaine-show-btn")
-        .addEventListener("click", function () {
-            blCountyPolygon.addTo(map);
-            saveData.blCountyShow = true;
-            saveDataSave();
-        });
+countiesFetchData.fetchThis(loadCounties);
 
-    document
-        .getElementById("markers-locations-counties-ls-show-btn")
-        .addEventListener("click", function () {
-            lsCountyPolygon.addTo(map);
-            saveData.lsCountyShow = true;
-            saveDataSave();
-        });
+async function loadCountiesGUI() {
+    if (!countiesFetchData.loaded)
+        await countiesFetchData.fetchThis(loadCounties);
+    resetContentParts();
+    for (let layer of constantData.layers.counties) {
+        addToContentPart1List(layer.title).addEventListener(
+            "click",
+            function () {
+                resetContentPart2();
+                let divs = new GenericHTMLConglomerate().genericPolygonOptions(
+                    layer
+                );
 
-    document
-        .getElementById("markers-locations-counties-blaine-hide-btn")
-        .addEventListener("click", function () {
-            blCountyPolygon.remove();
-            saveData.blCountyShow = false;
-            saveDataSave();
-        });
-
-    document
-        .getElementById("markers-locations-counties-ls-hide-btn")
-        .addEventListener("click", function () {
-            lsCountyPolygon.remove();
-            saveData.lsCountyShow = false;
-            saveDataSave();
-        });
-
-    document
-        .getElementById("markers-locations-counties-show-btn")
-        .addEventListener("click", function () {
-            document
-                .getElementById("markers-locations-counties-ls-show-btn")
-                .click();
-            document
-                .getElementById("markers-locations-counties-blaine-show-btn")
-                .click();
-        });
-
-    document
-        .getElementById("markers-locations-counties-hide-btn")
-        .addEventListener("click", function () {
-            document
-                .getElementById("markers-locations-counties-ls-hide-btn")
-                .click();
-            document
-                .getElementById("markers-locations-counties-blaine-hide-btn")
-                .click();
-        });
+                for (let x of divs)
+                    document.getElementById("contentPart2").appendChild(x);
+            }
+        );
+    }
 }

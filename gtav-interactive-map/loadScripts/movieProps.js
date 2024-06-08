@@ -1,42 +1,57 @@
-function loadMovieProps(r) {
-    let layers = genericCollectibleInsert(
-        "moviePropsDiv",
-        r.singleMarker,
-        constantData.icons.movieProp,
-        "completionDataMovieProps",
-        "lastPickMovieProps",
+let moviePropsFetchData = new LayerFetchData("movieProps");
+
+function movieProps(r) {
+    if (constantData.layers.movieProps !== undefined) return;
+    constantData.layers.movieProps = [];
+
+    registerSingleCollectibleMarkerArray(
         "movieProps",
-        "markers-collectibles-movieprops-completion-number",
-        10
+        constantData.layers.movieProps,
+        saveData.markerData.movieProps,
+        constantData.icons.movieProp,
+        r.singleMarker,
+        moviePropsGUI
     );
 
-    document.getElementById(
-        "markers-collectibles-movieprops-completion-number"
-    ).innerHTML = `Completed ${saveData.completionDataMovieProps.size}/10`;
-
-    layers = multiMarkerCollectibleInsert(
-        "moviePropsDiv",
-        r.multiMarker,
+    registerMultiCollectibleMarkerArray(
+        "movieProps",
+        constantData.layers.movieProps,
+        saveData.markerData.movieProps,
         [
-            [constantData.icons.moviePropTruckRebel, 9],
-            [constantData.icons.moviePropTruckRumpo, 8],
-            [constantData.icons.moviePropTruckPony, 7],
+            [constantData.icons.moviePropTruckRebel, 2],
+            [constantData.icons.moviePropTruckRumpo, 1],
+            [constantData.icons.moviePropTruckPony, 0],
         ],
-        "completionDataMovieProps",
-        "lastPickMovieProps",
-        "markers-collectibles-movieprops-completion-number",
-        10,
-        layers,
-        7
+        r.multiMarker,
+        moviePropsGUI
     );
+}
 
-    completionButtonsDivUpdates(
-        "markers-collectibles-movieprops-show-all-btn",
-        "markers-collectibles-movieprops-hide-all-btn",
-        "markers-collectibles-movieprops-show-completed-btn",
-        "markers-collectibles-movieprops-hide-completed-btn",
-        layers,
-        "lastPickMovieProps",
-        "completionDataMovieProps"
-    );
+moviePropsFetchData.fetchThis(movieProps);
+
+async function moviePropsGUI() {
+    if (!moviePropsFetchData.loaded)
+        await moviePropsFetchData.fetchThis(movieProps);
+    resetContentParts();
+    for (let layer of constantData.layers.movieProps) {
+        addToContentPart1List(layer.title).addEventListener(
+            "click",
+            function () {
+                resetContentPart2();
+                let divs =
+                    layer.extraData.description instanceof Array
+                        ? new GenericHTMLConglomerate().genericCollectibleMultiMarkerOptions(
+                              layer,
+                              constantData.layers.movieProps.length
+                          )
+                        : new GenericHTMLConglomerate().genericCollectibleMarkerOptions(
+                              layer,
+                              constantData.layers.movieProps.length
+                          );
+
+                for (let x of divs)
+                    document.getElementById("contentPart2").appendChild(x);
+            }
+        );
+    }
 }

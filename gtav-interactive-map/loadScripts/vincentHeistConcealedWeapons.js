@@ -1,19 +1,47 @@
+let vincentHeistConcealedWeaponsFetchData = new LayerFetchData(
+    "vincentHeistConcealedWeapons"
+);
+
 function loadVincentHeistConcealedWeapons(r) {
-    let layers = genericMarkers(
-        "concealedWeaponsDiv",
-        r,
+    if (constantData.layers.vincentHeistConcealedWeapons !== undefined) return;
+    constantData.layers.vincentHeistConcealedWeapons = [];
+
+    registerSingleMarkerArray(
+        "vincentHeistConcealedWeapons",
+        constantData.layers.vincentHeistConcealedWeapons,
+        saveData.markerData.vincentHeistConcealedWeapons,
         [
             [constantData.icons.objectiveCyellow, 2],
             [constantData.icons.objectiveByellow, 1],
             [constantData.icons.objectiveAyellow, 0],
         ],
-        "lastPickVincentHeistConcealedWeapons"
+        r,
+        loadVincentHeistConcealedWeaponsGUI
     );
+}
 
-    displayButtons(
-        "markers-vincentheist-concealedweapons-show-all-btn",
-        "markers-vincentheist-concealedweapons-hide-all-btn",
-        layers,
-        "lastPickVincentHeistConcealedWeapons"
-    );
+vincentHeistConcealedWeaponsFetchData.fetchThis(
+    loadVincentHeistConcealedWeapons
+);
+
+async function loadVincentHeistConcealedWeaponsGUI() {
+    if (!vincentHeistConcealedWeaponsFetchData.loaded)
+        await vincentHeistConcealedWeaponsFetchData.fetchThis(
+            loadVincentHeistConcealedWeapons
+        );
+    resetContentParts();
+    for (let layer of constantData.layers.vincentHeistConcealedWeapons) {
+        addToContentPart1List(layer.title).addEventListener(
+            "click",
+            function () {
+                resetContentPart2();
+                let divs = new GenericHTMLConglomerate().genericMarkerOptions(
+                    layer
+                );
+
+                for (let x of divs)
+                    document.getElementById("contentPart2").appendChild(x);
+            }
+        );
+    }
 }

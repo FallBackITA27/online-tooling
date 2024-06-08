@@ -1,26 +1,39 @@
+let signalJammersFetchData = new LayerFetchData("signalJammers");
+
 function loadSignalJammers(r) {
-    let layers = genericCollectibleInsert(
-        "signalJammersDiv",
-        r,
-        constantData.icons.signalJammer,
-        "completionDataSignalJammers",
-        "lastPickSignalJammers",
+    if (constantData.layers.signalJammers !== undefined) return;
+    constantData.layers.signalJammers = [];
+
+    registerSingleCollectibleMarkerArray(
         "signalJammers",
-        "markers-collectibles-signaljammers-completion-number",
-        50
+        constantData.layers.signalJammers,
+        saveData.markerData.signalJammers,
+        constantData.icons.signalJammer,
+        r,
+        loadSignalJammersGUI
     );
+}
 
-    document.getElementById(
-        "markers-collectibles-signaljammers-completion-number"
-    ).innerHTML = `Completed ${saveData.completionDataSignalJammers.size}/50`;
+signalJammersFetchData.fetchThis(loadSignalJammers);
 
-    completionButtonsDivUpdates(
-        "markers-collectibles-signaljammers-show-all-btn",
-        "markers-collectibles-signaljammers-hide-all-btn",
-        "markers-collectibles-signaljammers-show-completed-btn",
-        "markers-collectibles-signaljammers-hide-completed-btn",
-        layers,
-        "lastPickSignalJammers",
-        "completionDataSignalJammers"
-    );
+async function loadSignalJammersGUI() {
+    if (!signalJammersFetchData.loaded)
+        await signalJammersFetchData.fetchThis(loadSignalJammers);
+    resetContentParts();
+    for (let layer of constantData.layers.signalJammers) {
+        addToContentPart1List(layer.title).addEventListener(
+            "click",
+            function () {
+                resetContentPart2();
+                let divs =
+                    new GenericHTMLConglomerate().genericCollectibleMarkerOptions(
+                        layer,
+                        constantData.layers.signalJammers.length
+                    );
+
+                for (let x of divs)
+                    document.getElementById("contentPart2").appendChild(x);
+            }
+        );
+    }
 }

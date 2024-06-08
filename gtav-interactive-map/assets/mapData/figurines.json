@@ -2,7 +2,6 @@
     {
         "coords": [-42.3, -115.6],
         "description": "Inside the building's hallway",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 45,
         "display_name": "Action Figure N. 1"
@@ -10,7 +9,6 @@
     {
         "coords": [-28.719496, -114.960938],
         "description": "Behind the Crastenburg sign",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 81,
         "display_name": "Action Figure N. 2"
@@ -18,7 +16,6 @@
     {
         "coords": [-35.826721, -98.305664],
         "description": "Inside the building, next to the computers",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 106,
         "display_name": "Action Figure N. 3"
@@ -26,7 +23,6 @@
     {
         "coords": [-44.331707, -94.141846],
         "description": "Inside the Bugstars building",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 138,
         "display_name": "Action Figure N. 4"
@@ -34,7 +30,6 @@
     {
         "coords": [-44.816916, -87.51709],
         "description": "Inside the security's cabin",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 165,
         "display_name": "Action Figure N. 5"
@@ -42,7 +37,6 @@
     {
         "coords": [-36.633162, -72.322998],
         "description": "Inside the building, in the bus scraps",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 195,
         "display_name": "Action Figure N. 6"
@@ -50,7 +44,6 @@
     {
         "coords": [-29.238477, -67.236328],
         "description": "Inside the building with the portapotty on it; on some random cement cylinders",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 232,
         "display_name": "Action Figure N. 7"
@@ -58,7 +51,6 @@
     {
         "coords": [-29.878755, -79.705811],
         "description": "In front of the electrical panel",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 262,
         "display_name": "Action Figure N. 8"
@@ -66,7 +58,6 @@
     {
         "coords": [-28.921631, -89.846191],
         "description": "On the bench of the monument",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 294,
         "display_name": "Action Figure N. 9"
@@ -74,7 +65,6 @@
     {
         "coords": [-22.43134, -98.173828],
         "description": "In the supermarket's backroom",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 314,
         "display_name": "Action Figure N. 10"
@@ -82,7 +72,6 @@
     {
         "coords": [-16.772987, -98.470459],
         "description": "In the doghouse",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 340,
         "display_name": "Action Figure N. 11"
@@ -90,7 +79,6 @@
     {
         "coords": [-17.947381, -89.79126],
         "description": "On the washbasin in the building",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 366,
         "display_name": "Action Figure N. 12"
@@ -98,7 +86,6 @@
     {
         "coords": [-12.103781, -93.823242],
         "description": "Under the bridge",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 390,
         "display_name": "Action Figure N. 13"
@@ -106,7 +93,6 @@
     {
         "coords": [-3.283114, -87.945557],
         "description": "On the floor in between the tied up carpets",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 419,
         "display_name": "Action Figure N. 14"
@@ -114,7 +100,6 @@
     {
         "coords": [-8.928487, -84.089355],
         "description": "Inside the security's cabin",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 447,
         "display_name": "Action Figure N. 15"
@@ -122,7 +107,6 @@
     {
         "coords": [-17.947381, -83.638916],
         "description": "Inside the rusty bobcat bucket",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 473,
         "display_name": "Action Figure N. 16"
@@ -130,7 +114,6 @@
     {
         "coords": [-17.332843, -72.966712],
         "description": "Inside the fire department",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 503,
         "display_name": "Action Figure N. 17"
@@ -138,7 +121,6 @@
     {
         "coords": [-1.30726, -74.476318],
         "description": "In the washbasin inside the building",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 530,
         "display_name": "Action Figure N. 18"
@@ -146,7 +128,6 @@
     {
         "coords": [9.275622, -77.431641],
         "description": "Past the Automatic Garage door",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 563,
         "display_name": "Action Figure N. 19"
@@ -154,7 +135,6 @@
     {
         "coords": [3.83137, -84.737549],
         "description": "Inside the sewers",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 590,
         "display_name": "Action Figure N. 20"
@@ -162,7 +142,6 @@
     {
         "coords": [0.703107, -93.768311],
         "description": "Inside the under construction underground metro",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 638,
         "display_name": "Action Figure N. 21"
@@ -170,7 +149,6 @@
     {
         "coords": [4.718778, -102.930908],
         "description": "Inside the underground metro",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 687,
         "display_name": "Action Figure N. 22"
@@ -178,7 +156,6 @@
     {
         "coords": [-0.725078, -100.623779],
         "description": "On the Arcadius statue",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 741,
         "display_name": "Action Figure N. 23"
@@ -186,7 +163,6 @@
     {
         "coords": [-5.101887, -99.547119],
         "description": "On the fountain",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 773,
         "display_name": "Action Figure N. 24"
@@ -194,7 +170,6 @@
     {
         "coords": [-6.064086, -111.335449],
         "description": "Inside the market",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 804,
         "display_name": "Action Figure N. 25"
@@ -202,7 +177,6 @@
     {
         "coords": [-10.844096, -115.411377],
         "description": "On the ladder to the billboard",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 830,
         "display_name": "Action Figure N. 26"
@@ -210,7 +184,6 @@
     {
         "coords": [-6.500899, -121.717529],
         "description": "On the small wooden pier",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 856,
         "display_name": "Action Figure N. 27"
@@ -218,7 +191,6 @@
     {
         "coords": [-18.573362, -124.266357],
         "description": "In the shark statue's mouth",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 885,
         "display_name": "Action Figure N. 28"
@@ -226,7 +198,6 @@
     {
         "coords": [-9.795678, -130.133057],
         "description": "On the trash can under the pillar",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 906,
         "display_name": "Action Figure N. 29"
@@ -234,7 +205,6 @@
     {
         "coords": [-2.054003, -135.241699],
         "description": "On the lifeguard's cabin",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 931,
         "display_name": "Action Figure N. 30"
@@ -242,7 +212,6 @@
     {
         "coords": [7.351571, -131.726074],
         "description": "Next to a tomb on the first row behind the bench",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 958,
         "display_name": "Action Figure N. 31"
@@ -250,7 +219,6 @@
     {
         "coords": [3.00887, -128.0896],
         "description": "On a table, on the second floor of the plaza",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 986,
         "display_name": "Action Figure N. 32"
@@ -258,7 +226,6 @@
     {
         "coords": [1.713612, -118.278809],
         "description": "Inside the camper used for the Creator mode",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 1013,
         "display_name": "Action Figure N. 33"
@@ -266,7 +233,6 @@
     {
         "coords": [10.844096, -106.940918],
         "description": "Past the gate.",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 1040,
         "display_name": "Action Figure N. 34"
@@ -274,7 +240,6 @@
     {
         "coords": [13.816744, -92.867432],
         "description": "On the black metal stairs in the lot next to the small parking lot",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 1071,
         "display_name": "Action Figure N. 35"
@@ -282,7 +247,6 @@
     {
         "coords": [16.488765, -100.041504],
         "description": "On the comic's store sign",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 1109,
         "display_name": "Action Figure N. 36"
@@ -290,7 +254,6 @@
     {
         "coords": [19.47695, -107.358398],
         "description": "Inside the house, behind the second plant on the right from the main entrance",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 1148,
         "display_name": "Action Figure N. 37"
@@ -298,7 +261,6 @@
     {
         "coords": [15.623037, -117.663574],
         "description": "Under the arch of the small building next to the tennis court",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 1190,
         "display_name": "Action Figure N. 38"
@@ -306,7 +268,6 @@
     {
         "coords": [15.707663, -126.210938],
         "description": "Inside the pool's cave",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 1223,
         "display_name": "Action Figure N. 39"
@@ -314,7 +275,6 @@
     {
         "coords": [10.087854, -117.301025],
         "description": "Right in front of the hole 6 sign",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 1257,
         "display_name": "Action Figure N. 40"
@@ -322,7 +282,6 @@
     {
         "coords": [16.730907, -141.921387],
         "description": "On the fountain",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 1294,
         "display_name": "Action Figure N. 41"
@@ -330,7 +289,6 @@
     {
         "coords": [20.07657, -133.341064],
         "description": "On the leftmost couch on the balcony",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 1326,
         "display_name": "Action Figure N. 42"
@@ -338,7 +296,6 @@
     {
         "coords": [27.235095, -127.111816],
         "description": "On a lamp on the gravelly path",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 1360,
         "display_name": "Action Figure N. 43"
@@ -346,7 +303,6 @@
     {
         "coords": [28.246328, -112.543945],
         "description": "On the slide",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 1392,
         "display_name": "Action Figure N. 44"
@@ -354,7 +310,6 @@
     {
         "coords": [29.42046, -98.997803],
         "description": "On the sun lounger",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 1424,
         "display_name": "Action Figure N. 45"
@@ -362,7 +317,6 @@
     {
         "coords": [27.166695, -95.493164],
         "description": "On the right side of the rail",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 1452,
         "display_name": "Action Figure N. 46"
@@ -370,7 +324,6 @@
     {
         "coords": [22.116177, -84.034424],
         "description": "Second last column, second block of benches",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 1481,
         "display_name": "Action Figure N. 47"
@@ -378,7 +331,6 @@
     {
         "coords": [33.979809, -83.408203],
         "description": "On top of the letter N of the VINEWOOD sign",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 1515,
         "display_name": "Action Figure N. 48"
@@ -386,7 +338,6 @@
     {
         "coords": [33.220308, -68.928223],
         "description": "On the Kitchen area in front of the pool in Madrazo's backyard",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 1551,
         "display_name": "Action Figure N. 49"
@@ -394,7 +345,6 @@
     {
         "coords": [11.910354, -63.885498],
         "description": "Inside the dam's restricted area",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 1584,
         "display_name": "Action Figure N. 50"
@@ -402,7 +352,6 @@
     {
         "coords": [4.171115, -47.186279],
         "description": "On the N.O.O.S.E. building's entrance sign",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 1618,
         "display_name": "Action Figure N. 51"
@@ -410,7 +359,6 @@
     {
         "coords": [19.425154, -46.230469],
         "description": "In the supermarket's backroom",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 1655,
         "display_name": "Action Figure N. 52"
@@ -418,7 +366,6 @@
     {
         "coords": [41.672912, -44.813232],
         "description": "Inside the train control cubicle",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 1687,
         "display_name": "Action Figure N. 53"
@@ -426,7 +373,6 @@
     {
         "coords": [48.268569, -69.093018],
         "description": "In the house's doghouse",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 1723,
         "display_name": "Action Figure N. 54"
@@ -434,7 +380,6 @@
     {
         "coords": [48.319734, -80.233154],
         "description": "On the shelves with the boxes outside the building",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 1753,
         "display_name": "Action Figure N. 55"
@@ -442,7 +387,6 @@
     {
         "coords": [45.228481, -98.371582],
         "description": "Next to the trash bin",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 1781,
         "display_name": "Action Figure N. 56"
@@ -450,7 +394,6 @@
     {
         "coords": [40.178873, -106.116943],
         "description": "On the counter of the juice stand",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 1807,
         "display_name": "Action Figure N. 57"
@@ -458,7 +401,6 @@
     {
         "coords": [47.294134, -109.291992],
         "description": "To the right of the mine's entrance",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 1843,
         "display_name": "Action Figure N. 58"
@@ -466,7 +408,6 @@
     {
         "coords": [39.027719, -127.463379],
         "description": "On the wooden pier, inside a small lifeboat<sup>(?)</sup>",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 1878,
         "display_name": "Action Figure N. 59"
@@ -474,7 +415,6 @@
     {
         "coords": [12.790375, -157.554932],
         "description": "On the counter for the pool's bar",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 1910,
         "display_name": "Action Figure N. 60"
@@ -482,7 +422,6 @@
     {
         "coords": [19.331878, -156.467285],
         "description": "In the supermarket's backroom",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 1933,
         "display_name": "Action Figure N. 61"
@@ -490,7 +429,6 @@
     {
         "coords": [30.39183, -162.070313],
         "description": "In the trash bin next to the ATM",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 1967,
         "display_name": "Action Figure N. 62"
@@ -498,7 +436,6 @@
     {
         "coords": [50.269272, -148.353412],
         "description": "On the freezer",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 1996,
         "display_name": "Action Figure N. 63"
@@ -506,7 +443,6 @@
     {
         "coords": [46.634351, -135.087891],
         "description": "On the pot next to the church entrance",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2019,
         "display_name": "Action Figure N. 64"
@@ -514,7 +450,6 @@
     {
         "coords": [53.225768, -122.772217],
         "description": "Behind the monument's inscription",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2045,
         "display_name": "Action Figure N. 65"
@@ -522,7 +457,6 @@
     {
         "coords": [56.583692, -103.07373],
         "description": "On the chopped tree trunk",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2074,
         "display_name": "Action Figure N. 66"
@@ -530,7 +464,6 @@
     {
         "coords": [53.429174, -89.450684],
         "description": "On the camper's back side",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2104,
         "display_name": "Action Figure N. 67"
@@ -538,7 +471,6 @@
     {
         "coords": [54.239551, -73.443604],
         "description": "Inside the LS Customs",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2137,
         "display_name": "Action Figure N. 68"
@@ -546,7 +478,6 @@
     {
         "coords": [54.914514, -60.238037],
         "description": "Inside the tower",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2159,
         "display_name": "Action Figure N. 69"
@@ -554,7 +485,6 @@
     {
         "coords": [61.159138, -63.171387],
         "description": "Inside the tower",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2193,
         "display_name": "Action Figure N. 70"
@@ -562,7 +492,6 @@
     {
         "coords": [66.652977, -59.414063],
         "description": "Behind the glass door",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2230,
         "display_name": "Action Figure N. 71"
@@ -570,7 +499,6 @@
     {
         "coords": [64.081805, -69.345703],
         "description": "In the backroom of Chef's Supermarket",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2259,
         "display_name": "Action Figure N. 72"
@@ -578,7 +506,6 @@
     {
         "coords": [59.051856, -86.418457],
         "description": "On the rusty boat's backtail",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2288,
         "display_name": "Action Figure N. 73"
@@ -586,7 +513,6 @@
     {
         "coords": [64.727262, -95.910645],
         "description": "On the toilet in the middle of the walls",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2316,
         "display_name": "Action Figure N. 74"
@@ -594,7 +520,6 @@
     {
         "coords": [58.418977, -130.155029],
         "description": "Inside the random carton trash pile",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2344,
         "display_name": "Action Figure N. 75"
@@ -602,7 +527,6 @@
     {
         "coords": [62.349609, -138.043213],
         "description": "On whatever that thing is called",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2373,
         "display_name": "Action Figure N. 76"
@@ -610,7 +534,6 @@
     {
         "coords": [69.150831, -140.932617],
         "description": "Right outside the portapotties",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2405,
         "display_name": "Action Figure N. 77"
@@ -618,7 +541,6 @@
     {
         "coords": [74.94513, -140.625],
         "description": "On the wood pile outside the hut",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2432,
         "display_name": "Action Figure N. 78"
@@ -626,7 +548,6 @@
     {
         "coords": [77.892647, -110.961914],
         "description": "On the foot of the statue",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2461,
         "display_name": "Action Figure N. 79"
@@ -634,7 +555,6 @@
     {
         "coords": [75.628632, -108.248291],
         "description": "On the turnings inside the factory",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2488,
         "display_name": "Action Figure N. 80"
@@ -642,7 +562,6 @@
     {
         "coords": [73.763497, -119.597168],
         "description": "Inside the small Mount Chiliad hole",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2526,
         "display_name": "Action Figure N. 81"
@@ -650,7 +569,6 @@
     {
         "coords": [72.238865, -102.139893],
         "description": "Right in front of the voltage door inside the tunnel",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2562,
         "display_name": "Action Figure N. 82"
@@ -658,7 +576,6 @@
     {
         "coords": [76.780655, -88.066406],
         "description": "At the top of the Ski lift",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2601,
         "display_name": "Action Figure N. 83"
@@ -666,7 +583,6 @@
     {
         "coords": [79.775315, -103.40332],
         "description": "Inside the random carton trash pile",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2625,
         "display_name": "Action Figure N. 84"
@@ -674,7 +590,6 @@
     {
         "coords": [80.05046, -93.647461],
         "description": "Next to the carton boxes",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2652,
         "display_name": "Action Figure N. 85"
@@ -682,7 +597,6 @@
     {
         "coords": [80.559141, -70.532227],
         "description": "Inside the small drainage pipe",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2682,
         "display_name": "Action Figure N. 86"
@@ -690,7 +604,6 @@
     {
         "coords": [79.804527, -66.401367],
         "description": "On the couch outside the camper",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2705,
         "display_name": "Action Figure N. 87"
@@ -698,7 +611,6 @@
     {
         "coords": [76.970245, -52.69043],
         "description": "On the couch in front of the trespassers sign/confederate flag",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2732,
         "display_name": "Action Figure N. 88"
@@ -706,7 +618,6 @@
     {
         "coords": [72.685765, -62.973633],
         "description": "Past the glass (You have to break it to pass it)",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2761,
         "display_name": "Action Figure N. 89"
@@ -714,7 +625,6 @@
     {
         "coords": [69.553715, -71.268311],
         "description": "Inside the hung tire",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2798,
         "display_name": "Action Figure N. 90"
@@ -722,7 +632,6 @@
     {
         "coords": [73.84623, -48.88916],
         "description": "In between the farm's ajar door",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2824,
         "display_name": "Action Figure N. 91"
@@ -730,7 +639,6 @@
     {
         "coords": [74.930855, -31.113281],
         "description": "Inside the doghouse",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2852,
         "display_name": "Action Figure N. 92"
@@ -738,7 +646,6 @@
     {
         "coords": [70.685421, -21.159668],
         "description": "On the wooden stake",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2881,
         "display_name": "Action Figure N. 93"
@@ -746,7 +653,6 @@
     {
         "coords": [71.649833, -38.441162],
         "description": "Right besides the parked train carriage",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2905,
         "display_name": "Action Figure N. 94"
@@ -754,7 +660,6 @@
     {
         "coords": [68.403224, -42.659912],
         "description": "Besides the gnome",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2936,
         "display_name": "Action Figure N. 95"
@@ -762,7 +667,6 @@
     {
         "coords": [65.275094, -47.526855],
         "description": "On the hood of the car with the ufo sculture on it",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2959,
         "display_name": "Action Figure N. 96"
@@ -770,7 +674,6 @@
     {
         "coords": [65.357677, -26.949463],
         "description": "On the Humane Labs sign",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 2984,
         "display_name": "Action Figure N. 97"
@@ -778,7 +681,6 @@
     {
         "coords": [57.521723, -44.439697],
         "description": "Inside the train control cabin",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 3012,
         "display_name": "Action Figure N. 98"
@@ -786,7 +688,6 @@
     {
         "coords": [58.898971, -49.207764],
         "description": "Spawns only after collecting 98 Action Figures, atop the train parts",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 3040,
         "display_name": "Action Figure N. 99"
@@ -794,7 +695,6 @@
     {
         "coords": [58.893296, -49.361572],
         "description": "Spawns only after collecting 98 Action Figures, on the open plane door",
-        "image_url": "",
         "video_id": "K19ap2onKa8",
         "video_timestamp": 3078,
         "display_name": "Action Figure N. 100"

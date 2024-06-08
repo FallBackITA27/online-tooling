@@ -1,31 +1,61 @@
+let vincentHeistBreakingAndEnteringFetchData = new LayerFetchData(
+    "vincentHeistBreakingAndEntering"
+);
+
 function loadVincentHeistBreakingAndEntering(r) {
-    let layers = genericPolygon(
-        "breakingAndEnteringDiv",
-        r.searchAreas
+    if (constantData.layers.vincentHeistBreakingAndEntering !== undefined)
+        return;
+    constantData.layers.vincentHeistBreakingAndEntering = [];
+
+    registerSinglePolygonArray(
+        "vincentHeistBreakingAndEntering",
+        constantData.layers.vincentHeistBreakingAndEntering,
+        saveData.markerData.vincentHeistBreakingAndEntering,
+        r.searchAreas,
+        loadVincentHeistBreakingAndEnteringGUI
     );
 
-    layers = genericMarkers(
-        "breakingAndEnteringDiv",
-        r.terrorbyteSpots,
+    registerSingleMarkerArray(
+        "vincentHeistBreakingAndEntering",
+        constantData.layers.vincentHeistBreakingAndEntering,
+        saveData.markerData.vincentHeistBreakingAndEntering,
         constantData.icons.terrorbyteblue,
-        "lastPickVincentHeistBreakingAndEntering",
-        layers,
-        layers.length
+        r.terrorbyteSpots,
+        loadVincentHeistBreakingAndEnteringGUI
     );
 
-    layers = genericMarkers(
-        "breakingAndEnteringDiv",
-        r.techbroSpots,
+    registerSingleMarkerArray(
+        "vincentHeistBreakingAndEntering",
+        constantData.layers.vincentHeistBreakingAndEntering,
+        saveData.markerData.vincentHeistBreakingAndEntering,
         constantData.icons.laptopgreen,
-        "lastPickVincentHeistBreakingAndEntering",
-        layers,
-        layers.length
+        r.techbroSpots,
+        loadVincentHeistBreakingAndEnteringGUI
     );
+}
 
-    displayButtons(
-        "markers-vincentheist-breakingandentering-show-all-btn",
-        "markers-vincentheist-breakingandentering-hide-all-btn",
-        layers,
-        "lastPickVincentHeistBreakingAndEntering"
-    );
+vincentHeistBreakingAndEnteringFetchData.fetchThis(
+    loadVincentHeistBreakingAndEntering
+);
+
+async function loadVincentHeistBreakingAndEnteringGUI() {
+    if (!vincentHeistBreakingAndEnteringFetchData.loaded)
+        await vincentHeistBreakingAndEnteringFetchData.fetchThis(
+            loadVincentHeistBreakingAndEntering
+        );
+    resetContentParts();
+    for (let layer of constantData.layers.vincentHeistBreakingAndEntering) {
+        addToContentPart1List(layer.title).addEventListener(
+            "click",
+            function () {
+                resetContentPart2();
+                let divs = layer.title.includes("Area")
+                    ? new GenericHTMLConglomerate().genericPolygonOptions(layer)
+                    : new GenericHTMLConglomerate().genericMarkerOptions(layer);
+
+                for (let x of divs)
+                    document.getElementById("contentPart2").appendChild(x);
+            }
+        );
+    }
 }

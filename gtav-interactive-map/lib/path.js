@@ -1,55 +1,53 @@
-function genericLine(
-    parentDivId,
-    array,
-    layers = [],
-    startIndex = 0
+function registerSingleLineArray(
+    key,
+    constantLayerData,
+    markerData,
+    jsonData,
+    loadGUIFunc
 ) {
-    let parentDiv = document.getElementById(parentDivId);
-    for (let i = startIndex; i - startIndex < array.length; i++) {
-        let line = L.polyline(array[i - startIndex].coords, array[i - startIndex].options).bindTooltip(array[i - startIndex].display_name, array[i - startIndex].tooltip_options);
-
-        layers.pushMapLayer(line, i);
-
-        for (let markerIdx of array[i-startIndex].marker_points) {
-            layers.pushMapLayer(L.circleMarker(array[i - startIndex].coords[markerIdx], {
+    let numericIdOffset = constantLayerData.length;
+    for (let [i, line] of jsonData.entries()) {
+        let layer = new MapLayer(
+            key,
+            line.display_name,
+            i + numericIdOffset,
+            markerData,
+            constantLayerData
+        );
+        let actualLine = L.polyline(line.coords, line.options).bindTooltip(
+            line.display_name,
+            line.tooltip_options
+        );
+        actualLine.on("click", function (e) {
+            let markersMenu = document.getElementById("menuScroll").children[1];
+            if (markersMenu.classList.contains("selected")) markersMenu.click();
+            markersMenu.click();
+            loadGUIFunc();
+            document
+                .getElementById("contentPart1")
+                .children[i + numericIdOffset].click();
+        });
+        layer.push(actualLine);
+        for (let markerIdx of line.marker_points) {
+            let circleMarker = L.circleMarker(line.coords[markerIdx], {
                 radius: 10,
                 color: "transparent",
-                fillColor: array[i - startIndex].options.color,
-            }).bindTooltip(array[i - startIndex].names[markerIdx]), i);
+                fillColor: line.options.color,
+            }).bindTooltip(line.names[markerIdx]);
+            circleMarker.on("click", function (e) {
+                let markersMenu =
+                    document.getElementById("menuScroll").children[1];
+                if (markersMenu.classList.contains("selected"))
+                    markersMenu.click();
+                markersMenu.click();
+                loadGUIFunc();
+                document
+                    .getElementById("contentPart1")
+                    .children[i + numericIdOffset].click();
+            });
+            layer.push(circleMarker);
         }
-
-        let hr = document.createElement("hr");
-        hr.classList.add("twentyfive");
-        parentDiv.append(hr);
-
-        let linkDiv = document.createElement("div");
-        linkDiv.id =
-            "#" + array[i - startIndex].display_name.replaceAll(" ", "-");
-        parentDiv.append(linkDiv);
-
-        let title = document.createElement("h2");
-        title.innerHTML = array[i - startIndex].display_name;
-        parentDiv.append(title);
-
-        let zoom = document.createElement("button");
-        zoom.innerHTML = "Zoom to Line";
-        zoom.addEventListener("click", function () {
-            document.getElementById("gui_toggle_button_div").click();
-            map.fitBounds(line.getBounds());
-            if (!map.hasLayer(line)) layers[i].addLayerToMap();
-        });
-        parentDiv.append(zoom);
-
-        line.on("click", () =>{
-            document.getElementById("gui_toggle_button_div").click();
-            linkDiv.scrollIntoView();
-            map.fitBounds(line.getBounds());
-            Array.from(document.getElementsByClassName("hl")).forEach((r) =>
-                r.classList.remove("hl")
-            );
-            title.classList.add("hl");
-        });
+        constantLayerData.push(layer);
+        if (markerData.pick === "showAll") layer.addLayerToMap();
     }
-
-    return layers;
 }

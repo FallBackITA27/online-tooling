@@ -1,26 +1,39 @@
+let playingCardsFetchData = new LayerFetchData("playingCards");
+
 function loadPlayingCards(r) {
-    let layers = genericCollectibleInsert(
-        "playingCardsDiv",
-        r,
-        constantData.icons.playingCard,
-        "completionDataPlayingCards",
-        "lastPickPlayingCards",
+    if (constantData.layers.playingCards !== undefined) return;
+    constantData.layers.playingCards = [];
+
+    registerSingleCollectibleMarkerArray(
         "playingCards",
-        "markers-collectibles-playingcards-completion-number",
-        54
+        constantData.layers.playingCards,
+        saveData.markerData.playingCards,
+        constantData.icons.playingCard,
+        r,
+        loadPlayingCardsGUI
     );
+}
 
-    document.getElementById(
-        "markers-collectibles-playingcards-completion-number"
-    ).innerHTML = `Completed ${saveData.completionDataPlayingCards.size}/54`;
+playingCardsFetchData.fetchThis(loadPlayingCards);
 
-    completionButtonsDivUpdates(
-        "markers-collectibles-playingcards-show-all-btn",
-        "markers-collectibles-playingcards-hide-all-btn",
-        "markers-collectibles-playingcards-show-completed-btn",
-        "markers-collectibles-playingcards-hide-completed-btn",
-        layers,
-        "lastPickPlayingCards",
-        "completionDataPlayingCards"
-    );
+async function loadPlayingCardsGUI() {
+    if (!playingCardsFetchData.loaded)
+        await playingCardsFetchData.fetchThis(loadPlayingCards);
+    resetContentParts();
+    for (let layer of constantData.layers.playingCards) {
+        addToContentPart1List(layer.title).addEventListener(
+            "click",
+            function () {
+                resetContentPart2();
+                let divs =
+                    new GenericHTMLConglomerate().genericCollectibleMarkerOptions(
+                        layer,
+                        constantData.layers.playingCards.length
+                    );
+
+                for (let x of divs)
+                    document.getElementById("contentPart2").appendChild(x);
+            }
+        );
+    }
 }

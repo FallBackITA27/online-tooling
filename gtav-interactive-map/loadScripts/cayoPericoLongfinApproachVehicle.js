@@ -1,22 +1,52 @@
+let cayoPericoLongfinApproachVehicleFetchData = new LayerFetchData(
+    "cayoPericoLongfinApproachVehicle"
+);
+
 function loadCayoPericoLongfinApproachVehicle(r) {
-    let layers = genericMarkers(
-        "longfinApproachVehicleDiv",
-        r.longfinMarkers,
+    if (constantData.layers.cayoPericoLongfinApproachVehicle !== undefined)
+        return;
+    constantData.layers.cayoPericoLongfinApproachVehicle = [];
+
+    registerSingleMarkerArray(
+        "cayoPericoLongfinApproachVehicle",
+        constantData.layers.cayoPericoLongfinApproachVehicle,
+        saveData.markerData.cayoPericoLongfinApproachVehicle,
         constantData.icons.boat,
-        "lastPickCayoPericoLongfinApproachVehicle"
+        r.longfinMarkers,
+        loadCayoPericoLongfinApproachVehicleGUI
     );
 
-    layers = genericCircles(
-        "longfinApproachVehicleDiv",
+    registerSingleCircleMarkerArray(
+        "cayoPericoLongfinApproachVehicle",
+        constantData.layers.cayoPericoLongfinApproachVehicle,
+        saveData.markerData.cayoPericoLongfinApproachVehicle,
         r.dockMarkers,
-        layers,
-        r.longfinMarkers.length,
-    )
-
-    displayButtons(
-        "markers-cayopericoheist-longfinapproachvehicle-show-all-btn",
-        "markers-cayopericoheist-longfinapproachvehicle-hide-all-btn",
-        layers,
-        "lastPickCayoPericoLongfinApproachVehicle"
+        loadCayoPericoCuttingTorchGUI
     );
+}
+
+cayoPericoLongfinApproachVehicleFetchData.fetchThis(
+    loadCayoPericoLongfinApproachVehicle
+);
+
+async function loadCayoPericoLongfinApproachVehicleGUI() {
+    if (!cayoPericoLongfinApproachVehicleFetchData.loaded)
+        await cayoPericoLongfinApproachVehicleFetchData.fetchThis(
+            loadCayoPericoLongfinApproachVehicle
+        );
+    resetContentParts();
+    for (let layer of constantData.layers.cayoPericoLongfinApproachVehicle) {
+        addToContentPart1List(layer.title).addEventListener(
+            "click",
+            function () {
+                resetContentPart2();
+                let divs = new GenericHTMLConglomerate().genericMarkerOptions(
+                    layer
+                );
+
+                for (let x of divs)
+                    document.getElementById("contentPart2").appendChild(x);
+            }
+        );
+    }
 }

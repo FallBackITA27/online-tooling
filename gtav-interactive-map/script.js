@@ -1,336 +1,10 @@
-const weekday = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-];
-
-let saveData = {
-    version: "0.11.0",
-    pointerMode: false,
-    selectedTileLayer: "game",
-    lastZoom: 2,
-    lastCoords: [38.959409, -75.410156],
-    casinoHeist: {
-        startDate: false,
-    },
-    cayoPericoHeist: {
-        startDate: false,
-    },
-    luckyWheelSpin: {
-        startDate: false,
-    },
-    chipsBuyCooldown: {
-        startDate: false,
-    },
-    vipRegistrationDuration: {
-        startDate: false,
-    },
-    blCountyShow: false,
-    lsCountyShow: false,
-    completionDataFigurines: new Set(),
-    lastPickFigurines: "hideAll",
-    completionDataPlayingCards: new Set(),
-    lastPickPlayingCards: "hideAll",
-    completionDataMovieProps: new Set(),
-    lastPickMovieProps: "hideAll",
-    completionDataSignalJammers: new Set(),
-    lastPickSignalJammers: "hideAll",
-    completionDataLDOrganics: new Set(),
-    lastPickLDOrganics: "hideAll",
-    lastPickKosatkaFastTravels: "hideAll",
-    lastPickCayoPericoScopeOutPlane: "hideAll",
-    lastPickCayoPericoPlasmaCutter: "hideAll",
-    lastPickCayoPericoFingerprintCloner: "hideAll",
-    lastPickCayoPericoCuttingTorch: "hideAll",
-    lastPickCayoPericoWeaponLocker: "hideAll",
-    lastPickCayoPericoKosatkaApproachVehicle: "hideAll",
-    lastPickCayoPericoLongfinApproachVehicle: "hideAll",
-    lastPickVincentHeistSlushFund: "hideAll",
-    lastPickVincentHeistBreakingAndEntering: "hideAll",
-    lastPickVincentHeistConcealedWeapons: "hideAll",
-    lastPickVincentHeistHitAndRun: "hideAll",
-    lastPickVincentHeistDisorganizedCrime: "hideAll",
-    lastPickVincentHeistSceneOfTheCrime: "hideAll",
+let clickDebugFunction = function (e) {
+    alert(
+        e.latlng.lat.toFixed(6).replace(/0+$/, "") +
+            ", " +
+            e.latlng.lng.toFixed(6).replace(/0+$/, "")
+    );
 };
-
-function loadInSaveData(dataStr) {
-    if (dataStr != null) {
-        let temporarySaveData = JSON.parse(dataStr, (key, value) =>
-            [
-                "completionDataFigurines",
-                "completionDataMovieProps",
-                "completionDataPlayingCards",
-                "completionDataSignalJammers",
-                "completionDataLDOrganics",
-            ].includes(key)
-                ? new Set(value)
-                : value
-        );
-        if (temporarySaveData.version !== saveData.version) {
-            if (temporarySaveData.version == undefined) {
-                // Save data pre-0.1.0 had no tag, there is no way to save it at this point.
-                return;
-            }
-            if (temporarySaveData.version === "0.1.0") {
-                temporarySaveData.version = "0.1.1";
-                temporarySaveData.blCountyShow = false;
-                temporarySaveData.lsCountyShow = false;
-            }
-            if (temporarySaveData.version === "0.1.1") {
-                temporarySaveData.version = "0.1.2";
-                temporarySaveData.completionDataMovieProps = new Set();
-                temporarySaveData.lastPickMovieProps = "hideAll";
-                temporarySaveData.lastPickFigurines =
-                    temporarySaveData.completionDataLastPickFigurines;
-                delete temporarySaveData.completionDataLastPickFigurines;
-            }
-            if (temporarySaveData.version === "0.1.2") {
-                temporarySaveData.version = "0.2.0";
-            }
-            if (temporarySaveData.version === "0.2.0") {
-                temporarySaveData.version = "0.3.0";
-                temporarySaveData.completionDataPlayingCards = new Set();
-                temporarySaveData.lastPickPlayingCards = "hideAll";
-            }
-            if (temporarySaveData.version === "0.3.0") {
-                temporarySaveData.version = "0.3.1";
-            }
-            if (temporarySaveData.version === "0.3.1") {
-                temporarySaveData.version = "0.4.0";
-                temporarySaveData.luckyWheelSpin = {
-                    startDate: false,
-                };
-                temporarySaveData.chipsBuyCooldown = {
-                    startDate: false,
-                };
-                temporarySaveData.vipRegistrationDuration = {
-                    startDate: false,
-                };
-            }
-            if (temporarySaveData.version === "0.4.0") {
-                temporarySaveData.version = "0.5.0";
-                temporarySaveData.completionDataSignalJammers = new Set();
-                temporarySaveData.lastPickSignalJammers = "hideAll";
-            }
-            if (temporarySaveData.version === "0.5.0") {
-                temporarySaveData.version = "0.6.0";
-                temporarySaveData.completionDataLDOrganics = new Set();
-                temporarySaveData.lastPickLDOrganics = "hideAll";
-            }
-            if (temporarySaveData.version === "0.6.0") {
-                temporarySaveData.version = "0.7.0";
-            }
-            if (temporarySaveData.version === "0.7.0") {
-                temporarySaveData.version = "0.8.0";
-                temporarySaveData.lastPickKosatkaFastTravels = "hideAll";
-                temporarySaveData.lastPickCayoPericoScopeOutPlane = "hideAll";
-            }
-            if (temporarySaveData.version === "0.8.0") {
-                temporarySaveData.version = "0.8.1";
-            }
-            if (temporarySaveData.version === "0.8.1") {
-                temporarySaveData.version = "0.9.0";
-                temporarySaveData.lastPickCayoPericoPlasmaCutter = "hideAll";
-                temporarySaveData.lastPickCayoPericoCuttingTorch = "hideAll";
-                temporarySaveData.lastPickCayoPericoFingerprintCloner =
-                    "hideAll";
-                temporarySaveData.pointerMode = false;
-            }
-            if (temporarySaveData.version === "0.9.0") {
-                temporarySaveData.version = "0.10.0";
-                temporarySaveData.lastPickCayoPericoWeaponLocker = "hideAll";
-                temporarySaveData.lastPickCayoPericoKosatkaApproachVehicle =
-                    "hideAll";
-            }
-            if (temporarySaveData.version === "0.10.0") {
-                temporarySaveData.version = "0.11.0";
-                temporarySaveData.lastPickCayoPericoLongfinApproachVehicle =
-                    "hideAll";
-                temporarySaveData.lastPickVincentHeistSlushFund = "hideAll";
-                temporarySaveData.lastPickVincentHeistBreakingAndEntering = "hideAll";
-                temporarySaveData.lastPickVincentHeistConcealedWeapons = "hideAll";
-                temporarySaveData.lastPickVincentHeistHitAndRun = "hideAll";
-                temporarySaveData.lastPickVincentHeistSceneOfTheCrime = "hideAll";
-                temporarySaveData.lastPickVincentHeistDisorganizedCrime = "hideAll";
-            }
-            if (temporarySaveData.version === "0.11.0") {
-                // Current version
-            }
-            // Here you check the version tag in the savedata and modify it to match the data right after - this way old save data will not be lost.
-        }
-        saveData = temporarySaveData;
-    }
-}
-loadInSaveData(localStorage.getItem("saveData"));
-saveDataSave();
-
-document
-    .getElementById("backupDataButton")
-    .addEventListener("click", function () {
-        saveDataSave();
-        var element = document.createElement("a");
-        element.setAttribute(
-            "href",
-            "data:text/plain;charset=utf-8," +
-                encodeURIComponent(localStorage.getItem("saveData"))
-        );
-        element.setAttribute("download", "GTA5InteractiveMapData.json");
-        element.style.display = "none";
-        document.body.appendChild(element);
-        element.click();
-        document.body.removeChild(element);
-    });
-
-document
-    .getElementById("backupDataFile")
-    .addEventListener("change", function (e) {
-        let reader = new FileReader();
-        reader.readAsText(e.target.files[0]);
-        reader.addEventListener("load", function (res) {
-            console.log(res.target.result);
-            loadInSaveData(res.target.result);
-            saveDataSave();
-            window.location.reload();
-        });
-    });
-
-let player;
-function onYouTubeIframeAPIReady() {
-    player = new YT.Player("player", {
-        playerVars: {
-            autoplay: 1,
-            enablejsapi: 1,
-            rel: 0,
-            playsinline: 1,
-            origin: window.location.origin,
-        },
-        events: {
-            onReady: loadDynamicData,
-        },
-    });
-}
-
-function startTimer(buttonId, data) {
-    document.getElementById(buttonId).addEventListener("click", function () {
-        data.startDate = +new Date();
-        saveDataSave();
-        Notification.requestPermission();
-    });
-}
-
-setInterval(async function () {
-    function genericTimer(
-        heistData,
-        currentTime,
-        progressBarId,
-        paragraphId,
-        notifTitle,
-        notifString,
-        cooldown = 2880000,
-        iconPath = ""
-    ) {
-        progressBarElement = document.getElementById(progressBarId);
-        if (heistData.startDate !== false) {
-            if (heistData.startDate + cooldown < currentTime) {
-                new Notification(notifTitle, {
-                    body: notifString,
-                    icon: iconPath,
-                });
-                progressBarElement.value = cooldown;
-                heistData.startDate = false;
-                saveDataSave();
-            } else {
-                progressBarElement.value = currentTime - heistData.startDate;
-            }
-            let sec = Math.floor((cooldown - progressBarElement.value) / 1000);
-            let hrs = Math.trunc(sec / 3600);
-            sec %= 3600;
-            let min = Math.trunc(sec / 60);
-            sec %= 60;
-            document.getElementById(paragraphId).innerHTML =
-                progressBarElement.innerHTML = `${hrs
-                    .toString()
-                    .padStart(2, "0")}hrs ${min
-                    .toString()
-                    .padStart(2, "0")}min ${sec
-                    .toString()
-                    .padStart(2, "0")}sec left`;
-        }
-    }
-
-    let gtaOnlineTime = ~~(Date.now() / 2000);
-    document.getElementById("inGameClock").innerHTML = `In Game Time: ${
-        weekday[~~(gtaOnlineTime / 1440) % 7]
-    }, ${`${~~((gtaOnlineTime / 60) % 24)}`.padStart(2, "0")}:${`${~~(
-        gtaOnlineTime % 60
-    )}`.padStart(2, "0")}`; // +1 Offset, idk why, look at weekday array
-
-    genericTimer(
-        saveData.casinoHeist,
-        +new Date(),
-        "timers-progress-casinoheist",
-        "timers-paragraph-casinoheist",
-        "Time's up!",
-        "Your Casino Heist is ready.",
-        2880000,
-        "https://fallbackita27.github.io/online-tooling/gtav-interactive-map/gtavIcons/casino.svg"
-    );
-    startTimer("timers-button-casinoheist", saveData.casinoHeist);
-
-    genericTimer(
-        saveData.chipsBuyCooldown,
-        +new Date(),
-        "timers-progress-casinochipsbuy",
-        "timers-paragraph-casinochipsbuy",
-        "Time's up!",
-        "You can now buy chips at the Casino again.",
-        2880000,
-        "https://fallbackita27.github.io/online-tooling/gtav-interactive-map/gtavIcons/casino.svg"
-    );
-    startTimer("timers-button-casinochipsbuy", saveData.chipsBuyCooldown);
-
-    genericTimer(
-        saveData.cayoPericoHeist,
-        +new Date(),
-        "timers-progress-cayopericoheist",
-        "timers-paragraph-cayopericoheist",
-        "Time's up!",
-        "Your Cayo Perico Heist is ready.",
-        9000000,
-        "https://fallbackita27.github.io/online-tooling/gtav-interactive-map/gtavIcons/cayoPerico.svg"
-    );
-    startTimer("timers-button-cayopericoheist", saveData.cayoPericoHeist);
-
-    genericTimer(
-        saveData.luckyWheelSpin,
-        +new Date(),
-        "timers-progress-luckywheelspin",
-        "timers-paragraph-luckywheelspin",
-        "Time's up!",
-        "You can now spin the Casino's wheel again.",
-        86400000,
-        "https://fallbackita27.github.io/online-tooling/gtav-interactive-map/gtavIcons/casino.svg"
-    );
-    startTimer("timers-button-luckywheelspin", saveData.luckyWheelSpin);
-
-    genericTimer(
-        saveData.vipRegistrationDuration,
-        +new Date(),
-        "timers-progress-vipregistration",
-        "timers-paragraph-vipregistration",
-        "Time's up!",
-        "You can now spin the Casino's wheel again.",
-        14400000
-    );
-    startTimer(
-        "timers-button-vipregistration",
-        saveData.vipRegistrationDuration
-    );
-}, 500);
 
 let map = L.map("map", {
     center: saveData.lastCoords,
@@ -346,8 +20,55 @@ let map = L.map("map", {
     ],
     maxBoundsViscosity: 0.5,
 });
-
 const constantData = {
+    layers: {},
+    tileLayers: {
+        mainMap: {
+            render: L.tileLayer(
+                "https://s.rsg.sc/sc/images/games/GTAV/map/render/{z}/{x}/{y}.jpg",
+                {
+                    maxNativeZoom: 7,
+                    maxZoom: 7,
+                    minNativeZoom: 0,
+                    minZoom: 0,
+                    keepBuffer: 4,
+                    noWrap: true,
+                    updateWhenIdle: true,
+                }
+            ),
+            game: L.tileLayer(
+                "https://s.rsg.sc/sc/images/games/GTAV/map/game/{z}/{x}/{y}.jpg",
+                {
+                    maxNativeZoom: 7,
+                    maxZoom: 7,
+                    minNativeZoom: 0,
+                    minZoom: 0,
+                    keepBuffer: 4,
+                    noWrap: true,
+                    updateWhenIdle: true,
+                }
+            ),
+            print: L.tileLayer(
+                "https://s.rsg.sc/sc/images/games/GTAV/map/print/{z}/{x}/{y}.jpg",
+                {
+                    maxNativeZoom: 7,
+                    maxZoom: 7,
+                    minNativeZoom: 0,
+                    minZoom: 0,
+                    keepBuffer: 4,
+                    noWrap: true,
+                    updateWhenIdle: true,
+                }
+            ),
+        },
+    },
+    oceanColors: {
+        mainMap: {
+            render: "#0D2B4F",
+            game: "#384950",
+            print: "#4EB1D0",
+        },
+    },
     icons: {
         figurine: L.divIcon({
             className: "collectible figurine",
@@ -460,6 +181,581 @@ const constantData = {
     },
 };
 
+document.getElementById("map").style.background =
+    constantData.oceanColors.mainMap[saveData.selectedTileLayer];
+constantData.tileLayers.mainMap[saveData.selectedTileLayer].addTo(map);
+
+Array.from(document.getElementById("menuScroll").children).forEach((r) =>
+    r.addEventListener("click", async function (e) {
+        let mainContent = document.getElementById("mainContent");
+        let contentPart1 = mainContent.children[0];
+        let contentPart2 = mainContent.children[1];
+        mainContent.classList = [];
+
+        if (
+            e.target.classList.contains("selected") ||
+            e.target.value === "map"
+        ) {
+            resetContentParts();
+            Array.from(document.getElementsByClassName("selected")).forEach(
+                (x) => x.classList.remove("selected")
+            );
+            document
+                .getElementById("menuScroll")
+                .children[0].classList.add("selected");
+            mainContent.style = "display: none";
+            return;
+        }
+        mainContent.style = "";
+
+        Array.from(document.getElementsByClassName("selected")).forEach((x) =>
+            x.classList.remove("selected")
+        );
+        e.target.classList.add("selected");
+
+        resetContentParts();
+
+        if (e.target.value === "changelog") {
+            mainContent.classList.add("styleTextPara");
+            await fetch("./assets/uiText/changelog.json")
+                .then((data) => data.json())
+                .then((data) => {
+                    let textDiv = document.createElement("div");
+                    let header = document.createElement("header");
+                    header.appendChild(document.createElement("h1"));
+                    header.appendChild(document.createElement("h2"));
+                    textDiv.appendChild(header);
+                    textDiv.appendChild(document.createElement("p"));
+                    contentPart2.appendChild(textDiv);
+                    contentPart2.appendChild(document.createElement("p"));
+                    contentPart2.children[0].children[1].classList.add(
+                        "paragraphText"
+                    );
+                    contentPart2.children[1].classList.add("signature");
+                    for (let nData of data) {
+                        let element = addToContentPart1List(nData.title);
+                        element.classList.add("versionText");
+                        element.addEventListener("click", function () {
+                            contentPart2.children[0].children[0].children[0].innerHTML =
+                                "Version " + nData.title;
+                            contentPart2.children[0].children[0].children[1].innerHTML =
+                                new Date(nData.timestamp).toLocaleDateString(
+                                    undefined,
+                                    {
+                                        year: "numeric",
+                                        month: "long",
+                                        day: "2-digit",
+                                        hour: "2-digit",
+                                        minute: "2-digit",
+                                    }
+                                );
+                            contentPart2.children[0].children[1].innerHTML =
+                                nData.innerHTML;
+                            contentPart2.children[1].innerHTML =
+                                "Signatures: " + nData.signatures.join(", ");
+                        });
+                    }
+                    contentPart1.children[0].click();
+                });
+            return;
+        }
+
+        if (e.target.value === "faq") {
+            mainContent.classList.add("styleTextPara");
+            await fetch("./assets/uiText/faq.json")
+                .then((data) => data.json())
+                .then((data) => {
+                    let textDiv = document.createElement("div");
+                    textDiv.appendChild(document.createElement("h1"));
+                    textDiv.appendChild(document.createElement("p"));
+                    contentPart2.appendChild(textDiv);
+                    contentPart2.appendChild(document.createElement("p"));
+                    contentPart2.children[0].children[1].classList.add(
+                        "paragraphText"
+                    );
+                    contentPart2.children[1].classList.add("signature");
+                    for (let nData of data) {
+                        let element = addToContentPart1List(nData.title);
+                        element.addEventListener("click", function () {
+                            contentPart2.children[0].children[0].innerHTML =
+                                nData.extendedTitle
+                                    ? nData.extendedTitle
+                                    : nData.title;
+                            contentPart2.children[0].children[1].innerHTML =
+                                nData.innerHTML;
+                            contentPart2.children[1].innerHTML =
+                                "Signatures: " + nData.signatures.join(", ");
+                        });
+                    }
+                    contentPart1.children[0].click();
+                });
+            return;
+        }
+
+        if (e.target.value === "settings") {
+            // This is all so fucking cursed
+            mainContent.classList.add("styleClassic");
+
+            /* Map Style Options */
+            let mapStyleButton = addToContentPart1List("Map Style");
+            mapStyleButton.addEventListener("click", function () {
+                resetContentPart2();
+                const names = ["game", "render", "print"];
+                const namesDisp = ["In Game", "Satellite", "Game Manual"];
+
+                let optionDiv = document.createElement("div");
+                optionDiv.innerHTML = "Map Style";
+
+                let interactiveDiv = document.createElement("div");
+
+                let img1 = document.createElement("img");
+                img1.src = "./websiteIcons/small_arr_left.svg";
+                interactiveDiv.appendChild(img1);
+
+                interactiveDiv.innerHTML += `<p>${
+                    namesDisp[names.indexOf(saveData.selectedTileLayer)]
+                }</p>`;
+
+                let img2 = document.createElement("img");
+                img2.src = "./websiteIcons/small_arr_right.svg";
+                interactiveDiv.appendChild(img2);
+
+                interactiveDiv.style = "display: flex; align-items: center;";
+                optionDiv.appendChild(interactiveDiv);
+
+                contentPart2.append(optionDiv);
+
+                function refreshMap(idx) {
+                    interactiveDiv.children[1].innerHTML = namesDisp[idx];
+                    constantData.tileLayers.mainMap[
+                        saveData.selectedTileLayer
+                    ].remove();
+                    saveData.selectedTileLayer = names[idx];
+                    saveDataSave();
+                    constantData.tileLayers.mainMap[
+                        saveData.selectedTileLayer
+                    ].addTo(map);
+                    document.getElementById("map").style.background =
+                        constantData.oceanColors.mainMap[
+                            saveData.selectedTileLayer
+                        ];
+                }
+
+                optionDiv.addEventListener("click", function () {
+                    let idx = names.indexOf(saveData.selectedTileLayer) + 1;
+                    if (idx === 3) idx = 0;
+                    refreshMap(idx);
+                });
+            });
+
+            /* Debug Options */
+            let debugButton = addToContentPart1List("Debug");
+            debugButton.addEventListener("click", function () {
+                resetContentPart2();
+                let optionDiv = document.createElement("div");
+                optionDiv.innerHTML = "On Click Coordinates";
+
+                let interactiveDiv = document.createElement("div");
+
+                let img1 = document.createElement("img");
+                img1.src = "./websiteIcons/small_arr_left.svg";
+                interactiveDiv.appendChild(img1);
+
+                interactiveDiv.innerHTML += `<p>${
+                    saveData.pointerMode ? "True" : "False"
+                }</p>`;
+
+                let img2 = document.createElement("img");
+                img2.src = "./websiteIcons/small_arr_right.svg";
+                interactiveDiv.appendChild(img2);
+                interactiveDiv.style = "display: flex; align-items: center;";
+
+                optionDiv.appendChild(interactiveDiv);
+                optionDiv.addEventListener("click", function () {
+                    saveData.pointerMode = !saveData.pointerMode;
+                    saveDataSave();
+                    interactiveDiv.children[1].innerHTML = saveData.pointerMode
+                        ? "True"
+                        : "False";
+
+                    if (saveData.pointerMode) {
+                        map.on("click", clickDebugFunction);
+                    } else {
+                        map.off("click", clickDebugFunction);
+                    }
+                });
+
+                contentPart2.append(optionDiv);
+            });
+
+            /* Data Options */
+            let dataButton = addToContentPart1List("Data");
+
+            dataButton.addEventListener("click", function () {
+                resetContentPart2();
+                let optionDiv = document.createElement("div");
+                optionDiv.innerHTML = "Backup Data<p>Click Here</p>";
+
+                optionDiv.addEventListener("click", function () {
+                    saveDataSave();
+                    var element = document.createElement("a");
+                    element.setAttribute(
+                        "href",
+                        "data:text/plain;charset=utf-8," +
+                            encodeURIComponent(localStorage.getItem("saveData"))
+                    );
+                    element.setAttribute(
+                        "download",
+                        "GTA5InteractiveMapData.json"
+                    );
+                    element.style.display = "none";
+                    document.body.appendChild(element);
+                    element.click();
+                    document.body.removeChild(element);
+                });
+
+                contentPart2.append(optionDiv);
+
+                let option2Div = document.createElement("div");
+                option2Div.innerHTML = "Load Backup Data<p>Click Here</p>";
+
+                option2Div.addEventListener("click", function () {
+                    var element = document.createElement("input");
+                    element.type = "File";
+                    element.accept = "application/json, text/plain";
+                    element.addEventListener("change", function (e) {
+                        let reader = new FileReader();
+                        reader.addEventListener("load", function (res) {
+                            console.log(res.target.result);
+                            loadInSaveData(res.target.result);
+                            saveDataSave();
+                            window.location.reload();
+                        });
+                        reader.readAsText(e.target.files[0]);
+                    });
+                    document.body.appendChild(element);
+                    element.click();
+                    document.body.removeChild(element);
+                });
+
+                contentPart2.append(option2Div);
+            });
+
+            contentPart1.children[0].click();
+            return;
+        }
+
+        if (e.target.value === "tools") {
+            mainContent.classList.add("styleClassic");
+
+            let inGameTimeButton = addToContentPart1List("Timers");
+
+            inGameTimeButton.addEventListener("click", async function () {
+                resetContentPart2();
+                let optionDiv = document.createElement("div");
+                optionDiv.innerHTML = "In Game Time";
+                optionDiv.style = "cursor: unset;";
+
+                contentPart2.append(optionDiv);
+
+                function createOptionDivTimer(name, heistData) {
+                    let optionDiv = document.createElement("div");
+                    optionDiv.innerHTML = `${name}<p>00hrs 00min 00sec left</p>Click Here to Start`;
+                    contentPart2.appendChild(optionDiv);
+
+                    optionDiv.addEventListener("click", function () {
+                        heistData.startDate = +new Date();
+                        saveDataSave();
+                        Notification.requestPermission();
+                    });
+                    return optionDiv;
+                }
+
+                function genericTimer(
+                    heistData,
+                    currentTime,
+                    optionDiv,
+                    notifTitle,
+                    notifString,
+                    cooldown,
+                    iconPath
+                ) {
+                    let paragraphElement = optionDiv.children[0];
+                    if (heistData.startDate !== false) {
+                        if (heistData.startDate + cooldown < currentTime) {
+                            new Notification(notifTitle, {
+                                body: notifString,
+                                icon: iconPath,
+                            });
+                            heistData.startDate = false;
+                            saveDataSave();
+                        }
+                        let sec = Math.floor(
+                            (heistData.startDate + cooldown - currentTime) /
+                                1000
+                        );
+                        let hrs = Math.trunc(sec / 3600);
+                        sec %= 3600;
+                        let min = Math.trunc(sec / 60);
+                        sec %= 60;
+                        paragraphElement.innerHTML = `${hrs
+                            .toString()
+                            .padStart(2, "0")}hrs ${min
+                            .toString()
+                            .padStart(2, "0")}min ${sec
+                            .toString()
+                            .padStart(2, "0")}sec left`;
+                    }
+                }
+
+                let casinoHeistTime = createOptionDivTimer(
+                    "Casino Heist Cooldown",
+                    saveData.casinoHeist
+                );
+                let casinoChipsTime = createOptionDivTimer(
+                    "Casino Chips Buy Cooldown",
+                    saveData.chipsBuyCooldown
+                );
+                let cayoPericoHeistTime = createOptionDivTimer(
+                    "Cayo Perico Heist Cooldown",
+                    saveData.cayoPericoHeist
+                );
+                let luckyWheelTime = createOptionDivTimer(
+                    "Lucky Wheel Spin Cooldown",
+                    saveData.luckyWheelSpin
+                );
+                let vipRegisterTime = createOptionDivTimer(
+                    "VIP Registration Duration",
+                    saveData.vipRegistrationDuration
+                );
+
+                let timerInterval = setInterval(async function () {
+                    if (!inGameTimeButton.classList.contains("sel")) {
+                        clearInterval(timerInterval);
+                        return;
+                    }
+
+                    let gtaOnlineTime = ~~(Date.now() / 2000);
+                    optionDiv.innerHTML = `In Game Time<p>${
+                        weekday[~~(gtaOnlineTime / 1440) % 7]
+                    }, ${`${~~((gtaOnlineTime / 60) % 24)}`.padStart(
+                        2,
+                        "0"
+                    )}:${`${~~(gtaOnlineTime % 60)}`.padStart(2, "0")}</p>`;
+
+                    genericTimer(
+                        saveData.casinoHeist,
+                        +new Date(),
+                        casinoHeistTime,
+                        "Time's up!",
+                        "Your Casino Heist is ready.",
+                        2880000,
+                        "https://fallbackita27.github.io/online-tooling/gtav-interactive-map/gtavIcons/casino.svg"
+                    );
+
+                    genericTimer(
+                        saveData.chipsBuyCooldown,
+                        +new Date(),
+                        casinoChipsTime,
+                        "Time's up!",
+                        "You can now buy chips at the Casino again.",
+                        2880000,
+                        "https://fallbackita27.github.io/online-tooling/gtav-interactive-map/gtavIcons/casino.svg"
+                    );
+
+                    genericTimer(
+                        saveData.cayoPericoHeist,
+                        +new Date(),
+                        cayoPericoHeistTime,
+                        "Time's up!",
+                        "Your Cayo Perico Heist is ready.",
+                        9000000,
+                        "https://fallbackita27.github.io/online-tooling/gtav-interactive-map/gtavIcons/cayoPerico.svg"
+                    );
+
+                    genericTimer(
+                        saveData.luckyWheelSpin,
+                        +new Date(),
+                        luckyWheelTime,
+                        "Time's up!",
+                        "You can now spin the Casino's wheel again.",
+                        86400000,
+                        "https://fallbackita27.github.io/online-tooling/gtav-interactive-map/gtavIcons/casino.svg"
+                    );
+
+                    genericTimer(
+                        saveData.vipRegistrationDuration,
+                        +new Date(),
+                        vipRegisterTime,
+                        "Time's up!",
+                        "You can now register as a VIP again.",
+                        14400000,
+                        ""
+                    );
+                }, 500);
+            });
+
+            contentPart1.children[0].click();
+            return;
+        }
+
+        if (e.target.value === "markers") {
+            mainContent.classList.add("styleClassic");
+
+            addToContentPart1List("POIs").addEventListener(
+                "click",
+                function () {
+                    resetContentParts();
+                    addToContentPart1List("Counties").addEventListener(
+                        "click",
+                        loadCountiesGUI
+                    );
+                }
+            );
+            addToContentPart1List("Collectibles").addEventListener(
+                "click",
+                function () {
+                    resetContentParts();
+                    addToContentPart1List("Action Figures").addEventListener(
+                        "click",
+                        loadFigurinesGUI
+                    );
+                    addToContentPart1List("Movie Props").addEventListener(
+                        "click",
+                        moviePropsGUI
+                    );
+                    addToContentPart1List("Playing Cards").addEventListener(
+                        "click",
+                        loadPlayingCardsGUI
+                    );
+                    addToContentPart1List("Signal Jammers").addEventListener(
+                        "click",
+                        loadSignalJammersGUI
+                    );
+                    addToContentPart1List(
+                        "LD Organics Products"
+                    ).addEventListener("click", loadLDOrganicsGUI);
+                }
+            );
+            addToContentPart1List("The Cayo Perico Heist").addEventListener(
+                "click",
+                function () {
+                    resetContentParts();
+                    addToContentPart1List("General").addEventListener(
+                        "click",
+                        function () {
+                            resetContentParts();
+                            addToContentPart1List(
+                                "Kosatka Fast Travels"
+                            ).addEventListener(
+                                "click",
+                                loadKosatkaFastTravelsGUI
+                            );
+                            addToContentPart1List(
+                                "Scope Out Planes"
+                            ).addEventListener(
+                                "click",
+                                loadCayoPericoScopeOutPlaneGUI
+                            );
+                        }
+                    );
+                    addToContentPart1List("Equipment").addEventListener(
+                        "click",
+                        function () {
+                            resetContentParts();
+                            addToContentPart1List(
+                                "Fingerprint Cloner"
+                            ).addEventListener(
+                                "click",
+                                loadCayoPericoFingerprintClonerGUI
+                            );
+                            addToContentPart1List(
+                                "Plasma Cutter"
+                            ).addEventListener(
+                                "click",
+                                loadCayoPericoPlasmaCutterGUI
+                            );
+                            addToContentPart1List(
+                                "Cutting Torch"
+                            ).addEventListener(
+                                "click",
+                                loadCayoPericoCuttingTorchGUI
+                            );
+                            addToContentPart1List(
+                                "Weapon Loadout"
+                            ).addEventListener(
+                                "click",
+                                loadCayoPericoWeaponLoadoutGUI
+                            );
+                        }
+                    );
+                    addToContentPart1List("Approach Vehicles").addEventListener(
+                        "click",
+                        function () {
+                            resetContentParts();
+                            addToContentPart1List("Kosatka").addEventListener(
+                                "click",
+                                loadCayoPericoKosatkaApproachVehicleGUI
+                            );
+                            addToContentPart1List("Longfin").addEventListener(
+                                "click",
+                                loadCayoPericoLongfinApproachVehicleGUI
+                            );
+                        }
+                    );
+                }
+            );
+            addToContentPart1List(
+                "The Cluckin' Bell Farm Raid"
+            ).addEventListener("click", function () {
+                resetContentParts();
+                addToContentPart1List("Slush Fund").addEventListener(
+                    "click",
+                    loadVincentHeistSlushFundGUI
+                );
+                addToContentPart1List("Breaking and Entering").addEventListener(
+                    "click",
+                    loadVincentHeistBreakingAndEnteringGUI
+                );
+                addToContentPart1List("Concealed Weapons").addEventListener(
+                    "click",
+                    loadVincentHeistConcealedWeaponsGUI
+                );
+                addToContentPart1List("Hit and Run").addEventListener(
+                    "click",
+                    loadVincentHeistHitAndRunGUI
+                );
+                addToContentPart1List("Disorganized Crime").addEventListener(
+                    "click",
+                    loadVincentHeistDisorganizedCrimeGUI
+                );
+                addToContentPart1List("Scene of the Crime").addEventListener(
+                    "click",
+                    loadVincentHeistSceneOfTheCrimeGUI
+                );
+            });
+
+            return;
+        }
+    })
+);
+
+let player;
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player("player", {
+        playerVars: {
+            autoplay: 1,
+            enablejsapi: 1,
+            rel: 0,
+            playsinline: 1,
+            origin: window.location.origin,
+        },
+        events: {
+            onReady: loadDynamicData,
+        },
+    });
+}
+
 map.on("zoomend", function (e) {
     let x = map.getCenter();
     saveData.lastCoords = [
@@ -479,51 +775,12 @@ map.on("moveend", function (e) {
     saveDataSave();
 });
 
-document
-    .getElementById("gui_toggle_button_div")
-    .addEventListener("click", function (e) {
-        document.getElementById("popupgui").classList.toggle("s");
-        document.getElementById("gui_toggle_button").classList.toggle("s");
-    });
-
-function saveDataSave() {
-    console.log(saveData);
-    localStorage.setItem(
-        "saveData",
-        JSON.stringify(saveData, (_key, value) =>
-            value instanceof Set ? [...value] : value
-        )
-    );
-}
-
-let clickDebugFunction = function (e) {
-    alert(
-        e.latlng.lat.toFixed(6).replace(/0+$/, "") +
-            ", " +
-            e.latlng.lng.toFixed(6).replace(/0+$/, "")
-    );
-};
-
 async function loadDynamicData() {
-    if (saveData.pointerMode !== document.getElementById("pointerMode").checked)
-        document.getElementById("pointerMode").click();
     if (saveData.pointerMode) {
         map.on("click", clickDebugFunction);
     } else {
         map.off("click", clickDebugFunction);
     }
-    document
-        .getElementById("pointerMode")
-        .addEventListener("change", function () {
-            saveData.pointerMode =
-                document.getElementById("pointerMode").checked;
-            if (saveData.pointerMode) {
-                map.on("click", clickDebugFunction);
-            } else {
-                map.off("click", clickDebugFunction);
-            }
-            saveDataSave();
-        });
 
     document
         .getElementById("videoplayer")
@@ -531,135 +788,6 @@ async function loadDynamicData() {
             e.target.classList.remove("s");
             player.stopVideo();
         });
-
-    let x = [];
-    x.push(
-        fetch("./assets/figurines.json")
-            .then((r) => r.json())
-            .then(loadFigurines)
-    );
-    x.push(
-        fetch("./assets/playingCards.json")
-            .then((r) => r.json())
-            .then(loadPlayingCards)
-    );
-    x.push(
-        fetch("./assets/movieProps.json")
-            .then((r) => r.json())
-            .then(loadMovieProps)
-    );
-    x.push(
-        fetch("./assets/signalJammers.json")
-            .then((r) => r.json())
-            .then(loadSignalJammers)
-    );
-    x.push(
-        fetch("./assets/ldOrganics.json")
-            .then((r) => r.json())
-            .then(loadLDOrganics)
-    );
-    x.push(
-        fetch("./assets/kosatkaFastTravels.json")
-            .then((r) => r.json())
-            .then(loadKosatkaFastTravels)
-    );
-    x.push(
-        fetch("./assets/cayoPericoScopeOutPlane.json")
-            .then((r) => r.json())
-            .then(loadCayoPericoScopeOutPlane)
-    );
-    x.push(
-        fetch("./assets/cayoPericoPlasmaCutter.json")
-            .then((r) => r.json())
-            .then(loadCayoPericoPlasmaCutter)
-    );
-    x.push(
-        fetch("./assets/cayoPericoFingerprintCloner.json")
-            .then((r) => r.json())
-            .then(loadCayoPericoFingerprintCloner)
-    );
-    x.push(
-        fetch("./assets/cayoPericoCuttingTorch.json")
-            .then((r) => r.json())
-            .then(loadCayoPericoCuttingTorch)
-    );
-    x.push(
-        fetch("./assets/cayoPericoWeaponLoadout.json")
-            .then((r) => r.json())
-            .then(loadCayoPericoWeaponLoadout)
-    );
-    x.push(
-        fetch("./assets/cayoPericoKosatkaApproachVehicle.json")
-            .then((r) => r.json())
-            .then(loadCayoPericoKosatkaApproachVehicle)
-    );
-    x.push(
-        fetch("./assets/cayoPericoLongfinApproachVehicle.json")
-            .then((r) => r.json())
-            .then(loadCayoPericoLongfinApproachVehicle)
-    );
-    x.push(
-        fetch("./assets/vincentHeistSlushFund.json")
-            .then((r) => r.json())
-            .then(loadVincentHeistSlushFund)
-    );
-    x.push(
-        fetch("./assets/vincentHeistBreakingAndEntering.json")
-            .then((r) => r.json())
-            .then(loadVincentHeistBreakingAndEntering)
-    );
-    x.push(
-        fetch("./assets/vincentHeistConcealedWeapons.json")
-            .then((r) => r.json())
-            .then(loadVincentHeistConcealedWeapons)
-    );
-    x.push(
-        fetch("./assets/vincentHeistHitAndRun.json")
-            .then((r) => r.json())
-            .then(loadVincentHeistHitAndRun)
-    );
-    x.push(
-        fetch("./assets/vincentHeistDisorganizedCrime.json")
-            .then((r) => r.json())
-            .then(loadVincentHeistDisorganizedCrime)
-    );
-    x.push(
-        fetch("./assets/vincentHeistSceneOfTheCrime.json")
-            .then((r) => r.json())
-            .then(loadVincentHeistSceneOfTheCrime)
-    );
-    // x.push(
-    //     fetch("./assets/buildings.json").then(r=>r.json()).then(r=>{
-    //         for (marker of r) {
-    //             let actualMarker = L.marker(marker.coords, { icon: constantData.icons.building, title: marker.name });
-    //             let onMapMarker = L.layerGroup([actualMarker]);
-    //             map.addLayer(onMapMarker);
-    //         }
-    //     })
-    // );
-    // x.push(
-    //     fetch("./assets/inGameDistricts.json").then(r=>r.json()).then(r=>{
-    //         for (polygon of r) L.polygon(polygon.points, {color:polygon.color}).bindTooltip(polygon.name, {permanent:true,direction:"center"}).addTo(map);
-    //     })
-    // );
-    x.push(
-        fetch("./assets/mapStyle.json")
-            .then((r) => r.json())
-            .then(loadMapStyle)
-    );
-    x.push(
-        fetch("./assets/counties.json")
-            .then((r) => r.json())
-            .then(loadCounties)
-    );
-
-    for (let handle of x) await handle;
-    if (window.location.hash !== "") {
-        document.getElementById("gui_toggle_button_div").click();
-        document
-            .getElementById(window.location.hash.split("#")[1])
-            .scrollIntoView();
-    }
 }
 
 async function addSVGOverlay(url, coords) {

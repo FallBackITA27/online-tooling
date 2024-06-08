@@ -1,0 +1,128 @@
+[
+    {
+        "title": "1.0.0",
+        "timestamp": 1716985380000,
+        "signatures": ["FalB"],
+        "innerHTML": "Completely redid the code just for a new GUI. Biggest time waste in my life. Took me over one week. I'm exhausted. The full changelog wouldn't fit in here."
+    },
+    {
+        "title": "0.11.0",
+        "timestamp": 1716985380000,
+        "signatures": ["FalB"],
+        "innerHTML": "Inserted some data for the Longfin Approach Vehicle Prep. Also added all the data for The Cluckin' Bell Farm Raid."
+    },
+    {
+        "title": "0.10.0",
+        "timestamp": 1716760800000,
+        "signatures": ["FalB"],
+        "innerHTML": "Obsoleted the speedrun.com/gtao map for Cayo Perico, by adding all their features. This includes the newly added Weapon Loadout mission markers and the Kosatka Approach Vehicle spawns. I will be working on adding the rest of the actual preps over the next few days."
+    },
+    {
+        "title": "0.9.0",
+        "timestamp": 1716567180000,
+        "signatures": ["FalB"],
+        "innerHTML": "Reformatted a bunch of code, added Cayo Perico Heist Prep locations: Cutting Torch, Fingerprint Cloner, Plasma Cutter."
+    },
+    {
+        "title": "0.8.1",
+        "timestamp": 1716417900000,
+        "signatures": ["FalB"],
+        "innerHTML": "Added all the images for LD Organics Products with the combined work of three people (myself, <a href=\"//x.com/PeIIoh\">Pelloh</a> and EditChris)"
+    },
+    {
+        "title": "0.8.0",
+        "timestamp": 1716223380000,
+        "signatures": ["FalB"],
+        "innerHTML": "Added some Cayo Perico related locations. Will add more at a later date."
+    },
+    {
+        "title": "0.7.0",
+        "timestamp": 1716213480000,
+        "signatures": ["FalB"],
+        "innerHTML": "Added a few images. Nothing interesting. Also added <a href=\"//ogp.me\">opengraph</a> tags."
+    },
+    {
+        "title": "0.6.0",
+        "timestamp": 1716134100000,
+        "signatures": ["FalB"],
+        "innerHTML": "Added LD Organics Products to the website, finally completing the major collectibles."
+    },
+    {
+        "title": "0.5.0",
+        "timestamp": 1716118320000,
+        "signatures": ["FalB"],
+        "innerHTML": "Added Signal Jammers to the website."
+    },
+    {
+        "title": "0.4.0",
+        "timestamp": 1716060600000,
+        "signatures": ["FalB"],
+        "innerHTML": "Added a bunch of timers: Casino Wheel Spin, Chips Buy Cooldown and VIP Registration."
+    },
+    {
+        "title": "0.3.1",
+        "timestamp": 1716048540000,
+        "signatures": ["FalB"],
+        "innerHTML": "The title of the marker you clicked on will now be highlighted, to avoid confusion."
+    },
+    {
+        "title": "0.3.0",
+        "timestamp": 1716033900000,
+        "signatures": ["FalB"],
+        "innerHTML": "Now all Playing Cards have datapoints, icons and they're listed. Also made a way to give different markers in the same set different icons."
+    },
+    {
+        "title": "0.2.0",
+        "timestamp": 1715958420000,
+        "signatures": ["FalB"],
+        "innerHTML": "All movie props now have proper data points. Also finally decided on a release scheme: bigUpdate.smallUpdate.minorFix."
+    },
+    {
+        "title": "0.1.2",
+        "timestamp": 1715853900000,
+        "signatures": ["FalB"],
+        "innerHTML": "Started work on Movie Props - all the ones with a fixed location now show up on the map."
+    },
+    {
+        "title": "0.1.1",
+        "timestamp": 1715795160000,
+        "signatures": ["FalB"],
+        "innerHTML": "Data now stores the preferences for showing counties."
+    },
+    {
+        "title": "0.1.0",
+        "timestamp": 1715795160000,
+        "signatures": ["FalB"],
+        "innerHTML": "Data can now be saved and moved around! Also, data will be formatted appropriately."
+    },
+    {
+        "title": "0.0.5",
+        "timestamp": 1715783820000,
+        "signatures": ["FalB"],
+        "innerHTML": "You can now mark collectibles as completed; the `Show All`, `Hide All`, `Show Completed` and `Hide Completed` buttons now work properly. The Youtube video player has now been fixed of a bug where it wouldn't go to the proper timestamp."
+    },
+    {
+        "title": "0.0.4",
+        "timestamp": 1715686380000,
+        "signatures": ["FalB"],
+        "innerHTML": "The Cayo Perico Heist and the Casino Heist now have timers in the `Tools` section."
+    },
+    {
+        "title": "0.0.3",
+        "timestamp": 1715677620000,
+        "signatures": ["FalB"],
+        "innerHTML": "Now the map saves the last tile selection, alongside the last zoom and coordinate you were looking at, so that refreshing the page doesn't zoom you out completely. Also having a link that points to something in the GUI will open it on load."
+    },
+    {
+        "title": "0.0.2",
+        "timestamp": 1715590620000,
+        "signatures": ["FalB"],
+        "innerHTML": "Added tile selection to map, now able to switch between `game`, `render` and `print`."
+    },
+    {
+        "title": "0.0.1",
+        "timestamp": 1715376120000,
+        "signatures": ["FalB"],
+        "innerHTML": "Made the map work, aligned the SVGs kindly <del>stolen from</del> provided by GTALens.com. Manually got all the datapoints for Action Figures and descriptions."
+    }
+]

@@ -1,15 +1,43 @@
-function loadVincentHeistDisorganizedCrime(r) {
-    let layers = genericMarkers(
-        "disorganizedCrimeDiv",
-        r,
-        constantData.icons.garage,
-        "lastPickVincentHeistDisorganizedCrime"
-    );
+let vincentHeistDisorganizedCrimeFetchData = new LayerFetchData(
+    "vincentHeistDisorganizedCrime"
+);
 
-    displayButtons(
-        "markers-vincentheist-disorganizedcrime-show-all-btn",
-        "markers-vincentheist-disorganizedcrime-hide-all-btn",
-        layers,
-        "lastPickVincentHeistDisorganizedCrime"
+function loadVincentHeistDisorganizedCrime(r) {
+    if (constantData.layers.vincentHeistDisorganizedCrime !== undefined) return;
+    constantData.layers.vincentHeistDisorganizedCrime = [];
+
+    registerSingleMarkerArray(
+        "vincentHeistDisorganizedCrime",
+        constantData.layers.vincentHeistDisorganizedCrime,
+        saveData.markerData.vincentHeistDisorganizedCrime,
+        constantData.icons.garage,
+        r,
+        loadVincentHeistDisorganizedCrimeGUI
     );
+}
+
+vincentHeistDisorganizedCrimeFetchData.fetchThis(
+    loadVincentHeistDisorganizedCrime
+);
+
+async function loadVincentHeistDisorganizedCrimeGUI() {
+    if (!vincentHeistDisorganizedCrimeFetchData.loaded)
+        await vincentHeistDisorganizedCrimeFetchData.fetchThis(
+            loadVincentHeistDisorganizedCrime
+        );
+    resetContentParts();
+    for (let layer of constantData.layers.vincentHeistDisorganizedCrime) {
+        addToContentPart1List(layer.title).addEventListener(
+            "click",
+            function () {
+                resetContentPart2();
+                let divs = new GenericHTMLConglomerate().genericMarkerOptions(
+                    layer
+                );
+
+                for (let x of divs)
+                    document.getElementById("contentPart2").appendChild(x);
+            }
+        );
+    }
 }

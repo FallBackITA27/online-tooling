@@ -1,7 +1,7 @@
-{
-    "bl": {
-        "name": "Blaine County",
-        "points": [
+[
+    {
+        "display_name": "Blaine County",
+        "coords": [
             [41.508577, -31.728516],
             [42.650122, -42.319336],
             [43.992815, -46.801758],
@@ -44,11 +44,17 @@
             [71.385142, -10.986328],
             [61.438767, -16.787109]
         ],
-        "color": "orange"
+        "options": {
+            "color": "#f80"
+        },
+        "tooltip_options": {
+            "permanent": true,
+            "direction": "center"
+        }
     },
-    "ls": {
-        "name": "Los Santos County",
-        "points": [
+    {
+        "display_name": "Los Santos County",
+        "coords": [
             [43.992815, -46.801758],
             [52.160455, -45.65918],
             [57.751076, -50.756836],
@@ -95,6 +101,12 @@
             [41.508577, -31.728516],
             [42.650122, -42.319336]
         ],
-        "color": "green"
+        "options": {
+            "color": "#0F0"
+        },
+        "tooltip_options": {
+            "permanent": true,
+            "direction": "center"
+        }
     }
-}
+]

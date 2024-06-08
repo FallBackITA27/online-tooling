@@ -1,0 +1,40 @@
+[
+    {
+        "title": "Why did you make this?",
+        "signatures": ["FalB"],
+        "innerHTML": "In short: I ran into GTALens' 250 completed marks limit. In full: I know why they made that a thing and I know why they made themselves make that a thing. They created themselves a problem by saving data on their servers, which cost money to maintain, and instead of moving this data to the local browser storage they decided to make a subscription. I absolutely despise this marketing, so, seen the lack of open source Interactive maps, I tried to make what I could of their minified Vue source code and other interactive maps out there to make a good, up to date, open source one. If you're Andreww, the GTALens developer reading this: Fuck you. I like your work on GTACars, I like your work on these small useless statistical tools (like the map, which I had to remake for my own use, or the weather tool, which I'm remaking out of spite), but fuck you, for pushing a feature that could've been completely free into your subscription service. Also fuck you for using Vue, you made me lose more hours of my life than I should've lost; Client side code shouldn't be hidden, it should be as readable as possible, because users need to know what is happening on their machine. Your lack of willingness to use Vanilla JS shouldn't result in a worse product."
+    },
+    {
+        "title": "What about gtaweb?",
+        "extendedTitle": "What about gtaweb.eu?",
+        "signatures": ["FalB"],
+        "innerHTML": "While I admire their work, I have one fundamental issue with it: It's closed source. They opened a Github... but it's just for the issue tracker, which I found insulting to a degree. I most admire their `GTAO Toolkit`, which is something I plan to recreate and make better. Their UI is bad, but I shouldn't speak on that, given I'm not a web designer, I suck at that. Sadly I found out about their site way to late, and having already put several hours of work into this project of mine, I just decided to continue."
+    },
+    {
+        "title": "How do I contribute?",
+        "signatures": ["FalB"],
+        "innerHTML": "If you know anything about JavaScript, or coding really, just make a pull request on the github page. Otherwise, contact me on discord @fallbackita27 (or anywhere else really) and I'll see what could be done. I'll eventually make a roadmap."
+    },
+    {
+        "title": "I found a bug!",
+        "signatures": ["FalB"],
+        "innerHTML": "If you know anything about JavaScript, or coding really, just make a pull request on the github page. Otherwise, contact me on discord @fallbackita27 (or anywhere else really) and I'll see what could be done. I'll eventually make a roadmap."
+    },
+    {
+        "title": "I wanna move my data",
+        "extendedTitle": "I wanna move my data from PC to Mobile",
+        "signatures": ["FalB"],
+        "innerHTML": "This is possible. I don't want to and can't make a profile system (not without handling the website's backend first, and sadly Github doesn't allow that). This is why websites require a subscription often times, because to do this you need a server (which takes money to maintain), which is often bought from some service (like DigitalOcean) and that service needs to be paid (at least 8 euros a month). I want to keep this free for myself and for everyone else. I made a manual way to move data from one place to the other, which is the Backup Data section in the Settings, but it's far from automatic. I might be banking on some Browser features (like Mozilla's Firefox Sync) eventually, if that's even possible."
+    },
+    {
+        "title": "How was this made?",
+        "signatures": ["FalB"],
+        "innerHTML": "You probably can't code if you're asking this. If I figured it out from obfuscated and minified code, you can figure it out from perfectly clear open source code; I think I'm not wrong in my assumption. Thank <a href=\"https://leafletjs.com/\">leaflet</a>, it's used for tons of actually serious maps."
+    },
+    {
+        "title": "The GUI is horrible!",
+        "extendedTitle": "This GUI is fucking horrible!",
+        "signatures": ["FalB"],
+        "innerHTML": "Thank you, I work very hard to make the worst GUI possible. Jokes aside, I'm sadly not a frontend developer, I focus on backend, and so I'm completely outside of my field with this project."
+    }
+]

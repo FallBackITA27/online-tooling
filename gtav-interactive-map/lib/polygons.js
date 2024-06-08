@@ -1,47 +1,34 @@
-function genericPolygon(
-    parentDivId,
-    array,
-    layers = [],
-    startIndex = 0
+function registerSinglePolygonArray(
+    key,
+    constantLayerData,
+    markerData,
+    jsonData,
+    loadGUIFunc
 ) {
-    let parentDiv = document.getElementById(parentDivId);
-    for (let i = startIndex; i - startIndex < array.length; i++) {
-        let polygon = L.polygon(array[i - startIndex].coords, array[i - startIndex].options).bindTooltip(array[i - startIndex].display_name, array[i - startIndex].tooltip_options);
-
-        layers.pushMapLayer(polygon, i);
-
-        let hr = document.createElement("hr");
-        hr.classList.add("twentyfive");
-        parentDiv.append(hr);
-
-        let linkDiv = document.createElement("div");
-        linkDiv.id =
-            "#" + array[i - startIndex].display_name.replaceAll(" ", "-");
-        parentDiv.append(linkDiv);
-
-        let title = document.createElement("h2");
-        title.innerHTML = array[i - startIndex].display_name;
-        parentDiv.append(title);
-
-        let zoom = document.createElement("button");
-        zoom.innerHTML = "Zoom to Polygon";
-        zoom.addEventListener("click", function () {
-            document.getElementById("gui_toggle_button_div").click();
-            map.fitBounds(polygon.getBounds());
-            if (!map.hasLayer(polygon)) layers[i].addLayerToMap();
+    let numericIdOffset = constantLayerData.length;
+    for (let [i, polygon] of jsonData.entries()) {
+        let layer = new MapLayer(
+            key,
+            polygon.display_name,
+            i + numericIdOffset,
+            markerData,
+            constantLayerData
+        );
+        let actualPolygon = L.polygon(
+            polygon.coords,
+            polygon.options
+        ).bindTooltip(polygon.display_name, polygon.tooltip_options);
+        actualPolygon.on("click", function (e) {
+            let markersMenu = document.getElementById("menuScroll").children[1];
+            if (markersMenu.classList.contains("selected")) markersMenu.click();
+            markersMenu.click();
+            loadGUIFunc();
+            document
+                .getElementById("contentPart1")
+                .children[i + numericIdOffset].click();
         });
-        parentDiv.append(zoom);
-
-        polygon.on("click", () =>{
-            document.getElementById("gui_toggle_button_div").click();
-            linkDiv.scrollIntoView();
-            map.fitBounds(polygon.getBounds());
-            Array.from(document.getElementsByClassName("hl")).forEach((r) =>
-                r.classList.remove("hl")
-            );
-            title.classList.add("hl");
-        });
+        layer.push(actualPolygon);
+        constantLayerData.push(layer);
+        if (markerData.pick === "showAll") layer.addLayerToMap();
     }
-
-    return layers;
 }

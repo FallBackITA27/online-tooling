@@ -1,19 +1,56 @@
+let cayoPericoWeaponLoadoutFetchData = new LayerFetchData(
+    "cayoPericoWeaponLoadout"
+);
+
 function loadCayoPericoWeaponLoadout(r) {
-    let layers = genericLine("weaponLoadoutDiv", r.line);
+    if (constantData.layers.cayoPericoWeaponLoadout !== undefined) return;
+    constantData.layers.cayoPericoWeaponLoadout = [];
 
-    layers = genericMarkers(
-        "weaponLoadoutDiv",
-        r.singleMarkers,
+    registerSingleLineArray(
+        "cayoPericoWeaponLoadout",
+        constantData.layers.cayoPericoWeaponLoadout,
+        saveData.markerData.cayoPericoWeaponLoadout,
+        r.line,
+        loadCayoPericoWeaponLoadoutGUI
+    );
+
+    registerSingleMarkerArray(
+        "cayoPericoWeaponLoadout",
+        constantData.layers.cayoPericoWeaponLoadout,
+        saveData.markerData.cayoPericoWeaponLoadout,
         constantData.icons.weaponLocker,
-        "lastPickCayoPericoWeaponLoadout",
-        layers,
-        r.line.length
+        r.singleMarkers,
+        loadCayoPericoWeaponLoadoutGUI
     );
+}
 
-    displayButtons(
-        "markers-cayopericoheist-weaponloadout-show-all-btn",
-        "markers-cayopericoheist-weaponloadout-hide-all-btn",
-        layers,
-        "lastPickCayoPericoWeaponLoadout"
-    );
+cayoPericoWeaponLoadoutFetchData.fetchThis(loadCayoPericoWeaponLoadout);
+
+async function loadCayoPericoWeaponLoadoutGUI() {
+    if (!cayoPericoWeaponLoadoutFetchData.loaded)
+        await cayoPericoWeaponLoadoutFetchData.fetchThis(
+            loadCayoPericoWeaponLoadout
+        );
+    resetContentParts();
+    for (let layer of constantData.layers.cayoPericoWeaponLoadout) {
+        addToContentPart1List(layer.title).addEventListener(
+            "click",
+            function () {
+                resetContentPart2();
+                let divs;
+                if (layer.title === "Weapon Loadout") {
+                    divs = new GenericHTMLConglomerate().genericLineOptions(
+                        layer
+                    );
+                } else {
+                    divs = new GenericHTMLConglomerate().genericMarkerOptions(
+                        layer
+                    );
+                }
+
+                for (let x of divs)
+                    document.getElementById("contentPart2").appendChild(x);
+            }
+        );
+    }
 }

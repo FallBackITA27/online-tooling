@@ -31,6 +31,210 @@ a {
     cursor: crosshair;
 }
 
+.leaflet-control-container {
+    display: none;
+}
+
+.signature {
+    font-size: clamp(0.7rem, 0.5vw, 2rem);
+}
+
+.paragraphText {
+    font-size: clamp(0.7rem, 2vw, 2rem);
+}
+
+#overlayUi {
+    position: absolute;
+    max-height: calc(98% - 8px);
+    width: calc(99vw - 8px);
+    top: 1%;
+    left: 0.5vw;
+    margin: 0;
+    z-index: 2147483645;
+    background: transparent;
+    padding: 4px;
+    border-radius: 10px;
+    overflow: hidden;
+    font-family: Helvetica, sans-serif;
+}
+
+#menuScroll {
+    display: flex;
+    text-align: center;
+    flex-direction: row;
+    gap: 14px;
+    align-items: flex-start;
+    overflow-x: scroll;
+    max-height: 50px;
+    margin-bottom: 7px;
+    -ms-overflow-style: none; /* IE/Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+#menuScroll::-webkit-scrollbar {
+    display: none; /* Go fuck yourself chrome */
+}
+
+.menuScrollElement {
+    padding: 7px;
+    min-height: 34px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: none;
+    color: #fff;
+    min-width: 140px;
+    width: 500px;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+
+@media (max-width: 1000px) {
+    .menuScrollElement {
+        padding: 0;
+    }
+}
+
+.menuScrollElement.selected {
+    background-color: #fff;
+    color: #000;
+    min-width: 140px;
+    width: 500px;
+    white-space: nowrap;
+    padding-top: 2px;
+    border-top: solid #2b6eb4 5px;
+}
+
+#mainContent {
+    max-height: 93svh;
+}
+#contentPart1,
+#contentPart2 {
+    max-height: 93svh;
+}
+
+/* styleTextPara */
+
+#mainContent.styleTextPara {
+    display: grid;
+    gap: 7px;
+    grid-template-columns: 1fr 3fr;
+}
+
+#mainContent.styleTextPara > #contentPart1 {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 7px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -ms-overflow-style: none; /* IE/Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+#mainContent.styleTextPara > #contentPart1::-webkit-scrollbar {
+    display: none; /* Go fuck yourself chrome */
+}
+
+#mainContent.styleTextPara > #contentPart1 > .menuScrollElement {
+    color: #fff;
+    font-size: min(2vw, 0.9rem);
+    width: unset;
+    min-width: unset;
+}
+
+#mainContent.styleTextPara > #contentPart1 > .menuScrollElement.sel {
+    background-color: #fff;
+    color: #000;
+}
+
+#mainContent.styleTextPara > #contentPart2 {
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* styleClassic */
+
+#mainContent.styleClassic {
+    display: grid;
+    gap: 7px;
+    grid-template-columns: 1fr 3fr;
+}
+
+#mainContent.styleClassic > #contentPart1 {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 7px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -ms-overflow-style: none; /* IE/Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+#mainContent.styleClassic > #contentPart1::-webkit-scrollbar {
+    display: none; /* Go fuck yourself chrome */
+}
+
+#mainContent.styleClassic > #contentPart1 > .menuScrollElement {
+    color: #fff;
+    font-size: min(2vw, 0.9rem);
+    width: unset;
+    min-width: unset;
+}
+
+#mainContent.styleClassic > #contentPart1 > .menuScrollElement.sel {
+    background-color: #fff;
+    color: #000;
+}
+
+#mainContent.styleClassic > #contentPart2 {
+    display: flex;
+    flex-direction: column;
+}
+
+#mainContent.styleClassic > #contentPart2 > div {
+    padding: 7px;
+    min-height: 20px;
+    max-height: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: none;
+    color: #fff;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: min(2vw, 0.9rem);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.versionText {
+    font-size: 0.9rem !important;
+}
+
+.versionText::before {
+    content: "Version ";
+}
+
+@media (max-width: 500px) {
+    .versionText::before {
+        content: "Ver. ";
+    }
+}
+
+@media (max-width: 370px) {
+    .versionText::before {
+        content: none;
+    }
+}
+
 #videoplayer {
     position: absolute;
     height: 100%;
@@ -41,7 +245,7 @@ a {
     z-index: 2147483647;
     animation: fadeInFromNone 0.1s;
     display: none;
-    background-color: rgb(19, 19, 19, 0.9);
+    background-color: rgb(0, 0, 0, 0.6);
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -56,30 +260,6 @@ a {
     aspect-ratio: 16/9;
     max-width: 100%;
     min-width: 50%;
-}
-
-#popupgui {
-    position: absolute;
-    height: calc(98% - 8px);
-    width: calc(99vw - 8px);
-    top: 1%;
-    left: 0.5vw;
-    margin: 0;
-    z-index: 2147483645;
-    display: none;
-    opacity: 0;
-    background: rgb(19, 19, 19, 0.95);
-    padding: 4px;
-    border-radius: 10px;
-    text-align: center;
-    overflow-x: hidden;
-    overflow-y: scroll;
-}
-
-#popupgui.s {
-    animation: fadeInFromNone 0.1s;
-    opacity: 1;
-    display: block;
 }
 
 @keyframes fadeInFromNone {
@@ -99,88 +279,11 @@ a {
     }
 }
 
-#gui_toggle_button_div {
-    position: absolute;
-    height: 24px;
-    width: auto;
-    max-width: 24px;
-    bottom: 1%;
-    left: 0.5vw;
-    z-index: 2147483646;
-    background: rgb(19, 19, 19, 0.99);
-    padding: 4px;
-    border-radius: 10px;
-    display: flex;
-    gap: 7px;
-    transition: all 0.2s linear;
-    overflow-x: hidden;
-    cursor: pointer;
-}
-
-#gui_toggle_button_div:hover {
-    transition: all 0.2s linear;
-    max-width: 100px;
-}
-
-#gui_toggle_button {
-    transform: rotate(180deg);
-    transition: 0.1s all linear;
-}
-
-#gui_toggle_button.s {
-    transform: rotate(0deg);
-    transition: 0.1s all linear;
-}
-
-hr {
-    border-top: 3px solid #bbb;
-    border-radius: 10px;
-    width: 75%;
-}
-
-hr.fifty {
-    width: 50%;
-}
-
-hr.twentyfive {
-    width: 25%;
-}
-
-div.custom-ol {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-div.custom-ol > ol {
-    list-style-position: inside;
-    padding: 0;
-}
-
-div.custom-ol > ol li {
-    text-align: left;
-}
-
 .prevImage {
     aspect-ratio: 16/9;
-    width: 50%;
-}
-
-ul {
-    list-style-type: disc;
-}
-
-.hl {
-    background-color: rgb(218, 90, 5);
-}
-
-.sig {
-    font-size: small;
-}
-
-#mapStyleRadioButtons {
-    display: flex;
-    flex-direction: column;
+    width: 100%;
+    max-height: 95%;
+    object-fit: scale-down;
 }
 
 .weaponLocker {
