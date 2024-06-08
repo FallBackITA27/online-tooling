@@ -3,7 +3,7 @@
         "title": "1.0.0",
         "timestamp": 1716985380000,
         "signatures": ["FalB"],
-        "innerHTML": "Completely redid the code just for a new GUI. Biggest time waste in my life. Took me over one week. I'm exhausted. The full changelog wouldn't fit in here. <a href=\"https://github.com/FallBackITA27/online-tooling/commit/a6b9e29cb420fe46bd44b983d3ff6e7d8fbbf3e8\">Just look at this ridiculous git commit.</a>"
+        "innerHTML": "Completely redid the code just for a new GUI. Biggest time waste in my life. Took me over one week. I'm exhausted. The full changelog wouldn't fit in here. <a target=\"_blank\" href=\"https://github.com/FallBackITA27/online-tooling/commit/a6b9e29cb420fe46bd44b983d3ff6e7d8fbbf3e8\">Just look at this ridiculous git commit.</a>"
     },
     {
         "title": "0.11.0",
