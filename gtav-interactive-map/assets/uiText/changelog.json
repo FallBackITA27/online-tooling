@@ -27,7 +27,7 @@
         "title": "0.8.1",
         "timestamp": 1716417900000,
         "signatures": ["FalB"],
-        "innerHTML": "Added all the images for LD Organics Products with the combined work of three people (myself, <a href=\"//x.com/PeIIoh\">Pelloh</a> and EditChris)"
+        "innerHTML": "Added all the images for LD Organics Products with the combined work of three people (myself, <a target=\"_blank\" href=\"//x.com/PeIIoh\">Pelloh</a> and EditChris)"
     },
     {
         "title": "0.8.0",
@@ -39,7 +39,7 @@
         "title": "0.7.0",
         "timestamp": 1716213480000,
         "signatures": ["FalB"],
-        "innerHTML": "Added a few images. Nothing interesting. Also added <a href=\"//ogp.me\">opengraph</a> tags."
+        "innerHTML": "Added a few images. Nothing interesting. Also added <a target=\"_blank\" href=\"//ogp.me\">opengraph</a> tags."
     },
     {
         "title": "0.6.0",
