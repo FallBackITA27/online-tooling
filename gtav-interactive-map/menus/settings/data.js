@@ -1,9 +1,12 @@
 function dataSettings() {
     resetContentPart2();
-    let optionDiv = document.createElement("div");
-    optionDiv.innerHTML = "Backup Data<p>Click Here</p>";
+    let backupDataBtn = new OptionDivFactory(
+        "Backup Data",
+        "Click Here"
+    ).createArrowless();
+    contentPart2.append(backupDataBtn);
 
-    optionDiv.addEventListener("click", function () {
+    backupDataBtn.addEventListener("click", function () {
         saveDataSave();
         var element = document.createElement("a");
         element.setAttribute(
@@ -18,12 +21,13 @@ function dataSettings() {
         document.body.removeChild(element);
     });
 
-    contentPart2.append(optionDiv);
+    let loadBackupDataBtn = new OptionDivFactory(
+        "Load Backup Data",
+        "Click Here"
+    ).createArrowless();
+    contentPart2.append(loadBackupDataBtn);
 
-    let option2Div = document.createElement("div");
-    option2Div.innerHTML = "Load Backup Data<p>Click Here</p>";
-
-    option2Div.addEventListener("click", function () {
+    loadBackupDataBtn.addEventListener("click", function () {
         var element = document.createElement("input");
         element.type = "File";
         element.accept = "application/json, text/plain";
@@ -41,6 +45,4 @@ function dataSettings() {
         element.click();
         document.body.removeChild(element);
     });
-
-    contentPart2.append(option2Div);
 }

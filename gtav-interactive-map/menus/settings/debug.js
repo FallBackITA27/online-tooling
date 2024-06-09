@@ -1,28 +1,15 @@
 function debugSettings() {
     resetContentPart2();
-    let optionDiv = document.createElement("div");
-    optionDiv.innerHTML = "On Click Coordinates";
-
-    let interactiveDiv = document.createElement("div");
-
-    let img1 = document.createElement("img");
-    img1.src = "./websiteIcons/small_arr_left.svg";
-    interactiveDiv.appendChild(img1);
-
-    interactiveDiv.innerHTML += `<p>${
+    let optionDiv = new OptionDivFactory(
+        "On Click Coordinates",
         saveData.pointerMode ? "True" : "False"
-    }</p>`;
+    ).createArrowful();
+    contentPart2.append(optionDiv);
 
-    let img2 = document.createElement("img");
-    img2.src = "./websiteIcons/small_arr_right.svg";
-    interactiveDiv.appendChild(img2);
-    interactiveDiv.style = "display: flex; align-items: center;";
-
-    optionDiv.appendChild(interactiveDiv);
     optionDiv.addEventListener("click", function () {
         saveData.pointerMode = !saveData.pointerMode;
         saveDataSave();
-        interactiveDiv.children[1].innerHTML = saveData.pointerMode
+        optionDiv.children[0].children[1].innerHTML = saveData.pointerMode
             ? "True"
             : "False";
 
@@ -32,6 +19,4 @@ function debugSettings() {
             map.off("click", clickDebugFunction);
         }
     });
-
-    contentPart2.append(optionDiv);
 }
