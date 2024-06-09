@@ -229,22 +229,18 @@ Array.from(document.getElementById("menuScroll").children).forEach((r) =>
         }
 
         if (e.target.value === "settings") {
-            // This is all so fucking cursed
             mainContent.classList.add("styleClassic");
 
-            /* Map Style Options */
             addToContentPart1List("Map Style").addEventListener(
                 "click",
                 mapStyleSettings
             );
 
-            /* Debug Options */
             addToContentPart1List("Debug").addEventListener(
                 "click",
                 debugSettings
             );
 
-            /* Data Options */
             addToContentPart1List("Data").addEventListener(
                 "click",
                 dataSettings
