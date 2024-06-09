@@ -1,7 +1,7 @@
 async function toolsTimers(e) {
     resetContentPart2();
     let optionDiv = document.createElement("div");
-    optionDiv.innerHTML = "In Game Time";
+    optionDiv.innerHTML = "In Game Time<p>Calculating...</p>";
     optionDiv.style = "cursor: unset;";
 
     contentPart2.append(optionDiv);
