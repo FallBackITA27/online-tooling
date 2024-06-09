@@ -39,8 +39,7 @@ async function toolsTimers(e) {
                 saveDataSave();
             }
             let sec = Math.floor(
-                (heistData.startDate + cooldown - currentTime) /
-                    1000
+                (heistData.startDate + cooldown - currentTime) / 1000
             );
             let hrs = Math.trunc(sec / 3600);
             sec %= 3600;
@@ -86,10 +85,9 @@ async function toolsTimers(e) {
         let gtaOnlineTime = ~~(Date.now() / 2000);
         optionDiv.innerHTML = `In Game Time<p>${
             weekday[~~(gtaOnlineTime / 1440) % 7]
-        }, ${`${~~((gtaOnlineTime / 60) % 24)}`.padStart(
-            2,
-            "0"
-        )}:${`${~~(gtaOnlineTime % 60)}`.padStart(2, "0")}</p>`;
+        }, ${`${~~((gtaOnlineTime / 60) % 24)}`.padStart(2, "0")}:${`${~~(
+            gtaOnlineTime % 60
+        )}`.padStart(2, "0")}</p>`;
 
         genericTimer(
             saveData.casinoHeist,
