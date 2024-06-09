@@ -556,7 +556,6 @@ function resetContentParts() {
 }
 
 function resetContentPart1() {
-    let contentPart1 = document.getElementById("contentPart1");
     let childrenClone = [...contentPart1.children];
     for (let child of childrenClone) {
         child.classList.remove("sel");
@@ -565,7 +564,6 @@ function resetContentPart1() {
 }
 
 function resetContentPart2() {
-    let contentPart2 = document.getElementById("contentPart2");
     let childrenClone = [...contentPart2.children];
     for (let child of childrenClone) {
         contentPart2.removeChild(child);

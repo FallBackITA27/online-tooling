@@ -187,9 +187,6 @@ constantData.tileLayers.mainMap[saveData.selectedTileLayer].addTo(map);
 
 Array.from(document.getElementById("menuScroll").children).forEach((r) =>
     r.addEventListener("click", async function (e) {
-        let mainContent = document.getElementById("mainContent");
-        let contentPart1 = mainContent.children[0];
-        let contentPart2 = mainContent.children[1];
         mainContent.classList = [];
 
         if (
