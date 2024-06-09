@@ -61,6 +61,19 @@ class OptionDivFactory {
 
         return x;
     }
+
+    createTimer(heistData) {
+        let optionDiv = document.createElement("div");
+        optionDiv.innerHTML = `${this.heading}<p>00hrs 00min 00sec left</p>${this.footer}`;
+        contentPart2.appendChild(optionDiv);
+
+        optionDiv.addEventListener("click", function () {
+            heistData.startDate = +new Date();
+            saveDataSave();
+            Notification.requestPermission();
+        });
+        return optionDiv;
+    }
 }
 
 class GenericHTMLConglomerate {

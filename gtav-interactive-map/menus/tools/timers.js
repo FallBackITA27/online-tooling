@@ -6,20 +6,7 @@ async function toolsTimers(e) {
 
     contentPart2.append(optionDiv);
 
-    function createOptionDivTimer(name, heistData) {
-        let optionDiv = document.createElement("div");
-        optionDiv.innerHTML = `${name}<p>00hrs 00min 00sec left</p>Click Here to Start`;
-        contentPart2.appendChild(optionDiv);
-
-        optionDiv.addEventListener("click", function () {
-            heistData.startDate = +new Date();
-            saveDataSave();
-            Notification.requestPermission();
-        });
-        return optionDiv;
-    }
-
-    function genericTimer(
+    function genericTimerLogic(
         heistData,
         currentTime,
         optionDiv,
@@ -55,26 +42,30 @@ async function toolsTimers(e) {
         }
     }
 
-    let casinoHeistTime = createOptionDivTimer(
+    let casinoHeistTime = new OptionDivFactory(
         "Casino Heist Cooldown",
-        saveData.casinoHeist
-    );
-    let casinoChipsTime = createOptionDivTimer(
+        "Click Here to Start"
+    ).createTimer(saveData.casinoHeist);
+
+    let casinoChipsTime = new OptionDivFactory(
         "Casino Chips Buy Cooldown",
-        saveData.chipsBuyCooldown
-    );
-    let cayoPericoHeistTime = createOptionDivTimer(
+        "Click Here to Start"
+    ).createTimer(saveData.chipsBuyCooldown);
+
+    let cayoPericoHeistTime = new OptionDivFactory(
         "Cayo Perico Heist Cooldown",
-        saveData.cayoPericoHeist
-    );
-    let luckyWheelTime = createOptionDivTimer(
+        "Click Here to Start"
+    ).createTimer(saveData.cayoPericoHeist);
+
+    let luckyWheelTime = new OptionDivFactory(
         "Lucky Wheel Spin Cooldown",
-        saveData.luckyWheelSpin
-    );
-    let vipRegisterTime = createOptionDivTimer(
+        "Click Here to Start"
+    ).createTimer(saveData.luckyWheelSpin);
+
+    let vipRegisterTime = new OptionDivFactory(
         "VIP Registration Duration",
-        saveData.vipRegistrationDuration
-    );
+        "Click Here to Start"
+    ).createTimer(saveData.vipRegistrationDuration);
 
     let timerInterval = setInterval(async function () {
         if (!e.target.classList.contains("sel")) {
@@ -89,7 +80,7 @@ async function toolsTimers(e) {
             gtaOnlineTime % 60
         )}`.padStart(2, "0")}</p>`;
 
-        genericTimer(
+        genericTimerLogic(
             saveData.casinoHeist,
             +new Date(),
             casinoHeistTime,
@@ -99,7 +90,7 @@ async function toolsTimers(e) {
             "https://fallbackita27.github.io/online-tooling/gtav-interactive-map/gtavIcons/casino.svg"
         );
 
-        genericTimer(
+        genericTimerLogic(
             saveData.chipsBuyCooldown,
             +new Date(),
             casinoChipsTime,
@@ -109,7 +100,7 @@ async function toolsTimers(e) {
             "https://fallbackita27.github.io/online-tooling/gtav-interactive-map/gtavIcons/casino.svg"
         );
 
-        genericTimer(
+        genericTimerLogic(
             saveData.cayoPericoHeist,
             +new Date(),
             cayoPericoHeistTime,
@@ -119,7 +110,7 @@ async function toolsTimers(e) {
             "https://fallbackita27.github.io/online-tooling/gtav-interactive-map/gtavIcons/cayoPerico.svg"
         );
 
-        genericTimer(
+        genericTimerLogic(
             saveData.luckyWheelSpin,
             +new Date(),
             luckyWheelTime,
@@ -129,7 +120,7 @@ async function toolsTimers(e) {
             "https://fallbackita27.github.io/online-tooling/gtav-interactive-map/gtavIcons/casino.svg"
         );
 
-        genericTimer(
+        genericTimerLogic(
             saveData.vipRegistrationDuration,
             +new Date(),
             vipRegisterTime,
