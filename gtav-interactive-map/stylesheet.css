@@ -36,11 +36,11 @@ a {
 }
 
 .signature {
-    font-size: clamp(0.7rem, 0.5vw, 2rem);
+    font-size: clamp(.7rem, .5vw, 2rem);
 }
 
 .paragraphText {
-    font-size: clamp(0.7rem, 2vw, 2rem);
+    font-size: clamp(.7rem, 2vw, 2rem);
 }
 
 #overlayUi {
@@ -48,7 +48,7 @@ a {
     max-height: calc(98% - 8px);
     width: calc(99vw - 8px);
     top: 1%;
-    left: 0.5vw;
+    left: .5vw;
     margin: 0;
     z-index: 2147483645;
     background: transparent;
@@ -78,14 +78,14 @@ a {
 .menuScrollElement {
     padding: 7px;
     min-height: 34px;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: #000c;
     border: none;
     color: #fff;
     min-width: 140px;
     width: 500px;
     white-space: nowrap;
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: .9rem;
 }
 
 
@@ -139,7 +139,7 @@ a {
 
 #mainContent.styleTextPara > #contentPart1 > .menuScrollElement {
     color: #fff;
-    font-size: min(2vw, 0.9rem);
+    font-size: min(2vw, .9rem);
     width: unset;
     min-width: unset;
 }
@@ -151,7 +151,7 @@ a {
 
 #mainContent.styleTextPara > #contentPart2 {
     padding: 20px;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: #000c;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -183,7 +183,7 @@ a {
 
 #mainContent.styleClassic > #contentPart1 > .menuScrollElement {
     color: #fff;
-    font-size: min(2vw, 0.9rem);
+    font-size: min(2vw, .9rem);
     width: unset;
     min-width: unset;
 }
@@ -202,12 +202,12 @@ a {
     padding: 7px;
     min-height: 20px;
     max-height: 20px;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: #000c;
     border: none;
     color: #fff;
     white-space: nowrap;
     cursor: pointer;
-    font-size: min(2vw, 0.9rem);
+    font-size: min(2vw, .9rem);
 
     display: flex;
     flex-direction: row;
@@ -216,7 +216,7 @@ a {
 }
 
 .versionText {
-    font-size: 0.9rem !important;
+    font-size: .9rem !important;
 }
 
 .versionText::before {
@@ -243,9 +243,9 @@ a {
     left: 0;
     display: none;
     z-index: 2147483647;
-    animation: fadeInFromNone 0.1s;
+    animation: fadeInFromNone .1s;
     display: none;
-    background-color: rgb(0, 0, 0, 0.6);
+    background-color: #0009;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -253,7 +253,7 @@ a {
 
 #videoplayer.s {
     display: flex;
-    animation: fadeInFromNone 0.1s;
+    animation: fadeInFromNone .1s;
 }
 
 #player {
@@ -391,5 +391,5 @@ a {
     height: 11px;
     aspect-ratio: 1/1;
     display: inline-block;
-    opacity: 0.8;
+    opacity: .8;
 }
