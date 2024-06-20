@@ -176,12 +176,12 @@ document.getElementById("readInput").addEventListener("click", async function() 
                 skipToNextSubmission = true;
                 writeToOutput(`submission starting at "${line}", cannot parse date`);
             };
-            for (let keyword of keywords.slice(1, keywords.length)) {
+            outerLoop: for (let keyword of keywords.slice(1, keywords.length)) {
                 let kw = keyword.replace(/,/g, "").replace(/th/g, "").replace(/rd/g, "").replace(/nd/g, "").replace(/st/g, "");
                 for (let abbr of Object.keys(constants.months)) if (kw.startsWith(abbr)) {
                     console.log(kw);
                     month = constants.months[abbr];
-                    break;
+                    continue outerLoop;
                 }
                 if (kw.length === 4 && !isNaN(parseInt(kw))) {
                     year = kw;
