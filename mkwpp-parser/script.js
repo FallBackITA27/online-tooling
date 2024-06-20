@@ -184,6 +184,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
                 }
                 let _break = false;
                 for (let abbr of Object.keys(constants.months)) if (kw.startsWith(abbr)) {
+                    console.log(kw);
                     month = constants.months[abbr];
                     _break = true;
                     break;
@@ -354,128 +355,220 @@ function handleTime(data, date) {
 }
 
 /* example data
-Date: April 10, 2024
-Name: ChromaQ
-
-rSGB nosc: 1:27.593
-DKS: 1:58.875
-LC flap: 23.035
-MMM flap: 25.464
-MG flap: 16.692
-TF nosc flap: 37.231
-MC flap: 12.179
-CM flap: 11.130
-DKS flap: 39.208
-WGM flap: 15.958
-DC flap: 30.843
-KC flap: 47.642
-MT flap: 33.636
-GV flap: 6.167
-BC flap: 47.880
-RSL flap: 22.502
-RBC3 flap: 42.815
-
-Date: April 11th 2024
-Name: Sergio
-MH: 1:46.423/34.866
-
-Date: April 11, 2024
-Name: ARK..
-
-MG no-sc 1:53.782
-MC no-sc 1:26.557
-MH 1:55.099
-
-Date: April 11, 2024
-Name: ARK..
-
-MG no-sc 1:53.782
-MC no-sc 1:26.557
-MH 1:55.099
-Date: April 12 2024
-Name: Falco
-
-MG nosc: 1:42.665 
-Date: April 11th, 2024
-Name: Pabloski
-
-rGV2 nosc: 53.401
-Date: April 11, 2024
-Name: ARK..
-
-rYF 1:04.987
-rMC3 1:25.044
-rPB no-sc 1:17.670
-rGV2 no-sc 0:57.315 
-Date: April 11, 2024
+Date: June 16, 2024
 Name: Owen Smith
 
-DKSC: 1:52.909 https://youtu.be/z_2gws0rwro
-DKSC Flap: 36.523 https://youtu.be/-UMkQo4-HK4
-WGM: 38.688 https://youtu.be/G0ycgipn5ko
-WGM flap: 10.915 https://youtu.be/xJT65pN8ClI
-GV flap: 4.287 https://youtu.be/JVjQ7gLOrQA
-DDR: 1:51.651 https://youtu.be/4a0ZofupAAQ
-DDR flap: 34.036 https://youtu.be/uiFPtQHqFgM
-rDKJP: 1:51.801 https://youtu.be/sZJjn_bLkh4
-rDKJP Flap: 19.272 https://youtu.be/xng9cMsWkyk
-Date: April 11, 2024
-Name: ChromaQ
-
-CM: 48.669
-DDR flap: 36.379
-MH flap: 35.370
-RR nosc flap: 51.796
-RPB nosc flap: 23.999
-RYF flap: 19.770
-RGV2 nosc flap: 17.531
-RMR flap: 33.884
-RSGB nosc flap: 26.691
-RDS flap: 41.854
-RWS nosc flap: 39.340
-RDH nosc flap: 31.982
-RDKJP nosc flap: 47.850
-RMC nosc flap: 30.910
-RMC3 flap: 25.955
-RPG nosc flap: 40.808
-RDKM nosc flap: 43.833
-RBC nosc flap: 51.590
-Date: April 11, 2024
+MH: 1:45.025 https://youtu.be/YzsMl8YP4w4
+BC: 2:14.430 https://youtu.be/ooDAUlNYk9w
+BC flap: 43.080 https://youtu.be/-Z3rX3ld7Wg
+rDH flap: 28.803 https://youtu.be/EYql7W4ituA
+rDH nosc flap: 30.152 https://youtu.be/3fv9hgpQA7w
+rDKJP flap: 18.356 https://youtu.be/jVjyaBpBib8
+Date: June 16, 2024
 Name: Cqrt3r
 
-rSL: 1:41.816 / 13.860
-rSL nosc flap: 40.327
-DDR nosc flap: 34.246
-WGM nosc flap: 35.982 
-bryce729 Bryce — Today at 07:43
-Date: April 11, 2024
-Name: Bryce
+rDH flap: 28.160
+MG nosc: 1:41.876
+MT flap: 27.164
+MC: 1:09.320
+Date: June 16th, 2024
+Name: Danny Boy
 
-DC: 1:30.170
-DC Flap: 28.863
-Date: April 12, 2024
-Name: rey00
+MH: 1:43.802 https://youtu.be/mb7kuIQLQRo
+MH Flap: 33.248 https://youtu.be/F6nnEG1oXiE?t=41 
+Date: June 16th, 2024
+Name: Derpness
 
-DDR: 1:48.139 
-Date: April 12, 2024
-Name: Lauchlan L
+rMR: 1:49.244
+GV2 No-Glitch: 56.388 https://youtu.be/7l31vuQj-Fo
+Date: June 17, 2024
+Name: Intel Core
 
-WGM nosc flap: 35.564
-Date: 12th April 2024
+rMC3: 1:18.977
+Date: June 17, 2024
+Name: Shane Hogan
+
+MH: 1:43.961
+MH flap: 33.207 
+Date: June 16, 2024
+Name: Daelyn
+
+rGV2 nosc: 53.937
+Date: June 16th, 2024
+Name: .VNix
+
+rSGB no-sc flap: 26.476 https://youtu.be/ehvYIGoL18w
+rDH no-sc flap: 30.605 https://youtu.be/DiA3gpzZBKI
+
+Date: June 17th, 2024
+Name: .VNix
+
+rDS flap: 40.271 https://www.youtube.com/watch?v=YmRyLyq9-RI 
+Date: June 16, 2024
+Name: Dane Allen
+DKS: 1:48.946
+Date: April 15th 2024
+Name: Kasper
+
+rDKJP no-sc flap: 42.054
+Date: May 6th 2024
+Name: Kasper
+
+rMR: 1:41.983
+Date: 17 Jun 2024
+Name: Daelyn
+
+MT: 2:10.817 https://youtu.be/o6uLrPeuR04
+MT flap: 32.293 https://youtu.be/o6uLrPeuR04?t=58
+Date: 13 June 2024
+Name: Max1001
+
+rDKJP: 1:22.829
+Date: June 17th, 2024
+Name: Hockeylord900
+
+rSL no-sc: 2:05.558
+Date: June 17, 2024
+Name: Dane Allen
+rPB: 1:07.206
+Date: June 18, 2024
+Name: Dane Allen
+rBC3: 1:59.530
+DDR Flap: 33.325 
+Date: 18th June 2024
 Name: Shojiro
 
-rMC nosc: 1:33.181 
-Date: April 12, 2024
-Name: Lauchlan L
+LC: 1:09.417 
+Date: June 17th, 2024
+Name: Dwt89_
 
-rPG nosc: 38.485
-Date: April 12, 2024
-Name: ARK..
+MMM 1:18.551
+CM flap 4.391
+DKSC 1:54.174
+MH flap 34.380
+BC nosc flap 48.219
+rPB nosc 1:14.866 / 23.167
+rGV2 nosc flap 16.902
+rSL nosc 2:07.829 / 41.131
+rDS flap 39.733
+rDKJP 1:55.472 / 23.441
+Date: 18 Jun 2024
+Name: Cederic
 
-MG no-sc 1:49.630
-rMC no-sc 1:43.463
-Date: April 12, 2024
-Name: ARK..
+DC: 1:30.970
+Date: June 6th, 2024
+Name: Ian Beler
 
-MMM 1:21.373
+3lap
+MMM 1:17.144
+Date: June 9th, 2024
+Name: Danny Boy
+
+rDH: 1:32.727 https://youtu.be/hwdCqYtK9pk
+
+Date: April 20th, 2024
+Name: Danny Boy
+
+rDH Flap: 27.608 https://youtu.be/IFVgFMU9QSM?t=39
+rDH No-SC Flap: 29.713 https://youtu.be/K_1I7zuWj6g?t=39
+
+Date: October 22nd, 2022
+Name: Danny Boy
+
+rDKJP No-SC Flap: 42.427 https://youtu.be/lt1RTXcQ_KE?t=102
+
+Date: April 6th, 2024
+Name: Danny Boy
+
+rPG No-SC Flap: 38.719 https://youtu.be/w_Psickbc_Y?t=52
+
+Date: December 31st, 2023
+Name: Danny Boy
+
+rDKM No-SC Flap: 41.390 https://youtu.be/P0eGM5qJQIo?t=59
+
+Date: July 22nd, 2023
+Name: Danny Boy
+
+rDKM Flap: 39.045 https://youtu.be/JFsBaTSGjS8?t=113
+
+Date: December 15th, 2021
+Name: Danny Boy
+
+rBC No-SC Flap: 49.270 https://youtu.be/__fiTT4bcvg?t=63
+Date: 18 June 2024
+Name: Daelyn
+
+DC: 1:32.025 
+Date: June 18th, 2024
+Name: Trenton Steinburg
+
+MH: 1:50.596
+MH Flap: 35.150
+BC no-glitch: 2:34.542
+BC no-glitch flap: 50.450
+RR no-glitch: 2:38.491
+RR no-glitch flap: 52.645
+rPB no-glitch: 1:16.575
+rPB no-glitch flap: 24.154
+rYF: 1:03.660
+rYF flap: 20.139
+rMR 1:47.269
+rMR flap: 34.305
+rSL no-glitch: 2:11.163
+rSL no-glitch flap: 43.468
+rSGB no-glitch: 1:26.181
+rSGB no-glitch flap: 27.139
+rDS: 2:12.853
+rDS flap: 42.693
+rDH no-glitch: 1:43.029
+rDH no-glitch flap: 31.707
+rDKJP no-glitch: 2:20.217
+rDKJP no-glitch flap: 46.411
+rMC no-glitch: 1:39.266
+rMC no-glitch flap: 31.215
+rPG no-glitch: 2:09.549
+rPG no-glitch flap: 41.075
+rDKM no-glitch: 2:20.122
+rDKM no-glitch flap: 44.538
+Date: June 18th, 2024
+Name: Mystogan
+
+rSL nosc: 2:05.537
+Date: June 19th, 2024
+Name: Danny Boy
+
+MC: 54.962 https://youtu.be/MeCvG8DMjOA
+MT: 1:56.331 
+Date: June 19th, 2024
+Name: Ian Beler
+
+MMM 1:17.107 / 24.065
+
+Date: June 20 2024
+Name: ChromaQ
+
+DKS: 1:56.329 / 37.634 
+Date: 20 Jun 2024
+Name: Bryce
+
+MG: 19.698 https://www.youtube.com/watch?v=y5V_s3dMJ4k
+
+Date: 18 Jun 2024
+Name: Jay Rangthale
+
+rSL No-Glitch: 2:03.656
+Date: 20 June 2024
+Name: Daelyn
+
+rBC3: 2:02.049
+Date: 20 June 2024
+Name: Ben Yafe
+
+TF: 1:48.199
+Date: June 19th, 2024
+Name: Dwt89_
+
+MT 2:10.776 / 30.747
+rPB flap 16.445
 */
