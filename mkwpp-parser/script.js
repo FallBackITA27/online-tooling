@@ -178,18 +178,15 @@ document.getElementById("readInput").addEventListener("click", async function() 
             };
             for (let keyword of keywords.slice(1, keywords.length)) {
                 let kw = keyword.replace(/,/g, "").replace(/th/g, "").replace(/rd/g, "").replace(/nd/g, "").replace(/st/g, "");
-                if (kw.length === 4) {
-                    year = kw;
-                    continue;
-                }
-                let _break = false;
                 for (let abbr of Object.keys(constants.months)) if (kw.startsWith(abbr)) {
                     console.log(kw);
                     month = constants.months[abbr];
-                    _break = true;
                     break;
                 }
-                if (_break) continue;
+                if (kw.length === 4 && !isNaN(parseInt(kw))) {
+                    year = kw;
+                    continue;
+                }
                 date = kw.padStart(2,"0");
             };
             currentDate = `${year}-${month}-${date}`;
