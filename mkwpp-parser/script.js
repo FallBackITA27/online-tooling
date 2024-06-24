@@ -297,7 +297,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
                     let catString = "Combined";
                     if (bnosc && !constants.track_category[track]) catString = "NonSC";
                     if (track === 29 && !bflap) catString = "NonSC";
-                    out.push(`(${data.players[player]},${catString},${track*2 + bflap},${time.time / 1000},${time.date},${time.comment === "" ? "N/A" : time.comment})`);
+                    out.push(`${data.players[player]},${catString},${track*2 + bflap},${time.time / 1000},${time.date},${time.comment === "" ? "N/A" : time.comment}`);
                 }
     }
     writeToOutput("<sub>-------</sub> FINAL OUTPUT <sub>-------</sub>");
