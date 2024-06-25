@@ -176,7 +176,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
             let year;
             let month;
             let date;
-            let keywords = lowercaseLine.split(" ").filter(r=>r !== " ");
+            let keywords = lowercaseLine.split(" ").filter(r=>r !== "");
             if (keywords.length > 4) {
                 skipToNextSubmission = true;
                 writeToOutput(`submission starting at "${line}", cannot parse date`);
@@ -199,7 +199,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
         }
         if (skipToNextSubmission) continue;
         if (lowercaseLine.startsWith("name")) {
-            let keywords = lowercaseLine.split(" ").filter(r=>r !== " ");
+            let keywords = lowercaseLine.split(" ").filter(r=>r !== "");
             currentName = keywords.slice(1,keywords.length).join(" ");
             if (data.players[currentName] != null && data.players[currentName] != undefined) continue;
             skipToNextSubmission = true;
