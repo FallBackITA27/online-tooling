@@ -252,8 +252,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
             let refTrackData1 = [];
             let refTrackData2 = [];
             let x = false;
-            for (let i = 0; i<trackData.length; i++) {
-                let token = trackData[i];
+            for (let [i, token] of trackData.entries()) {
                 if (token === "/" || token === "\\") {
                     x = true;
                     continue;
@@ -266,14 +265,14 @@ document.getElementById("readInput").addEventListener("click", async function() 
                     trackData1.push(trackDataRef[i]);
                 }
             }
-            let finalData1 = handleTime(trackData1,currentDate);
+            let finalData1 = handleTime(trackData1,refTrackData1,currentDate);
             finalData1.flap = false;
-            let finalData2 = handleTime(trackData2,currentDate);
+            let finalData2 = handleTime(trackData2,refTrackData2,currentDate);
             finalData2.flap = false;
             pushToUser.push(finalData1);
             pushToUser.push(finalData2);
         } else {
-            let finalData = handleTime(trackData,currentDate);
+            let finalData = handleTime(trackData,trackDataRef,currentDate);
             finalData.flap = flap;
             pushToUser.push(finalData);
         }
@@ -329,8 +328,7 @@ function formatMsToTime(i32) {
 function handleTime(data, refData, date) {
     let time = 0;
     let comment = "";
-    for (let i = 0; i < data.length; i++) {
-        let token = data[i];
+    for (let [i, token] of data.entries()) {
         console.log("new token: "+ token);
         if (token.includes("youtu") || token.includes("twitch")) {
             comment = refData[i];
