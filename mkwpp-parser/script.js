@@ -165,6 +165,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
     for (let line of parserData) {
         let lowercaseLine = line.toLowerCase();
         console.log(lowercaseLine);
+        console.log(data)
         if (lowercaseLine.includes("—")) {
             writeToOutput(`Skipped line "${line}", it's a discord line.`);
             continue;
