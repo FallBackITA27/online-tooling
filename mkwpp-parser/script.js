@@ -220,6 +220,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
             break;
         }
         trackData = trackData.slice(1,trackData.length);
+        trackDataRef = trackDataRef.slice(1,trackDataRef.length);
 
         if (track === -1) {
             writeToOutput(`Skipped line "${line}" for player ${data.players[currentName]}, could not detect track.`);
@@ -234,11 +235,13 @@ document.getElementById("readInput").addEventListener("click", async function() 
             if (token.startsWith("n")) {
                 nosc = true;
                 trackData.splice(i,1);
+                trackDataRef.splice(i,1);
                 i--;
             }
             if (token.startsWith("f") || token.startsWith("l")) {
                 flap = true;
                 trackData.splice(i,1);
+                trackDataRef.splice(i,1);
                 i--;
             }
         }
