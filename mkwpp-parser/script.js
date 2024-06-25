@@ -326,6 +326,8 @@ function formatMsToTime(i32) {
 }
 
 function handleTime(data, refData, date) {
+    console.log("TrackData", data);
+    console.log("RefData", refData);
     let time = 0;
     let comment = "";
     for (let [i, token] of data.entries()) {
