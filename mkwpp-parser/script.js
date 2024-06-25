@@ -213,6 +213,7 @@ document.getElementById("readInput").addEventListener("click", async function() 
 
         let track = -1;
         let trackData = lowercaseLine.split(" ").filter(r=>r!=="");
+        let trackDataRef = line.split(" ").filter(r=>r!=="");
 
         for (let abbr of Object.keys(constants.tracks)) if (trackData[0].startsWith(abbr)) {
             track = constants.tracks[abbr];
@@ -242,21 +243,27 @@ document.getElementById("readInput").addEventListener("click", async function() 
             }
         }
         trackData = trackData.filter(r=>r!=="");
+        trackDataRef = trackDataRef.filter(r=>r!=="");
 
         let pushToUser = [];
         if (trackData.includes("/") || trackData.includes("\\")) {
             let trackData1 = [];
             let trackData2 = [];
+            let refTrackData1 = [];
+            let refTrackData2 = [];
             let x = false;
-            for (let token of trackData) {
+            for (let i = 0; i<trackData.length; i++) {
+                let token = trackData[i];
                 if (token === "/" || token === "\\") {
                     x = true;
                     continue;
                 }
                 if (x) {
                     trackData2.push(token);
+                    trackData2.push(trackDataRef[i]);
                 } else {
                     trackData1.push(token);
+                    trackData1.push(trackDataRef[i]);
                 }
             }
             let finalData1 = handleTime(trackData1,currentDate);
@@ -319,13 +326,14 @@ function formatMsToTime(i32) {
     return ret;
 }
 
-function handleTime(data, date) {
+function handleTime(data, refData, date) {
     let time = 0;
     let comment = "";
-    for (let token of data) {
+    for (let i = 0; i < data.length; i++) {
+        let token = data[i];
         console.log("new token: "+ token);
         if (token.includes("youtu") || token.includes("twitch")) {
-            comment = token;
+            comment = refData[i];
             continue;
         }
         let total = 0;
