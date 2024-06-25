@@ -165,6 +165,10 @@ document.getElementById("readInput").addEventListener("click", async function() 
     for (let line of parserData) {
         let lowercaseLine = line.toLowerCase();
         console.log(lowercaseLine);
+        if (lowercaseLine.includes("—")) {
+            writeToOutput(`Skipped line "${line}", it's a discord line.`);
+            continue;
+        }
         if (lowercaseLine.startsWith("date")) {
             skipToNextSubmission = false
             flapCatch = false;
